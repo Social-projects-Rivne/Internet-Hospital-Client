@@ -2,28 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Router} from '@angular/router';
-import { ICurrentUser } from '../Models/CurrentUser'
+import { Router } from '@angular/router';
+import { ICurrentUser } from '../Models/CurrentUser';
 import { HOST_URL } from '../../app/config';
 import { SIGN_IN } from '../../app/config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const PATIENT: string = 'Patient';
-const DOCTOR: string = 'Doctor';
-const MODERATOR: string = 'Moderator';
-const ADMIN: string = 'Admin';
-const TOKEN: string = 'currentUser';
-const DEFAULT_AVATAR: string = '../../assets/img/default-avatar.png';
+const PATIENT = 'Patient';
+const DOCTOR = 'Doctor';
+const MODERATOR = 'Moderator';
+const ADMIN = 'Admin';
+const TOKEN = 'currentUser';
+const DEFAULT_AVATAR = '../../assets/img/default-avatar.png';
 
 @Injectable()
-export class  AuthenticationService  {
+export class AuthenticationService {
 
-    constructor(private http: HttpClient, private router: Router) {   }
+    constructor(private http: HttpClient, private router: Router) { }
 
     url = HOST_URL;
     jwtHelper = new JwtHelperService();
     token = TOKEN;
 
+    private AvatarURL = new BehaviorSubject<string>(this.checkAvatarUrl());
+    private isLoginSubject = new BehaviorSubject<boolean>(this.hasAccessToken());
+    private isPatientSubject = new BehaviorSubject<boolean>(this.hasPatientRole());
+    private isDoctorSubject = new BehaviorSubject<boolean>(this.hasDoctorRole());
+    private isModeratorSubject = new BehaviorSubject<boolean>(this.hasModeratorRole());
+    private isAdminSubject = new BehaviorSubject<boolean>(this.hasAdminRole());
 
     // get an access token
     login(username: string, password: string): Observable<ICurrentUser> {
@@ -42,13 +48,12 @@ export class  AuthenticationService  {
             }));
     }
 
-    private AvatarURL = new BehaviorSubject<string>(this.checkAvatarUrl());
     getAvatarURL(): Observable<string> {
         return this.AvatarURL.asObservable();
     }
     checkAvatarUrl(): string {
         if (localStorage.getItem(TOKEN)) {
-            let currentUser = JSON.parse(localStorage.getItem(TOKEN));
+            const currentUser = JSON.parse(localStorage.getItem(TOKEN));
             if (currentUser.user_avatar) {
                 return this.url + currentUser.user_avatar;
             }
@@ -56,8 +61,7 @@ export class  AuthenticationService  {
         return DEFAULT_AVATAR;
     }
 
-    private setUserRole()
-    {
+    private setUserRole() {
         if (this.hasPatientRole()) {
             this.isPatientSubject.next(true);
         } else if (this.hasDoctorRole()) {
@@ -72,7 +76,6 @@ export class  AuthenticationService  {
     }
 
     // check if user is logged
-    private isLoginSubject = new BehaviorSubject<boolean>(this.hasAccessToken());
     isLoggedIn(): Observable<boolean> {
         return this.isLoginSubject.asObservable();
     }
@@ -84,7 +87,6 @@ export class  AuthenticationService  {
     }
 
     // check if user is a patient
-    private isPatientSubject =new BehaviorSubject<boolean>(this.hasPatientRole());
     isPatient(): Observable<boolean> {
         return this.isPatientSubject.asObservable();
     }
@@ -96,7 +98,6 @@ export class  AuthenticationService  {
     }
 
     // check if user is a doctor
-    private isDoctorSubject =new BehaviorSubject<boolean>(this.hasDoctorRole());
     isDoctor(): Observable<boolean> {
         return this.isDoctorSubject.asObservable();
     }
@@ -108,7 +109,6 @@ export class  AuthenticationService  {
     }
 
     // check if user is a moderator
-    private isModeratorSubject = new BehaviorSubject<boolean>(this.hasModeratorRole());
     isModerator(): Observable<boolean> {
         return this.isModeratorSubject.asObservable();
     }
@@ -120,7 +120,6 @@ export class  AuthenticationService  {
     }
 
     // check if user is an admin
-    private isAdminSubject =new BehaviorSubject<boolean>(this.hasAdminRole());
     isAdmin(): Observable<boolean> {
         return this.isAdminSubject.asObservable();
     }
@@ -134,8 +133,8 @@ export class  AuthenticationService  {
     // return if user is approved doctor
     isApprovedPatient(): boolean {
         if (localStorage.getItem(TOKEN)) {
-            var tokenPayload = this.getTokenPayload();
-            if (tokenPayload['ApprovedPatient'] !== undefined){
+            const tokenPayload = this.getTokenPayload();
+            if (tokenPayload['ApprovedPatient'] !== undefined) {
                 return true;
             }
         }
@@ -144,8 +143,8 @@ export class  AuthenticationService  {
 
     // return if user is approved doctor
     isApprovedDoctor(): boolean {
-        if (localStorage.getItem(TOKEN)){
-            var tokenPayload = this.getTokenPayload();
+        if (localStorage.getItem(TOKEN)) {
+            const tokenPayload = this.getTokenPayload();
             if (tokenPayload['ApprovedDoctor'] !== undefined) {
                 return true;
             }
@@ -156,33 +155,33 @@ export class  AuthenticationService  {
     // return user role
     private getUserRole(): string {
         if (localStorage.getItem(TOKEN)) {
-            var tokenPayload = this.getTokenPayload();
-            return tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];  
+            const tokenPayload = this.getTokenPayload();
+            return tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
         }
     }
 
-    private getTokenPayload(): string{
+    private getTokenPayload(): string {
         return this.jwtHelper.decodeToken(JSON.parse(localStorage.getItem(TOKEN)).access_token);
     }
 
 
     // refresh access token
     refreshToken(): Observable<ICurrentUser> {
-        let currentUser = JSON.parse(localStorage.getItem(TOKEN));
-        let token = currentUser.refresh_token;
-        return this.http.post<ICurrentUser>(this.url + '/api/Signin/refresh', { RefreshToken: token } )
-          .pipe(
-            map(user => {
-                if (user && user.access_token) {
-                    localStorage.setItem(TOKEN, JSON.stringify(user));
-                }
-              return <ICurrentUser>user;
-          }));
+        const currentUser = JSON.parse(localStorage.getItem(TOKEN));
+        const token = currentUser.refresh_token;
+        return this.http.post<ICurrentUser>(this.url + '/api/Signin/refresh', { RefreshToken: token })
+            .pipe(
+                map(user => {
+                    if (user && user.access_token) {
+                        localStorage.setItem(TOKEN, JSON.stringify(user));
+                    }
+                    return <ICurrentUser>user;
+                }));
     }
 
     // get a token of logged user
     getAuthToken(): string {
-        let currentUser = JSON.parse(localStorage.getItem(TOKEN));
+        const currentUser = JSON.parse(localStorage.getItem(TOKEN));
         if (currentUser != null) {
             return currentUser.access_token;
         }
@@ -199,7 +198,7 @@ export class  AuthenticationService  {
         this.router.navigate([SIGN_IN]);
     }
     private removeAllAuthorizeFlags() {
-        this.isLoginSubject.next(false); 
+        this.isLoginSubject.next(false);
         this.isPatientSubject.next(false);
         this.isDoctorSubject.next(false);
         this.isModeratorSubject.next(false);

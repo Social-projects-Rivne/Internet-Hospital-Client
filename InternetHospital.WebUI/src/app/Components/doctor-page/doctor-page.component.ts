@@ -27,7 +27,7 @@ export class DoctorPageComponent implements OnInit {
       _ => {
         this.router.navigate([`/${DOCTOR_LIST}`]);
       });
-      this.showLikeRow = window.innerWidth > MIN_WIDTH_FOR_ROW;
+    this.showLikeRow = window.innerWidth > MIN_WIDTH_FOR_ROW;
   }
 
   @HostListener('window:resize')

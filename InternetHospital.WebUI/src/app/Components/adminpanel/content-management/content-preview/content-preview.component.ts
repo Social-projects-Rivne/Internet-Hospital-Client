@@ -40,8 +40,7 @@ export class ContentPreviewComponent implements OnInit {
   nextImg() {
     if (this.slideIndex < this.imgs.length - 1) {
       this.slideIndex++;
-    }
-    else {
+    } else {
       this.slideIndex = 0;
     }
   }
@@ -49,8 +48,7 @@ export class ContentPreviewComponent implements OnInit {
   prevImg() {
     if (this.slideIndex !== 0) {
       this.slideIndex--;
-    }
-    else {
+    } else {
       this.slideIndex = this.imgs.length - 1;
     }
   }

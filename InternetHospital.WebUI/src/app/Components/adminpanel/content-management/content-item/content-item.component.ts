@@ -10,8 +10,8 @@ const SLIDE_TIME_IN_MSC = 3500;
   styleUrls: ['./content-item.component.scss'],
   animations: [
     trigger('imageDisplay', [
-      state('displayed', style({opacity: '1'})),
-      state('hidden', style({opacity: '0'})),
+      state('displayed', style({ opacity: '1' })),
+      state('hidden', style({ opacity: '0' })),
       transition('displayed <=> hidden', animate('500ms cubic-bezier(0.74, 0.97, 0.91, 1)')),
     ]),
   ],
@@ -25,13 +25,13 @@ export class ContentItemComponent implements OnInit {
   slideIndex = 0;
   @Input() content: Content;
 
-  @Output() onChanged = new EventEmitter<Content>();
-  @Output() onDeleted = new EventEmitter<Content>();
+  @Output() Changed = new EventEmitter<Content>();
+  @Output() Deleted = new EventEmitter<Content>();
 
-  imgs = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
-  'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
-  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'
-];
+  imgs = ['https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
+    'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
+    'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'
+  ];
 
   ngOnInit() {
     setInterval(() => {
@@ -40,7 +40,7 @@ export class ContentItemComponent implements OnInit {
   }
 
   delete() {
-    this.onDeleted.emit(this.content);
+    this.Deleted.emit(this.content);
   }
 
   nextImg() {
@@ -60,6 +60,6 @@ export class ContentItemComponent implements OnInit {
   }
 
   edit() {
-    this.onChanged.emit(this.content);
+    this.Changed.emit(this.content);
   }
 }

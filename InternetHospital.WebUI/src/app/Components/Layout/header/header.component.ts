@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HOST_URL } from '../../../config';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 

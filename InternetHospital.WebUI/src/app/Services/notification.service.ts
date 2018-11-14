@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import {TIME_DURATION, HORIZONTAL_ALIGN, VERTICAL_ALIGN, NOTIFICATION_CLASS, SUCCESS_CLASS, ERROR_CLASS} from './../config';
+import { TIME_DURATION, HORIZONTAL_ALIGN, VERTICAL_ALIGN, NOTIFICATION_CLASS, SUCCESS_CLASS, ERROR_CLASS } from './../config';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +13,15 @@ export class NotificationService {
     duration: TIME_DURATION,
     horizontalPosition: HORIZONTAL_ALIGN,
     verticalPosition: VERTICAL_ALIGN
-  }
+  };
 
-  error(msg)
-  {
+  error(msg) {
     this.config['panelClass'] = [NOTIFICATION_CLASS, ERROR_CLASS];
-    this.snackBar.open(msg, '',this.config);
+    this.snackBar.open(msg, '', this.config);
   }
 
   success(msg) {
     this.config['panelClass'] = [NOTIFICATION_CLASS, SUCCESS_CLASS];
-    this.snackBar.open(msg, '',this.config);
+    this.snackBar.open(msg, '', this.config);
   }
 }

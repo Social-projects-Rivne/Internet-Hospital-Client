@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Content } from '../../../../Models/Content';
 import { ImageValidationService } from '../../../../Services/image-validation.service';
 import { EditContentService } from '../../services/edit-content.service';
-import { CreateContentService } from '../../services/create-content.service';
 
 const MAX_WIDTH_IMG = 2000;
 const MAX_HEIGHT_IMG = 2000;
@@ -42,20 +41,19 @@ export class ContentEditComponent implements OnInit {
 
       reader.onload = (event: any) => {
         if (event.target.readyState === FileReader.DONE) {
-          if (this.imgService.isImageFile(event.target.result) === false ) {
+          if (this.imgService.isImageFile(event.target.result) === false) {
             // notification service will replace this alert in future
             alert('Only image files are acceptable!');
-          }
-          else {
+          } else {
             const img = new Image();
 
             img.onload = () => {
               if (this.imgService.hasImageValidSize(MAX_HEIGHT_IMG, MAX_WIDTH_IMG,
-                                                    MIN_HEIGHT_IMG, MIN_WIDTH_IMG,
-                                                    img.height, img.width)) {
+                MIN_HEIGHT_IMG, MIN_WIDTH_IMG,
+                img.height, img.width)) {
                 this.imgs.push(event.target.result);
-              }
-              else {
+              } else {
+                // tslint:disable-next-line:no-unused-expression
                 this.service.form.invalid;
                 // notification service will replace this alert in future
                 alert('Image is invalid! It might be too big or too small.');
@@ -71,7 +69,7 @@ export class ContentEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.service.form.valid) {
-     // this.service.putContent(form.value, this.fileToUpload).subscribe(res => console.log(res)); 
+      // this.service.putContent(form.value, this.fileToUpload).subscribe(res => console.log(res));
     }
     this.service.form.reset();
     this.service.initializeFormGroup();

@@ -16,23 +16,26 @@ import { ContentPreviewComponent } from '../adminpanel/content-management/conten
 import { ContentEditComponent } from '../adminpanel/content-management/content-edit/content-edit.component';
 import { ContentItemComponent } from '../adminpanel/content-management/content-item/content-item.component';
 
-import { MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule
-      } from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatButtonModule,
+  MatMenuModule
+} from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { FormsModule,
-        ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

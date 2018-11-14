@@ -10,7 +10,7 @@ import { AdminPanelComponent } from './adminpanel.component';
 
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
-import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
+import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE } from './routesConfig';
 
 import { ADMIN_PANEL } from '../../config';
 const routes: Routes = [
@@ -49,7 +49,7 @@ const routes: Routes = [
         component: ModeratorCreateComponent,
         pathMatch: 'full'
       },
-      ]
+    ]
   }
 ];
 

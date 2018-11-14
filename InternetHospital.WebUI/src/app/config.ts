@@ -18,7 +18,7 @@ export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
 
-//notification config
+// notification config
 export const TIME_DURATION = 3000;
 export const HORIZONTAL_ALIGN = 'right';
 export const VERTICAL_ALIGN = 'top';

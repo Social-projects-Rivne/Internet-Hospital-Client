@@ -1,4 +1,4 @@
-import { HomeImages } from "../Models/Temp/HomeImage";
+import { HomeImages } from '../Models/Temp/HomeImage';
 
 
 export const HOME_IMAGES: HomeImages[] = [

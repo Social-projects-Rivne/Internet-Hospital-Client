@@ -11,11 +11,11 @@ export class SidebarComponent implements OnInit {
 
   constructor() { }
 
-  users = '/'  + ADMIN_PANEL +  '/' + USERS_MNG;
-  moders = '/'  + ADMIN_PANEL +  '/' + MODERATORS_MNG;
+  users = '/' + ADMIN_PANEL + '/' + USERS_MNG;
+  moders = '/' + ADMIN_PANEL + '/' + MODERATORS_MNG;
   contents = '/' + ADMIN_PANEL + '/' + CONTENTS_MNG;
   requests = '/' + ADMIN_PANEL + '/' + REQUESTS_MNG;
 
   ngOnInit() {
-   }
+  }
 }

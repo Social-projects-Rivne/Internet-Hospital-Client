@@ -25,7 +25,7 @@ export class GalleryComponent implements AfterContentChecked {
   onResize() {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
-                                              / WIDTH_OF_1_IMG);
+      / WIDTH_OF_1_IMG);
 
   }
 
@@ -34,7 +34,7 @@ export class GalleryComponent implements AfterContentChecked {
   ngAfterContentChecked() {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
-                                              / WIDTH_OF_1_IMG);
+      / WIDTH_OF_1_IMG);
   }
 
   next() {

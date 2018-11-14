@@ -23,8 +23,8 @@ export class DoctorsService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set("page", this.paginationService.pageIndex.toString())
-      .set("pagecount", this.paginationService.pageSize.toString())
+      .set('page', this.paginationService.pageIndex.toString())
+      .set('pagecount', this.paginationService.pageSize.toString())
   };
 
   getDoctor(id: number) {
@@ -36,30 +36,28 @@ export class DoctorsService {
     private paginationService: PaginationService) { }
 
   getDoctors(name?: string, specialization?: number) {
-    let doctorsUrl = this.url;
-    if (name != null && name != "") {
-      this.httpOptions.params =  this.httpOptions.params.set(searchbyname, name);
-    }
-    else {
+    const doctorsUrl = this.url;
+    if (name != null && name !== '') {
+      this.httpOptions.params = this.httpOptions.params.set(searchbyname, name);
+    } else {
       this.httpOptions.params = this.httpOptions.params.delete(searchbyname);
     }
 
-    if (specialization != 0 && !isNaN(specialization)) {
-      this.httpOptions.params =  this.httpOptions.params.set(searchbyspecialization, specialization.toString())
-    }
-    else {
+    if (specialization !== 0 && !isNaN(specialization)) {
+      this.httpOptions.params = this.httpOptions.params.set(searchbyspecialization, specialization.toString());
+    } else {
       this.httpOptions.params = this.httpOptions.params.delete(searchbyspecialization);
     }
 
     this.http.get(doctorsUrl, this.httpOptions)
-    .subscribe((result: any) => {
-      this.doctorsList=result.doctors;
-      this.doctorsAmount = result.totalDoctors;
-  });
+      .subscribe((result: any) => {
+        this.doctorsList = result.doctors;
+        this.doctorsAmount = result.totalDoctors;
+      });
   }
 
   getSpecializations() {
-    let specUrl = this.url + "/specializations";
+    const specUrl = this.url + '/specializations';
     this.http.get<Specialization[]>(specUrl)
       .subscribe(data => this.specializations = data);
   }
