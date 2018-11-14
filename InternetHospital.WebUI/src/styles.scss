@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-@include angular-material-typography($custom-typography);
+@import "~@angular/material/theming";
 
 snack-bar-container.error {
   background-color: #e05744;
@@ -24,13 +24,12 @@ snack-bar-container.notification simple-snack-bar {
     format("opentype");
 }
 
-@import "~@angular/material/theming";
-
 $custom-typography: mat-typography-config(
   $font-family: "Fontil Sans, monospace",
   $headline: mat-typography-level(32px, 48px, 700),
   $body-1: mat-typography-level(16px, 24px, 500)
 );
+@include angular-material-typography($custom-typography);
 
 html,
 body {
