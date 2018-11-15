@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminPanelComponent } from './adminpanel.component';
 
-describe('AdminpanelComponent', () => {
+describe('AdminPanelComponent', () => {
   let component: AdminPanelComponent;
   let fixture: ComponentFixture<AdminPanelComponent>;
 
