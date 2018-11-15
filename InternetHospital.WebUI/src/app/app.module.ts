@@ -38,7 +38,7 @@ import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedba
 import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
 import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
+import { DoctorsFeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
 
 import { UpdatePatientComponent } from './Components/PatientProfile/update-patient/update-patient.component';
 import { DateValidatorDirective } from './Directives/date-validator.directive';
@@ -70,7 +70,7 @@ import { DatePipe } from '@angular/common';
     FeedbackItemComponent,
     GalleryComponent,
     ImageModalDialogComponent,
-    FeedbacksComponent,
+    DoctorsFeedbacksComponent,
     UpdatePatientComponent,
     DateValidatorDirective,
     DoctorPlansComponent
