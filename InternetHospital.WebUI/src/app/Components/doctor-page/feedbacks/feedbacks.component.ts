@@ -7,7 +7,7 @@ const MIN_WIDTH_FOR_ROW = 700;
   templateUrl: './feedbacks.component.html',
   styleUrls: ['./feedbacks.component.scss']
 })
-export class FeedbacksComponent implements OnInit {
+export class DoctorsFeedbacksComponent implements OnInit {
   startDate = new Date();
   endDate = new Date();
   filterShow = 'row';
