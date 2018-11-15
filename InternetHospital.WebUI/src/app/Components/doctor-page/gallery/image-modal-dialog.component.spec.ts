@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DoctorsFeedbacksComponent } from './feedbacks.component';
+import { ImageModalDialogComponent } from './image-modal-dialog.component';
 
-describe('DoctorsFeedbacksComponent', () => {
-  let component: DoctorsFeedbacksComponent;
-  let fixture: ComponentFixture<DoctorsFeedbacksComponent>;
+describe('ImageModalDialogComponent', () => {
+  let component: ImageModalDialogComponent;
+  let fixture: ComponentFixture<ImageModalDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DoctorsFeedbacksComponent ]
+      declarations: [ ImageModalDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DoctorsFeedbacksComponent);
+    fixture = TestBed.createComponent(ImageModalDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
