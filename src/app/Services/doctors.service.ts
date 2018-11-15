@@ -37,13 +37,13 @@ export class DoctorsService {
 
   getDoctors(name?: string, specialization?: number) {
     const doctorsUrl = this.url;
-    if (name != null && name != '') {
+    if (name != null && name !== '') {
       this.httpOptions.params =  this.httpOptions.params.set(searchbyname, name);
     } else {
       this.httpOptions.params = this.httpOptions.params.delete(searchbyname);
     }
 
-    if (specialization != 0 && !isNaN(specialization)) {
+    if (specialization !== 0 && !isNaN(specialization)) {
       this.httpOptions.params =  this.httpOptions.params.set(searchbyspecialization, specialization.toString());
     } else {
       this.httpOptions.params = this.httpOptions.params.delete(searchbyspecialization);
