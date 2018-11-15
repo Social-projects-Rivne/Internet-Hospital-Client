@@ -68,8 +68,7 @@ export class ModeratorManagementComponent implements OnInit {
       this.service.putModer(form.value).subscribe(res => console.log(res));
       this.service.form.reset();
       this.service.initializeFormGroup();
-    }
-    else {
+    } else {
       this.service.form.reset();
       this.service.initializeFormGroup();
     }

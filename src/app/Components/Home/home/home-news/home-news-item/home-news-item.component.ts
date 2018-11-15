@@ -8,7 +8,7 @@ import { HomeImages } from '../../../../../Models/Temp/HomeImage';
 })
 export class HomeNewsItemComponent implements OnInit {
   @Input()
-  image: HomeImages
+  image: HomeImages;
 
   constructor() { }
 

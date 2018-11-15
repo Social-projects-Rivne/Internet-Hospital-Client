@@ -37,7 +37,9 @@ export class UsersProfileComponent implements OnInit {
     { dateTime: this.date, doctorName: 'Aloha4', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' }
   ];
 
-  tempText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta, quasi a, recusandae, nesciunt dolores aperiam eius tempore ad.';
+  tempText = `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+   Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta,
+   quasi a, recusandae, nesciunt dolores aperiam eius tempore ad.`;
 
   defaultImage = '../../assets/img/default.png';
   fileAvatar: File = null;
@@ -60,7 +62,7 @@ export class UsersProfileComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(files.item(0));
 
-    reader.onload = (event) => {
+    reader.onload = (event: any) => {
       if (this.imageValidator.isImageFile(event.target.result)) {
         this.imageService.updateAvatar(this.fileAvatar).subscribe((shit: any) => {
           this.imageToShow = event.target.result;

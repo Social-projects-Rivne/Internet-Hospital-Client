@@ -1,4 +1,4 @@
-export class FeedBackType{
-    id:number;
-    name:string;
+export class FeedBackType {
+    id: number;
+    name: string;
 }

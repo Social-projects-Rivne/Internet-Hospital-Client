@@ -7,4 +7,4 @@ export class Appointment {
     status: string;
     startTime: Date;
     endTime: Date;
-} 
+}
