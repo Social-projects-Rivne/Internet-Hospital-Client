@@ -1,7 +1,7 @@
 <div class="container">
   <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
     <div fxFlex="20%">
-      <app-doctor-list-search-item (Search)="onSearch($event)" [specializations]="service.specializations"></app-doctor-list-search-item>
+      <app-doctor-list-search-item (search)="onSearch($event)" [specializations]="service.specializations"></app-doctor-list-search-item>
     </div>
     <div fxFlex="80%">
       <app-doctor-list-item *ngFor="let doctor of service.doctorsList" [doctor]="doctor"></app-doctor-list-item>

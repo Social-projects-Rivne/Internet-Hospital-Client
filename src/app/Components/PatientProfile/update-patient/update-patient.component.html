@@ -5,7 +5,7 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form"
-      #updateForm="ngForm" class="normal-form form-width" (ngSubmit)="onSubmit(updateForm)" enctype="multipart/form-data">
+      class="normal-form form-width" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
       <div fxLayout="column" fxLayoutAlign="space-around center" class="inner-div">
         <div class="controles-row form-fieldStrech">
           <mat-form-field class="mat-form-fieldStrech">

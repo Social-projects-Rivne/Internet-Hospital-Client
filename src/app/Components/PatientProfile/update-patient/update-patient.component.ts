@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
 import { NotificationService } from '../../../Services/notification.service';
@@ -29,7 +28,7 @@ export class UpdatePatientComponent implements OnInit {
     this.imageHandling.isPassportUploaded = false;
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit() {
       this.service.updatePatient(this.imageHandling.PassportToUpload)
         .subscribe(
             data => {

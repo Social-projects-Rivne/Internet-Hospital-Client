@@ -91,11 +91,11 @@ export class DoctorPlansComponent implements OnInit {
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (this.activeDayIsOpen = true) {
+      if (this.activeDayIsOpen) {
         this.activeDayIsOpen = false;
       }
       this.viewDate = date;
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;

@@ -1,4 +1,4 @@
-export class Filter {
+export class DoctorFilter {
     selectedSpecialization = '';
     searchKey: string;
     isWithParams: boolean;

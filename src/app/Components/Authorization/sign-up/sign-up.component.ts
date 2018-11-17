@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../../Services/registration.service';
 import { ImageValidationService } from '../../../Services/image-validation.service';
@@ -30,7 +29,7 @@ export class SignUpComponent implements OnInit {
     this.service.form.reset();
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit() {
     this.service.postUser(this.imageHandling.fileToUpload)
         .pipe(first())
         .subscribe(

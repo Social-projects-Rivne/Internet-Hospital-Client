@@ -11,5 +11,5 @@
       <mat-option *ngFor="let specialization of specializations" [value]="specialization.id">{{specialization.specialization}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button fxFlex="20%" mat-raised-button color="primary" (click)="search()">Search</button>
+  <button fxFlex="20%" mat-raised-button color="primary" (click)="onSearch()">Search</button>
 </div>

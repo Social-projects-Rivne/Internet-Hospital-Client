@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
-import { Filter } from '../../../Models/Filter';
+import { DoctorFilter } from '../../../Models/DoctorFilter';
 
 @Component({
   selector: 'app-doctor-list',
@@ -12,12 +12,12 @@ import { Filter } from '../../../Models/Filter';
 export class DoctorListComponent implements OnInit {
   constructor(private service: DoctorsService, private pagService: PaginationService) { }
 
-  private filter: Filter;
+  private filter: DoctorFilter;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.filter = new Filter();
+    this.filter = new DoctorFilter();
     this.service.getDoctors();
     this.service.getSpecializations();
   }

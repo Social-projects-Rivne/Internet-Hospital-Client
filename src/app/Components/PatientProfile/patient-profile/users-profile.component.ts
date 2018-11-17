@@ -64,7 +64,7 @@ export class UsersProfileComponent implements OnInit {
 
     reader.onload = (event: any) => {
       if (this.imageValidator.isImageFile(event.target.result)) {
-        this.imageService.updateAvatar(this.fileAvatar).subscribe((shit: any) => {
+        this.imageService.updateAvatar(this.fileAvatar).subscribe(_ => {
           this.imageToShow = event.target.result;
 
           this.user = JSON.parse(localStorage.getItem(this.token));
