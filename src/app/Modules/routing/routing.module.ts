@@ -26,6 +26,7 @@ import { ADMIN_PANEL,
           SIGN_IN,
           SIGN_UP,
           SETTINGS_PATIENT,
+          SETTINGS_DOCTOR,
           USERS_PROFILE,
           FEEDBACKS,
 } from '../../config';
@@ -33,6 +34,7 @@ import { ADMIN_PANEL,
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
 import { DoctorPageComponent } from '../../Components/doctor-page/doctor-page.component';
+import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doctor/update-doctor.component';
 
 const ROUTES: Routes = [
   {
@@ -43,7 +45,8 @@ const ROUTES: Routes = [
       { path: DOCTOR_LIST, component: DoctorListComponent },
       { path: USERS_PROFILE, component: UsersProfileComponent},
       { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
-      { path: SETTINGS_PATIENT, component: UpdatePatientComponent},
+      { path: SETTINGS_PATIENT, component: UpdatePatientComponent, canActivate: [PatientGuard]},
+      { path: SETTINGS_DOCTOR, component: UpdateDoctorComponent, canActivate: [DoctorGuard]},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
     ]
