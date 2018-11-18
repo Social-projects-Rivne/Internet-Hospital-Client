@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CreateContentService } from './create-content.service';
+import { ModeratorService } from './moderator.service';
 
-describe('CreateContentService', () => {
+describe('ModeratorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CreateContentService = TestBed.get(CreateContentService);
+    const service: ModeratorService = TestBed.get(ModeratorService);
     expect(service).toBeTruthy();
   });
 });

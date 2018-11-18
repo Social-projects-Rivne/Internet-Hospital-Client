@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreateModeratorService } from '../../Services/create-moderator.service';
+import { ModeratorService } from '../../Services/moderator.service';
 import { MODERATORS_MNG } from '../../routesConfig';
 import { ADMIN_PANEL } from '../../../../config';
+import { CreatingModerator } from '../../../../Models/CreatingModerator';
+import { compareValidator } from '../../../../Directives/compare-validator.directive';
+import { NotificationService } from '../../../../Services/notification.service';
 
 @Component({
   selector: 'app-moderator-create',
@@ -12,29 +15,46 @@ import { ADMIN_PANEL } from '../../../../config';
 })
 export class ModeratorCreateComponent implements OnInit {
 
-  constructor(private service: CreateModeratorService, private router: Router) {
+  isLoadingResults = false;
+  isRateLimitReached = false;
+  moderatorsManagePath = `/${ADMIN_PANEL}/${MODERATORS_MNG}`;
+
+  form: FormGroup = new FormGroup({
+    email: new FormControl('', [ Validators.required, Validators.email ]),
+    firstName: new FormControl('', Validators.required),
+    secondName: new FormControl('', Validators.required),
+    thirdName: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required,
+                                    Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,24}$/)]),
+    confirmPassword: new FormControl('', [ Validators.required, compareValidator('password') ]),
+  });
+
+
+  constructor(private service: ModeratorService, private router: Router, private notification: NotificationService) {
   }
 
   ngOnInit() {
   }
 
-  onClear() {
-    this.service.form.reset();
-  }
-
-  onSubmit(form: NgForm) {
-    if (this.service.form.valid) {
-      this.service.postModer(form.value).subscribe(res => console.log(res));
-      this.router.navigate(['/' + ADMIN_PANEL + '/' + MODERATORS_MNG]);
-      this.service.form.reset();
-      this.service.initializeFormGroup();
-    } else {
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+  onSubmit() {
+    if (this.form.valid) {
+      this.isLoadingResults = true;
+      const moderator = new CreatingModerator();
+      const values = this.form.controls;
+      moderator.email = values.email.value;
+      moderator.firstName = values.firstName.value;
+      moderator.secondName = values.secondName.value;
+      moderator.thirdName = values.thirdName.value;
+      moderator.password = values.password.value;
+      moderator.confirmPassword = values.confirmPassword.value;
+      this.service.postModerator(moderator).subscribe( (data: any) => {
+        this.isLoadingResults = false;
+        this.notification.success(data.message);
+        this.router.navigate([this.moderatorsManagePath]);
+      }, error => {
+        this.isLoadingResults = false;
+        this.notification.error(error);
+      });
     }
-  }
-
-  returnToManagementPage() {
-    this.router.navigate(['/' + ADMIN_PANEL + '/' + MODERATORS_MNG]);
   }
 }
