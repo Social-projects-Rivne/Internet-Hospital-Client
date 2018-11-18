@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
 import { FeedBackService } from '../../Services/FeedBackService/feed-back.service';
 import { FeedBackType } from '../../Models/FeedBackType';
 import { NotificationService } from '../../Services/notification.service';
 import { Router } from '@angular/router';
-import { HOST_URL } from 'src/app/config';
 
 @Component({
   selector: 'app-systemfeedbacks',

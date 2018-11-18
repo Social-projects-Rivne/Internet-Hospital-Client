@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column"  fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
+<div class="container" fxLayout="column" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
   <mat-form-field fxFlex="40%" class="search-form-field" floatLabel="never">
     <input matInput [(ngModel)]="filter.searchKey" placeholder="Search" autocomplete="off">
     <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.searchKey" (click)="onSearchClear()">
@@ -11,5 +11,5 @@
       <mat-option *ngFor="let specialization of specializations" [value]="specialization.id">{{specialization.specialization}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button fxFlex="20%" mat-raised-button color="primary" (click)="search()">Search</button>
+  <button fxFlex="20%" mat-raised-button color="primary" (click)="onSearch()">Search</button>
 </div>

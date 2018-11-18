@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import { ImageModalDialogComponent } from './image-modal-dialog.component';
 
-describe('AppComponent', () => {
-  let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
+describe('ImageModalDialogComponent', () => {
+  let component: ImageModalDialogComponent;
+  let fixture: ComponentFixture<ImageModalDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppComponent ]
+      declarations: [ ImageModalDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(ImageModalDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

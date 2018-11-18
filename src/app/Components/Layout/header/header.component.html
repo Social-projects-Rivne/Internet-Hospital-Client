@@ -1,5 +1,4 @@
 <mat-toolbar color="primary">
-
     <!-- Header -->
     <button id="HeaderButton" mat-button [routerLink]="['/']">
         <img width="40" height="40" src="../../../../assets/img/LogoCircle.png">
@@ -8,10 +7,8 @@
             <span class="color_blue"> H</span>ospital
         </span>
     </button>
-
     <!-- Space -->
     <span class="example-fill-remaining-space"></span>
-
     <!-- Phone Menu -->
     <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.gt-xs>
         <mat-icon>arrow_drop_down</mat-icon>
@@ -25,10 +22,9 @@
         <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/']">Settings</button>
-        <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/settings-patient']">Settings</button>        
+        <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/settings-patient']">Settings</button>
         <button mat-menu-item *ngIf="(isLoggedIn | async)" [routerLink]="['/sign-in']">Sign out</button>
     </mat-menu>
-
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
         <a mat-button routerLink="/doctor-list">Doctor's List</a>
@@ -38,9 +34,7 @@
         </button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
-        
     </div>
-
 </mat-toolbar>
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">
     <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/users-profile']">My profile</button>

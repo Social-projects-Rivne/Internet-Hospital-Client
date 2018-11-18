@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, 
-          MatIconModule, 
-          MatDialogModule, 
+import { MatToolbarModule,
+          MatIconModule,
+          MatDialogModule,
           MatNativeDateModule,
           MatListModule,
           MatGridListModule,
@@ -47,7 +47,7 @@ const MAT_MODULS = [
     MatTableModule,
     MatButtonToggleModule,
     MatExpansionModule
-  ]
+  ];
 
 @NgModule({
   imports: [MAT_MODULS],

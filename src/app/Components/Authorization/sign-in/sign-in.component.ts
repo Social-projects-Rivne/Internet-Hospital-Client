@@ -22,19 +22,19 @@ export class SignInComponent implements OnInit {
       private notification: NotificationService
       ) { }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
     });
     this.authenticationService.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';   
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get f() { return this.loginForm.controls; }
- 
+
   onSubmit() {
-    
+
     if (this.loginForm.invalid) {
         return;
     }
@@ -42,10 +42,9 @@ export class SignInComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                if(this.authenticationService.hasAdminRole()){
+                if (this.authenticationService.hasAdminRole()) {
                     this.router.navigate([ADMIN_PANEL]);
-                }
-                else{
+                } else {
                     this.router.navigate([this.returnUrl]);
                 }
             },

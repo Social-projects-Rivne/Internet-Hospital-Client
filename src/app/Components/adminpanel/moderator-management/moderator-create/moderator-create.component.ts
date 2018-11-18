@@ -28,8 +28,7 @@ export class ModeratorCreateComponent implements OnInit {
       this.router.navigate(['/' + ADMIN_PANEL + '/' + MODERATORS_MNG]);
       this.service.form.reset();
       this.service.initializeFormGroup();
-    }
-    else {
+    } else {
       this.service.form.reset();
       this.service.initializeFormGroup();
     }
