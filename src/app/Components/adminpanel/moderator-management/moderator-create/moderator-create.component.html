@@ -1,6 +1,6 @@
 <div class="moder-create-container">
   <mat-card class="mat-elevation-z10">
-    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+    <div class="loading-shade" *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
       <div class="rate-limit-reached" *ngIf="isRateLimitReached">
         InternetHospital's API rate limit has been reached. It will be reset in one minute.

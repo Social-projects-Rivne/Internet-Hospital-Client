@@ -16,7 +16,6 @@ import { NotificationService } from '../../../../Services/notification.service';
 export class ModeratorCreateComponent implements OnInit {
 
   isLoadingResults = false;
-  isRateLimitReached = false;
   moderatorsManagePath = `/${ADMIN_PANEL}/${MODERATORS_MNG}`;
 
   form: FormGroup = new FormGroup({
