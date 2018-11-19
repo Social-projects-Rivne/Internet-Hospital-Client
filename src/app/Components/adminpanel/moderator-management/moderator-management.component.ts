@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ModeratorService } from '../Services/moderator.service';
+import { NotificationService } from '../../../Services/notification.service';
 
 import { ModeratorData } from '../../../Models/ModeratorData';
 import { ModeratorsData } from '../../../Models/ModeratorsData';
@@ -12,7 +13,6 @@ import { MatPaginator, MatSort } from '@angular/material';
 
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { NotificationService } from '../../../Services/notification.service';
 
 const DEFAULT_AMOUNT_OF_MODERS_ON_PAGE = 5;
 
@@ -104,26 +104,21 @@ export class ModeratorManagementComponent implements OnInit {
   delete(id) {
     this.isLoadingResults = true;
     this.service.deleteModerator(id)
-          .subscribe( (data: any) => {
-            this.notification.success(data.message);
-            this.paginator.page.emit();
-          }, error => {
-            this.isLoadingResults = false;
-            this.notification.error(error);
-    });
+      .subscribe( _ => {
+        this.notification.success('Moderator was successfully deleted!');
+        this.paginator.page.emit();
+      }, error => {
+        this.isLoadingResults = false;
+        this.notification.error(error);
+      });
   }
 
   deleteSelected() {
     this.isLoadingResults = true;
-    this.service.deleteModerators(this.selected).subscribe((data: any) => {
+    this.service.deleteModerators(this.selected).subscribe( _ => {
+      this.selected = [];
       this.paginator.page.emit();
-      data.forEach(element => {
-        if (element.item1) {
-          this.notification.success(element.item2);
-        } else {
-          this.notification.error(element.item2);
-        }
-      });
+      this.notification.success('Moderators were deleted!');
     }, error => {
       this.isLoadingResults = false;
       this.notification.error(error);
