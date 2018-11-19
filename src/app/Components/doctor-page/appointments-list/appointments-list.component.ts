@@ -18,8 +18,7 @@ export class AppointmentsListComponent implements OnInit {
               private pagService: PaginationService) { }
 
   ngOnInit() {
-    this.doctorplansService.getMyAppointments(304).subscribe(data => {this.appointmentList = data.appointments;console.log(this.appointmentList);console.log(data)});
-    console.log(this.appointmentList);
+    this.doctorplansService.getDoctorAppointments();
   }
 
   //data => this.appointmentList = data
