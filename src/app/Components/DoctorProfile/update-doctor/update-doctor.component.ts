@@ -51,11 +51,4 @@ export class UpdateDoctorComponent implements OnInit {
             this.notification.error(error);
           });
   }
-
-
 }
-
-
-
-
-
