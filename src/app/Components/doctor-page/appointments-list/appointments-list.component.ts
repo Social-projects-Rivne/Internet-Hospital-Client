@@ -12,15 +12,17 @@ import { MatPaginator, PageEvent } from '@angular/material';
 export class AppointmentsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  appointments: Appointment[];
+  appointmentList: Array<Appointment>;
   
   constructor(private doctorplansService: DoctorplansService,
               private pagService: PaginationService) { }
 
   ngOnInit() {
-    this.doctorplansService.getAppointments().subscribe(data => this.appointments = data);
+    this.doctorplansService.getMyAppointments(304).subscribe(data => {this.appointmentList = data.appointments;console.log(this.appointmentList);console.log(data)});
+    console.log(this.appointmentList);
   }
 
+  //data => this.appointmentList = data
 
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);

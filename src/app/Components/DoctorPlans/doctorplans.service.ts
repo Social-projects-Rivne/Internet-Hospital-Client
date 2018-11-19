@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class DoctorplansService {
-  appointmentList: Appointment[];
+  appointments: Appointment[];
   constructor(private http: HttpClient,
     private datePipe: DatePipe) { }
 
@@ -27,9 +27,9 @@ export class DoctorplansService {
       return this.http.get<Appointment[]>(specUrl);
     }
 
-    getMyAppointments() {
-      const specUrl = HOST_URL + '/api/Appointments';
-      return this.http.get<Appointment[]>(specUrl);
+    getMyAppointments(id: number) {
+      const specUrl = HOST_URL + `/api/Appointments/getavailable/${id}`;
+      return this.http.get<any>(specUrl);
     }
 
     addAppointment(start: Date, end: Date) {
