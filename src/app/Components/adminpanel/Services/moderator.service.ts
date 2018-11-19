@@ -40,12 +40,19 @@ export class ModeratorService {
               + `${SEARCH_BY_NAME}=${searchByName}&`
               + `${ORDER_BY}=${order}&`
               + `${SORT}=${sort}`;
-              console.log(url);
     return this.http.get<ModeratorsData>(url, this.httpOptions);
   }
 
   postModerator(moderator: CreatingModerator) {
     const body = JSON.stringify(moderator);
     return this.http.post<CreatingModerator>(this.url, body, this.httpOptions);
+  }
+
+  deleteModerator(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  deleteModerators(ids: number[]) {
+    return this.http.delete(`${this.url}/?ids=${ids.join('&ids=')}`);
   }
 }

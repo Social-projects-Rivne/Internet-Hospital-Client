@@ -6,5 +6,4 @@ export class ModeratorData {
     email: string;
     status: string;
     signUpTime: Date;
-  }
-  
+}

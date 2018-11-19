@@ -12,6 +12,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { NotificationService } from '../../../Services/notification.service';
 
 const DEFAULT_AMOUNT_OF_MODERS_ON_PAGE = 5;
 
@@ -43,11 +44,10 @@ export class ModeratorManagementComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service: ModeratorService) {
+  constructor(private service: ModeratorService, private notification: NotificationService) {
   }
 
   ngOnInit() {
-    console.log(this.sort);
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = DEFAULT_AMOUNT_OF_MODERS_ON_PAGE;
     merge(this.sort.sortChange, this.paginator.page)
@@ -79,7 +79,6 @@ export class ModeratorManagementComponent implements OnInit {
 
   changeStatus() {
     const index = this.displayedColumns.indexOf('status');
-    console.log(this.includeAll, index);
     if (this.includeAll) {
       if (index === -1) {
         this.displayedColumns.splice(this.displayedColumns.length - 1, 0, 'status');
@@ -99,7 +98,35 @@ export class ModeratorManagementComponent implements OnInit {
       }
     } else if (index !== -1) {
       this.selected.splice(index, 1);
-      console.log(this.selected);
     }
+  }
+
+  delete(id) {
+    this.isLoadingResults = true;
+    this.service.deleteModerator(id)
+          .subscribe( (data: any) => {
+            this.notification.success(data.message);
+            this.paginator.page.emit();
+          }, error => {
+            this.isLoadingResults = false;
+            this.notification.error(error);
+    });
+  }
+
+  deleteSelected() {
+    this.isLoadingResults = true;
+    this.service.deleteModerators(this.selected).subscribe((data: any) => {
+      this.paginator.page.emit();
+      data.forEach(element => {
+        if (element.item1) {
+          this.notification.success(element.item2);
+        } else {
+          this.notification.error(element.item2);
+        }
+      });
+    }, error => {
+      this.isLoadingResults = false;
+      this.notification.error(error);
+    });
   }
 }
