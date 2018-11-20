@@ -1,4 +1,23 @@
 <div class="container">
+    <form class="example-container" [formGroup]="appointmentFilterForm" (ngSubmit)="onFilterSubmit()">
+        <mat-card>
+            <mat-card-content id="divider">
+                <mat-form-field id="mat-form-fieldStrech">
+                    <mat-label>Start</mat-label>
+                    <input [(ngModel)]="start" matInput formControlName="start" type="text" mwlFlatpickr [altInput]="true" [convertModelValue]="true"
+                      [enableTime]="true" [minuteIncrement]="5" [time24hr]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i"
+                      placeholder="Not set">
+                  </mat-form-field>
+                  <mat-form-field id="mat-form-fieldStrech">
+                      <mat-label>End</mat-label>
+                      <input [(ngModel)]="end" matInput formControlName="end" type="text" mwlFlatpickr [altInput]="true" [convertModelValue]="true"
+                        [enableTime]="true" [minuteIncrement]="5" [time24hr]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i"
+                        placeholder="Not set">
+                    </mat-form-field>
+            </mat-card-content>
+            <button (click)="onFilterSubmit(start, end)" mat-button>LIKE</button>
+        </mat-card>
+    </form>  
   <app-appointments-item *ngFor="let appointment of service.appointmentList" [appointment]="appointment"></app-appointments-item>
   <mat-paginator class="container-bottom" fxLayoutAlign="end start" [length]="service.appointmentsAmount" [pageSize]="pagService.pageSize"
     (page)="pageSwitch($event)" [hidePageSize]="true">

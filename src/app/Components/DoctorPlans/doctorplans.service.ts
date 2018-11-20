@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { PaginationService } from 'src/app/Services/pagination.service';
 import { map } from 'rxjs/operators';
 import { element } from '@angular/core/src/render3/instructions';
+import { AppointmentFilter } from 'src/app/Models/AppointmentFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class DoctorplansService {
   appointmentList: Appointment[];
   appointmentsAmount: number;
 
-  url = HOST_URL + '/api/Appointments/';
+  url = HOST_URL + '/api/Appointments/available/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -26,25 +27,38 @@ export class DoctorplansService {
       .set('pagecount', this.paginationService.pageSize.toString())
   };
 
-  // getDoctorAppointments(id: number) {
-  //   const appointmentsUrl = `${this.url}/${id}`;
-  //   return this.http.get(appointmentsUrl, this.httpOptions);
-  // }
-
-  getDoctorAppointments(id?: number) {
+  getDoctorAppointments(id: number, filterFrom?, filterTill?) {
+    console.log(filterFrom);
     const appointmentsUrl = this.url;
+    this.httpOptions.params = this.httpOptions.params.set('doctorId', id.toString());
+    if(filterFrom) {
+      if(filterFrom) {
+        this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(filterFrom, 'short'));
+      }
+      else {
+        this.httpOptions.params = this.httpOptions.params.delete('from');
+      }
+
+      if(filterTill) {
+         this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
+       }
+       else {
+         this.httpOptions.params = this.httpOptions.params.delete('till');
+       }
+    }
 
     this.http.get(appointmentsUrl, this.httpOptions)
-    //.pipe(
-      //map<Appointment>(res => res.list.map(element => ({
-        //...element,
-        //startTime: this.datePipe.transform(element.startTime, 'short')
-      //})))
-      //map(val => val.startTime = this.datePipe.transform(val.startTime, 'short'))
-    //)
+    // .pipe(
+    //   map(result => result.map(element => ({
+    //     ...element,
+    //     startTime: this.datePipe.transform(element.startTime, 'short')
+    //   })))
+    //   //map(val => val = this.datePipe.transform(val.startTime, 'short'))
+    // )
     .subscribe((result: any ) => {
       this.appointmentList = result.appointments;
-      this.appointmentsAmount = result.quantity;       
+      this.appointmentsAmount = result.quantity;
+      console.log(result.appointments);
   });
   } 
 
@@ -65,20 +79,6 @@ export class DoctorplansService {
               private datePipe: DatePipe,
               private paginationService: PaginationService) { }
 
-  // getAppointmentExtended(
-  //   doctorId: number,
-  //   pageCount: number,
-  //   page: number,
-  //   From: Date,
-  //   Till: Date): Observable<Appointment[]> {
-  //   const url = this.url + `/available?${DOCTOR_ID}=${doctorId}&`
-  //     + `${PAGE}=${page + 1}&`
-  //     + `${PAGE_COUNT}=${pageCount}&`
-  //     + `${FROM}=${From.toUTCString()}&`
-  //     + `${TILL}=${Till.toUTCString()}&`;
-  //   return this.http.get<Appointment[]>(url, this.httpOptions);
-  // }
-
   deleteAppointment(appointmentId: number | string) {
     const specUrl = HOST_URL + '/api/Appointments/delete';
     return this.http.request('delete', specUrl, { body: { id: appointmentId } });
@@ -92,11 +92,6 @@ export class DoctorplansService {
   getAppointments() {
     const specUrl = HOST_URL + '/api/Appointments';
     return this.http.get<Appointment[]>(specUrl);
-  }
-
-  getMyAppointments(id: number) {
-    const specUrl = HOST_URL + `/api/Appointments/getavailable/${id}`;
-    return this.http.get<any>(specUrl);
   }
 
   addAppointment(start: Date, end: Date) {
