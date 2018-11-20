@@ -1,6 +1,6 @@
 <div class="container">
-  <app-appointments-item *ngFor="let appointment of doctorplansService.appointmentList" [appointment]="appointment"></app-appointments-item>
-  <mat-paginator class="container-bottom" fxLayoutAlign="end start" [length]="doctorplansService.appointmentsAmount" [pageSize]="pagService.pageSize"
+  <app-appointments-item *ngFor="let appointment of service.appointmentList" [appointment]="appointment"></app-appointments-item>
+  <mat-paginator class="container-bottom" fxLayoutAlign="end start" [length]="service.appointmentsAmount" [pageSize]="pagService.pageSize"
     (page)="pageSwitch($event)" [hidePageSize]="true">
   </mat-paginator>
 </div>

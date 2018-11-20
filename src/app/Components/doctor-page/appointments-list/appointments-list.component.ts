@@ -3,6 +3,7 @@ import { Appointment } from '../../DoctorPlans/Appointment';
 import { DoctorplansService } from '../../DoctorPlans/doctorplans.service';
 import { PaginationService } from '../../../Services/pagination.service';
 import { MatPaginator, PageEvent } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appointments-list',
@@ -14,18 +15,26 @@ export class AppointmentsListComponent implements OnInit {
 
   appointmentList: Array<Appointment>;
   
-  constructor(private doctorplansService: DoctorplansService,
-              private pagService: PaginationService) { }
+  constructor(private service: DoctorplansService,
+              private pagService: PaginationService,
+              private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.doctorplansService.getDoctorAppointments();
+    this.service.getDoctorAppointments();
   }
+
+  
 
   //data => this.appointmentList = data
 
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);
-    //this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
+    this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
+    //if (this.filter.isWithParams === true) {
+      //this.service.getDoctors(this.filter.searchKey, + this.filter.selectedSpecialization);
+    //} else {
+      this.service.getDoctorAppointments();
+    //}
     window.scroll(0, 0);
   }
 }

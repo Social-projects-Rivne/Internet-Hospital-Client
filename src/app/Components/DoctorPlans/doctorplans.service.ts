@@ -5,12 +5,8 @@ import { Appointment } from './Appointment';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { PaginationService } from 'src/app/Services/pagination.service';
-
-const DOCTOR_ID = 'DoctorId'
-const PAGE = 'page';
-const PAGE_COUNT = 'pageCount';
-const FROM = 'From';
-const TILL = 'Till'
+import { map } from 'rxjs/operators';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
@@ -35,15 +31,35 @@ export class DoctorplansService {
   //   return this.http.get(appointmentsUrl, this.httpOptions);
   // }
 
-  getDoctorAppointments(name?: string) {
+  getDoctorAppointments(id?: number) {
     const appointmentsUrl = this.url;
 
     this.http.get(appointmentsUrl, this.httpOptions)
-    .subscribe((result: any) => {
+    //.pipe(
+      //map<Appointment>(res => res.list.map(element => ({
+        //...element,
+        //startTime: this.datePipe.transform(element.startTime, 'short')
+      //})))
+      //map(val => val.startTime = this.datePipe.transform(val.startTime, 'short'))
+    //)
+    .subscribe((result: any ) => {
       this.appointmentList = result.appointments;
-      this.appointmentsAmount = result.quantity;
+      this.appointmentsAmount = result.quantity;       
   });
+  } 
+
+  transformDate(date) {
+    return this.datePipe.transform(date, 'short');
   }
+
+  // this.appointmentList.forEach(appointment => {
+  //   return this.datePipe.transform(appointment.startTime, 'yyyy-MM-dd');
+  // });  
+
+  // {
+  //   starttime: this.datePipe.transform(start, 'short'),
+  //   endtime: this.datePipe.transform(end, 'short')
+  // }
 
   constructor(private http: HttpClient,
               private datePipe: DatePipe,
