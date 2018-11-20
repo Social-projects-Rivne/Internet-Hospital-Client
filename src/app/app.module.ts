@@ -50,6 +50,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
+import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { DatePipe } from '@angular/common';
     FeedbacksComponent,
     UpdatePatientComponent,
     DateValidatorDirective,
-    DoctorPlansComponent
+    DoctorPlansComponent,
+    UpdateDoctorComponent
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [

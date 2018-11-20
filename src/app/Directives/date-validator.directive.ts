@@ -13,7 +13,7 @@ export class DateValidatorDirective {
 
 export function MaxDateValidator(control: AbstractControl): { [key: string]: boolean } | null {
   const dateRequirement = new Date().getFullYear() - new Date(control.value).getFullYear();
-  if (control.value == null || dateRequirement < PASSPORT_AGE) {
+  if (control.value == null || dateRequirement < PASSPORT_AGE || dateRequirement > 140) {
     return { 'date': true };
   }
   return null;

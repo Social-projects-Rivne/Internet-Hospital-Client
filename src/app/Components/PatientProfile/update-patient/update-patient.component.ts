@@ -21,6 +21,7 @@ export class UpdatePatientComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.service.setCurrentProfile();
   }
 
   onClear() {
@@ -29,11 +30,11 @@ export class UpdatePatientComponent implements OnInit {
   }
 
   onSubmit() {
-      this.service.updatePatient(this.imageHandling.PassportToUpload)
+      this.service.updatePatient(this.imageHandling.passportToUpload)
         .subscribe(
             data => {
               this.router.navigate(['']);
-              this.notification.success('Successfully updated!');
+              this.notification.success('Successfully updated! Waiting for moderator\'s approvement!');
               this.service.form.reset();
               this.service.initializeFormGroup();
               this.imageHandling.isPassportUploaded = false;
