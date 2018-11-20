@@ -38,13 +38,14 @@
   }   
 
   .upload-photos {
-      font-size: 1.2em;
+      font-size: 1.1em;
       font-weight: 700;
       color: white;
       background-color: #e62739;
       display: inline-block;
-      padding: 5px;
+      padding: 5px 4px;
       border-radius: 5px;
+      width: 97%;
   }
   
   .mat-card-title {
@@ -53,10 +54,14 @@
 
   .upload-files {
       margin-top: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
   }
 
   .upload-succeded {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 700;
     color: white;
     background-color: rgb(0, 190, 0);
