@@ -6,8 +6,8 @@
 
     <mat-divider></mat-divider>
 
-    <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form"
-      class="normal-form form-width" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form" class="normal-form form-width"
+      (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 
 
       <div fxLayout="column" fxLayoutAlign="space-around center" class="inner-div">
@@ -33,7 +33,8 @@
           <mat-form-field class="mat-form-fieldStrech">
             <input required type="date" formControlName="BirthDate" matInput placeholder="Birthday">
             <mat-error>
-              Invalid date. <span *ngIf="service.form.get('BirthDate').dirty && service.form.get('BirthDate').errors?.date">Unappropriate years!</span>
+              Invalid date.
+              <span *ngIf="service.form.get('BirthDate').dirty && service.form.get('BirthDate').errors?.date">Unappropriate years!</span>
             </mat-error>
           </mat-form-field>
         </div>
@@ -45,7 +46,8 @@
         </div>
         <div class="controles-row form-fieldStrech">
           <mat-form-field class="mat-form-fieldStrech">
-            <input type="text" required formControlName="PhoneNumber" matInput [dropSpecialCharacters]="false" prefix="{{locale}} " mask="(00) 000-00-00" [showMaskTyped]="true" placeholder="Phone number">
+            <input type="text" required formControlName="PhoneNumber" matInput [dropSpecialCharacters]="false" prefix="{{locale}} " mask="(00) 000-00-00"
+              [showMaskTyped]="true" placeholder="Phone number">
             <mat-error>Invalid number.</mat-error>
           </mat-form-field>
         </div>
@@ -62,36 +64,36 @@
           <input id="PassportURL" formControlName="PassportURL" #PassportURL type="file" accept="image/*" (change)="imageHandling.handlePassportInput($event.target)"
             class="inputfile" multiple name="PassportURL">
           <label *ngIf="!imageHandling.isPassportUploaded" class="upload-photos mi-text-header" for="PassportURL">
-            <i class="fas fa-upload"></i> 
+            <i class="fas fa-upload"></i>
             <strong> Upload passport photos</strong>
           </label>
           <label *ngIf="imageHandling.isPassportUploaded" class="upload-succeded mi-text-header" for="PassportURL">
-              <i class="fas fa-check"></i>
-              <strong> Upload succeded</strong>  
+            <i class="fas fa-check"></i>
+            <strong> Upload succeded</strong>
           </label>
         </div>
         <div class="upload-files">
           <input id="DiplomaURL" formControlName="DiplomaURL" #DiplomaURL type="file" accept="image/*" (change)="imageHandling.handleDiplomaInput($event.target)"
             class="inputfile" multiple name="DiplomaURL">
           <label *ngIf="!imageHandling.isDiplomaUploaded" class="upload-photos mi-text-header" for="DiplomaURL">
-            <i class="fas fa-upload"></i> 
+            <i class="fas fa-upload"></i>
             <strong> Upload diploma photos</strong>
           </label>
           <label *ngIf="imageHandling.isDiplomaUploaded" class="upload-succeded mi-text-header" for="DiplomaURL">
-              <i class="fas fa-check"></i>
-              <strong> Upload succeded</strong>  
+            <i class="fas fa-check"></i>
+            <strong> Upload succeded</strong>
           </label>
         </div>
         <div class="upload-files">
           <input id="LicenseURL" formControlName="LicenseURL" #LicenseURL type="file" accept="image/*" (change)="imageHandling.handleLicenseInput($event.target)"
             class="inputfile" multiple name="LicenseURL">
           <label *ngIf="!imageHandling.isLicenseUploaded" class="upload-photos mi-text-header" for="LicenseURL">
-            <i class="fas fa-upload"></i> 
+            <i class="fas fa-upload"></i>
             <strong> Upload license photo </strong>
           </label>
           <label *ngIf="imageHandling.isLicenseUploaded" class="upload-succeded mi-text-header" for="LicenseURL">
-              <i class="fas fa-check"></i>
-              <strong> Upload succeded</strong>  
+            <i class="fas fa-check"></i>
+            <strong> Upload succeded</strong>
           </label>
         </div>
         <div div fxLayout="row" fxLayoutAlign="space-around center">
