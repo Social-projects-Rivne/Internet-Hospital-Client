@@ -12,7 +12,6 @@ const INCLUDE_ALL = 'includeAll';
 const SORT = 'sort';
 const ORDER_BY = 'order';
 
-
 @Injectable({
   providedIn: 'root'
 })
