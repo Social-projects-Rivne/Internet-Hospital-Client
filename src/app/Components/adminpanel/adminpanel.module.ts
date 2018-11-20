@@ -20,17 +20,17 @@ import { MatFormFieldModule,
         MatInputModule,
         MatTableModule,
         MatPaginatorModule,
+        MatSortModule,
         MatCheckboxModule,
         MatCardModule,
         MatToolbarModule,
         MatIconModule,
         MatListModule,
         MatButtonModule,
-        MatMenuModule
+        MatMenuModule,
+        MatProgressSpinnerModule
       } from '@angular/material';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,6 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatCardModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
