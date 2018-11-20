@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from 'selenium-webdriver/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { NotificationService } from '../notification.service';
 import { HOST_URL } from 'src/app/config';
 
@@ -8,13 +8,17 @@ import { HOST_URL } from 'src/app/config';
 })
 export class UserListService {
 
-  url = HOST_URL + '/api/UserList/';
+  url = HOST_URL + '/api/userlist';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
 
-  constructor(private _http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getUserList() {
-    const typeUrl = this.url + 'UserList';
-    return this._http.get(typeUrl);
+    const typeUrl = this.url;
+    return this.http.get(typeUrl, this.httpOptions);
   }
 
 }
