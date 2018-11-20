@@ -21,9 +21,9 @@ export class UpdatePatientService {
   constructor(private http: HttpClient) { }
   form: FormGroup = new FormGroup({
   PhoneNumber: new FormControl('', Validators.pattern(/\(\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)),
-    FirstName: new FormControl('', Validators.required),
-    SecondName: new FormControl('', Validators.required),
-    ThirdName: new FormControl('', Validators.required),
+    FirstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
+    SecondName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
+    ThirdName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     BirthDate: new FormControl('', MaxDateValidator),
     PassportURL: new FormControl('')
   });
