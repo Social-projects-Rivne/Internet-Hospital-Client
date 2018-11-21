@@ -4,9 +4,8 @@ import { DoctorplansService } from '../../DoctorPlans/doctorplans.service';
 import { PaginationService } from '../../../Services/pagination.service';
 import { MatPaginator, PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { AppointmentFilter } from 'src/app/Models/AppointmentFilter';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { NotificationService } from '../../../Services/notification.service';
 
 @Component({
   selector: 'app-appointments-list',
@@ -16,54 +15,55 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class AppointmentsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   id;
-  appointmentFilterForm: FormGroup;
 
-  appointmentList: Array<Appointment>;
+  appointmentList: Appointment[] = [];
+  appointmentsAmount: number;
   private filter: AppointmentFilter;
 
   constructor(private service: DoctorplansService,
     private pagService: PaginationService,
     private activateRoute: ActivatedRoute,
-    private formBuilder: FormBuilder) {
-    this.filter = new AppointmentFilter;
+    private notification: NotificationService) {
+    this.filter = new AppointmentFilter();
   }
 
   ngOnInit() {
     this.id = this.activateRoute.snapshot.params['id'];
-    this.service.appointmentList.forEach(element => element.startTime.toISOString().replace('T', ''));
-    this.service.getDoctorAppointments(this.id);
-    this.appointmentFilterForm = this.formBuilder.group({
-      start: [''],
-      end: ['']
+    this.service.getDoctorAppointments(this.id).subscribe((result: any) => {
+      this.appointmentList = result.appointments;
+      this.appointmentsAmount = result.quantity;
+    },
+    error => {
+      this.notification.error(error);
     });
   }
 
-  onFilterSubmit(start, end) {
-    this.filter.from = start;
-    this.filter.till = end;
-    // if (this.filter.isWithParams === true) {
-    this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
-    // } else {
-    // this.service.getDoctorAppointments(this.id);
-    // }
-    this.filter.from = null;
-    this.filter.till = null;
+  onSearch() {
+    this.paginator.firstPage();
+    const event = new PageEvent();
+    event.pageSize = this.pagService.pageSize;
+    event.pageIndex = this.pagService.pageIndex - 1;
+    event.length = this.appointmentsAmount;
+    this.pageSwitch(event);
   }
-
-  // data => this.appointmentList = data
 
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);
     this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
-    if (this.filter.isWithParams === true) {
-      this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
-    } else {
-      this.service.getDoctorAppointments(this.id);
-    }
+    this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till).subscribe((result: any) => {
+      this.appointmentList = result.appointments;
+      this.appointmentsAmount = result.quantity;
+    },
+    error => {
+      this.onClear();
+      this.onSearch();
+      this.notification.error(error);
+    });
     window.scroll(0, 0);
   }
 
   onClear() {
-    this.appointmentFilterForm.reset();
+    this.filter.from = null;
+    this.filter.till = null;
   }
 }

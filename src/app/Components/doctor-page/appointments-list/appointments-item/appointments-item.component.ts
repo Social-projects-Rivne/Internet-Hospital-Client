@@ -11,13 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 export class AppointmentsItemComponent implements OnInit {
   @Input()
   appointment: Appointment;
-  patientId;
 
-  constructor(private service: DoctorplansService,
-              private activateRoute: ActivatedRoute) { }
+  constructor(private service: DoctorplansService) { }
 
   ngOnInit() {
-    this.patientId = this.activateRoute.snapshot.params['id'];
   }
 
   onSubscribeToAppointment() {
