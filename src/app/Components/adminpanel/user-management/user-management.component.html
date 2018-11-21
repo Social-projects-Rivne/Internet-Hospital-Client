@@ -1,39 +1,39 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="Users">
 
-    <ng-container matColumnDef="u_id">
+    <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="u_firstname">
+    <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="u_secondname">
+    <ng-container matColumnDef="secondName">
       <th mat-header-cell *matHeaderCellDef> Second Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.secondname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.secondName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="u_thirdname">
+    <ng-container matColumnDef="thirdName">
       <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.thirdname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.thirdName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="u_email">
+    <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
-     <ng-container matColumnDef="u_birthdate">
+    <ng-container matColumnDef="birthDate">
       <th mat-header-cell *matHeaderCellDef> Birthdate </th>
-      <td mat-cell *matCellDef="let element"> {{element.birthdate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.birthDate | date}} </td>
     </ng-container>
 
-     <ng-container matColumnDef="u_statusid">
+    <ng-container matColumnDef="statusId">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.statusid}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.statusId}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -41,6 +41,4 @@
 
   </table>
 
-  <button mat-raised-button (click)="buttonclick()"> Shuffle </button>
-  
 </div>

@@ -1,10 +1,11 @@
 export class UserListModel {
     id: number;
-    FirstName: string;
-    SecondName: string;
-    ThirdName: string;
-    Email: string;
-    AvatarURL: string;
-    BirthDate: string;
-    StatusId: number;
+    firstName: string;
+    secondName: string;
+    thirdName: string;
+    email: string;
+    avatarURL: string;
+    birthDate: string;
+    statusId: number;
+    statusName?: string;
 }

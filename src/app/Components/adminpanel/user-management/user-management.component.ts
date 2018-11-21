@@ -13,10 +13,9 @@ import {MatTableModule} from '@angular/material/table';
 
 export class UserManagementComponent implements OnInit {
 
-  public Users: UserListModel[];
+  public Users: UserListModel[] = [];
 
-  displayedColumns: string[] = ['u_id', 'u_firstname', 'u_secondname', 'u_thirdname', 'u_email', 'u_birdthdate', 'u_statusid'];
-  dataSource = this.Users;
+  displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusId'];
 
   constructor(
     private _userListService: UserListService,
@@ -26,8 +25,10 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     this._userListService.getUserList().subscribe((types: any) => {
       this.Users = types;
-      console.log(types);
-    }, error => {
+      console.log(this.Users);
+      console.log(types[0].id);
+    },
+    error => {
       this._notification.error('Server error');
     });
   }
@@ -36,6 +37,10 @@ export class UserManagementComponent implements OnInit {
     for (let i = 0; i < this.Users.length; ++i) {
       console.log(this.Users[i].id);
     }
+  }
+
+  StatusConverter() {
+
   }
 
 }
