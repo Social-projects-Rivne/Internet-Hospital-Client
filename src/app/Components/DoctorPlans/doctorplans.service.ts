@@ -8,6 +8,7 @@ import { PaginationService } from 'src/app/Services/pagination.service';
 import { map } from 'rxjs/operators';
 import { element } from '@angular/core/src/render3/instructions';
 import { AppointmentFilter } from 'src/app/Models/AppointmentFilter';
+import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,6 @@ import { AppointmentFilter } from 'src/app/Models/AppointmentFilter';
 export class DoctorplansService {
   appointmentList: Appointment[];
   appointmentsAmount: number;
-
-  url = HOST_URL + '/api/Appointments/available/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -26,54 +25,6 @@ export class DoctorplansService {
       .set('page', this.paginationService.pageIndex.toString())
       .set('pagecount', this.paginationService.pageSize.toString())
   };
-
-  getDoctorAppointments(id: number, filterFrom?, filterTill?) {
-    console.log(filterFrom);
-    const appointmentsUrl = this.url;
-    this.httpOptions.params = this.httpOptions.params.set('doctorId', id.toString());
-    if(filterFrom) {
-      if(filterFrom) {
-        this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(filterFrom, 'short'));
-      }
-      else {
-        this.httpOptions.params = this.httpOptions.params.delete('from');
-      }
-
-      if(filterTill) {
-         this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
-       }
-       else {
-         this.httpOptions.params = this.httpOptions.params.delete('till');
-       }
-    }
-
-    this.http.get(appointmentsUrl, this.httpOptions)
-    // .pipe(
-    //   map(result => result.map(element => ({
-    //     ...element,
-    //     startTime: this.datePipe.transform(element.startTime, 'short')
-    //   })))
-    //   //map(val => val = this.datePipe.transform(val.startTime, 'short'))
-    // )
-    .subscribe((result: any ) => {
-      this.appointmentList = result.appointments;
-      this.appointmentsAmount = result.quantity;
-      console.log(result.appointments);
-  });
-  } 
-
-  transformDate(date) {
-    return this.datePipe.transform(date, 'short');
-  }
-
-  // this.appointmentList.forEach(appointment => {
-  //   return this.datePipe.transform(appointment.startTime, 'yyyy-MM-dd');
-  // });  
-
-  // {
-  //   starttime: this.datePipe.transform(start, 'short'),
-  //   endtime: this.datePipe.transform(end, 'short')
-  // }
 
   constructor(private http: HttpClient,
               private datePipe: DatePipe,
@@ -100,5 +51,38 @@ export class DoctorplansService {
       starttime: this.datePipe.transform(start, 'short'),
       endtime: this.datePipe.transform(end, 'short')
     });
+  }
+
+  getDoctorAppointments(id: number, filterFrom?, filterTill?) {
+    const specUrl = HOST_URL + '/api/Appointments/available/';
+    console.log(filterFrom);
+    this.httpOptions.params = this.httpOptions.params.set('doctorId', id.toString());
+    if(filterFrom) {
+      if(filterFrom) {
+        this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(filterFrom, 'short'));
+      }
+      else {
+        this.httpOptions.params = this.httpOptions.params.delete('from');
+      }
+
+      if(filterTill) {
+         this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
+       }
+       else {
+         this.httpOptions.params = this.httpOptions.params.delete('till');
+       }
+    }
+    this.http.get(specUrl, this.httpOptions)
+    .subscribe((result: any ) => {
+      this.appointmentList = result.appointments;
+      this.appointmentsAmount = result.quantity;
+      console.log(result.appointments);
+  });
+  } 
+
+  subscribePatientToAppointment(appointmentId: number) {
+    console.log(appointmentId);
+    const scecUrl = HOST_URL + '/api/Appointments/subscribe';
+    return this.http.post(scecUrl, { Id: appointmentId });
   }
 }

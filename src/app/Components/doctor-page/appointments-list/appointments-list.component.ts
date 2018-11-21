@@ -39,14 +39,27 @@ export class AppointmentsListComponent implements OnInit {
     });
   } 
 
+  onSearch($event) {
+    this.filter = $event;
+    this.filter.CheckIfPropertyExist();
+    this.paginator.firstPage();
+    const event = new PageEvent();
+    event.pageSize = this.pagService.pageSize;
+    event.pageIndex = this.pagService.pageIndex - 1;
+    event.length = this.service.appointmentsAmount;
+    this.pageSwitch(event);
+  }
+
   onFilterSubmit(start, end) {
     this.filter.from = start;
     this.filter.till = end;
     //if (this.filter.isWithParams === true) {
       this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
     //} else {
-      //this.service.getDoctorAppointments(this.id);
+      this.service.getDoctorAppointments(this.id);
     //}
+    this.filter.from = null;
+    this.filter.till = null;
   }
 
   //data => this.appointmentList = data
@@ -55,7 +68,7 @@ export class AppointmentsListComponent implements OnInit {
     this.pagService.change(event);
     this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
     if (this.filter.isWithParams === true) {
-      this.service.getDoctorAppointments(this.id, this.filter);
+      this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
     } else {
       this.service.getDoctorAppointments(this.id);
     }

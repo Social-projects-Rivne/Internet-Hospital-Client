@@ -15,7 +15,7 @@
                         placeholder="Not set">
                     </mat-form-field>
             </mat-card-content>
-            <button (click)="onFilterSubmit(start, end)" mat-button>LIKE</button>
+            <button color="primary" (click)="onFilterSubmit(start, end)" mat-button>Search</button>
         </mat-card>
     </form>  
   <app-appointments-item *ngFor="let appointment of service.appointmentList" [appointment]="appointment"></app-appointments-item>
