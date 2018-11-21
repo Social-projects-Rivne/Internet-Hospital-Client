@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserListService } from 'src/app/Services/UserListService/user-list.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { UserListModel } from 'src/app/Models/UserListModel';
-import { User } from 'src/app/Models/User';
-import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +13,7 @@ export class UserManagementComponent implements OnInit {
 
   public Users: UserListModel[] = [];
 
-  displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusId'];
+  displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
 
   constructor(
     private _userListService: UserListService,
@@ -27,6 +25,7 @@ export class UserManagementComponent implements OnInit {
       this.Users = types;
       console.log(this.Users);
       console.log(types[0].id);
+      this.StatusConverter();
     },
     error => {
       this._notification.error('Server error');
@@ -34,13 +33,30 @@ export class UserManagementComponent implements OnInit {
   }
 
   buttonclick() {
-    for (let i = 0; i < this.Users.length; ++i) {
-      console.log(this.Users[i].id);
-    }
+    this.StatusConverter();
   }
 
   StatusConverter() {
-
+    this.Users.forEach(element => {
+      if (element.statusId === 1) {
+        element.statusName = 'Banned';
+      }
+      if (element.statusId === 2) {
+        element.statusName = 'New';
+      }
+      if (element.statusId === 3) {
+        element.statusName = 'Approved';
+      }
+      if (element.statusId === 4) {
+        element.statusName = 'Not approved';
+      }
+      if (element.statusId === 5) {
+        element.statusName = 'Deleted';
+      }
+      if (element.statusId === 6) {
+        element.statusName = 'Active';
+      }
+    });
   }
 
 }

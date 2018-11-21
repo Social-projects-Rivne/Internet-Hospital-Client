@@ -1,4 +1,7 @@
 <div class="mat-elevation-z8">
+
+  <button matTooltip="Hello" id="GoHome" mat-button (click)="buttonclick()">get data</button>
+
   <table mat-table [dataSource]="Users">
 
     <ng-container matColumnDef="id">
@@ -31,9 +34,9 @@
       <td mat-cell *matCellDef="let element"> {{element.birthDate | date}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="statusId">
+    <ng-container matColumnDef="statusName">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.statusId}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.statusName}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

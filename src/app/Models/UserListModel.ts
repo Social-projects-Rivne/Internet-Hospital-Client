@@ -8,4 +8,5 @@ export class UserListModel {
     birthDate: string;
     statusId: number;
     statusName?: string;
+    statusDescription?: string;
 }
