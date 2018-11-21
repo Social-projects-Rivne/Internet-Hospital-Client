@@ -14,7 +14,7 @@ import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/
   providedIn: 'root'
 })
 export class DoctorplansService {
-  appointmentList: Appointment[];
+  appointmentList: Appointment[] = [];
   appointmentsAmount: number;
 
   httpOptions = {
@@ -27,8 +27,8 @@ export class DoctorplansService {
   };
 
   constructor(private http: HttpClient,
-              private datePipe: DatePipe,
-              private paginationService: PaginationService) { }
+    private datePipe: DatePipe,
+    private paginationService: PaginationService) { }
 
   deleteAppointment(appointmentId: number | string) {
     const specUrl = HOST_URL + '/api/Appointments/delete';
@@ -57,28 +57,28 @@ export class DoctorplansService {
     const specUrl = HOST_URL + '/api/Appointments/available/';
     console.log(filterFrom);
     this.httpOptions.params = this.httpOptions.params.set('doctorId', id.toString());
-    if(filterFrom) {
-      if(filterFrom) {
+    // if (filterFrom || filterTill) {
+      if (filterFrom) {
         this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(filterFrom, 'short'));
-      }
-      else {
+      } else {
         this.httpOptions.params = this.httpOptions.params.delete('from');
       }
 
-      if(filterTill) {
-         this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
-       }
-       else {
-         this.httpOptions.params = this.httpOptions.params.delete('till');
-       }
-    }
+      if (filterTill) {
+        this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
+      } else {
+        this.httpOptions.params = this.httpOptions.params.delete('till');
+      }
+    // }
     this.http.get(specUrl, this.httpOptions)
-    .subscribe((result: any ) => {
-      this.appointmentList = result.appointments;
-      this.appointmentsAmount = result.quantity;
-      console.log(result.appointments);
-  });
-  } 
+    // .pipe(map(app => (this.appointmentList.forEach(start => start.startTime.toISOString().replace('T', ''))
+    // )))
+      .subscribe((result: any) => {
+        this.appointmentList = result.appointments;
+        this.appointmentsAmount = result.quantity;
+        // console.log(this.appointmentList[0].startTime);
+      });
+  }
 
   subscribePatientToAppointment(appointmentId: number) {
     console.log(appointmentId);

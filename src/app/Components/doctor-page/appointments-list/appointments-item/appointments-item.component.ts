@@ -21,7 +21,6 @@ export class AppointmentsItemComponent implements OnInit {
   }
 
   onSubscribeToAppointment() {
-    console.log("Succesfull");
     this.service.subscribePatientToAppointment(this.appointment.id).subscribe();
   }
 }

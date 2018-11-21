@@ -21,48 +21,36 @@ export class AppointmentsListComponent implements OnInit {
   appointmentList: Array<Appointment>;
   private filter: AppointmentFilter;
 
-  
   constructor(private service: DoctorplansService,
-              private pagService: PaginationService,
-              private activateRoute: ActivatedRoute,
-              private formBuilder: FormBuilder) { 
-                this.filter = new AppointmentFilter;
-              }
+    private pagService: PaginationService,
+    private activateRoute: ActivatedRoute,
+    private formBuilder: FormBuilder) {
+    this.filter = new AppointmentFilter;
+  }
 
   ngOnInit() {
     this.id = this.activateRoute.snapshot.params['id'];
+    this.service.appointmentList.forEach(element => element.startTime.toISOString().replace('T', ''));
     this.service.getDoctorAppointments(this.id);
-
     this.appointmentFilterForm = this.formBuilder.group({
       start: [''],
       end: ['']
     });
-  } 
-
-  onSearch($event) {
-    this.filter = $event;
-    this.filter.CheckIfPropertyExist();
-    this.paginator.firstPage();
-    const event = new PageEvent();
-    event.pageSize = this.pagService.pageSize;
-    event.pageIndex = this.pagService.pageIndex - 1;
-    event.length = this.service.appointmentsAmount;
-    this.pageSwitch(event);
   }
 
   onFilterSubmit(start, end) {
     this.filter.from = start;
     this.filter.till = end;
-    //if (this.filter.isWithParams === true) {
-      this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
-    //} else {
-      this.service.getDoctorAppointments(this.id);
-    //}
+    // if (this.filter.isWithParams === true) {
+    this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till);
+    // } else {
+    // this.service.getDoctorAppointments(this.id);
+    // }
     this.filter.from = null;
     this.filter.till = null;
   }
 
-  //data => this.appointmentList = data
+  // data => this.appointmentList = data
 
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);
@@ -73,5 +61,9 @@ export class AppointmentsListComponent implements OnInit {
       this.service.getDoctorAppointments(this.id);
     }
     window.scroll(0, 0);
+  }
+
+  onClear() {
+    this.appointmentFilterForm.reset();
   }
 }
