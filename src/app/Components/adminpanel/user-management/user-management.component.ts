@@ -23,8 +23,6 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     this._userListService.getUserList().subscribe((types: any) => {
       this.Users = types;
-      console.log(this.Users);
-      console.log(types[0].id);
       this.StatusConverter();
     },
     error => {
@@ -32,29 +30,31 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  buttonclick() {
-    this.StatusConverter();
-  }
-
   StatusConverter() {
     this.Users.forEach(element => {
       if (element.statusId === 1) {
         element.statusName = 'Banned';
+        element.statusDescription = 'Banned user who has violated our rules.'
       }
       if (element.statusId === 2) {
         element.statusName = 'New';
+        element.statusDescription = 'New user registered in our system.';
       }
       if (element.statusId === 3) {
         element.statusName = 'Approved';
+        element.statusDescription = 'Approved user with checked data.';
       }
       if (element.statusId === 4) {
         element.statusName = 'Not approved';
+        element.statusDescription = 'Not approved, because user`s data was invalid.';
       }
       if (element.statusId === 5) {
         element.statusName = 'Deleted';
+        element.statusDescription = 'Deleted user by Admin';
       }
       if (element.statusId === 6) {
         element.statusName = 'Active';
+        element.statusDescription = 'Active moderator';
       }
     });
   }

@@ -16,6 +16,7 @@ import { ContentPreviewComponent } from '../adminpanel/content-management/conten
 import { ContentEditComponent } from '../adminpanel/content-management/content-edit/content-edit.component';
 import { ContentItemComponent } from '../adminpanel/content-management/content-item/content-item.component';
 
+
 import { MatFormFieldModule,
         MatInputModule,
         MatTableModule,
@@ -34,9 +35,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
+    MatTooltipModule,
     CommonModule,
     AdminpanelRoutingModule,
     MatToolbarModule,
