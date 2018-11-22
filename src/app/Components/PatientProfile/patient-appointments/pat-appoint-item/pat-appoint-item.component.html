@@ -1,0 +1,10 @@
+<div class="container" fxLayout="row" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
+    <mat-card fxLayout="row" fxLayoutAlign="space-around start">
+        <div class="marginTen">
+            <mat-card-content class="mat-display-1">
+                {{patAppointment.startTime | date:'dd.MM.y HH.mm'}}  -  {{patAppointment.endTime | date:'HH.mm'}}
+            </mat-card-content>
+        </div>
+        <button id="btnDisSubscribe" (click)="onDisSubscribeToAppointment()" mat-raised-button color="primary">Subscribe</button>
+    </mat-card>
+</div>

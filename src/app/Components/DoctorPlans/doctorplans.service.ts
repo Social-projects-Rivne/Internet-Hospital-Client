@@ -32,4 +32,9 @@ export class DoctorplansService {
       return this.http.post(specUrl, {starttime: this.datePipe.transform(start, 'short'),
                                 endtime: this.datePipe.transform(end, 'short')});
     }
+
+    disSubscribeToAppointment(appointmentId: number) {
+      const scecUrl = HOST_URL + '/api/Appointments/subscribe';
+      return this.http.post(scecUrl, { Id: appointmentId });
+    }
 }
