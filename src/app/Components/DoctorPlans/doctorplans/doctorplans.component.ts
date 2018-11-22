@@ -29,11 +29,13 @@ export class DoctorPlansComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   activeDayIsOpen = false;
   loginForm: FormGroup;
+  load = true;
 
   deleteAction: CalendarEventAction = {
     label: '<i></i>',
     onClick: ({ event }: { event: CalendarEvent }): void => {
       if (confirm('Are you sure ?')) {
+        this.load = true;
         this.doctorplansService.deleteAppointment(event.id)
           .subscribe((data: any) => {
             this.getAppointments();
@@ -52,6 +54,7 @@ export class DoctorPlansComponent implements OnInit {
     label: '<i></i>',
     onClick: ({ event }: { event: CalendarEvent }): void => {
       if (confirm('Are you sure ?')) {
+        this.load = true;
         this.doctorplansService.cancelAppointment(event.id)
           .subscribe((data: any) => {
             this.getAppointments();
@@ -86,6 +89,7 @@ export class DoctorPlansComponent implements OnInit {
         });
         this.Map();
         this.refresh.next();
+        this.load = false;
       });
   }
 
@@ -140,12 +144,14 @@ export class DoctorPlansComponent implements OnInit {
   }
 
   onSubmit() {
+    this.load = true;
     this.doctorplansService.addAppointment(this.loginForm.controls['start'].value, this.loginForm.controls['end'].value)
       .subscribe((data: any) => {
         this.getAppointments();
-        this.notification.success(data['message']);
+        this.notification.success('Appointment has been successfully created');
       },
       error => {
+        this.getAppointments();
         this.notification.error(error);
       });
   }
