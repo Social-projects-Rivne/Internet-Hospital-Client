@@ -36,6 +36,8 @@ import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { UserlistSearchComponent } from '../../Components/adminpanel/user-management/userlist-search/userlist-search.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -56,7 +58,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
   ],
   declarations: [
     AdminPanelComponent,
@@ -69,7 +72,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ContentManagementComponent,
     ContentPreviewComponent,
     ContentEditComponent,
-    ContentItemComponent
+    ContentItemComponent,
+    UserlistSearchComponent
   ],
   providers: []
 })

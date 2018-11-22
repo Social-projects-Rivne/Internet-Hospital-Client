@@ -1,0 +1,18 @@
+.margin-ten{
+    margin: 10px;
+}
+.example-full-width{
+    width: 100%;
+}
+.example-half-width{
+    width: 50%;
+}
+.margin-five-dic{
+    margin: -10px;
+}
+@media screen and (max-width: 992px) {
+    
+    .example-half-width {
+        width: 94%;
+    }
+}
