@@ -6,7 +6,7 @@
     </div>
     <div class="doctor-info">
       <p><span class="info-name">Specialization:</span><span class="info-value">{{doctor?.specialization}}</span></p>
-      <p><span class="info-name">Birth date:</span><span class="info-value">{{doctor?.birthDate}}</span></p>
+      <p><span class="info-name">Birth date:</span><span class="info-value">{{doctor?.birthDate | date:'dd.MM.y'}}</span></p>
       <p><span class="info-name">Address:</span><span class="info-value">{{doctor?.address}}</span></p>
       <p><span class="info-name">Phone:</span><span class="info-value">{{doctor?.phone}}</span></p>
     </div>

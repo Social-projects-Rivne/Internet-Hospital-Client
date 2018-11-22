@@ -14,7 +14,7 @@ import { NotificationService } from '../../../Services/notification.service';
 })
 export class AppointmentsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  id;
+  doctorId;
 
   appointmentList: Appointment[] = [];
   appointmentsAmount: number;
@@ -28,14 +28,18 @@ export class AppointmentsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.activateRoute.snapshot.params['id'];
-    this.service.getDoctorAppointments(this.id).subscribe((result: any) => {
+    this.getDoctorId();
+    this.service.getDoctorAppointments(this.doctorId).subscribe((result: any) => {
       this.appointmentList = result.appointments;
       this.appointmentsAmount = result.quantity;
     },
     error => {
       this.notification.error(error);
     });
+  }
+
+  getDoctorId() {
+    this.doctorId = this.activateRoute.snapshot.params['id'];
   }
 
   onSearch() {
@@ -50,7 +54,7 @@ export class AppointmentsListComponent implements OnInit {
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);
     this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
-    this.service.getDoctorAppointments(this.id, this.filter.from, this.filter.till).subscribe((result: any) => {
+    this.service.getDoctorAppointments(this.doctorId, this.filter.from, this.filter.till).subscribe((result: any) => {
       this.appointmentList = result.appointments;
       this.appointmentsAmount = result.quantity;
     },
