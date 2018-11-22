@@ -1,10 +1,9 @@
 <div class="container" fxLayout="row" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
     <mat-card fxLayout="row" fxLayoutAlign="space-around start">
         <div class="marginTen">
-            <mat-card-content class="mat-display-1">{{appointment.startTime | date:'dd.MM.y HH.mm'}}</mat-card-content>
-        </div>
-        <div class="marginTen">
-            <mat-card-content class="mat-display-1">{{appointment.endTime | date:'dd.MM.y HH.mm'}}</mat-card-content>
+            <mat-card-content class="mat-display-1">
+                {{appointment.startTime | date:'dd.MM.y HH.mm'}}  -  {{appointment.endTime | date:'HH.mm'}}
+            </mat-card-content>
         </div>
         <button id="btnSubscribe" (click)="onSubscribeToAppointment()" mat-raised-button color="primary">Subscribe</button>
     </mat-card>
