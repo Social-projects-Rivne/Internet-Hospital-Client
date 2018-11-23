@@ -4,3 +4,11 @@ table {
 .padding-ten{
     padding: 10px;
 }
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+    display: flex;
+    margin-right: 16px;
+    flex-grow: 0;
+}
+.mat-expansion-panel-header{
+    font-size: 28px;
+}

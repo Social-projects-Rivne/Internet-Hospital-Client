@@ -38,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserlistSearchComponent } from '../../Components/adminpanel/user-management/userlist-search/userlist-search.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import { MatSelectModule } from '@angular/material/select';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatSelectModule,
+    MatExpansionModule,
   ],
   declarations: [
     AdminPanelComponent,

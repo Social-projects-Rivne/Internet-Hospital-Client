@@ -1,23 +1,19 @@
-<mat-card class="example-card example-half-width">
-
-    <mat-card-header>
-      <h4 class="margin-five-dic">Search</h4>   
-    </mat-card-header>
+<div class="example-card example-half-width">
 
     <hr class="example-full-width">
 
   <mat-card-content>
 
     <mat-form-field class="example-full-width">
-      <input autocomplete="off" matInput placeholder="User's name">
+      <input type="text" [(ngModel)]="nameSearch" (keyup)="textChanged($event)" autocomplete="off" matInput placeholder="User's name">
     </mat-form-field>
 
     <br>
 
     <mat-form-field class="example-full-width">
-      <mat-select placeholder="Status" [(value)]="selected">
+      <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let item of Users" [value]="item.id">
+        <mat-option *ngFor="let item of Users" [value]="item.statusName">
           {{item.statusName}}
         </mat-option>
       </mat-select>
@@ -25,9 +21,9 @@
 
     <br>
 
-    <button class="example-full-width" mat-raised-button color="primary">Search</button>
+    <button (click)="searchClick()" class="example-full-width" mat-raised-button color="primary">Search</button>
 
   </mat-card-content>
 
 
-</mat-card>
+</div>
