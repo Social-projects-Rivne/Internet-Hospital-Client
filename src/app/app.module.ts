@@ -51,6 +51,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
+import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
+import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 
@@ -78,6 +80,8 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
     DateValidatorDirective,
     DoctorPlansComponent,
     UpdateDoctorComponent,
+    AppointmentsListComponent,
+    AppointmentsItemComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent
   ],
