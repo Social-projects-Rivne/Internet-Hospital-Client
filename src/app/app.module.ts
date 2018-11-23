@@ -27,6 +27,7 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 // tslint:disable-next-line:max-line-length
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
@@ -53,8 +54,6 @@ import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
 import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
-import { TestComponent } from './test/test.component';
-import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish.appointment.guard';
 
 @NgModule({
   declarations: [
@@ -81,7 +80,6 @@ import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish.appointme
     UpdateDoctorComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
-    TestComponent,
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [

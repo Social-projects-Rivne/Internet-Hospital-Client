@@ -10,7 +10,7 @@ import { DoctorFilter } from '../../../Models/DoctorFilter';
   styleUrls: ['./doctor-list.component.scss']
 })
 export class DoctorListComponent implements OnInit {
-  constructor(private service: DoctorsService, 
+  constructor(private service: DoctorsService,
               private pagService: PaginationService) { }
 
   private filter: DoctorFilter;

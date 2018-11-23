@@ -9,6 +9,7 @@ import { COLORS } from 'src/app/Mock-Objects/mock-colors';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { DataSharingService } from '../../../Services/date-sharing.service';
 
 @Component({
   selector: 'app-doctorplans',
@@ -22,7 +23,8 @@ export class DoctorPlansComponent implements OnInit {
     private notification: NotificationService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private dateSharing: DataSharingService) { }
 
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
@@ -141,9 +143,8 @@ export class DoctorPlansComponent implements OnInit {
     if (event.color === COLORS.blue) {
       this.notification.error('Appointment is empty');
     } else {
-      console.log(123);
-      const link = '/test/' + event.id.toString();
-      this.router.navigate([link, {start: this.datePipe.transform(event.start, 'short')}]);
+      this.dateSharing.changeDate(event.start);
+      // todo: navigate to illness creation component
     }
   }
 
