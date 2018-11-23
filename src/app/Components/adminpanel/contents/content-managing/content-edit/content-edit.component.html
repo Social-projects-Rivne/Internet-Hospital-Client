@@ -1,0 +1,50 @@
+<mat-card class="mat-elevation-z10 content-edit">
+  <form [formGroup]="contentService.form" class="mat-elavation-z10" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div [style.text-align]="'left'" [style.padding]="'50px 50px 0 0'">
+      <!-- Id/Author -->
+    </div>
+    <div>
+      <mat-form-field>
+        <input required formControlName="title" matInput placeholder="Title">
+        <mat-error>Title required.</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <textarea required formControlName="body" class="text-body" maxlength="1000"
+          matInput placeholder="Body"></textarea>
+        <mat-error>Body required.</mat-error>
+
+      </mat-form-field>
+      <!-- <div [froalaEditor] [(froalaModel)]="editorContent">Hello, Froala!</div>
+      <div [froalaView]="editorContent"></div>
+      {{editorContent}} -->
+    </div>
+    <div>
+      <mat-form-field>
+        <input required formControlName="source" matInput placeholder="Source">
+        <mat-error>Source required.</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div style="text-align: center">
+        <!-- (change)="handleFileInput($event.target.files)" -->
+      <input [disabled]="contentService.croppedImgs.length > 5" placeholder="Images" type="file" 
+              accept="image/*" (change)="handleFileInput($event.target.files[0])" />
+      <image-cropper style="width:100%" *ngIf="contentService.imgs.length != 0 && currentImgIndex != -1" [imageBase64]="contentService.imgs[currentImgIndex]" 
+        [maintainAspectRatio]="true" [aspectRatio]="16 / 9" [format]="contentService.imgsFiles[currentImgIndex].type.replace('image/','')" 
+        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+      <div class="cropped-images-container">
+        <div class="img-container" *ngFor="let img of contentService.croppedImgs; index as i">
+            <!-- (click)="delete()" -->
+          <button class="delete-button" (click)="delete(i)" mat-button >&#x2716;</button>
+          <img [src]="img" (click)="putInCropper(i)">
+        </div>
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="contentService.form.invalid || contentService.croppedFiles.length == 0">Submit</button>
+      <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+    </div>
+  </form>
+</mat-card>

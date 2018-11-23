@@ -1,7 +1,7 @@
 export class Content {
-    Id: number;
-    Title: string;
-    Body: string;
-    Source: string;
-    Images: string[];
+    id: number;
+    title: string;
+    body: string;
+    source: string;
+    images: File[];
 }

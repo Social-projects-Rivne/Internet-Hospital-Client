@@ -1,13 +1,30 @@
-.content-preview {
+.content-item {
   display: inline-block;
   margin: 10px;
-  width: 500px;
+  width: 400px;
   padding: 0;
+  word-break: break-all;
 
   mat-card-header,
   .content-body {
     padding: 16px;
   }
+}
+
+.delete-button {
+  position: absolute;
+  right: 0px;
+  font-size: 20px;
+  text-align: center;
+  background-color: red;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  border-width: 0;
+  min-width: 0;
+  padding: 0;
+  padding-top: 2px;
+  line-height: 0;
 }
 
 .slides {
@@ -51,20 +68,19 @@
   opacity: 0.5;
 }
 
-.source-button {
+.edit-button {
   position: absolute;
   bottom: 0;
   right: 0;
   width: 200px;
 }
 
-.content-body {
+mat-card-content.content-body {
   margin-bottom: 30px;
-  height: 89px;
-  overflow: hidden;
+  height: 70px;
 
   p {
-    height: 89px;
+    height: 70px;
     overflow: hidden;
   }
 }

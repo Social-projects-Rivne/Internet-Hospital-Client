@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Content } from '../../../Models/Content';
-
+import { CONTENTS_MNG } from '../routesConfig';
+import { ADMIN_PANEL } from '../../../config';
+import { ContentEditingService } from '../services/content-editing.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-content-management',
-  templateUrl: './content-management.component.html',
-  styleUrls: ['./content-management.component.scss']
+  selector: 'app-contents',
+  templateUrl: './contents.component.html',
+  styleUrls: ['./contents.component.scss']
 })
-export class ContentManagementComponent implements OnInit {
+export class ContentsComponent implements OnInit {
 
-  selectedContent: Content = null;
+  contMng = `/${ADMIN_PANEL}/${CONTENTS_MNG}`;
   contentItems: Content[] = [];
 
-  constructor() {
+  constructor(private editingContent: ContentEditingService, private router: Router) {
   }
 
   ngOnInit() {
@@ -21,14 +24,13 @@ export class ContentManagementComponent implements OnInit {
     }
   }
 
-  onChange(sel: Content) {
-    this.selectedContent = sel;
+  onChange(i: number) {
+    this.editingContent.setForm(this.contentItems[i]);
+    this.router.navigate([this.contMng]);
   }
 
-  onDelete(sel: Content) {
-    const ind = this.contentItems.indexOf(sel);
-    this.contentItems.splice(ind, 1);
-
+  onDelete(i: number) {
+    this.contentItems.splice(i, 1);
     // method for delete from DB
   }
 
@@ -85,15 +87,13 @@ function createNewContent(id: number): Content {
                 + '@gmail.com';
 
   const cont: Content = new Content();
-  cont.Id = id;
-  cont.Title = email;
-  cont.Source = lastname;
-  cont.Images = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
-                  'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
-                  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'];
-  cont.Body = '';
+  cont.id = id;
+  cont.title = email;
+  cont.source = lastname;
+  cont.images = [];
+  cont.body = '';
   for (let i = 0; i < 100; ++i) {
-    cont.Body += 'wwwwwwwwww';
+    cont.body += 'wwwwwwwwww';
   }
   return cont;
 }

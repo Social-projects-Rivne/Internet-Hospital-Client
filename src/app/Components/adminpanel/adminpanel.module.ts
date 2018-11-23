@@ -11,10 +11,10 @@ import { UserManagementComponent } from '../adminpanel/user-management/user-mana
 import { RequestManagementComponent } from '../adminpanel/request-management/request-management.component';
 import { ModeratorManagementComponent } from '../adminpanel/moderator-management/moderator-management.component';
 import { ModeratorCreateComponent } from '../adminpanel/moderator-management/moderator-create/moderator-create.component';
-import { ContentManagementComponent } from '../adminpanel/content-management/content-management.component';
-import { ContentPreviewComponent } from '../adminpanel/content-management/content-preview/content-preview.component';
-import { ContentEditComponent } from '../adminpanel/content-management/content-edit/content-edit.component';
-import { ContentItemComponent } from '../adminpanel/content-management/content-item/content-item.component';
+import { ContentsComponent } from '../adminpanel/contents/contents.component';
+import { ContentPreviewComponent } from '../adminpanel/contents/content-managing/content-preview/content-preview.component';
+import { ContentEditComponent } from '../adminpanel/contents/content-managing/content-edit/content-edit.component';
+import { ContentItemComponent } from '../adminpanel/contents/content-item/content-item.component';
 
 import { MatFormFieldModule,
         MatInputModule,
@@ -34,6 +34,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ContentManagingComponent } from '../../Components/adminpanel/contents/content-managing/content-managing.component';
 
 @NgModule({
   imports: [
@@ -55,7 +57,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ImageCropperModule
   ],
   declarations: [
     AdminPanelComponent,
@@ -65,10 +68,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RequestManagementComponent,
     ModeratorManagementComponent,
     ModeratorCreateComponent,
-    ContentManagementComponent,
+    ContentsComponent,
     ContentPreviewComponent,
     ContentEditComponent,
-    ContentItemComponent
+    ContentItemComponent,
+    ContentManagingComponent
   ],
   providers: []
 })

@@ -25,9 +25,8 @@ export class ContentItemComponent implements OnInit {
   slideIndex = 0;
   @Input() content: Content;
 
-  @Output() changed = new EventEmitter<Content>();
-  @Output() deleted = new EventEmitter<Content>();
-
+  @Output() deleted = new EventEmitter();
+  @Output() changed = new EventEmitter();
   imgs = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
   'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
   'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'
@@ -40,7 +39,7 @@ export class ContentItemComponent implements OnInit {
   }
 
   delete() {
-    this.deleted.emit(this.content);
+    this.deleted.emit();
   }
 
   nextImg() {
@@ -60,6 +59,6 @@ export class ContentItemComponent implements OnInit {
   }
 
   edit() {
-    this.changed.emit(this.content);
+    this.changed.emit();
   }
 }

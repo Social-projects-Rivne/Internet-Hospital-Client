@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z10 content-preview">
+  <mat-card-header>
+    <mat-card-title>{{editingContentService.form.controls.title.value}}</mat-card-title>
+  </mat-card-header>
+  <div class="carousel">
+    <div class="image-container">
+      <img class="slides" *ngFor="let img of editingContentService.croppedImgs" src="{{img}}" 
+        [@imageDisplay]="img === editingContentService.croppedImgs[slideIndex] ? 'displayed' : 'hidden'">
+      <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
+      <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+    </div>
+  </div>
+  <mat-card-content class="content-body">
+    <p>
+      {{editingContentService.form.controls.body.value}}
+    </p>
+  </mat-card-content>
+  <button class="source-button" mat-raised-button color="primary">Read full</button>
+</mat-card>

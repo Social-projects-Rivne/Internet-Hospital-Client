@@ -1,0 +1,9 @@
+<div class="content-page" fxFlexFill>
+  <a style="margin: 10px" color="primary" mat-raised-button [routerLink]='contMng'>CREATE</a>
+  <div fxLayout='row wrap' fxLayoutGap="10px grid">
+    <div fxFlex="33.3" *ngFor="let cont of contentItems; let i = index;" >
+      <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" (changed)="onChange(i)" (deleted)="onDelete(i)">
+      </app-content-item>
+    </div>
+  </div>
+</div>

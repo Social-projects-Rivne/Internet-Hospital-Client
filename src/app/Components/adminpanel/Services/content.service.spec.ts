@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EditModeratorService } from './edit-moderator.service';
+import { ContentService } from './content.service';
 
-describe('EditModeratorService', () => {
+describe('ContentService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EditModeratorService = TestBed.get(EditModeratorService);
+    const service: ContentService = TestBed.get(ContentService);
     expect(service).toBeTruthy();
   });
 });
