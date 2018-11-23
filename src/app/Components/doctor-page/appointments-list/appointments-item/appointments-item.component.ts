@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Appointment } from '../../../DoctorPlans/Appointment';
 import { DoctorplansService } from 'src/app/Components/DoctorPlans/doctorplans.service';
-import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Observable } from 'rxjs';
 

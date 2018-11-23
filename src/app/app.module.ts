@@ -53,7 +53,8 @@ import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
 import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
-
+import { TestComponent } from './test/test.component';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish.appointment.guard';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     UpdateDoctorComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
+    TestComponent,
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [
@@ -112,7 +114,7 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     )
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

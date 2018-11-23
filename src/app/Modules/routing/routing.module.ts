@@ -35,6 +35,8 @@ import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-n
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
 import { DoctorPageComponent } from '../../Components/doctor-page/doctor-page.component';
 import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doctor/update-doctor.component';
+import { TestComponent } from 'src/app/test/test.component';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish.appointment.guard';
 
 const ROUTES: Routes = [
   {
@@ -49,6 +51,7 @@ const ROUTES: Routes = [
       { path: SETTINGS_DOCTOR, component: UpdateDoctorComponent, canActivate: [DoctorGuard]},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
+      { path: 'test/:id', component: TestComponent, canActivate: [DoctorGuard, FinishAppointmentGuard] },
     ]
   },
   { path: PAGE_404, component: Page404Component },

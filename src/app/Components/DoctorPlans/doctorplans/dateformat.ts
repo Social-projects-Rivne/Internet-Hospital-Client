@@ -34,10 +34,6 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     }
 
     week(event: CalendarEvent): string {
-      return `<b>${new DatePipe(this.locale).transform(
-        event.start,
-        'HH:mm',
-        this.locale
-      )}</b>`;
+      return ``;
     }
 }
