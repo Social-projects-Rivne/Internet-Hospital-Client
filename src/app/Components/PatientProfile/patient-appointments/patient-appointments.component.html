@@ -1,7 +1,4 @@
 <div class="container">
   <h3>You subscribed to appointments:</h3>
-  <app-pat-appoint-item *ngFor="let patAppointment of patAppointmentList" [patAppointment]="patAppointment"></app-pat-appoint-item>
-  <mat-paginator class="container-bottom" fxLayoutAlign="end start" [length]="patAppointmentsAmount" [pageSize]="pagService.pageSize"
-    (page)="pageSwitch($event)" [hidePageSize]="true">
-  </mat-paginator>
+  <app-pat-appoint-item *ngFor="let patAppointment of appointmentList" [patAppointment]="patAppointment"></app-pat-appoint-item>
 </div>

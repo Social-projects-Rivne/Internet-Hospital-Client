@@ -71,6 +71,11 @@ export class DoctorplansService {
     return this.http.post(scecUrl, { Id: appointmentId });
   }
 
+  getPatientAppointments() {
+    const specUrl = HOST_URL + '/api/Appointments/forpatient';
+    return this.http.get<Appointment[]>(specUrl);
+  }
+
   disSubscribeToAppointment(appointmentId: number) {
     const scecUrl = HOST_URL + '/api/Appointments/subscribe';
     return this.http.post(scecUrl, { Id: appointmentId });

@@ -23,14 +23,13 @@ export class PatientAppointmentsComponent implements OnInit {
     private notification: NotificationService) { }
 
   ngOnInit() {
-    // this.getDoctorId();
-    // this.service.getPatientAppointments(this.patientId).subscribe((result: any) => {
-    //   this.appointmentList = result.appointments;
-    //   this.appointmentsAmount = result.quantity;
-    // },
-    // error => {
-    //   this.notification.error(error);
-    // });
+    this.service.getPatientAppointments().subscribe((result: any) => {
+      this.appointmentList = result.appointments;
+      console.log(this.appointmentList);
+    },
+    error => {
+      this.notification.error(error);
+    });
   }
 
 }
