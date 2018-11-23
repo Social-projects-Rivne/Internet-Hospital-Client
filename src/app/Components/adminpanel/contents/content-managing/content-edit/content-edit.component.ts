@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Content } from '../../../../../Models/Content';
+import { ArticleType } from '../../../../../Models/ArticleType';
 import { ImageValidationService } from '../../../../../Services/image-validation.service';
 import { ContentService } from '../../../services/content.service';
 import { ContentEditingService } from '../../../services/content-editing.service';
@@ -19,6 +19,7 @@ const MIN_HEIGHT_IMG = 300;
 
 export class ContentEditComponent implements OnInit {
 
+  types: ArticleType[];
   currentImgIndex = -1;
   editorContent = '';
   constructor(private dataService: ContentService, private contentService: ContentEditingService,
@@ -52,7 +53,6 @@ export class ContentEditComponent implements OnInit {
             this.contentService.imgs.push(img.src);
             this.currentImgIndex = this.contentService.imgs.length - 1;
           } else {
-            this.contentService.form.invalid;
             // notification service will replace this alert in future
             alert('Image is invalid! It might be too big or too small.');
           }

@@ -22,13 +22,14 @@ export class ContentService {
 
   putContent(content: Content) {
     const formData = new FormData();
-    for (let i = 0; i < content.images.length; ++i) {
-      formData.append('Images', content.images[i]);
+    for (let i = 0; i < content.slides.length; ++i) {
+      formData.append('Images', content.slides[i]);
     }
     formData.append('Id', content.id.toString());
     formData.append('Title', content.title);
-    formData.append('Body', content.body);
-    formData.append('Source', content.source);
+    formData.append('Body', content.shortBody);
+    formData.append('Article', content.article);
+    // formData.append('Types', content.types);
 
     // place method for sending
   }

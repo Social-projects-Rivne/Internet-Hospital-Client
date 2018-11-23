@@ -1,7 +1,12 @@
+import { ArticleType } from './ArticleType';
+
 export class Content {
-    id: number;
+    id: string;
+    author: string;
     title: string;
-    body: string;
-    source: string;
-    images: File[];
+    types: ArticleType[];
+    shortBody: string;
+    slides: File[];
+    article: string;
+    editors: string[];
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Content } from '../../../Models/Content';
+import { Content } from 'src/app/Models/Content';
 
 @Injectable({
   providedIn: 'root'
@@ -8,24 +8,24 @@ import { Content } from '../../../Models/Content';
 export class ContentEditingService {
 
   form: FormGroup = new FormGroup({
-    id: new FormControl({value: '', disabled: true}),
     title: new FormControl('', Validators.required),
-    source: new FormControl('', Validators.required),
-    body: new FormControl('', Validators.required)
+    types: new FormControl('', Validators.required),
+    shortBody: new FormControl('', Validators.required),
+    article: new FormControl('', Validators.required)
   });
   imgsFiles: File[] = [];
   imgs: string[] = [];
   croppedImgs: string[] = [];
   croppedFiles: File[] = [];
-
+  editingContent: Content;
   constructor() { }
 
   initializeFormGroup() {
     this.form.setValue({
-      id: '',
       title: '',
-      body: '',
-      source: ''
+      types: '',
+      shortBody: '',
+      article: ''
     });
   }
 
@@ -38,24 +38,24 @@ export class ContentEditingService {
 
   setForm(content: Content) {
     this.form.setValue({
-      id: content.id,
       title: content.title,
-      body: content.body,
-      source: content.source
+      types: content.types,
+      shortBody: content.shortBody,
+      article: content.article
     });
-    this.imgsFiles = content.images;
-    this.form.controls.title.setValue('2222');
-    console.log(`suka blet roby ${content.title}`);
+    this.imgsFiles = content.slides;
+    this.editingContent = content;
   }
 
   getContent() {
     const content = new Content();
     const contr = this.form.controls;
-    content.id = contr.id.value;
-    content.body = contr.body.value;
-    content.source = contr.source.value;
     content.title = contr.title.value;
-    content.images = this.croppedFiles;
+    content.types = contr.types.value;
+    content.shortBody = contr.shortBody.value;
+    content.slides = this.croppedFiles;
+    content.article = contr.article.value;
+    content.id = this.editingContent.id;
     return content;
   }
 

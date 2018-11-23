@@ -4,6 +4,7 @@ import { CONTENTS_MNG } from '../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
 import { ContentEditingService } from '../services/content-editing.service';
 import { Router } from '@angular/router';
+import { ArticleType } from 'src/app/Models/ArticleType';
 
 @Component({
   selector: 'app-contents',
@@ -87,14 +88,18 @@ function createNewContent(id: number): Content {
                 + '@gmail.com';
 
   const cont: Content = new Content();
-  cont.id = id;
+  cont.id = id.toString();
   cont.title = email;
-  cont.source = lastname;
-  cont.images = [];
-  cont.body = '';
+  cont.shortBody = lastname;
+  cont.slides = [];
+  cont.shortBody = '';
   for (let i = 0; i < 100; ++i) {
-    cont.body += 'wwwwwwwwww';
+    cont.shortBody += 'wwwwwwwwww';
   }
+  const aType = new ArticleType();
+  aType.id = '1';
+  aType.name = 'Real kek';
+  cont.types = [aType];
   return cont;
 }
 
