@@ -1,7 +1,7 @@
 import { ArticleType } from './ArticleType';
 
 export class Content {
-    id: string;
+    id: number;
     author: string;
     title: string;
     types: ArticleType[];

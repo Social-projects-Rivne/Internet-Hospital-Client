@@ -28,7 +28,7 @@ export class ContentService {
     formData.append('Id', content.id.toString());
     formData.append('Title', content.title);
     formData.append('Body', content.shortBody);
-    formData.append('Article', content.article);
+    formData.append('Article', content.article.toString());
     // formData.append('Types', content.types);
 
     // place method for sending

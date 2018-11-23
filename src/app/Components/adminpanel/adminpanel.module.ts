@@ -28,7 +28,8 @@ import { MatFormFieldModule,
         MatListModule,
         MatButtonModule,
         MatMenuModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatSelectModule
       } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
@@ -58,7 +59,8 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatSelectModule
   ],
   declarations: [
     AdminPanelComponent,

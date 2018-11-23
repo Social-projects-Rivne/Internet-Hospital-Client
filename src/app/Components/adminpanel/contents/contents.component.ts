@@ -88,18 +88,24 @@ function createNewContent(id: number): Content {
                 + '@gmail.com';
 
   const cont: Content = new Content();
-  cont.id = id.toString();
+  cont.id = id;
   cont.title = email;
   cont.shortBody = lastname;
   cont.slides = [];
   cont.shortBody = '';
+  cont.article = '';
   for (let i = 0; i < 100; ++i) {
     cont.shortBody += 'wwwwwwwwww';
   }
-  const aType = new ArticleType();
-  aType.id = '1';
-  aType.name = 'Real kek';
-  cont.types = [aType];
+  const aType = [{
+    id: 2,
+    name: 'mem'
+  },
+  {
+    id: 3,
+    name: '4ek'
+  }];
+  cont.types = aType;
   return cont;
 }
 

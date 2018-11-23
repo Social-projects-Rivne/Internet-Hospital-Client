@@ -2,8 +2,7 @@
   <button class="delete-button" mat-button (click)="delete()">&#x2716;</button>
   <mat-card-header>
     <mat-card-title>{{content.title}}</mat-card-title>
-    <strong *ngFor="let type of editingContentService.editingContent.types">type.name </strong>
-    <br>
+    <div style="width: 100%"><strong *ngFor="let type of content.types">{{type.name}} </strong></div>
     <span>{{content.author}}</span>
   </mat-card-header>
   <div class="carousel">

@@ -19,7 +19,6 @@ const MIN_HEIGHT_IMG = 300;
 
 export class ContentEditComponent implements OnInit {
 
-  types: ArticleType[];
   currentImgIndex = -1;
   editorContent = '';
   constructor(private dataService: ContentService, private contentService: ContentEditingService,
