@@ -16,7 +16,7 @@ export class PatAppointItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDisSubscribeToAppointment() {
-    this.service.disSubscribeToAppointment(this.patAppointment.id).subscribe();
+  onUnsubscribeToAppointment() {
+    this.service.unsubscribeToAppointment(this.patAppointment.id).subscribe();
   }
 }

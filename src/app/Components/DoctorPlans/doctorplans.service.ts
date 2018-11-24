@@ -76,8 +76,9 @@ export class DoctorplansService {
     return this.http.get<Appointment[]>(specUrl);
   }
 
-  disSubscribeToAppointment(appointmentId: number) {
-    const scecUrl = HOST_URL + '/api/Appointments/subscribe';
-    return this.http.post(scecUrl, { Id: appointmentId });
+  unsubscribeToAppointment(appointmentId: number) {
+    console.log(appointmentId);
+    const scecUrl = HOST_URL + '/api/Appointments/unsubscribe';
+    return this.http.post(scecUrl, { id: appointmentId });
   }
 }
