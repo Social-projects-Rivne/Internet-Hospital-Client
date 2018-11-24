@@ -7,6 +7,7 @@ import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.mod
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -91,6 +92,7 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
     OverlayModule,
     NgxMaskModule.forRoot(),
     MatExpansionModule,
+    MatSidenavModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

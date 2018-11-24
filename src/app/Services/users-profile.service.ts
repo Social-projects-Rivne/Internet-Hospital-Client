@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR } from '../config';
+import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT } from '../config';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +19,11 @@ export class UsersProfileService {
         const formData = new FormData();
         formData.append('Image', fileAvatar);
         return this.http.put(HOST_URL + PATIENT_UPDATE_AVATAR, formData);
-      }
+    }
 
+    getProfile() {
+        const getUrl = HOST_URL + API_PATIENT;
+        console.log(getUrl);
+        return this.http.get(getUrl);
+    }
 }
