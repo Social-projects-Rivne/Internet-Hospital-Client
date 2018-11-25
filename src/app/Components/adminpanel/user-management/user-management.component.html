@@ -12,7 +12,7 @@
 
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input type="text" [(ngModel)]="nameSearch" (keyup)="textChanged($event)" autocomplete="off" matInput
+          <input type="text" [(ngModel)]="nameSearch" (keyup)="applyFilter($event.target.value)" autocomplete="off" matInput
             placeholder="User's name">
         </mat-form-field>
         <br>
@@ -34,7 +34,7 @@
 
 <div class="mat-elevation-z8">
 
-  <table mat-table [dataSource]="Users">
+  <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -77,6 +77,6 @@
 
   </table>
 
-  <mat-paginator [pageSize]="15" [pageSizeOptions]="[10, 15, 20, 50]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSize]="15" [pageSizeOptions]="[15, 25, 50]" ></mat-paginator>
 
 </div>

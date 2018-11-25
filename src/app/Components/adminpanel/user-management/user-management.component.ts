@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserListService } from 'src/app/Services/UserListService/user-list.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { UserListModel } from 'src/app/Models/UserListModel';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserListFilter } from 'src/app/Models/UserListFilter';
 
 @Component({
@@ -14,6 +14,9 @@ import { UserListFilter } from 'src/app/Models/UserListFilter';
 export class UserManagementComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  public dataSource: MatTableDataSource<UserListModel>;
   public Users: UserListModel[] = [];
   public Types: UserListModel[] = [];
   private filter: UserListFilter;
@@ -27,12 +30,14 @@ export class UserManagementComponent implements OnInit {
     private _notification: NotificationService,
     ) {
       this.filter = new UserListFilter();
-     }
+    }
 
-  ngOnInit() {
+    ngOnInit() {
       this._userListService.getUserList().subscribe((types: any) => {
         this.Users = types;
         this.Users = this._userListService.StatusConverter(this.Users);
+        this.dataSource = new MatTableDataSource(this.Users);
+        this.ngAfterViewInit();
       },
         error => {
           this._notification.error('Server error');
@@ -72,8 +77,16 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  textChanged(event: any) {
-    this.searchInput = event.target.value;
+  applyFilter(filterValue: any) {
+    this.searchInput = filterValue;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+    this.dataSource.sort = this.sort;
   }
-
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }
