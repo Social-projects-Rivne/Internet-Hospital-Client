@@ -2,11 +2,32 @@
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-          <mat-icon class="sidenav-icon">search</mat-icon> Search   
+        <mat-icon class="sidenav-icon">search</mat-icon> Search
       </mat-panel-title>
     </mat-expansion-panel-header>
-    
-    <app-userlist-search></app-userlist-search>
+
+    <div class="example-card example-half-width">
+
+      <hr class="example-full-width">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input type="text" [(ngModel)]="nameSearch" (keyup)="textChanged($event)" autocomplete="off" matInput
+            placeholder="User's name">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let item of Types" [value]="item.statusName">
+              {{item.statusName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <button (click)="searchClick()" class="example-full-width" mat-raised-button color="primary">Search</button>
+      </mat-card-content>
+    </div>
 
   </mat-expansion-panel>
 </mat-accordion>

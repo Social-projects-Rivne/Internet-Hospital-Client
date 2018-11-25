@@ -31,10 +31,7 @@ export class UserListService {
   }
   getUserListParams(filter?: UserListFilter) {
     const typeUrl = this.url + 'userlist/getparams';
-if (!filter) {
-  return this.http.get(typeUrl, this.httpOptions);
-
-}
+      return this.http.get(typeUrl, this.httpOptions);
   }
 
   StatusConverter(Users: any[]) {

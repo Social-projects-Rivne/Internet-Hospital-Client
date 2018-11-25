@@ -23,17 +23,17 @@ export class UserlistSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this._userListService.getUserList().subscribe((types: any) => {
-    //   this.Users = types;
-    //   this.Users.sort((x1, x2) => x1.statusId - x2.statusId);
-    //   this.Users = this.uniq(this.Users);
-    //   this.Users = this._userListService.StatusConverter(this.Users);
-    // },
-    //   error => {
-    //     this._notification.error('Server error');
-    //   });
+    this._userListService.getUserList().subscribe((types: any) => {
+      this.Users = types;
+      this.Users.sort((x1, x2) => x1.statusId - x2.statusId);
+      this.Users = this.uniq(this.Users);
+      this.Users = this._userListService.StatusConverter(this.Users);
+    },
+      error => {
+        this._notification.error('Server error');
+      });
 
-    //   this.filter = new UserListFilter();
+      this.filter = new UserListFilter();
   }
 
   uniq(Users: UserListModel[]) {
@@ -47,6 +47,10 @@ export class UserlistSearchComponent implements OnInit {
   }
 
   searchClick() {
+
+    alert(this.searchInput);
+    alert(this.selectedStatus);
+
     this.filter.searchKey = this.searchInput;
     this.filter.selectedStatus = this.selectedStatus;
     this.filter.CheckIfPropertyExist();
