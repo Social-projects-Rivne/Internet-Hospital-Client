@@ -9,14 +9,12 @@
               #img>
           </form>
         </div>
-        <div class="patient-general-info" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlex>
-          <div>
-            <div>First name: {{patient?.firstName}}</div>
-            <div>Second name: {{patient?.secondName}}</div>
-            <div>Last name: {{patient?.thirdName}}</div>
+        <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
+          <div class="patient-name">
+            {{patient?.firstName}} {{patient?.secondName}} {{patient?.thirdName}}
           </div>
-          <div>
-            <div>Birth date: {{patient?.birthDate | date: 'mediumDate'}}</div>
+          <div fxLayoutAlign="center center" fxLayout="column">
+            <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
             <div>Phone number: {{patient?.phoneNumber}}</div>
           </div>
         </div>
@@ -28,11 +26,6 @@
       </div>
       <mat-drawer #drawer mode="over" class="example-sidenav" autozise>
         <app-update-patient></app-update-patient>
-        <!-- <p>Auto-resizing sidenav</p>
-          <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-          <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-          </button> -->
       </mat-drawer>
     </mat-drawer-container>
   </mat-card>
@@ -41,24 +34,21 @@
     Additional info about me:
     <p>{{tempText}}</p>
   </mat-card>
-
+  
   <mat-card class="profile-bottom mat-elevation-z8" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%">
     <div class="without_paginator" fxLayout="row" fxLayoutGap="1%">
       <div class="patient-history-search-filter" fxFlex="30%">
-        <app-doctor-list-search-item [specializations]="doctorService.specializations"></app-doctor-list-search-item>
+        <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
       </div>
       <div class="patient-history" fxFlex>
         <mat-list>
-          <div class="history-items" *ngFor="let IllnessHistory of tempHistory" fxLayoutGap="0.5%" fxLayout="row">
+          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%" fxLayout="row">
             <mat-expansion-panel fxFlex>
               <mat-expansion-panel-header>
                 <div fxLayout="row">
                   <mat-list-item>
-                    <div>{{IllnessHistory.conclusionTime}}</div>
+                    <div>{{IllnessHistory.conclusionTime | date: 'medium'}}</div>
                   </mat-list-item>
-                  <!-- <mat-list-item>
-                      <div>{{IllnessHistory.doctorName}}</div>
-                    </mat-list-item> -->
                   <mat-list-item>
                     <div>{{IllnessHistory.diagnose}}</div>
                   </mat-list-item>
@@ -81,6 +71,7 @@
         </mat-list>
       </div>
     </div>
-    <mat-paginator></mat-paginator>
+    <mat-paginator fxLayoutAlign="end start" [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize"
+    (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
   </mat-card>
 </div>

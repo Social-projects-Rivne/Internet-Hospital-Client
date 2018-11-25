@@ -19,6 +19,7 @@ export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
 
+export const PATIENT_GET_HISTORIES = '/api/Patient/GetHistories';
 export const PATIENT_GET_PROFILE = '/api/Patient/getProfile';
 export const SETTINGS_DOCTOR = 'settings-doctor';
 export const API_DOCTOR_UPDATE = '/api/Doctors/update';

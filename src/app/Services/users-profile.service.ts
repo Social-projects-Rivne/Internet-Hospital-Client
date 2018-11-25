@@ -1,15 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT } from '../config';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { IllnessHistory } from '../Models/Illness-history';
+import { PaginationService } from './pagination.service';
+import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT, PATIENT_GET_HISTORIES } from '../config';
+
+const start = 'searchfromdate';
+const end = 'searchtodate';
 
 @Injectable({
     providedIn: 'root'
- })
+})
 export class UsersProfileService {
+
+    illnessHistories: IllnessHistory[];
+    illnessHistoriesAmount: number;
 
     url = HOST_URL + PATIENT_GET_AVATAR;
 
-    constructor(private http: HttpClient) {}
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        }),
+        params: new HttpParams()
+            .set('page', this.paginationService.pageIndex.toString())
+            .set('pagecount', this.paginationService.pageSize.toString())
+    };
+
+    constructor(private http: HttpClient, private paginationService: PaginationService) { }
 
     getImage() {
         return this.http.get(this.url);
@@ -25,5 +42,26 @@ export class UsersProfileService {
         const getUrl = HOST_URL + API_PATIENT;
         console.log(getUrl);
         return this.http.get(getUrl);
+    }
+
+    getHistories(fromDate?: Date, toDate?: Date) {
+        const historiesUrl = HOST_URL + PATIENT_GET_HISTORIES;
+        if (fromDate !== null && fromDate !== undefined) {
+            console.log(fromDate.toISOString());
+            this.httpOptions.params = this.httpOptions.params.set(start, fromDate.toDateString());
+        } else {
+            this.httpOptions.params = this.httpOptions.params.delete(start);
+        }
+        if (toDate !== null && toDate !== undefined) {
+            this.httpOptions.params = this.httpOptions.params.set(end, toDate.toDateString());
+        } else {
+            this.httpOptions.params = this.httpOptions.params.delete(end);
+        }
+        console.log(this.httpOptions.params);
+        this.http.get(historiesUrl, this.httpOptions)
+            .subscribe((result: any) => {
+                this.illnessHistories = result.histories;
+                this.illnessHistoriesAmount = result.totalHistories;
+            });
     }
 }

@@ -52,6 +52,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
+// tslint:disable-next-line:max-line-length
+import { IllnessHistorySearchItemComponent } from './Components/PatientProfile/patient-profile/illness-history-search-item/illness-history-search-item.component';
 
 
 @NgModule({
@@ -76,7 +78,8 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
     UpdatePatientComponent,
     DateValidatorDirective,
     DoctorPlansComponent,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    IllnessHistorySearchItemComponent
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [
