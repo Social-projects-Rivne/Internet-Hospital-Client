@@ -1,36 +1,42 @@
-<mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon class="sidenav-icon">search</mat-icon> Search
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+<div id="header" fxLayout="row">
+  <mat-accordion fxFlex.md="45" fxFlex.lg="60" fxFlex.lg="70">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon class="sidenav-icon">search</mat-icon> Search
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <div class="example-card example-half-width">
+      <div class="example-card example-half-width">
 
-      <hr class="example-full-width">
+        <hr class="example-full-width">
 
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input type="text" [(ngModel)]="nameSearch" (keyup)="applyFilter($event.target.value)" autocomplete="off" matInput
-            placeholder="User's name">
-        </mat-form-field>
-        <br>
-        <mat-form-field class="example-full-width">
-          <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let item of Types" [value]="item.statusName">
-              {{item.statusName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <button (click)="searchClick()" class="example-full-width" mat-raised-button color="primary">Search</button>
-      </mat-card-content>
-    </div>
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input type="text" [(ngModel)]="nameSearch" (keyup)="applyFilter($event.target.value)" autocomplete="off"
+              matInput placeholder="User's name">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let item of Types" [value]="item.statusName">
+                {{item.statusName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <button (click)="searchClick()" class="example-full-width" mat-raised-button color="primary">Search</button>
+        </mat-card-content>
+      </div>
 
-  </mat-expansion-panel>
-</mat-accordion>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-paginator fxHide.xs fxHide.sm fxFlex.md="55" fxFlex.lg="40" fxFlex.xl="30" id="header-paginator" [pageSize]="15" [pageSizeOptions]="[15, 25, 50]"></mat-paginator>
+</div>
 
 <div class="mat-elevation-z8">
 
@@ -76,7 +82,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
-
-  <mat-paginator [pageSize]="15" [pageSizeOptions]="[15, 25, 50]" ></mat-paginator>
 
 </div>
