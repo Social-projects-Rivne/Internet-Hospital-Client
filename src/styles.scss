@@ -67,3 +67,28 @@ body {
     padding: 0;
   }
 }
+
+.subscribed-user {  
+  color: rgb(9, 181, 211);
+  font-weight: bold;
+  margin-right: 7px;
+  margin-left: 3px;
+  font-size: 17px;
+}
+
+.icon-calendar {
+  color: rgb(235, 166, 88);
+  text-decoration: none;
+}
+
+.icon-calendar:hover {
+  color: rgb(243, 61, 6);
+}
+
+.cal-week-view .cal-time-events .cal-event {
+  width: auto;
+}
+
+.cal-event-title:hover {
+  color: rgb(9, 181, 211);
+}
