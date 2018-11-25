@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z10 content-preview">
   <mat-card-header>
     <mat-card-title>{{editingContentService.form.controls.title.value}}</mat-card-title>
-    <strong *ngFor="let type of editingContentService.editingContent.types">type </strong>
+    <strong *ngFor="let type of editingContentService.creatingContent.types">type </strong>
   </mat-card-header>
   <div class="carousel">
     <div class="image-container">
@@ -13,7 +13,7 @@
   </div>
   <mat-card-content class="content-body">
     <p>
-      {{editingContentService.form.controls.shortBody.value}}
+      {{editingContentService.form.controls.shortDescription.value}}
     </p>
   </mat-card-content>
   <button class="source-button" mat-raised-button color="primary">Read full</button>

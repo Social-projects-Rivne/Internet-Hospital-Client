@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Content } from '../../../Models/Content';
+import { ShortContentWithEditors } from '../../../Models/Content/ShortContentWithEditors';
 import { CONTENTS_MNG } from '../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
 import { ContentEditingService } from '../services/content-editing.service';
 import { Router } from '@angular/router';
-import { ArticleType } from 'src/app/Models/ArticleType';
+import { ContentEdition } from 'src/app/Models/Content/ContentEdition';
 
 @Component({
   selector: 'app-contents',
@@ -14,7 +14,7 @@ import { ArticleType } from 'src/app/Models/ArticleType';
 export class ContentsComponent implements OnInit {
 
   contMng = `/${ADMIN_PANEL}/${CONTENTS_MNG}`;
-  contentItems: Content[] = [];
+  contentItems: ShortContentWithEditors[] = [];
 
   constructor(private editingContent: ContentEditingService, private router: Router) {
   }
@@ -26,13 +26,19 @@ export class ContentsComponent implements OnInit {
   }
 
   onChange(i: number) {
-    this.editingContent.setForm(this.contentItems[i]);
+    // content number get
+    // this.editingContent.setForm(this.contentItems[i]);
     this.router.navigate([this.contMng]);
   }
 
   onDelete(i: number) {
     this.contentItems.splice(i, 1);
     // method for delete from DB
+  }
+
+  createNewArticle() {
+    this.editingContent.initializeContent();
+    this.router.navigate([this.contMng]);
   }
 
 }
@@ -79,7 +85,7 @@ const NAMES = [
 ];
 
 // Builds and returns a new Content.
-function createNewContent(id: number): Content {
+function createNewContent(id: number): ShortContentWithEditors {
   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
   const surname = SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))];
   const lastname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
@@ -87,25 +93,26 @@ function createNewContent(id: number): Content {
                 + name.substr(0, Math.round(Math.random() * name.length))
                 + '@gmail.com';
 
-  const cont: Content = new Content();
+  const cont: ShortContentWithEditors = new ShortContentWithEditors();
   cont.id = id;
   cont.title = email;
-  cont.shortBody = lastname;
-  cont.slides = [];
-  cont.shortBody = '';
-  cont.article = '';
-  for (let i = 0; i < 100; ++i) {
-    cont.shortBody += 'wwwwwwwwww';
+  cont.shortDescription = '';
+  cont.date = new Date();
+  cont.date.setMonth(Math.round(Math.random() * 12));
+  cont.editions = [];
+  for (let i = Math.round(Math.random() * 5); i >= 0; --i) {
+    const edit = new ContentEdition();
+    edit.author = name[i] + ' ' + surname[i] + ' ' + lastname[i];
+    edit.date = new Date();
+    edit.date.setMonth(Math.round(Math.random() * cont.date.getMonth()));
+    cont.editions.push(edit);
   }
-  const aType = [{
-    id: 2,
-    name: 'mem'
-  },
-  {
-    id: 3,
-    name: '4ek'
-  }];
-  cont.types = aType;
+  cont.author = name + ' ' + surname + ' ' + lastname;
+  for (let i = 0; i < 100; ++i) {
+    cont.shortDescription += 'wwwwwwwwww';
+  }
+
+  cont.types = ['kek' , '4eburek'];
   return cont;
 }
 

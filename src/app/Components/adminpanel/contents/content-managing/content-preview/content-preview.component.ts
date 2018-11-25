@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Content } from '../../../../../Models/Content';
 import { ContentEditingService } from '../../../services/content-editing.service';
 
 const SLIDE_TIME_IN_MSC = 3500;

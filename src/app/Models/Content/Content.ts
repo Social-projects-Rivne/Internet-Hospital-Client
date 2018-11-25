@@ -5,8 +5,8 @@ export class Content {
     author: string;
     title: string;
     types: ArticleType[];
-    shortBody: string;
-    slides: File[];
+    shortDescription: string;
+    articlePreviewAttachments: File[];
     article: string;
     editors: string[];
 }

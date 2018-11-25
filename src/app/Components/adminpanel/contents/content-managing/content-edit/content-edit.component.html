@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z10 content-edit">
   <form [formGroup]="contentService.form" class="mat-elavation-z10" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <div *ngIf="contentService.editingContent.id != null">
+    <div *ngIf="contentService.creatingContent === null">
         {{contentService.editingContent.author}}
     </div>
     <div>
@@ -11,12 +11,12 @@
     </div>
     <mat-form-field>
       <mat-select placeholder="Types" formControlName="types" [multiple]='true'>
-        <mat-option *ngFor="let type of contentService.types" [value]="type">{{type.name}}</mat-option>
+        <mat-option *ngFor="let type of contentService.types" [value]="type.id">{{type.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <div>
       <mat-form-field>
-        <textarea required formControlName="shortBody" class="text-body" maxlength="1000" matInput placeholder="Body"></textarea>
+        <textarea required formControlName="shortDescription" class="text-body" maxlength="1000" matInput placeholder="Body"></textarea>
         <mat-error>Short review required.</mat-error>
       </mat-form-field>
     </div>
@@ -43,7 +43,7 @@
       </mat-form-field>
     </div>
     <div>
-      <button mat-raised-button color="primary" type="submit" [disabled]="contentService.form.invalid || contentService.croppedFiles.length < 3">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="contentService.form.invalid || contentService.croppedFiles.length < 1">Submit</button>
       <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
     </div>
   </form>

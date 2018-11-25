@@ -1,91 +1,86 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Content } from 'src/app/Models/Content';
-import { ArticleType } from 'src/app/Models/ArticleType';
+import { CreatingContent } from 'src/app/Models/Content/CreatingContent';
+import { ArticleType } from 'src/app/Models/Content/ArticleType';
+import { ContentTypeService } from './content-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentEditingService {
 
-  types: ArticleType[] = [{
-    id: 0,
-    name: 'cheburek'
-  },
-  {
-    id: 1,
-    name: 'kek'
-  },
-  {
-    id: 2,
-    name: 'mem'
-  },
-  {
-    id: 3,
-    name: '4ek'
-  },
-  {
-    id: 4,
-    name: 'mer4'
-  }];
-
   form: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     types: new FormControl([], Validators.required),
-    shortBody: new FormControl('', Validators.required),
+    shortDescription: new FormControl('', Validators.required),
     article: new FormControl('', Validators.required)
   });
+
+  types: ArticleType[] = [];
   imgsFiles: File[] = [];
   imgs: string[] = [];
   croppedImgs: string[] = [];
   croppedFiles: File[] = [];
-  editingContent = new Content();
-  constructor() { }
 
-  initializeFormGroup() {
+  creatingContent = new CreatingContent();
+  constructor(private typeService: ContentTypeService) { }
+
+  initializeContent() {
+    this.clearData();
     this.form.setValue({
       title: '',
-      types: [],
-      shortBody: '',
-      article: ''
+      shortDescription: '',
+      article: '',
+      types: []
+    });
+    console.log('before loading');
+    this.typeService.getContentType().subscribe((data: any) => {
+      this.types = data;
+      console.log(data);
+      console.log('In loading types!');
     });
   }
 
-  clearImages() {
+  clearData() {
     this.imgsFiles = [];
     this.imgs = [];
     this.croppedFiles = [];
     this.croppedImgs = [];
+    this.types = [];
   }
 
-  setForm(content: Content) {
-    const arrType = [];
-    for (let i = 0; i < content.types.length && arrType.length !== content.types.length; ++i) {
-      arrType.push(this.types[ArticleType.indexInArray(content.types[i], this.types)]);
-    }
+  /*setForm(content: Content) {
+    this.typeService.getContentType().subscribe((data: any) => {
+      this.types = data;
+      this.setSelectedTypes(content.types);
+    });
+
     this.form.setValue({
       title: content.title,
-      types: arrType,
-      shortBody: content.shortBody,
+      shortDescription: content.shortDescription,
       article: content.article
     });
-    this.imgsFiles = content.slides;
+    this.imgsFiles = content.articlePreviewAttachments;
     this.editingContent = content;
-  }
+  }*/
 
-  getContent() {
-    const content = new Content();
+  getNewContent() {
+    const content = new CreatingContent();
     const contr = this.form.controls;
     content.title = contr.title.value;
-    content.types = contr.types.value;
-    content.shortBody = contr.shortBody.value;
-    content.slides = this.croppedFiles;
+    content.typeIds = contr.types.value;
+    content.shortDescription = contr.shortDescription.value;
+    content.articlePreviewAttachments = this.croppedFiles;
     content.article = contr.article.value;
-    content.id = this.editingContent.id;
+    content.articleAttachments = [];
     return content;
   }
 
-  logForm() {
-    console.log(this.form);
+  setSelectedTypes(typeIds: number[]) {
+    const arrType = [];
+    for (let i = 0; i < typeIds.length && arrType.length !== typeIds.length; ++i) {
+      arrType.push(this.types[ArticleType.indexInArrayById(typeIds[i], this.types)]);
+    }
+    this.form.controls.types.setValue(arrType);
   }
 }

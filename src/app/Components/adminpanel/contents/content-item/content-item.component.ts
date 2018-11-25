@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Content } from '../../../../Models/Content';
+import { ShortContentWithEditors } from '../../../../Models/Content/ShortContentWithEditors';
 
 const SLIDE_TIME_IN_MSC = 3500;
 
@@ -23,17 +23,22 @@ export class ContentItemComponent implements OnInit {
   }
 
   slideIndex = 0;
-  @Input() content: Content;
+  timer: number;
+  @Input() content: ShortContentWithEditors;
 
   @Output() deleted = new EventEmitter();
   @Output() changed = new EventEmitter();
+
   imgs = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
   'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
-  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg'
-];
+  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg' ];
 
   ngOnInit() {
-    setInterval(() => {
+    this.setAutoplay();
+  }
+
+  setAutoplay() {
+    this.timer = window.setInterval(() => {
       this.nextImg();
     }, SLIDE_TIME_IN_MSC);
   }
@@ -43,19 +48,23 @@ export class ContentItemComponent implements OnInit {
   }
 
   nextImg() {
+    window.clearInterval(this.timer);
     if (this.slideIndex < this.imgs.length - 1) {
       this.slideIndex++;
     } else {
       this.slideIndex = 0;
     }
+    this.setAutoplay();
   }
 
   prevImg() {
+    window.clearInterval(this.timer);
     if (this.slideIndex !== 0) {
       this.slideIndex--;
     } else {
       this.slideIndex = this.imgs.length - 1;
     }
+    this.setAutoplay();
   }
 
   edit() {

@@ -15,4 +15,14 @@ export class ArticleType {
         }
         return index;
     }
+
+    public static indexInArrayById(typeId: number, array: ArticleType[]): number {
+        let index = -1;
+        for (let i = 0; i < array.length && index === -1; ++i) {
+            if (typeId === array[i].id) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }

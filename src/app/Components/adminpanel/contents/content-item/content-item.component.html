@@ -1,21 +1,39 @@
 <mat-card class="mat-elevation-z10 content-item">
   <button class="delete-button" mat-button (click)="delete()">&#x2716;</button>
   <mat-card-header>
-    <mat-card-title>{{content.title}}</mat-card-title>
-    <div style="width: 100%"><strong *ngFor="let type of content.types">{{type.name}} </strong></div>
-    <span>{{content.author}}</span>
-  </mat-card-header>
-  <div class="carousel">
-    <div class="image-container">
-      <img class="slides" *ngFor="let img of imgs" src="{{img}}" [@imageDisplay]="img === imgs[slideIndex] ? 'displayed' : 'hidden'">
-      <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
-      <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+    <div class="title-with-date clearfix">
+      <div class="content-title">{{content.title}}</div>
+      <div class="content-date">{{content.date | date}}</div>
     </div>
-  </div>
+    <div class="types-with-author clearfix">
+      <div class="types"><strong *ngFor="let type of content.types">{{type.name}} </strong></div>
+      <div class="content-author">Created by: {{content.author}}</div>
+    </div>
+  </mat-card-header>
+  <!-- <div class="carousel">
+    <div class="slide-line" [ngStyle]="{'width': imgs.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
+      <div *ngFor="let img of imgs" class="image-container" [style.width]="100/imgs.length + '%'">
+        <img src="{{img}}"> 
+      </div>
+    </div>
+    <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
+    <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+  </div> -->
   <mat-card-content class="content-body">
     <p>
-      {{content.shortBody}}
+      {{content.shortDescription}}
     </p>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            History of editions
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="edition" *ngFor="let edition of content.editions">
+          <div class="edition-author">edition.author</div>
+          <div class="edition-date">edition.date</div>
+        </div>
+      </mat-expansion-panel>
   </mat-card-content>
   <button class="edit-button" mat-raised-button color="primary" (click)="edit()">Edit</button>
 </mat-card>

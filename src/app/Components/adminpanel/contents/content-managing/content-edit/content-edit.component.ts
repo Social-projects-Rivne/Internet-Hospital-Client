@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ArticleType } from '../../../../../Models/ArticleType';
 import { ImageValidationService } from '../../../../../Services/image-validation.service';
 import { ContentService } from '../../../services/content.service';
 import { ContentEditingService } from '../../../services/content-editing.service';
@@ -29,7 +28,7 @@ export class ContentEditComponent implements OnInit {
   }
 
   onClear() {
-    this.contentService.clearImages();
+    this.contentService.clearData();
     this.currentImgIndex = -1;
     this.editorContent = '';
   }
@@ -63,8 +62,13 @@ export class ContentEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.contentService.form);
-    // this.service.putContent(this.content.Id, this.imgs); // .pipe(first()).subscribe(res => console.log(res));
+    const content = this.contentService.getNewContent();
+    content.articlePreviewAttachments = this.contentService.imgsFiles;
+    this.dataService.postContent(content).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    }); // .pipe(first()).subscribe(res => console.log(res));
     // this.service.form.reset();
     // this.service.initializeFormGroup();
   }
