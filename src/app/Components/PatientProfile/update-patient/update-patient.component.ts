@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
 import { NotificationService } from '../../../Services/notification.service';
@@ -15,29 +14,30 @@ export class UpdatePatientComponent implements OnInit {
 
   locale = LOCALE_PHONE;
 
-  constructor(private service: UpdatePatientService, 
+  constructor(private service: UpdatePatientService,
     private notification: NotificationService,
     private imageHandling: ImageHandlingService,
     private router: Router,
   ) { }
 
   ngOnInit() {
+    this.service.setCurrentProfile();
   }
 
   onClear() {
     this.service.form.reset();
-    this.imageHandling.isPassportUploaded = false; 
+    this.imageHandling.isPassportUploaded = false;
   }
 
-  onSubmit(form: NgForm) {
-      this.service.updatePatient(this.imageHandling.PassportToUpload)
+  onSubmit() {
+      this.service.updatePatient(this.imageHandling.passportToUpload)
         .subscribe(
-            data => {   
-              this.router.navigate(['']);   
-              this.notification.success("Successfully updated!");
+            data => {
+              this.router.navigate(['']);
+              this.notification.success('Successfully updated! Waiting for moderator\'s approvement!');
               this.service.form.reset();
-              this.service.initializeFormGroup();  
-              this.imageHandling.isPassportUploaded = false;             
+              this.service.initializeFormGroup();
+              this.imageHandling.isPassportUploaded = false;
             },
             error => {
               this.notification.error(error);

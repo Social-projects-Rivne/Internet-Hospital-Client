@@ -4,14 +4,9 @@ import { AuthenticationService } from '../../Services/authentication.service';
 @Injectable()
 export class DoctorGuard implements CanActivate {
 
-    constructor(private router: Router,private authenticationService: AuthenticationService) { }
+    constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        
-        if (this.authenticationService.hasDoctorRole()) {  
-            if(this.authenticationService.isApprovedDoctor())
-                return true;            
-        }        
-        return false;
+        return this.authenticationService.hasDoctorRole() && this.authenticationService.isApprovedDoctor();
     }
 }

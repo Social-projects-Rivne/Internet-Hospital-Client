@@ -1,47 +1,54 @@
 <div class="moder-create-container">
   <mat-card class="mat-elevation-z10">
-    <form [formGroup]="service.form" #createForm="ngForm" (ngSubmit)="onSubmit(createForm)" enctype="multipart/form-data">
+    <div class="loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="rate-limit-reached" *ngIf="isRateLimitReached">
+        InternetHospital's API rate limit has been reached. It will be reset in one minute.
+      </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
         <mat-form-field>
-          <input formControlName="Email" matInput placeholder="Email">
+          <input formControlName="email" matInput placeholder="*Email">
           <mat-error>Invalid email address.</mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input formControlName="Surname" matInput placeholder="Surname">
-          <mat-error>Invalid surname address.</mat-error>
+          <input formControlName="firstName" matInput placeholder="*First name">
+          <mat-error>Invalid first name.</mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input formControlName="Name" matInput placeholder="Name">
-          <mat-error>Invalid name.</mat-error>
+          <input formControlName="secondName" matInput placeholder="*Second name">
+          <mat-error>Invalid second name.</mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input formControlName="Lastname" matInput placeholder="Lastname">
-          <mat-error>Invalid lastname.</mat-error>
+          <input formControlName="thirdName" matInput placeholder="*Third name">
+          <mat-error>Invalid third name.</mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input type="password" formControlName="Password" matInput placeholder="Password">
-          <mat-error>This field is mandatory.</mat-error>
+          <input type="password" formControlName="password" matInput placeholder="*Password">
+          <mat-error *ngIf="form.controls.password.errors?.required">This field is mandatory!</mat-error>
+          <mat-error *ngIf="form.controls.password.errors?.pattern">Invalid password!</mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password">
+          <input type="password" formControlName="confirmPassword" matInput placeholder="*Confirm Password">
           <mat-error>Passwords don't match.</mat-error>
         </mat-form-field>
       </div>
       <div>
-        <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid || isImageValid == false">Submit</button>
-        <button type="reset" mat-raised-button color="warn">Clear</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button mat-raised-button color="warn" type="reset">Clear</button>
       </div>
     </form>
-    <button mat-raised-button class="return-button" (click)="returnToManagementPage()">Return</button>
+    <a mat-raised-button class="return-button" [routerLink]="moderatorsManagePath">Return</a>
   </mat-card>
 </div>

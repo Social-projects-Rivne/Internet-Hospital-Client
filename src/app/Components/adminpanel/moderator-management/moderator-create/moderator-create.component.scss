@@ -1,21 +1,40 @@
-.moder-create-container{
-    width:100%;
-    text-align:center;
-    
-    mat-form-field{
-        width: 300px;
-    }
+.moder-create-container {
+  width: 100%;
+  text-align: center;
 
-    button{
-        width: 145px;
-        margin: 5px;
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rate-limit-reached {
+    color: #980000;
+    max-width: 360px;
+    text-align: center;
+  }
+
+  mat-form-field {
+    width: 300px;
+  }
+
+  button {
+    width: 145px;
+    margin: 5px;
+  }
+  .mat-card {
+    width: 350px;
+    display: inline-block;
+    .return-button {
+      width: 300px;
+      background-color: lightseagreen;
     }
-    .mat-card{
-        width:350px;
-        display:inline-block;
-        .return-button{
-            width:300px;
-            background-color: lightseagreen;
-        }
-    }
+  }
 }

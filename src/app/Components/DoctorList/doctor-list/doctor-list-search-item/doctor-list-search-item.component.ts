@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Specialization } from 'src/app/Models/Specialization';
-import { Filter } from "../../../../Models/Filter";
+import { DoctorFilter } from '../../../../Models/DoctorFilter';
 
 @Component({
   selector: 'app-doctor-list-search-item',
@@ -11,20 +11,20 @@ export class DoctorListSearchItemComponent implements OnInit {
   @Input()
   specializations: Specialization[];
   @Output()
-  onSearch = new EventEmitter();
+  search = new EventEmitter();
 
-  filter = new Filter();
+  filter = new DoctorFilter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  search() {
-    this.onSearch.emit(this.filter);
+  onSearch() {
+    this.search.emit(this.filter);
   }
 
   onSearchClear() {
-    this.filter.searchKey = "";
+    this.filter.searchKey = '';
   }
 }

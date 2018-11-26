@@ -13,16 +13,15 @@ export class NotificationService {
     duration: TIME_DURATION,
     horizontalPosition: HORIZONTAL_ALIGN,
     verticalPosition: VERTICAL_ALIGN
-  }
+  };
 
-  error(msg)
-  {
+  error(msg) {
     this.config['panelClass'] = [NOTIFICATION_CLASS, ERROR_CLASS];
-    this.snackBar.open(msg, '',this.config);
+    this.snackBar.open(msg, '', this.config);
   }
 
   success(msg) {
     this.config['panelClass'] = [NOTIFICATION_CLASS, SUCCESS_CLASS];
-    this.snackBar.open(msg, '',this.config);
+    this.snackBar.open(msg, '', this.config);
   }
 }

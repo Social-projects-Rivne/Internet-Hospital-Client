@@ -1,151 +1,127 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Router } from '@angular/router';
 
-import { EditModeratorService } from '../Services/edit-moderator.service';
-import { NgForm } from '@angular/forms';
+import { ModeratorService } from '../Services/moderator.service';
+import { NotificationService } from '../../../Services/notification.service';
+
+import { ModeratorData } from '../../../Models/ModeratorData';
+import { ModeratorsData } from '../../../Models/ModeratorsData';
+
+import { MODER_CREATE } from './../routesConfig';
+import { ADMIN_PANEL } from '../../../config';
+
+import { MatPaginator, MatSort } from '@angular/material';
+
+import { merge, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+
+const DEFAULT_AMOUNT_OF_MODERS_ON_PAGE = 5;
 
 @Component({
   selector: 'app-moderator-management',
   templateUrl: './moderator-management.component.html',
-  styleUrls: ['./moderator-management.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.74, 0.97, 0.91, 1)')),
-    ]),
-  ],
+  styleUrls: ['./moderator-management.component.scss']
 })
 
 export class ModeratorManagementComponent implements OnInit {
-  dataSource: MatTableDataSource<UserData>;
-  selection = new SelectionModel<UserData>(true, []);
-  displayedColumns = ['select', 'id', 'email', 'surname', 'name', 'lastname', 'status', 'edit'];
-  dataColumns = ['id', 'email', 'surname', 'name', 'lastname', 'status'];
-  displayedRow: UserData;
-  previousRow: UserData;
+  createNewPath = `/${ADMIN_PANEL}/${MODER_CREATE}`;
+
+  displayedColumns = ['select', 'email', 'firstName', 'secondName', 'thirdName', 'signUpTime', 'delete'];
+  dataSource: ModeratorData[] = [];
+
+  selected = [];
+
+  isLoadingResults = true;
+  isRateLimitReached = false;
+
+  search = '';
+
+  amountOfModerators = 0;
+  includeAll = false;
+
+  pageSizeOptions = [5, 10, 15, 20, 30, 50];
+
+  @ViewChild(MatSort) sort: MatSort;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service: EditModeratorService, private router: Router) {
-    const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) {
-      users.push(createNewUser(i));
-    }
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private service: ModeratorService, private notification: NotificationService) {
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.paginator.pageSize = DEFAULT_AMOUNT_OF_MODERS_ON_PAGE;
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.service.getFilteredModeratorsExtended(
+            this.sort.active,
+            this.sort.direction,
+            this.search,
+            this.paginator.pageIndex,
+            this.includeAll,
+            this.paginator.pageSize);
+        }),
+        map((data: ModeratorsData) => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = false;
+          this.amountOfModerators = data.amountOfAllFiltered;
+          return data.moderators;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = true;
+          return observableOf([]);
+        })
+      ).subscribe(data => this.dataSource = data);
   }
 
-  isShowing(row): boolean {
-    return row === this.displayedRow || row === this.previousRow;
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  // Selects all rows if they are not all selected; otherwise clear selection.
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  changeRow(row) {
-    this.displayedRow = row === this.displayedRow ? null : row;
-  }
-
-  editModer(form: NgForm) {
-    // place for calling editing service
-    if (this.service.form.valid) {
-      this.service.putModer(form.value).subscribe(res => console.log(res));
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+  changeStatus() {
+    const index = this.displayedColumns.indexOf('status');
+    if (this.includeAll) {
+      if (index === -1) {
+        this.displayedColumns.splice(this.displayedColumns.length - 1, 0, 'status');
+        this.paginator.page.emit();
+      }
+    } else if (index !== -1) {
+      this.displayedColumns.splice(index, 1);
+      this.paginator.page.emit();
     }
-    else {
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+  }
+
+  select(event, id) {
+    const index = this.selected.indexOf(id);
+    if (event.checked) {
+      if (index === -1) {
+        this.selected.push(id);
+      }
+    } else if (index !== -1) {
+      this.selected.splice(index, 1);
     }
   }
 
-  createNewModer() {
-    this.router.navigate(['/supersecurityadminpanel/createmod']);
+  delete(id) {
+    this.isLoadingResults = true;
+    this.service.deleteModerator(id)
+      .subscribe( _ => {
+        this.notification.success('Moderator was successfully deleted!');
+        this.paginator.page.emit();
+      }, error => {
+        this.isLoadingResults = false;
+        this.notification.error(error);
+      });
   }
-}
 
-// Temp functional for generating data
-
-// Constants used to fill up our data base.
-const SURNAMES = [
-  'Cook',
-  'Smith',
-  'Fuelk',
-  'Stam',
-  'Hill',
-  'Gradje',
-  'Mikj',
-  'Vise',
-  'Lake',
-  'Nert',
-  'Malt',
-  'Gobs',
-  'Fryder',
-  'Mankohen',
-  'Cherw'
-];
-const NAMES = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth'
-];
-
-export interface UserData {
-  id: string;
-  email: string;
-  name: string;
-  surname: string;
-  lastname: string;
-  status: string;
-}
-
-// Builds and returns a new User.
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const surname = SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))];
-  const lastname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const email = surname.substr(0, Math.round(Math.random() * surname.length))
-    + name.substr(0, Math.round(Math.random() * name.length))
-    + '@gmail.com';
-
-  return {
-    id: id.toString(),
-    surname: surname,
-    name: name,
-    lastname: lastname,
-    email: email,
-    status: Math.round(Math.random() * 1) ? 'active' : 'deleted'
-  };
+  deleteSelected() {
+    this.isLoadingResults = true;
+    this.service.deleteModerators(this.selected).subscribe( _ => {
+      this.selected = [];
+      this.paginator.page.emit();
+      this.notification.success('Moderators were deleted!');
+    }, error => {
+      this.isLoadingResults = false;
+      this.notification.error(error);
+    });
+  }
 }

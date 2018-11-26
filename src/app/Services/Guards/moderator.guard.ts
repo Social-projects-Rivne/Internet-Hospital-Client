@@ -4,12 +4,9 @@ import { AuthenticationService } from '../../Services/authentication.service';
 @Injectable()
 export class ModeratorGuard implements CanActivate {
 
-    constructor(private router: Router,private authenticationService: AuthenticationService) { }
+    constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.authenticationService.hasModeratorRole()) {            
-            return true;
-        }        
-        return false;
+        return this.authenticationService.hasModeratorRole();
     }
 }

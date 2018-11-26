@@ -7,6 +7,9 @@ import { isSameMonth, isSameDay } from 'date-fns';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { COLORS } from 'src/app/Mock-Objects/mock-colors';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { DataSharingService } from '../../../Services/date-sharing.service';
 
 @Component({
   selector: 'app-doctorplans',
@@ -15,6 +18,14 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./doctorplans.component.scss']
 })
 export class DoctorPlansComponent implements OnInit {
+
+  constructor(private doctorplansService: DoctorplansService,
+    private notification: NotificationService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private datePipe: DatePipe,
+    private dateSharing: DataSharingService) { }
+
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
   view: CalendarView = CalendarView.Month;
@@ -23,16 +34,50 @@ export class DoctorPlansComponent implements OnInit {
   Appointments: Appointment[] = [];
   events: CalendarEvent[] = [];
   refresh: Subject<any> = new Subject();
-  activeDayIsOpen: boolean = false;
+  activeDayIsOpen = false;
   loginForm: FormGroup;
+  load = true;
 
-  constructor(private doctorplansService: DoctorplansService,
-    private notification: NotificationService,
-    private formBuilder: FormBuilder) { }
+  deleteAction: CalendarEventAction = {
+    label: '<i></i>',
+    onClick: ({ event }: { event: CalendarEvent }): void => {
+      if (confirm('Are you sure ?')) {
+        this.load = true;
+        this.doctorplansService.deleteAppointment(event.id)
+          .subscribe((data: any) => {
+            this.getAppointments();
+            this.notification.success(data['message']);
+          },
+            error => {
+              this.getAppointments();
+              this.notification.error(error);
+            });
+      }
+    },
+    cssClass: 'fas fa-trash-alt icon-calendar'
+  };
+
+  cancelAction: CalendarEventAction = {
+    label: '<i></i>',
+    onClick: ({ event }: { event: CalendarEvent }): void => {
+      if (confirm('Are you sure ?')) {
+        this.load = true;
+        this.doctorplansService.cancelAppointment(event.id)
+          .subscribe((data: any) => {
+            this.getAppointments();
+            this.notification.success(data['message']);
+          },
+            error => {
+              this.getAppointments();
+              this.notification.error(error);
+            });
+      }
+    },
+    cssClass: 'far fa-calendar-times fa-lg icon-calendar'
+  };
 
   ngOnInit() {
     this.getAppointments();
-
     this.loginForm = this.formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required]
@@ -47,18 +92,20 @@ export class DoctorPlansComponent implements OnInit {
         this.Appointments = data.appointments;
         this.Appointments = this.Appointments.sort(function(a, b) {
           return a.startTime < b.startTime ? -1 : 1;
-        })
+        });
         this.Map();
         this.refresh.next();
+        this.load = false;
       });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (this.activeDayIsOpen = true)
+      if (this.activeDayIsOpen) {
         this.activeDayIsOpen = false;
+      }
       this.viewDate = date;
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
@@ -70,17 +117,16 @@ export class DoctorPlansComponent implements OnInit {
     let color;
     let title;
     this.Appointments.forEach(element => {
-      let actions: CalendarEventAction[] = [];
-      if (element.status === "Reserved") {
-        title = "Reserved by";
-        actions.push(this.getUserAction(element.id, element.userFirstName, element.userSecondName));
+      const actions: CalendarEventAction[] = [];
+      if (element.status === 'Reserved') {
+        title = 'Reserved by' + '<span class="subscribed-user">' +
+         element.userFirstName + ' ' +  element.userSecondName + '</span>';
         actions.push(this.cancelAction);
-        color = COLORS.yellow;;
-      }
-      else {
-        title = "Empty";
+        color = COLORS.yellow;
+      } else {
+        title = 'Empty';
         actions.push(this.deleteAction);
-        color = COLORS.green;
+        color = COLORS.blue;
       }
       this.events.push({
         id: element.id,
@@ -93,59 +139,24 @@ export class DoctorPlansComponent implements OnInit {
     });
   }
 
-  deleteAction: CalendarEventAction = {
-    label: '<i></i>',
-    onClick: ({ event }: { event: CalendarEvent }): void => {
-      if (confirm("Are you sure ?")) {
-        this.doctorplansService.deleteAppointment(event.id)
-          .subscribe((data: any) => {
-            this.getAppointments();
-            this.notification.success(data["message"]);
-          },
-            error => {
-              this.getAppointments();
-              this.notification.error(error);
-            });;
-      }
-    },
-    cssClass: "fas fa-trash-alt text-danger"
-  }
-
-  cancelAction: CalendarEventAction = {
-    label: '<i></i>',
-    onClick: ({ event }: { event: CalendarEvent }): void => {
-      if (confirm("Are you sure ?")) {
-        this.doctorplansService.cancelAppointment(event.id)
-          .subscribe((data: any) => {
-            this.getAppointments();
-            this.notification.success(data["message"]);
-          },
-            error => {
-              this.getAppointments();
-              this.notification.error(error);
-            });
-      }
-    },
-    cssClass: "far fa-times-circle fa-lg text-danger"
-  }
-
-  getUserAction(id: number, name: string, secondname: string): CalendarEventAction {
-    return {
-      label: '<i>' + name + ' ' + secondname + '</i>  ',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        alert("ЗАХОЖУ НА ЮЗЕРА " + name + " " + secondname);
-      },
-      cssClass: "text-success"
+  handleEvent(event: CalendarEvent): void {
+    if (event.color === COLORS.blue) {
+      this.notification.error('Appointment is empty');
+    } else {
+      this.dateSharing.changeDate(event.start);
+      // todo: navigate to illness creation component
     }
   }
 
   onSubmit() {
-    this.doctorplansService.addAppointment(this.loginForm.controls["start"].value, this.loginForm.controls["end"].value)
+    this.load = true;
+    this.doctorplansService.addAppointment(this.loginForm.controls['start'].value, this.loginForm.controls['end'].value)
       .subscribe((data: any) => {
         this.getAppointments();
-        this.notification.success(data["message"]);
+        this.notification.success('Appointment has been successfully created');
       },
       error => {
+        this.getAppointments();
         this.notification.error(error);
       });
   }

@@ -28,8 +28,9 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
-import { DoctorListSearchItemComponent }
-from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
+// tslint:disable-next-line:max-line-length
+import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
 import { AdminpanelModule } from './Components/adminpanel/adminpanel.module';
 import { UsersProfileComponent } from './Components/PatientProfile/patient-profile/users-profile.component';
@@ -51,7 +52,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
-
+import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
+import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
+import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,10 @@ import { DatePipe } from '@angular/common';
     FeedbacksComponent,
     UpdatePatientComponent,
     DateValidatorDirective,
-    DoctorPlansComponent
+    DoctorPlansComponent,
+    UpdateDoctorComponent,
+    AppointmentsListComponent,
+    AppointmentsItemComponent,
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [
@@ -107,7 +113,7 @@ import { DatePipe } from '@angular/common';
     )
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
