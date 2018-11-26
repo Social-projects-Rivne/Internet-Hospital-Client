@@ -1,7 +1,6 @@
 export class IllnessHistory {
     appointmentId: number;
     conslusionTime: Date;
-    // doctorName: string;
     complaints: string;
     diseaseAnamnesis: string;
     lifeAnamnesis: string;
