@@ -32,12 +32,12 @@ export class ContentService {
     for (let i = 0; i < content.articlePreviewAttachments.length; ++i) {
       formData.append( 'articlePreviewAttachment', content.articlePreviewAttachments[i]);
     }
-    const body = JSON.stringify(content);
-    console.log(body);
+    for (let i = 0; i < content.articlePreviewAttachments.length; ++i) {
+      formData.append( 'articleAttachment', content.articleAttachments[i]);
+    }
+    console.log(formData);
     console.log(content);
+    console.log(this.url);
     return this.http.post(this.url, formData);
-    // formData.append('Types', content.types);
-
-    // place method for sending
   }
 }

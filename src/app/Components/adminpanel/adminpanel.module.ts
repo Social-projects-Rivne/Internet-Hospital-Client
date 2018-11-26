@@ -32,6 +32,9 @@ import { MatFormFieldModule,
         MatSelectModule,
         MatExpansionModule
       } from '@angular/material';
+
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
@@ -62,7 +65,9 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     FlexLayoutModule,
     ImageCropperModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FroalaEditorModule,
+    FroalaViewModule
   ],
   declarations: [
     AdminPanelComponent,

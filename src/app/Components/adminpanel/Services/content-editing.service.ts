@@ -68,12 +68,21 @@ export class ContentEditingService {
     const content = new CreatingContent();
     const contr = this.form.controls;
     content.title = contr.title.value;
-    content.typeIds = contr.types.value;
+    content.typeIds = this.getIdsOfSelectedTypes();
     content.shortDescription = contr.shortDescription.value;
     content.articlePreviewAttachments = this.croppedFiles;
+    console.log(this.croppedFiles);
     content.article = contr.article.value;
     content.articleAttachments = [];
     return content;
+  }
+
+  getIdsOfSelectedTypes(): number[] {
+    const arr = [];
+    for (let i = 0; i < this.form.controls.types.value.length; ++i) {
+      arr.push(this.form.controls.types.value[i].id);
+    }
+    return arr;
   }
 
   setSelectedTypes(typeIds: number[]) {

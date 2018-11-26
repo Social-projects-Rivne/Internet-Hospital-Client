@@ -11,7 +11,7 @@
     </div>
     <mat-form-field>
       <mat-select placeholder="Types" formControlName="types" [multiple]='true'>
-        <mat-option *ngFor="let type of contentService.types" [value]="type.id">{{type.name}}</mat-option>
+        <mat-option *ngFor="let type of contentService.types" [value]="type">{{type.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <div>
@@ -35,12 +35,8 @@
         </div>
       </div>
     </div>
-    <div>
-      <mat-form-field>
-        <textarea required formControlName="article" class="text-body" maxlength="1000" matInput placeholder="Body"></textarea>
-        <mat-error>Body required.</mat-error>
-
-      </mat-form-field>
+    <div id="froala-area">
+      <textarea id="froala" required [froalaEditor]="froalaOptions" [(froalaModel)]="article" formControlName="article"></textarea>
     </div>
     <div>
       <button mat-raised-button color="primary" type="submit" [disabled]="contentService.form.invalid || contentService.croppedFiles.length < 1">Submit</button>
