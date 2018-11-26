@@ -29,12 +29,15 @@ import { ADMIN_PANEL,
           SETTINGS_DOCTOR,
           USERS_PROFILE,
           FEEDBACKS,
+          FILL_ILLNESS
 } from '../../config';
 
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
 import { DoctorPageComponent } from '../../Components/doctor-page/doctor-page.component';
 import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doctor/update-doctor.component';
+import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illness-history.component';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 
 const ROUTES: Routes = [
   {
@@ -49,6 +52,7 @@ const ROUTES: Routes = [
       { path: SETTINGS_DOCTOR, component: UpdateDoctorComponent, canActivate: [DoctorGuard]},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
+      { path: FILL_ILLNESS, component: IllnessHistoryComponent, canActivate: [FinishAppointmentGuard] }
     ]
   },
   { path: PAGE_404, component: Page404Component },
@@ -75,4 +79,5 @@ export const ROUTING_COMPONENTS = [
   HomeNewsComponent,
   DoctorPlansComponent,
   FeedbacksComponent,
+  IllnessHistoryComponent
 ];

@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Doctor } from '../Models/Doctors';
 import { PaginationService } from './pagination.service';
 import { Specialization } from '../Models/Specialization';
+import { FormGroup } from '@angular/forms';
+import { IllnessHistory } from '../Models/IllnessHistory';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -60,5 +62,15 @@ export class DoctorsService {
     const specUrl = this.url + '/specializations';
     this.http.get<Specialization[]>(specUrl)
       .subscribe(data => this.specializations = data);
+  }
+
+  fillIllness(form: FormGroup) {
+    // this.illnessHistory = new IllnessHistory(this.form.value);
+    let illnessHistory = new IllnessHistory();
+    illnessHistory = form.value;
+    illnessHistory.AppointmentId = 3;
+    illnessHistory.FinishAppointmentTime = new Date();
+    const url = HOST_URL + '/api/Doctors/illnesshistory';
+    return this.http.post(url, illnessHistory);
   }
 }

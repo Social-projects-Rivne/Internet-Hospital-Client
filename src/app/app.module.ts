@@ -54,6 +54,7 @@ import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
 import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
+import { IllnessHistoryComponent } from './Components/illness-history/illness-history.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     UpdateDoctorComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
+    IllnessHistoryComponent,
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [

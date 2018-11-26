@@ -4,7 +4,7 @@ import { ImageValidationService } from '../../../Services/image-validation.servi
 import { NotificationService } from '../../../Services/notification.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { HOST_URL } from '../../../config';
-import { IllnessHistory } from 'src/app/Models/Illness-history';
+import { IllnessHistory } from 'src/app/Models/IllnessHistory';
 import { ICurrentUser } from '../../../Models/CurrentUser';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 
@@ -28,14 +28,6 @@ export class UsersProfileComponent implements OnInit {
 
   user: ICurrentUser;
   token = TOKEN;
-
-
-  tempHistory: IllnessHistory[] = [
-    { dateTime: this.date, doctorName: 'Aloha1', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    { dateTime: this.date, doctorName: 'Aloha2', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    { dateTime: this.date, doctorName: 'Aloha3', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' },
-    { dateTime: this.date, doctorName: 'Aloha4', diagnosis: 'Cancer', symptoms: 'Feels bad', treatment: 'Drink tea' }
-  ];
 
   tempText = `Lorem ipsum dolor sit amet consectetur adipisicing elit.
    Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta,

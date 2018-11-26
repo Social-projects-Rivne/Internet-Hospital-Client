@@ -1,0 +1,46 @@
+<div id="FatherDiv" fxLayoutAlign="center">
+  <form class="example-container" id="FatherForm" [formGroup]="service.form" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>Please, fill all necessary info</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content id="divider">
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>Complains</mat-label>
+          <input required formControlName="Complains" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>DiseaseAnamnesis</mat-label>
+          <input required formControlName="DiseaseAnamnesis" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>LifeAnamnesis</mat-label>
+          <input formControlName="LifeAnamnesis" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>ObjectiveStatus</mat-label>
+          <input required formControlName="ObjectiveStatus" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>LocalStatus</mat-label>
+          <input formControlName="LocalStatus" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>Diagnose</mat-label>
+          <input required formControlName="Diagnose" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>SurveyPlan</mat-label>
+          <input formControlName="SurveyPlan" matInput>
+        </mat-form-field>
+        <mat-form-field id="mat-form-fieldStrech">
+          <mat-label>TreatmentPlan</mat-label>
+          <input required formControlName="TreatmentPlan" matInput>
+        </mat-form-field>
+      </mat-card-content>
+      <section class="RightFloat">
+        <button id="ConfirmButton" mat-raised-button type="submit" [disabled]="!service.form.valid">Confirm</button>
+        <button id="CancelButton" (click)="onCancel()" mat-raised-button>Cancel</button>
+      </section>
+    </mat-card>
+  </form>
+</div>
