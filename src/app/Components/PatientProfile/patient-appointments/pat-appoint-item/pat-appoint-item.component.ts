@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { Appointment } from 'src/app/Components/DoctorPlans/Appointment';
 import { DoctorplansService } from 'src/app/Components/DoctorPlans/doctorplans.service';
 import { formatDate } from '@angular/common';
@@ -20,7 +21,8 @@ export class PatAppointItemComponent implements OnInit {
   constructor(private service: DoctorplansService,
               private dialogService: DialogService,
               private router: Router,
-              private notification: NotificationService) { }
+              private notification: NotificationService,
+              private location: Location) { }
 
   ngOnInit() {
   }
@@ -30,14 +32,13 @@ export class PatAppointItemComponent implements OnInit {
     .afterClosed().subscribe(res => {
       if (res) {
         this.service.unsubscribeToAppointment(this.patAppointment.id).subscribe(
-          data => {
+          () => {
             this.notification.success('Unsubscribed successfully');
+            location.reload();
           },
           error => {
             this.notification.error(error);
           });
-        //  this.router.navigate([USERS_PROFILE]));
-        // this.service.getPatientAppointments();
       }
     });
   }
