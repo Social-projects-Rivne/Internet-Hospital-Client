@@ -55,6 +55,7 @@ import { AppointmentsListComponent } from './Components/doctor-page/appointments
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
+import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 
 
 @NgModule({
@@ -83,9 +84,10 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
     AppointmentsListComponent,
     AppointmentsItemComponent,
     PatientAppointmentsComponent,
-    PatAppointItemComponent
+    PatAppointItemComponent,
+    MatConfirmDialogComponent
   ],
-  entryComponents: [ ImageModalDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,
