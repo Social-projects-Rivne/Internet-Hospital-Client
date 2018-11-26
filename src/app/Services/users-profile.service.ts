@@ -40,14 +40,12 @@ export class UsersProfileService {
 
     getProfile() {
         const getUrl = HOST_URL + API_PATIENT;
-        console.log(getUrl);
         return this.http.get(getUrl);
     }
 
     getHistories(fromDate?: Date, toDate?: Date) {
         const historiesUrl = HOST_URL + PATIENT_GET_HISTORIES;
         if (fromDate !== null && fromDate !== undefined) {
-            console.log(fromDate.toISOString());
             this.httpOptions.params = this.httpOptions.params.set(start, fromDate.toDateString());
         } else {
             this.httpOptions.params = this.httpOptions.params.delete(start);
@@ -57,7 +55,6 @@ export class UsersProfileService {
         } else {
             this.httpOptions.params = this.httpOptions.params.delete(end);
         }
-        console.log(this.httpOptions.params);
         this.http.get(historiesUrl, this.httpOptions)
             .subscribe((result: any) => {
                 this.illnessHistories = result.histories;

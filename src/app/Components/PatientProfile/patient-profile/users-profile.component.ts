@@ -45,7 +45,7 @@ export class UsersProfileComponent implements OnInit {
 
   getImageFromService() {
     this.patientService.getImage().subscribe((data: any) => {
-      this.imageToShow = HOST_URL + data.avatarURL, console.log(data);
+      this.imageToShow = HOST_URL + data.avatarURL;
     }
     );
   }
