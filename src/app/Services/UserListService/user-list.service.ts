@@ -29,9 +29,20 @@ export class UserListService {
     const typeUrl = this.url + 'userlist';
     return this.http.get(typeUrl, this.httpOptions);
   }
-  getUserListParams(filter?: UserListFilter) {
+  getUserListParams(filter: UserListFilter) {
     const typeUrl = this.url + 'userlist/getparams';
-      return this.http.get(typeUrl, this.httpOptions);
+
+    if (filter.searchKey != null && filter.searchKey !== '' ) {
+      this.httpOptions.params = this.httpOptions.params.set('searchbyname', UserListFilter.name);
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('searchbyname');
+    }
+    if (filter.selectedStatus != null) {
+      this.httpOptions.params = this.httpOptions.params.set('searchbyspecialization', filter.searchKey.toString());
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('searchbyspecialization');
+    }
+    return this.http.get(typeUrl, this.httpOptions);
   }
 
   StatusConverter(Users: any[]) {

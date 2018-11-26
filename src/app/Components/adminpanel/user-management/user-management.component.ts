@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserListService } from 'src/app/Services/UserListService/user-list.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { UserListModel } from 'src/app/Models/UserListModel';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
 import { UserListFilter } from 'src/app/Models/UserListFilter';
+import { PaginationService } from 'src/app/Services/pagination.service';
 
 @Component({
   selector: 'app-user-management',
@@ -27,7 +28,8 @@ export class UserManagementComponent implements OnInit {
 
   constructor(
     private _userListService: UserListService,
-    private _notification: NotificationService,
+    private _notificationService: NotificationService,
+    private _paginationService: PaginationService,
     ) {
       this.filter = new UserListFilter();
     }
@@ -40,7 +42,7 @@ export class UserManagementComponent implements OnInit {
         this.ngAfterViewInit();
       },
         error => {
-          this._notification.error('Server error');
+          this._notificationService.error('Server error');
       });
       this._userListService.getUserList().subscribe((types: any) => {
         this.Types = types;
@@ -50,7 +52,7 @@ export class UserManagementComponent implements OnInit {
         this.Types = this.uniq(this.Types);
       },
         error => {
-          this._notification.error('Server error');
+          this._notificationService.error('Server error');
       });
   }
 
@@ -58,16 +60,19 @@ export class UserManagementComponent implements OnInit {
     this.filter.searchKey = this.searchInput;
     this.filter.selectedStatus = this.selectedStatus;
     this.filter.CheckIfPropertyExist();
-    if (this.filter.isWithParams) {
-      this._userListService.getUserListParams(this.filter).subscribe((types: any) => {
-        this.Users = types;
-        this.Users.sort((x1, x2) => x1.statusId - x2.statusId);
-        this.Users = this.uniq(this.Users);
-        this.Users = this._userListService.StatusConverter(this.Users);
-      },
-        error => {
-          this._notification.error('Server error');
-      });
+    this.paginator.firstPage();
+    const pageevent = new PageEvent();
+    pageevent.pageSize = this._paginationService.pageSize;
+    pageevent.pageIndex = this._paginationService.pageIndex - 1;
+    // pageEvent.length = this.
+    this._paginationService.change(pageevent);
+    this._userListService.httpOptions.params =
+                                              this._userListService.httpOptions.params.set('page',
+                                              this._paginationService.pageIndex.toString());
+    if (this.filter.isWithParams === true) {
+      this._userListService.getUserListParams(this.filter);
+    } else {
+      this._userListService.getUserList();
     }
   }
 
