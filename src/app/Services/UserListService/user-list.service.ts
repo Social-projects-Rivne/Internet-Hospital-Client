@@ -19,8 +19,8 @@ export class UserListService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-    .set('page', this.paginationService.pageIndex.toString())
-    .set('pagecount', this.paginationService.userPageSize.toString())
+      .set('page', this.paginationService.pageIndex.toString())
+      .set('pagecount', this.paginationService.userPageSize.toString())
   };
 
   constructor(private http: HttpClient, private paginationService: PaginationService) { }
@@ -31,17 +31,6 @@ export class UserListService {
   }
   getUserListParams(filter: UserListFilter) {
     const typeUrl = this.url + 'userlist/getparams';
-
-    // if (filter.searchKey != null && filter.searchKey !== '' ) {
-    //   this.httpOptions.params = this.httpOptions.params.set('searchbyname', UserListFilter.name);
-    // } else {
-    //   this.httpOptions.params = this.httpOptions.params.delete('searchbyname');
-    // }
-    // if (filter.selectedStatus != null) {
-    //   this.httpOptions.params = this.httpOptions.params.set('searchbyspecialization', filter.searchKey.toString());
-    // } else {
-    //   this.httpOptions.params = this.httpOptions.params.delete('searchbyspecialization');
-    // }
     return this.http.get(typeUrl, this.httpOptions);
   }
 
