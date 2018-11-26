@@ -81,7 +81,7 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     DateValidatorDirective,
     DoctorPlansComponent,
     UpdateDoctorComponent,
-    IllnessHistorySearchItemComponent
+    IllnessHistorySearchItemComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
   ],

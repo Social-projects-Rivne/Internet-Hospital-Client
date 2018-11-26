@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 
 import { HOST_URL } from '../config';
 import { compareValidator } from '../Directives/compare-validator.directive';
-import { API_PATIENT_UPDATE, PATIENT_UPDATE_AVATAR, LOCALE_PHONE, PATIENT_GET_PROFILE } from '../config';
+import { API_PATIENT_UPDATE, PATIENT_UPDATE_AVATAR, LOCALE_PHONE, API_PATIENT } from '../config';
 import { MaxDateValidator } from '../Directives/date-validator.directive';
 import { Patient } from '../Models/Patient';
 
@@ -15,7 +15,7 @@ import { Patient } from '../Models/Patient';
 export class UpdatePatientService {
   url = HOST_URL + API_PATIENT_UPDATE;
   avatarUpdateUrl = HOST_URL + PATIENT_UPDATE_AVATAR;
-  getProfileUrl = HOST_URL + PATIENT_GET_PROFILE;
+  getProfileUrl = HOST_URL + API_PATIENT;
   patient: Patient;
 
   constructor(private http: HttpClient) { }
