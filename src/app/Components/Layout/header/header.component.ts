@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   isModerator: Observable<boolean>;
   isAdmin: Observable<boolean>;
   userAvatar: string;
+  defaultImage = '../../assets/img/default.png';
 
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();

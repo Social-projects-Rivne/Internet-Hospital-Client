@@ -29,7 +29,7 @@
     <div id="DeskMenu" fxHide.xs>
         <a mat-button routerLink="/doctor-list">Doctor's List</a>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
-            <img [src]="userAvatar" class="user-avatar" />
+            <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img/>
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>

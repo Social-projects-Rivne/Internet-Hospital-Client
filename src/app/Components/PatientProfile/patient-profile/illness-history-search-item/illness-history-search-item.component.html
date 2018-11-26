@@ -1,0 +1,11 @@
+<mat-form-field>
+  <input matInput [(ngModel)]="filter.fromDate" [matDatepickerFilter]="startDateFilter" [matDatepicker]="fromPicker" placeholder="From" (dateChange)="beginDate($event)">
+  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+  <mat-datepicker #fromPicker startView="month" [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="filter.toDate" [matDatepickerFilter]="dateFilter" [matDatepicker]="toPicker" placeholder="To" (dateChange)="finishDate($event)">
+  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+  <mat-datepicker #toPicker startView="month" [startAt]="endDate"></mat-datepicker>
+</mat-form-field>
+<button mat-raised-button class="search-by-filter" color="primary" (click)="onSearch()">Search</button>
