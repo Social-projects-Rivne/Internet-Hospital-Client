@@ -4,6 +4,9 @@ import { DoctorplansService } from 'src/app/Components/DoctorPlans/doctorplans.s
 import { formatDate } from '@angular/common';
 import { Observable } from 'rxjs';
 import { DialogService } from 'src/app/Services/dialog.service';
+import { Router } from '@angular/router';
+import { USERS_PROFILE } from 'src/app/config';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
   selector: 'app-pat-appoint-item',
@@ -15,7 +18,9 @@ export class PatAppointItemComponent implements OnInit {
   patAppointment: Appointment;
 
   constructor(private service: DoctorplansService,
-              private dialogService: DialogService) { }
+              private dialogService: DialogService,
+              private router: Router,
+              private notification: NotificationService) { }
 
   ngOnInit() {
   }
@@ -24,7 +29,15 @@ export class PatAppointItemComponent implements OnInit {
     this.dialogService.openConfirmDialog('Are you sure to unsubscribe this appointment?')
     .afterClosed().subscribe(res => {
       if (res) {
-        this.service.unsubscribeToAppointment(this.patAppointment.id).subscribe();
+        this.service.unsubscribeToAppointment(this.patAppointment.id).subscribe(
+          data => {
+            this.notification.success('Unsubscribed successfully');
+          },
+          error => {
+            this.notification.error(error);
+          });
+        //  this.router.navigate([USERS_PROFILE]));
+        // this.service.getPatientAppointments();
       }
     });
   }
