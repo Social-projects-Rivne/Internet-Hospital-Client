@@ -1,45 +1,45 @@
 <div id="FatherDiv" fxLayoutAlign="center">
-  <form class="example-container" id="FatherForm" [formGroup]="service.form" (ngSubmit)="onSubmit()">
+  <form id="FatherForm" [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="Column" fxLayoutAlign="center center">
     <mat-card>
       <mat-card-title>Please, fill all necessary info</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content id="divider">
-        <mat-form-field id="mat-form-fieldStrech">
-          <mat-label>Complains</mat-label>
-          <input required formControlName="Complains" matInput>
+        <mat-form-field class="mat-form-fieldStrech">
+          <mat-label>Complaints</mat-label>
+          <textarea  required formControlName="Complaints" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>DiseaseAnamnesis</mat-label>
-          <input required formControlName="DiseaseAnamnesis" matInput>
+          <textarea required formControlName="DiseaseAnamnesis" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>LifeAnamnesis</mat-label>
-          <input formControlName="LifeAnamnesis" matInput>
+          <textarea formControlName="LifeAnamnesis" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>ObjectiveStatus</mat-label>
-          <input required formControlName="ObjectiveStatus" matInput>
+          <textarea required formControlName="ObjectiveStatus" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>LocalStatus</mat-label>
-          <input formControlName="LocalStatus" matInput>
+          <textarea formControlName="LocalStatus" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>Diagnose</mat-label>
-          <input required formControlName="Diagnose" matInput>
+          <textarea required formControlName="Diagnose" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>SurveyPlan</mat-label>
-          <input formControlName="SurveyPlan" matInput>
+          <textarea formControlName="SurveyPlan" matInput></textarea>
         </mat-form-field>
-        <mat-form-field id="mat-form-fieldStrech">
+        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>TreatmentPlan</mat-label>
-          <input required formControlName="TreatmentPlan" matInput>
+          <textarea required formControlName="TreatmentPlan" matInput></textarea>
         </mat-form-field>
       </mat-card-content>
-      <section class="RightFloat">
-        <button id="ConfirmButton" mat-raised-button type="submit" [disabled]="!service.form.valid">Confirm</button>
+      <section>
         <button id="CancelButton" (click)="onCancel()" mat-raised-button>Cancel</button>
+        <button id="ConfirmButton" mat-raised-button type="submit" [disabled]="form.invalid">Confirm</button>
       </section>
     </mat-card>
   </form>

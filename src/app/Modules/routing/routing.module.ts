@@ -52,7 +52,7 @@ const ROUTES: Routes = [
       { path: SETTINGS_DOCTOR, component: UpdateDoctorComponent, canActivate: [DoctorGuard]},
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
-      { path: FILL_ILLNESS, component: IllnessHistoryComponent, canActivate: [FinishAppointmentGuard] }
+      { path: FILL_ILLNESS + '/:id', component: IllnessHistoryComponent, canActivate: [FinishAppointmentGuard] }
     ]
   },
   { path: PAGE_404, component: Page404Component },

@@ -145,7 +145,7 @@ export class DoctorPlansComponent implements OnInit {
       this.notification.error('Appointment is empty');
     } else {
       this.dateSharing.changeDate(event.start);
-      this.router.navigate([FILL_ILLNESS]);
+      this.router.navigate([FILL_ILLNESS + `/${event.id}`]);
     }
   }
 

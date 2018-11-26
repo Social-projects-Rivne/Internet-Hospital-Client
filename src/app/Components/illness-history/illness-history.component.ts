@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { MY_PLANS } from 'src/app/config';
 
 @Component({
   selector: 'app-illness-history',
@@ -9,10 +12,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class IllnessHistoryComponent implements OnInit {
 
-  constructor(private service: DoctorsService) { }
+  private appointmentId: number;
+
+  constructor(private service: DoctorsService, private router: Router, private notification: NotificationService,
+    private activateRoute: ActivatedRoute) { }
 
   form: FormGroup = new FormGroup({
-    Complains: new FormControl('', Validators.required),
+    Complaints: new FormControl('', Validators.required),
     DiseaseAnamnesis: new FormControl('', Validators.required),
     LifeAnamnesis: new FormControl(''),
     ObjectiveStatus: new FormControl('', Validators.required),
@@ -24,7 +30,7 @@ export class IllnessHistoryComponent implements OnInit {
 
   initializeFormGroup() {
     this.form.setValue({
-      Complains: '',
+      Complaints: '',
       DiseaseAnamnesis: '',
       LifeAnamnesis: '',
       ObjectiveStatus: '',
@@ -36,10 +42,25 @@ export class IllnessHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appointmentId = this.activateRoute.snapshot.params['id'];
+    console.log(this.appointmentId);
     this.initializeFormGroup();
   }
 
+  onCancel() {
+    this.router.navigate([MY_PLANS]);
+  }
+
   onSubmit() {
-    this.service.fillIllness(this.form).subscribe();
+    this.service.fillIllness(this.form, this.appointmentId).subscribe(
+      () => {
+        this.notification.success('All is fine!');
+      },
+      (err) => {
+        this.notification.error(err.message);
+      },
+      () => {
+        this.router.navigate([MY_PLANS]);
+      });
   }
 }

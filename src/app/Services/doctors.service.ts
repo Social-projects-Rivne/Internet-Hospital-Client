@@ -6,6 +6,7 @@ import { PaginationService } from './pagination.service';
 import { Specialization } from '../Models/Specialization';
 import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
+import { DatePipe } from '@angular/common';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -35,7 +36,8 @@ export class DoctorsService {
   }
 
   constructor(private http: HttpClient,
-    private paginationService: PaginationService) { }
+    private paginationService: PaginationService,
+    private datePipe: DatePipe) { }
 
   getDoctors(name?: string, specialization?: number) {
     const doctorsUrl = this.url;
@@ -64,12 +66,17 @@ export class DoctorsService {
       .subscribe(data => this.specializations = data);
   }
 
-  fillIllness(form: FormGroup) {
+  fillIllness(form: FormGroup, appointmentId: number) {
     // this.illnessHistory = new IllnessHistory(this.form.value);
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
-    illnessHistory.AppointmentId = 3;
+    illnessHistory.AppointmentId = appointmentId;
+    console.log('ds1' + illnessHistory.FinishAppointmentTime);
     illnessHistory.FinishAppointmentTime = new Date();
+    console.log('ds2' + illnessHistory.FinishAppointmentTime);
+    illnessHistory.FinishAppointmentTime.setUTCHours(illnessHistory.FinishAppointmentTime.getUTCHours() + 1);
+    illnessHistory.FinishAppointmentTime = new Date(this.datePipe.transform(illnessHistory.FinishAppointmentTime, 'short'));
+    console.log('ds3' + illnessHistory.FinishAppointmentTime);
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
   }

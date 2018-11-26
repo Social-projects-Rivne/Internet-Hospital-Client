@@ -1,34 +1,21 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
+#FatherForm {
   background-origin: padding-box;
   width: 40%;
   min-width: 320px;
-  margin: auto;
-}
-
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
-}
-
-input.example-right-align {
-  -moz-appearance: textfield;
-}
-
-.RightFloat {
-  float: right;
+  margin: 20px;
 }
 
 #ConfirmButton {
+  float: right;
   margin-left: 10px;
 }
 
-#mat-form-fieldStrech {
+#CancelButton {
+  float: left;
+  margin-right: 10px;
+}
+
+.mat-form-fieldStrech {
   width: 100%;
 }
 
