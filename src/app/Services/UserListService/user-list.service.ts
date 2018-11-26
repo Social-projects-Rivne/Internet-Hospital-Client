@@ -20,32 +20,32 @@ export class UserListService {
     }),
     params: new HttpParams()
     .set('page', this.paginationService.pageIndex.toString())
-    .set('pagecount', this.paginationService.pageSize.toString())
+    .set('pagecount', this.paginationService.userPageSize.toString())
   };
 
   constructor(private http: HttpClient, private paginationService: PaginationService) { }
 
   getUserList() {
-    const typeUrl = this.url + 'userlist';
+    const typeUrl = this.url + 'userlist/getparams';
     return this.http.get(typeUrl, this.httpOptions);
   }
   getUserListParams(filter: UserListFilter) {
     const typeUrl = this.url + 'userlist/getparams';
 
-    if (filter.searchKey != null && filter.searchKey !== '' ) {
-      this.httpOptions.params = this.httpOptions.params.set('searchbyname', UserListFilter.name);
-    } else {
-      this.httpOptions.params = this.httpOptions.params.delete('searchbyname');
-    }
-    if (filter.selectedStatus != null) {
-      this.httpOptions.params = this.httpOptions.params.set('searchbyspecialization', filter.searchKey.toString());
-    } else {
-      this.httpOptions.params = this.httpOptions.params.delete('searchbyspecialization');
-    }
+    // if (filter.searchKey != null && filter.searchKey !== '' ) {
+    //   this.httpOptions.params = this.httpOptions.params.set('searchbyname', UserListFilter.name);
+    // } else {
+    //   this.httpOptions.params = this.httpOptions.params.delete('searchbyname');
+    // }
+    // if (filter.selectedStatus != null) {
+    //   this.httpOptions.params = this.httpOptions.params.set('searchbyspecialization', filter.searchKey.toString());
+    // } else {
+    //   this.httpOptions.params = this.httpOptions.params.delete('searchbyspecialization');
+    // }
     return this.http.get(typeUrl, this.httpOptions);
   }
 
-  StatusConverter(Users: any[]) {
+  StatusConverter(Users: any) {
 
     console.log(Users);
 

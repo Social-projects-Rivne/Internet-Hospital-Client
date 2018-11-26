@@ -10,13 +10,13 @@
       </mat-expansion-panel-header>
 
       <div class="example-card example-half-width">
-
+        
         <hr class="example-full-width">
-
+        
         <mat-card-content>
           <mat-form-field class="example-full-width">
             <input type="text" [(ngModel)]="nameSearch" (keyup)="applyFilter($event.target.value)" autocomplete="off"
-              matInput placeholder="User's name">
+            matInput placeholder="User's name">
           </mat-form-field>
           <br>
           <mat-form-field class="example-full-width">
@@ -28,25 +28,40 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <button (click)="searchClick()" class="example-full-width" mat-raised-button color="primary">Search</button>
+          <button (click)="onSearch()" class="example-full-width" mat-raised-button color="primary">Search</button>
         </mat-card-content>
       </div>
 
     </mat-expansion-panel>
   </mat-accordion>
+  
+  <mat-paginator fxHide.xs fxHide.sm fxFlex.md="55" 
+  fxFlex.lg="40" fxFlex.xl="30" id="header-paginator" 
+  [pageSize]="_paginationService.userPageSize"
+  [length]="usersAmount" 
+  (page)="pageSwitch($event)">
+</mat-paginator>
 
-  <mat-paginator fxHide.xs fxHide.sm fxFlex.md="55" fxFlex.lg="40" fxFlex.xl="30" id="header-paginator" [pageSize]="15" [pageSizeOptions]="[15, 25, 50]"></mat-paginator>
+  
 </div>
 
+<div class="table-container mat-elevation-z8">
+  <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="rate-limit-reached" *ngIf="isRateLimitReached">
+      InternetHospital's API rate limit has been reached. It will be reset in one minute.
+    </div>
+  </div>
+  
 <div class="mat-elevation-z8">
-
+  
   <table mat-table [dataSource]="dataSource" matSort>
-
+    
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
-
+    
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> First Name </th>
       <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
