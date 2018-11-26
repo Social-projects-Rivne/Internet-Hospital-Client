@@ -31,8 +31,7 @@
   </mat-card>
 
   <mat-card class="pation-additional-info mat-elevation-z8">
-    Additional info about me:
-    <p>{{tempText}}</p>
+    <app-patient-appointments></app-patient-appointments>
   </mat-card>
 
   <mat-card class="profile-bottom mat-elevation-z8" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%">
@@ -74,5 +73,4 @@
     <mat-paginator fxLayoutAlign="end start" [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize"
     (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
   </mat-card>
-  <app-patient-appointments></app-patient-appointments>
 </div>

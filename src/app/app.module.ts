@@ -84,7 +84,7 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
     DateValidatorDirective,
     DoctorPlansComponent,
     UpdateDoctorComponent,
-    IllnessHistorySearchItemComponent
+    IllnessHistorySearchItemComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
     PatientAppointmentsComponent,
