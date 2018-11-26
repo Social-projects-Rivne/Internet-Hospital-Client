@@ -77,7 +77,6 @@ export class DoctorplansService {
   }
 
   unsubscribeToAppointment(appointmentId: number) {
-    console.log(appointmentId);
     const scecUrl = HOST_URL + '/api/Appointments/unsubscribe';
     return this.http.post(scecUrl, { id: appointmentId });
   }

@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '@angular/common';
 import { Appointment } from 'src/app/Components/DoctorPlans/Appointment';
 import { DoctorplansService } from 'src/app/Components/DoctorPlans/doctorplans.service';
-import { formatDate } from '@angular/common';
-import { Observable } from 'rxjs';
 import { DialogService } from 'src/app/Services/dialog.service';
 import { Router } from '@angular/router';
 import { USERS_PROFILE } from 'src/app/config';
@@ -21,8 +18,7 @@ export class PatAppointItemComponent implements OnInit {
   constructor(private service: DoctorplansService,
               private dialogService: DialogService,
               private router: Router,
-              private notification: NotificationService,
-              private location: Location) { }
+              private notification: NotificationService) { }
 
   ngOnInit() {
   }
@@ -34,7 +30,8 @@ export class PatAppointItemComponent implements OnInit {
         this.service.unsubscribeToAppointment(this.patAppointment.id).subscribe(
           () => {
             this.notification.success('Unsubscribed successfully');
-            location.reload();
+            this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(() =>
+            this.router.navigate([USERS_PROFILE]));
           },
           error => {
             this.notification.error(error);

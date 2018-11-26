@@ -18,14 +18,11 @@ export class PatientAppointmentsComponent implements OnInit {
   appointmentsAmount: number;
 
   constructor(private service: DoctorplansService,
-    private pagService: PaginationService,
-    private activateRoute: ActivatedRoute,
-    private notification: NotificationService) { }
+              private notification: NotificationService) { }
 
   ngOnInit() {
     this.service.getPatientAppointments().subscribe((result: any) => {
       this.appointmentList = result.appointments;
-      console.log(this.appointmentList);
     },
     error => {
       this.notification.error(error);
