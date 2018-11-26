@@ -1,3 +1,5 @@
+import { IllnessHistory } from '../Models/Illness-history';
+
 export class Patient {
     id: number;
     firstName: string;
@@ -5,4 +7,5 @@ export class Patient {
     thirdName: string;
     birthDate: string;
     phoneNumber: string;
+    illnessHistory: IllnessHistory[];
 }
