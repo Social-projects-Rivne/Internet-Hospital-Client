@@ -1,0 +1,17 @@
+<div class="container" fxLayout="row" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
+    <mat-card fxLayout="row" fxLayoutAlign="space-around start">
+        <div class="marginTen">
+            <mat-card-content class="mat-display-1">
+                {{appointment.startTime | date:'dd.MM.y'}}
+            </mat-card-content>
+        </div>
+        <div class="marginTen">
+            <mat-card-content class="mat-display-1">
+                {{appointment.startTime | date:'HH.mm'}} - {{appointment.endTime | date:'HH.mm'}}
+            </mat-card-content>
+        </div>
+        <div class="marginTen">
+            <button id="btnSubscribe" *ngIf="(isPatient | async)" (click)="onSubscribeToAppointment()" mat-raised-button color="primary">Subscribe</button>
+        </div>
+    </mat-card>
+</div>
