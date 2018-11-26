@@ -82,7 +82,7 @@ import { IllnessHistoryComponent } from './Components/illness-history/illness-hi
     DateValidatorDirective,
     DoctorPlansComponent,
     UpdateDoctorComponent,
-    IllnessHistorySearchItemComponent
+    IllnessHistorySearchItemComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
     IllnessHistoryComponent,

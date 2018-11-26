@@ -22,11 +22,7 @@ export class FinishAppointmentGuard implements CanActivate {
             this.router.navigate([MY_PLANS]);
         }
         const start = this.appointmentStart;
-        console.log('Guard start1' + start);
         const now = new Date();
-        console.log('Guard now' + now);
-        start.setHours(start.getHours() - 1);
-        console.log('Guard start2' + start);
 
         if (start > now) {
             this.notification.error('Please wait for the appointment beginning');

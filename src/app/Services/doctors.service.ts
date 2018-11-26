@@ -67,16 +67,10 @@ export class DoctorsService {
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {
-    // this.illnessHistory = new IllnessHistory(this.form.value);
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
     illnessHistory.AppointmentId = appointmentId;
-    console.log('ds1' + illnessHistory.FinishAppointmentTime);
-    illnessHistory.FinishAppointmentTime = new Date();
-    console.log('ds2' + illnessHistory.FinishAppointmentTime);
-    illnessHistory.FinishAppointmentTime.setUTCHours(illnessHistory.FinishAppointmentTime.getUTCHours() + 1);
-    illnessHistory.FinishAppointmentTime = new Date(this.datePipe.transform(illnessHistory.FinishAppointmentTime, 'short'));
-    console.log('ds3' + illnessHistory.FinishAppointmentTime);
+    illnessHistory.FinishAppointmentTime = this.datePipe.transform(new Date(), 'short');
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
   }

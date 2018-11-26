@@ -8,9 +8,5 @@ export class IllnessHistory {
     Diagnose: String;
     SurveyPlan: String;
     TreatmentPlan: String;
-    FinishAppointmentTime: Date;
-
-    // public constructor(init?: Partial<IllnessHistory>) {
-    //     Object.assign(this, init);
-    // }
+    FinishAppointmentTime: String;
 }

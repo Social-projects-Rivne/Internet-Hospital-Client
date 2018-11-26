@@ -55,11 +55,10 @@ export class IllnessHistoryComponent implements OnInit {
     this.service.fillIllness(this.form, this.appointmentId).subscribe(
       () => {
         this.notification.success('All is fine!');
+        this.router.navigate([MY_PLANS]);
       },
-      (err) => {
-        this.notification.error(err.message);
-      },
-      () => {
+      (error) => {
+        this.notification.error(error);
         this.router.navigate([MY_PLANS]);
       });
   }
