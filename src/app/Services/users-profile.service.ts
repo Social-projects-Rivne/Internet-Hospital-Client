@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { PaginationService } from './pagination.service';
 import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT, PATIENT_GET_HISTORIES } from '../config';
+import { DatePipe } from '@angular/common';
 
 const start = 'searchfromdate';
 const end = 'searchtodate';
@@ -26,7 +27,7 @@ export class UsersProfileService {
             .set('pagecount', this.paginationService.pageSize.toString())
     };
 
-    constructor(private http: HttpClient, private paginationService: PaginationService) { }
+    constructor(private http: HttpClient, private paginationService: PaginationService, private datePipe: DatePipe) { }
 
     getImage() {
         return this.http.get(this.url);
@@ -59,6 +60,9 @@ export class UsersProfileService {
             .subscribe((result: any) => {
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
+                for (const history of this.illnessHistories) {
+                    history.finishAppointmentTime = this.datePipe.transform(new Date(), 'medium');
+                }
             });
     }
 }
