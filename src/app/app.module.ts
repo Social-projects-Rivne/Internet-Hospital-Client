@@ -62,6 +62,7 @@ import { IllnessHistoryComponent } from './Components/illness-history/illness-hi
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
     IllnessHistoryComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent,
-    MatConfirmDialogComponent
+    MatConfirmDialogComponent,
+    LoadingComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [

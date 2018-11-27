@@ -17,6 +17,8 @@ export class IllnessHistoryComponent implements OnInit {
   constructor(private service: DoctorsService, private router: Router, private notification: NotificationService,
     private activateRoute: ActivatedRoute) { }
 
+  load = false;
+
   form: FormGroup = new FormGroup({
     Complaints: new FormControl('', Validators.required),
     DiseaseAnamnesis: new FormControl('', Validators.required),
@@ -52,13 +54,16 @@ export class IllnessHistoryComponent implements OnInit {
   }
 
   onSubmit() {
+    this.load = true;
     this.service.fillIllness(this.form, this.appointmentId).subscribe(
       () => {
         this.notification.success('All is fine!');
+        this.load = false;
         this.router.navigate([MY_PLANS]);
       },
       (error) => {
         this.notification.error(error);
+        this.load = false;
         this.router.navigate([MY_PLANS]);
       });
   }
