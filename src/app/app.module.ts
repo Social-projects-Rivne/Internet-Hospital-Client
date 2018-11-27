@@ -82,9 +82,9 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     DateValidatorDirective,
     DoctorPlansComponent,
     UpdateDoctorComponent,
-    IllnessHistorySearchItemComponent
-    AppointmentsListComponent,
+    IllnessHistorySearchItemComponent,
     AppointmentsItemComponent,
+    AppointmentsListComponent,
   ],
   entryComponents: [ ImageModalDialogComponent ],
   imports: [

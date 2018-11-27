@@ -7,11 +7,18 @@ import { UserListFilter } from 'src/app/Models/UserListFilter';
 import { stringify } from '@angular/core/src/render3/util';
 import { filterQueryId } from '@angular/core/src/view/util';
 import { PaginationService } from '../pagination.service';
+import { PageEvent } from '@angular/material';
+
+const SEARCH_NAME = 'SearchByName';
+const SEARCH_STATUS = 'SearchByStatus';
+const PAGE = 'page';
+const PAGE_SIZE = 'pagecount';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserListService {
+
 
   url = HOST_URL + '/api/';
   httpOptions = {
@@ -25,12 +32,21 @@ export class UserListService {
 
   constructor(private http: HttpClient, private paginationService: PaginationService) { }
 
-  getUserList() {
-    const typeUrl = this.url + 'userlist/getparams';
+  getUserList(filter?: UserListFilter, event?: PageEvent) {
+    let typeUrl = this.url + 'userlist/getparams';
+
+    if (filter != null) {
+        if (filter.searchKey !== undefined && filter.searchKey !== '') {
+          typeUrl += `?${SEARCH_NAME}=${filter.searchKey}&`;
+        }
+        if (filter.selectedStatus !== 0 && filter.selectedStatus !== undefined) {
+          typeUrl += `?${SEARCH_STATUS}=${filter.selectedStatus}`;
+        }
+    }
     return this.http.get(typeUrl, this.httpOptions);
   }
-  getUserListParams(filter: UserListFilter) {
-    const typeUrl = this.url + 'userlist/getparams';
+  getStatuses() {
+    const typeUrl = this.url + 'userlist/getstatuses';
     return this.http.get(typeUrl, this.httpOptions);
   }
 

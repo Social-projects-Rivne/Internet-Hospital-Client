@@ -36,7 +36,6 @@ import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserlistSearchComponent } from '../../Components/adminpanel/user-management/userlist-search/userlist-search.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -77,7 +76,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent,
-    UserlistSearchComponent
   ],
   providers: []
 })
