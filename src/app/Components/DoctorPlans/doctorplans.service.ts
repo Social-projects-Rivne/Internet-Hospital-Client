@@ -21,8 +21,8 @@ export class DoctorplansService {
   };
 
   constructor(private http: HttpClient,
-              private datePipe: DatePipe,
-              private paginationService: PaginationService) { }
+    private datePipe: DatePipe,
+    private paginationService: PaginationService) { }
 
   deleteAppointment(appointmentId: number | string) {
     const specUrl = HOST_URL + '/api/Appointments/delete';
@@ -69,5 +69,15 @@ export class DoctorplansService {
   subscribePatientToAppointment(appointmentId: number) {
     const scecUrl = HOST_URL + '/api/Appointments/subscribe';
     return this.http.post(scecUrl, { Id: appointmentId });
+  }
+
+  getPatientAppointments() {
+    const specUrl = HOST_URL + '/api/Appointments/forpatient';
+    return this.http.get<Appointment[]>(specUrl);
+  }
+
+  unsubscribeToAppointment(appointmentId: number) {
+    const scecUrl = HOST_URL + '/api/Appointments/unsubscribe';
+    return this.http.post(scecUrl, { id: appointmentId });
   }
 }
