@@ -1,0 +1,28 @@
+#FatherForm {
+  background-origin: padding-box;
+  width: 40%;
+  min-width: 320px;
+  margin: 20px;
+}
+
+#ConfirmButton {
+  float: right;
+  margin-left: 10px;
+}
+
+#CancelButton {
+  float: left;
+  margin-right: 10px;
+}
+
+.mat-form-fieldStrech {
+  width: 100%;
+}
+
+#divider {
+  margin-top: 50px;
+}
+
+#FatherDiv {
+  background-color: #e1e8f0;
+}

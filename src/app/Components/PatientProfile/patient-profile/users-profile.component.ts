@@ -3,7 +3,7 @@ import { UsersProfileService } from '../../../Services/users-profile.service';
 import { ImageValidationService } from '../../../Services/image-validation.service';
 import { NotificationService } from '../../../Services/notification.service';
 import { HOST_URL } from '../../../config';
-import { IllnessHistory } from '../../../Models/Illness-history';
+import { IllnessHistory } from 'src/app/Models/IllnessHistory';
 import { ICurrentUser } from '../../../Models/CurrentUser';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { Patient } from '../../../Models/Patient';

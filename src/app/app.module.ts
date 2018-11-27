@@ -57,6 +57,7 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
 import { IllnessHistorySearchItemComponent } from './Components/PatientProfile/patient-profile/illness-history-search-item/illness-history-search-item.component';
 import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
+import { IllnessHistoryComponent } from './Components/illness-history/illness-history.component';
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
@@ -87,6 +88,7 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
     IllnessHistorySearchItemComponent,
     AppointmentsListComponent,
     AppointmentsItemComponent,
+    IllnessHistoryComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent,
     MatConfirmDialogComponent

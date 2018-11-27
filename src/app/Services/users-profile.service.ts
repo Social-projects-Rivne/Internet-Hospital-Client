@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { IllnessHistory } from '../Models/Illness-history';
+import { IllnessHistory } from '../Models/IllnessHistory';
 import { PaginationService } from './pagination.service';
 import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT, PATIENT_GET_HISTORIES } from '../config';
 
