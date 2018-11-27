@@ -96,8 +96,7 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
     IllnessHistoryComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent,
-    MatConfirmDialogComponent
->>>>>>> 19e434d04972f4d74cf396cc8c401b6b43a35d14
+    MatConfirmDialogComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
