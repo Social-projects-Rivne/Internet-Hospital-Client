@@ -6,7 +6,7 @@
           <form enctype="multipart/form-data">
             <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
             <img [src]="imageToShow" alt="Avatar" (click)="Image.click()" title="Change your profile photo" (error)="img.src = defaultImage"
-              #img>
+              #img/>
           </form>
         </div>
         <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
@@ -48,7 +48,7 @@
               <mat-expansion-panel-header>
                 <div fxLayout="row">
                   <mat-list-item>
-                    <div>{{IllnessHistory.conclusionTime | date: 'medium'}}</div>
+                    <div>{{IllnessHistory.finishAppointmentTime}}</div>
                   </mat-list-item>
                   <mat-list-item>
                     <div>{{IllnessHistory.diagnose}}</div>

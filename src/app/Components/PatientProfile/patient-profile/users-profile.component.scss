@@ -17,16 +17,19 @@
                         height: 400px;
                         width: 400px;
                         border-radius: 50%;
-                        cursor: pointer;
                     }
-                }
-                .patient-name {
+                    img:hover {
+                        cursor: pointer;
+                        opacity: 0.6;
+                    }
+                }                    
+            }
+            .patient-name {
                     font-size: 30px;
-                }
             }
         }
     }
-    .mat-card {
+}
+.mat-card {
         min-width: 60%;
-    }
 }

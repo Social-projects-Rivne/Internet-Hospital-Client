@@ -58,8 +58,8 @@ export class DoctorsService {
   fillIllness(form: FormGroup, appointmentId: number) {
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
-    illnessHistory.AppointmentId = appointmentId;
-    illnessHistory.FinishAppointmentTime = this.datePipe.transform(new Date(), 'short');
+    illnessHistory.appointmentId = appointmentId;
+    illnessHistory.finishAppointmentTime = this.datePipe.transform(new Date(), 'short');
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
   }

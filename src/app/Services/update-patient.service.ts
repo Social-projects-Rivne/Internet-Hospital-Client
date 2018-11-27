@@ -20,7 +20,7 @@ export class UpdatePatientService {
 
   constructor(private http: HttpClient) { }
   form: FormGroup = new FormGroup({
-  PhoneNumber: new FormControl('', Validators.pattern(/\(\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)),
+    PhoneNumber: new FormControl('', Validators.pattern(/\(\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)),
     FirstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     SecondName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     ThirdName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
@@ -40,17 +40,14 @@ export class UpdatePatientService {
   }
 
   setCurrentProfile() {
-    this.getProfile().subscribe((res: any) => {
-      this.patient = res;
-      const correctDate = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
-      this.form.setValue({
-        PhoneNumber: this.patient.phoneNumber,
-        FirstName: this.patient.firstName,
-        SecondName: this.patient.secondName,
-        ThirdName: this.patient.thirdName,
-        BirthDate: correctDate,
-        PassportURL: '',
-      });
+    const correctDate = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
+    this.form.setValue({
+      PhoneNumber: this.patient.phoneNumber,
+      FirstName: this.patient.firstName,
+      SecondName: this.patient.secondName,
+      ThirdName: this.patient.thirdName,
+      BirthDate: correctDate,
+      PassportURL: '',
     });
   }
 
