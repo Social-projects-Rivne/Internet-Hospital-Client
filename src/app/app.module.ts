@@ -17,6 +17,7 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
 import { Page404Component } from './Components/page404/page404.component';
 import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
+import {MatTableModule} from '@angular/material/table';
 
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService } from './Services/interceptor.service';

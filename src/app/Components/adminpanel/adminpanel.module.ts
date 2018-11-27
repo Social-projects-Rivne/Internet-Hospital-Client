@@ -16,6 +16,7 @@ import { ContentPreviewComponent } from '../adminpanel/content-management/conten
 import { ContentEditComponent } from '../adminpanel/content-management/content-edit/content-edit.component';
 import { ContentItemComponent } from '../adminpanel/content-management/content-item/content-item.component';
 
+
 import { MatFormFieldModule,
         MatInputModule,
         MatTableModule,
@@ -34,9 +35,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { UserlistSearchComponent } from '../../Components/adminpanel/user-management/userlist-search/userlist-search.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   imports: [
+    MatTooltipModule,
     CommonModule,
     AdminpanelRoutingModule,
     MatToolbarModule,
@@ -55,7 +61,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    MatExpansionModule,
   ],
   declarations: [
     AdminPanelComponent,
@@ -68,7 +76,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContentManagementComponent,
     ContentPreviewComponent,
     ContentEditComponent,
-    ContentItemComponent
+    ContentItemComponent,
+    UserlistSearchComponent
   ],
   providers: []
 })

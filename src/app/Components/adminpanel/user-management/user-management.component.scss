@@ -1,0 +1,54 @@
+table {
+    width: 100%;
+}
+.padding-ten{
+    padding: 10px;
+}
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+    display: flex;
+    margin-right: 16px;
+    flex-grow: 0;
+}
+.mat-expansion-panel-header{
+    font-size: 28px;
+}
+#header-paginator[_ngcontent-c10]{
+    margin-left: 5px;
+    float: right;
+    height: 48px;
+}
+#header{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.table-container {
+    position: relative;
+  
+    .loading-shade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .rate-limit-reached {
+        color: #980000;
+        max-width: 360px;
+        text-align: center;
+      }
+  
+      table {
+        width: 100%;
+  
+        .delete-column{
+          width:50px;
+          padding: 0;
+        }
+    }    
+  }

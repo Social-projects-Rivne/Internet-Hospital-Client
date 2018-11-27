@@ -17,6 +17,9 @@ export class PaginationService {
     get pageSize(): number {
         return this.paginationModel.pageSize;
     }
+    get userPageSize(): number {
+        return this.paginationModel.userPageSize;
+    }
 
     constructor() {
         this.paginationModel = new Pagination();
