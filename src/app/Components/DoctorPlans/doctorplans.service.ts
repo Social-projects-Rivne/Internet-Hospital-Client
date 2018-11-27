@@ -3,26 +3,14 @@ import { HOST_URL } from 'src/app/config';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Appointment } from './Appointment';
 import { DatePipe } from '@angular/common';
-import { PaginationService } from 'src/app/Services/pagination.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorplansService {
 
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    }),
-    params: new HttpParams()
-      .set('page', this.paginationService.pageIndex.toString())
-      .set('pagecount', this.paginationService.pageSize.toString())
-  };
-
   constructor(private http: HttpClient,
-    private datePipe: DatePipe,
-    private paginationService: PaginationService) { }
+    private datePipe: DatePipe) { }
 
   deleteAppointment(appointmentId: number | string) {
     const specUrl = HOST_URL + '/api/Appointments/delete';
@@ -47,23 +35,9 @@ export class DoctorplansService {
     });
   }
 
-  getDoctorAppointments(id: number, filterFrom?, filterTill?) {
+  getDoctorAppointments(httpOptions: object) {
     const specUrl = HOST_URL + '/api/Appointments/available';
-    this.httpOptions.params = this.httpOptions.params.set('doctorId', id.toString());
-
-    if (filterFrom) {
-      this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(filterFrom, 'short'));
-    } else {
-      this.httpOptions.params = this.httpOptions.params.delete('from');
-    }
-
-    if (filterTill) {
-      this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(filterTill, 'short'));
-    } else {
-      this.httpOptions.params = this.httpOptions.params.delete('till');
-    }
-
-    return this.http.get(specUrl, this.httpOptions);
+    return this.http.get(specUrl, httpOptions);
   }
 
   subscribePatientToAppointment(appointmentId: number) {
