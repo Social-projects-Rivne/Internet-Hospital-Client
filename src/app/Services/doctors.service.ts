@@ -4,6 +4,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Doctor } from '../Models/Doctors';
 import { PaginationService } from './pagination.service';
 import { Specialization } from '../Models/Specialization';
+import { FormGroup } from '@angular/forms';
+import { IllnessHistory } from '../Models/IllnessHistory';
+import { DatePipe } from '@angular/common';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -33,7 +36,8 @@ export class DoctorsService {
   }
 
   constructor(private http: HttpClient,
-    private paginationService: PaginationService) { }
+    private paginationService: PaginationService,
+    private datePipe: DatePipe) { }
 
   getDoctors(name?: string, specialization?: number) {
     const doctorsUrl = this.url;
@@ -60,5 +64,14 @@ export class DoctorsService {
     const specUrl = this.url + '/specializations';
     this.http.get<Specialization[]>(specUrl)
       .subscribe(data => this.specializations = data);
+  }
+
+  fillIllness(form: FormGroup, appointmentId: number) {
+    let illnessHistory = new IllnessHistory();
+    illnessHistory = form.value;
+    illnessHistory.AppointmentId = appointmentId;
+    illnessHistory.FinishAppointmentTime = this.datePipe.transform(new Date(), 'short');
+    const url = HOST_URL + '/api/Doctors/illnesshistory';
+    return this.http.post(url, illnessHistory);
   }
 }

@@ -58,6 +58,10 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
 import { IllnessHistorySearchItemComponent } from './Components/PatientProfile/patient-profile/illness-history-search-item/illness-history-search-item.component';
 import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
 import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
+import { IllnessHistoryComponent } from './Components/illness-history/illness-history.component';
+import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
+import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
+import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,10 +87,19 @@ import { AppointmentsItemComponent } from './Components/doctor-page/appointments
     DoctorPlansComponent,
     UpdateDoctorComponent,
     IllnessHistorySearchItemComponent,
+<<<<<<< HEAD
     AppointmentsItemComponent,
     AppointmentsListComponent,
+=======
+    AppointmentsListComponent,
+    AppointmentsItemComponent,
+    IllnessHistoryComponent,
+    PatientAppointmentsComponent,
+    PatAppointItemComponent,
+    MatConfirmDialogComponent
+>>>>>>> 19e434d04972f4d74cf396cc8c401b6b43a35d14
   ],
-  entryComponents: [ ImageModalDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,

@@ -1,0 +1,8 @@
+<h3>You subscribed to appointments:</h3>
+<div class="container">
+  <app-pat-appoint-item 
+          id="patAppointmentsList" 
+          *ngFor="let patAppointment of appointmentList" 
+          [patAppointment]="patAppointment">
+  </app-pat-appoint-item>
+</div>

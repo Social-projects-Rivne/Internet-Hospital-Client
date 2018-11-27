@@ -1,0 +1,17 @@
+<mat-card class="patientAppointmentsCard">
+    <mat-card-header fxLayout="row">
+        <mat-card-title fxLayoutAlign="center center">Appointment to {{patAppointment.doctorFirstName}}
+            {{patAppointment.doctorSecondName}}</mat-card-title>
+        <mat-card-subtitle fxLayoutAlign="center center">{{patAppointment.doctorSpecialication}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="mat-display-1" fxLayout="row">
+        <span id="addressOfAppointment" fxLayout="row">Address: {{patAppointment.address}}</span>
+    </mat-card-content>
+    <mat-card-content class="mat-display-1" fxLayout="row">
+        <span fxLayout="row">Date: {{patAppointment.startTime | date:'dd.MM.y HH.mm'}} - {{patAppointment.endTime |
+            date:'HH.mm'}}</span>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row">
+        <button id="btnUnsubscribe" (click)="onUnsubscribeToAppointment()" mat-raised-button color="primary">Unsubscribe</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,4 +1,4 @@
-import { IllnessHistory } from '../Models/Illness-history';
+import { IllnessHistory } from '../Models/IllnessHistory';
 
 export class Patient {
     id: number;

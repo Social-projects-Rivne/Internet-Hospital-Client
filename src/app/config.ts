@@ -6,8 +6,8 @@ export const DOCTOR_LIST = 'doctor-list';
 export const DOCTOR_PAGE = DOCTOR_LIST + '/';
 export const PAGE_404 = '404';
 export const FEEDBACKS = 'feedbacks';
-export const API_DOCTORS = '/api/Doctors';
-export const API_PATIENT = '/api/Patient/GetProfile';
+export const FILL_ILLNESS = 'fill-illness';
+export const API_PATIENT = '/api/Patient/GetDetailedProfile';
 
 export const MY_PLANS = 'my-plans';
 export const USERS_PROFILE = 'users-profile';
@@ -16,11 +16,11 @@ export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';
 export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
 export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
+export const API_DOCTORS = '/api/Doctors';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
 
 export const PATIENT_GET_HISTORIES = '/api/Patient/GetHistories';
-export const PATIENT_GET_PROFILE = '/api/Patient/getProfile';
 export const SETTINGS_DOCTOR = 'settings-doctor';
 export const API_DOCTOR_UPDATE = '/api/Doctors/update';
 export const DOCTOR_GET_PROFILE = '/api/Doctors/getProfile';

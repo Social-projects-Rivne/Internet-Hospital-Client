@@ -10,6 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { DataSharingService } from '../../../Services/date-sharing.service';
+import { FILL_ILLNESS } from '../../../config';
 
 @Component({
   selector: 'app-doctorplans',
@@ -144,7 +145,7 @@ export class DoctorPlansComponent implements OnInit {
       this.notification.error('Appointment is empty');
     } else {
       this.dateSharing.changeDate(event.start);
-      // todo: navigate to illness creation component
+      this.router.navigate([FILL_ILLNESS + `/${event.id}`]);
     }
   }
 
