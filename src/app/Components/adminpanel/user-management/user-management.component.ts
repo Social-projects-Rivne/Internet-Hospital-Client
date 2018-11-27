@@ -55,7 +55,6 @@ export class UserManagementComponent implements OnInit {
 
     this._userListService.getStatuses().subscribe((result: any) => {
       this.statuses = result;
-      console.log(this.statuses);
     },
       error => {
         this._notificationService.error(error);
