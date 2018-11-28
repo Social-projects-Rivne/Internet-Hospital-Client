@@ -10,7 +10,7 @@ import { ContentTypeService } from './content-type.service';
 export class ContentEditingService {
 
   form: FormGroup = new FormGroup({
-    title: new FormControl('', Validators.required),
+    title: new FormControl('', [ Validators.required, Validators.maxLength(100) ]),
     types: new FormControl([], Validators.required),
     shortDescription: new FormControl('', Validators.required),
     article: new FormControl('', Validators.required)
@@ -23,6 +23,7 @@ export class ContentEditingService {
   croppedFiles: File[] = [];
 
   creatingContent = new CreatingContent();
+
   constructor(private typeService: ContentTypeService) { }
 
   initializeContent() {

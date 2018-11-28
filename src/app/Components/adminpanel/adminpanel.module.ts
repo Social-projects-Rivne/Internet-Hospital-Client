@@ -30,7 +30,8 @@ import { MatFormFieldModule,
         MatMenuModule,
         MatProgressSpinnerModule,
         MatSelectModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDatepickerModule
       } from '@angular/material';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
@@ -59,6 +60,7 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSortModule,
+    MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

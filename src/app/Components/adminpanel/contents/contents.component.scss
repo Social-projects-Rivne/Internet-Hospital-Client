@@ -1,0 +1,21 @@
+button {
+    margin: 10px;
+}
+
+.filters {
+    text-align: left;
+    margin: 10px;
+
+    mat-checkbox {
+        margin-top: 15px;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+    .filter {
+        display: inline-block; 
+        margin: 0 10px
+    }
+}

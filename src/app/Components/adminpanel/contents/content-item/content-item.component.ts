@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShortContentWithEditors } from '../../../../Models/Content/ShortContentWithEditors';
+import { HOST_URL } from 'src/app/config';
 
 const SLIDE_TIME_IN_MSC = 3500;
 
@@ -17,7 +18,9 @@ const SLIDE_TIME_IN_MSC = 3500;
   ],
 })
 
-export class ContentItemComponent implements OnInit {
+export class ContentItemComponent implements OnInit, OnDestroy {
+
+  url = HOST_URL;
 
   constructor() {
   }
@@ -29,12 +32,12 @@ export class ContentItemComponent implements OnInit {
   @Output() deleted = new EventEmitter();
   @Output() changed = new EventEmitter();
 
-  imgs = [ 'https://whitehousepawprints.com/wp-content/uploads/2017/05/family-2.jpg',
-  'https://www.maritimefirstnewspaper.com/wp-content/uploads/2018/07/family-3.jpg',
-  'https://vanierinstitute.ca/wp-content/uploads/2016/05/Diversity-diversit%C3%A9.jpg' ];
-
   ngOnInit() {
     this.setAutoplay();
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.timer);
   }
 
   setAutoplay() {
@@ -49,7 +52,7 @@ export class ContentItemComponent implements OnInit {
 
   nextImg() {
     window.clearInterval(this.timer);
-    if (this.slideIndex < this.imgs.length - 1) {
+    if (this.slideIndex < this.content.previewImageUrls.length - 1) {
       this.slideIndex++;
     } else {
       this.slideIndex = 0;
@@ -62,7 +65,7 @@ export class ContentItemComponent implements OnInit {
     if (this.slideIndex !== 0) {
       this.slideIndex--;
     } else {
-      this.slideIndex = this.imgs.length - 1;
+      this.slideIndex = this.content.previewImageUrls.length - 1;
     }
     this.setAutoplay();
   }

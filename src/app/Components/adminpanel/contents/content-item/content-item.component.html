@@ -1,29 +1,39 @@
 <mat-card class="mat-elevation-z10 content-item">
-  <button class="delete-button" mat-button (click)="delete()">&#x2716;</button>
-  <mat-card-header>
-    <div class="title-with-date clearfix">
-      <div class="content-title">{{content.title}}</div>
-      <div class="content-date">{{content.date | date}}</div>
+  <div class="manage-button-container">
+    <button mat-button (click)="edit()">
+      <mat-icon color="primary">edit</mat-icon>
+    </button>
+    <button mat-button (click)="delete()">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+  </div>
+  <mat-card-header style="position: relative">
+    <div class="title-with-date">
+      <div class="content-title">
+        <div class="date-with-author">
+          <div class="content-date">{{content.dateOfCreation | date}}</div>
+          <div class="content-author" color="primary">{{content.author}}</div>
+        </div>
+      {{content.title}}
+      </div>
     </div>
-    <div class="types-with-author clearfix">
-      <div class="types"><strong *ngFor="let type of content.types">{{type.name}} </strong></div>
-      <div class="content-author">Created by: {{content.author}}</div>
-    </div>
+    <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
-  <!-- <div class="carousel">
-    <div class="slide-line" [ngStyle]="{'width': imgs.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
-      <div *ngFor="let img of imgs" class="image-container" [style.width]="100/imgs.length + '%'">
-        <img src="{{img}}"> 
+  <div class="carousel">
+    <div class="slide-line" [ngStyle]="{'width': content.previewImageUrls.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
+      <div *ngFor="let img of content.previewImageUrls" class="image-container" 
+        [style.width]="(content.previewImageUrls.length > 0 ? 100 / content.previewImageUrls.length : 100) + '%'">
+        <img src="{{ url + img}}"> 
       </div>
     </div>
     <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
     <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
-  </div> -->
-  <mat-card-content class="content-body">
+  </div>
+  <mat-card-content>
     <p>
       {{content.shortDescription}}
     </p>
-    <mat-expansion-panel>
+    <mat-expansion-panel >
         <mat-expansion-panel-header>
           <mat-panel-title>
             History of editions
@@ -35,5 +45,4 @@
         </div>
       </mat-expansion-panel>
   </mat-card-content>
-  <button class="edit-button" mat-raised-button color="primary" (click)="edit()">Edit</button>
 </mat-card>

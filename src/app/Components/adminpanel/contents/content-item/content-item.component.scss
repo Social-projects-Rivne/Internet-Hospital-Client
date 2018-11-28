@@ -1,69 +1,51 @@
 .content-item {
-  display: inline-block;
-  margin: 10px;
-  width: 400px;
   padding: 0;
-  word-break: break-all;
+  width: 100%;
 
-  .delete-button {
-    position: absolute;
-    right: 0px;
-    font-size: 20px;
-    text-align: center;
-    background-color: red;
-    margin: 0;
-    width: 25px;
-    height: 25px;
-    border-width: 0;
-    min-width: 0;
-    padding: 0;
-    padding-top: 2px;
-    line-height: 0;
-  }
+  .manage-button-container {
+    text-align: right;
 
-  mat-card-header,
-  .content-body {
-    padding: 16px;
-    display: block;
+    button {
+      padding: 0;
+      min-width: 0;
+      line-height: 0;
+      vertical-align: text-top;
+    }
   }
 
   mat-card-header {
-    min-height: 30px;
+    padding: 16px;
+    display: block;
+    padding-top: 0;
+
+    @media (max-width: 599px) {
+    margin: 0;
+}
   }
 
   .title-with-date {
+    display: block;
 
     .content-title {
       font-size: 2em;
-      line-height: 1;
-      margin-right: 9px;
-      float: left;
-    }
+      line-height: normal;
+      text-align: left;
 
-    .content_creation-date {
-      float: right;
+      .date-with-author {
+        float: right;
+        font-size: 0.5em;
+        text-align: right;
+        margin-left: 5px;
+
+        .content-author {
+          color: rgb(20, 9, 180)
+        }
+      }
     }
   }
-
-  .clearfix::after{
-    clear: both;
-    height: 0;
-  }
-
-  .types-with-author{
-
     .types {
-      float: left;
-      width: 60%;
-      font-size: 1em;
       color: grey;
     }
-
-    .content-author {
-      float: right;
-      width: 40%;
-    }
-  }
 
   .carousel {
     width: 100%;
@@ -121,31 +103,20 @@
     }
   }
 
+  mat-card-content p {
+    padding: 16px;
+    text-align: justify;
+  }
+
   .edition {
     .edition-author {
       display: inline-block;
       width: 60%;
     }
 
-    .editiom-date {
+    .edition-date {
       display: inline-block;
       width: 40%;
     }
-  }
-
-  mat-card-content.content-body {
-    margin-bottom: 45px;
-    max-height: 150px;
-    overflow: hidden;
-  
-    p {
-    }
-  }  
-
-  .edit-button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 200px;
   }
 }

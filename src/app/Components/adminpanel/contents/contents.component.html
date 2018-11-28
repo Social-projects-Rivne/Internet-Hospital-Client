@@ -1,9 +1,42 @@
-<div class="content-page" fxFlexFill>
-  <button style="margin: 10px" color="primary" mat-raised-button (click)="createNewArticle()">CREATE</button>
-  <div fxLayout='row wrap' fxLayoutGap="10px grid">
-    <div fxFlex="33.3" *ngFor="let cont of contentItems; let i = index;" >
+<div class="content-page">
+  <button color="primary" mat-raised-button (click)="createNewArticle()" fxLayoutAlign="center">CREATE</button>
+  <div class="filters">
+    <div>
+      <mat-form-field class="search">
+        <input matInput [(ngModel)]="filters.search" placeholder="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-checkbox style="margin-top: 15px;" [(ngModel)]="filters.includeAll">Include all</mat-checkbox>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <mat-select placeholder="Selected types" [(ngModel)]="filters.typeIds" [multiple]='true'>
+          <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <input matInput [(ngModel)]="filters.from" [matDatepicker]="from" placeholder="From">
+        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+        <mat-datepicker #from></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <input matInput [(ngModel)]="filters.to" [matDatepicker]="to" placeholder="To">
+        <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+        <mat-datepicker #to></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <button color="primary" mat-raised-button (click)="paginator.pageIndex=0; paginator.page.emit()" fxLayoutAlign="center">FILTER</button>
+  </div>
+  <div fxLayout='row wrap' fxLayout.xs='column wrap' fxLayoutGap="15px grid">
+    <div fxFlex="50" fxFlex.lg="33.3" fxFlex.xl="20" *ngFor="let cont of content.data; let i = index;">
       <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" (changed)="onChange(i)" (deleted)="onDelete(i)">
       </app-content-item>
     </div>
   </div>
+  <mat-paginator [pageIndex]="filters.page" [pageSize]="filters.pageSize" [pageSizeOptions]="[12, 24, 36, 48]" [length]="content.amountOfAll"></mat-paginator>
 </div>

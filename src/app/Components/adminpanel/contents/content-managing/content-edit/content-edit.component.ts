@@ -30,7 +30,6 @@ export class ContentEditComponent implements OnInit {
     events: {
       'froalaEditor.image.beforeUpload': (event, editor, files: FileList) => {
         if (files.length) {
-          console.log('IMAGE UPLOADING !!!!');
           this.froalaImgsAll.setValue(`id-${++this.counter}`, files.item(0));
           const count = this.counter;
           const reader = new FileReader();
@@ -58,7 +57,7 @@ export class ContentEditComponent implements OnInit {
 
   handleFroalaResult(): string {
     const froalaDiv = document.createElement('div');
-    froalaDiv.innerHTML = this.article;
+    froalaDiv.innerHTML = this.article.slice();
     const img = froalaDiv.getElementsByTagName('img');
     for (let i = 0; i < img.length; i++) {
       const id = img.item(i).getAttribute('data-id');
@@ -75,8 +74,6 @@ export class ContentEditComponent implements OnInit {
   getUrlFroalaImg(): string {
     return 'HomePage/%$#@_article_id_@$#%/Attachments';
   }
-
-  // TODO: make edding urls to imgs at backend
 
   getExtension(filename: string) {
     const idx = filename.lastIndexOf('.');
@@ -129,13 +126,13 @@ export class ContentEditComponent implements OnInit {
     content.article = this.getFroalaResultBody();
     content.articleAttachments = this.froalaImgsToSend;
     console.log(content);
+    console.log(this.froalaImgsToSend);
     this.dataService.postContent(content).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
-    }); // .pipe(first()).subscribe(res => console.log(res));
-    // this.service.form.reset();
-    // this.service.initializeFormGroup();*/
+    });
+    this.froalaImgsToSend = [];
   }
 
   convertBlobToFile(blob: Blob, file: File): File {
@@ -148,21 +145,12 @@ export class ContentEditComponent implements OnInit {
     if (event.file != null) {
       if (this.contentService.croppedImgs.length < this.contentService.imgs.length) {
         this.contentService.croppedImgs.push(event.base64);
-        console.log(this.contentService.imgsFiles);
         this.contentService.croppedFiles.push(this.convertBlobToFile(event.file,
           this.contentService.imgsFiles[this.currentImgIndex]));
-
-        console.log(this.contentService.croppedFiles);
-        console.log(this.contentService.imgsFiles);
-
-
       } else {
         this.contentService.croppedImgs[this.currentImgIndex] = event.base64;
         this.contentService.croppedFiles[this.currentImgIndex] =
           this.convertBlobToFile(event.file, this.contentService.imgsFiles[this.currentImgIndex]);
-        console.log(this.contentService.croppedImgs);
-        console.log(this.contentService.imgsFiles);
-
       }
     }
   }
@@ -182,8 +170,6 @@ export class ContentEditComponent implements OnInit {
     if (i === this.currentImgIndex) {
       this.currentImgIndex = -1;
     }
-    console.log(this.contentService.croppedFiles, this.contentService.croppedImgs);
-    console.log(this.contentService.form.controls.types);
   }
 
   putInCropper(i) {

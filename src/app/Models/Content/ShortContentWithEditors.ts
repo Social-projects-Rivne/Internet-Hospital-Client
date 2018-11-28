@@ -7,5 +7,7 @@ export class ShortContentWithEditors {
     types: string[];
     shortDescription: string;
     editions: ContentEdition[];
-    date: Date;
+    dateOfCreation: Date;
+    status: string;
+    previewImageUrls: string[];
 }
