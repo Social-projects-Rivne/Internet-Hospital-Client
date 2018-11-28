@@ -10,39 +10,34 @@
       </mat-expansion-panel-header>
 
       <div class="example-card example-half-width">
-        
         <hr class="example-full-width">
-        
-        <mat-card-content>
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
           <mat-form-field class="example-full-width">
-            <input type="text" [(ngModel)]="nameSearch" (keyup)="applyFilter($event.target.value)" autocomplete="off"
-            matInput placeholder="User's name">
+            <input type="text" [(ngModel)]="searchInput" autocomplete="off" matInput placeholder="User's name">
           </mat-form-field>
           <br>
           <mat-form-field class="example-full-width">
             <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let item of Types" [value]="item.statusName">
-                {{item.statusName}}
+              <mat-option *ngFor="let item of statuses" [value]="item.id">
+                {{item.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <br>
-          <button (click)="onSearch()" class="example-full-width" mat-raised-button color="primary">Search</button>
+          <div id="button-box" fxLayout="row" fxLayoutAlign="space-around center">
+            <button (click)="onSearch()" mat-raised-button color="primary">Search</button>
+            <button (click)="onClear()" mat-raised-button color="warn">Clear</button>
+          </div>
         </mat-card-content>
       </div>
 
     </mat-expansion-panel>
   </mat-accordion>
-  
-  <mat-paginator fxHide.xs fxHide.sm fxFlex.md="55" 
-  fxFlex.lg="40" fxFlex.xl="30" id="header-paginator" 
-  [pageSize]="_paginationService.userPageSize"
-  [length]="usersAmount" 
-  (page)="pageSwitch($event)">
-</mat-paginator>
 
-  
+  <mat-paginator fxHide.xs fxHide.sm fxFlex.md="55" fxFlex.lg="40" fxFlex.xl="30" id="header-paginator" [pageSize]="_paginationService.userPageSize"
+    [length]="usersAmount" (page)="pageSwitch($event)">
+  </mat-paginator>
 </div>
 
 <div class="table-container mat-elevation-z8">
@@ -52,50 +47,51 @@
       InternetHospital's API rate limit has been reached. It will be reset in one minute.
     </div>
   </div>
-  
-<div class="mat-elevation-z8">
-  
-  <table mat-table [dataSource]="dataSource" matSort>
-    
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-    
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="secondName">
-      <th mat-header-cell *matHeaderCellDef> Second Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.secondName}} </td>
-    </ng-container>
+  <div class="mat-elevation-z8">
 
-    <ng-container matColumnDef="thirdName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.thirdName}} </td>
-    </ng-container>
+      <mat-paginator fxHide fxShow.sm fxShow.xs [pageSize]="_paginationService.userPageSize"
+      [length]="usersAmount" (page)="pageSwitch($event)">
+      </mat-paginator>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="birthDate">
-      <th mat-header-cell *matHeaderCellDef> Birthdate </th>
-      <td mat-cell *matCellDef="let element"> {{element.birthDate | date}} </td>
-    </ng-container>
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="statusName">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element" matTooltipPosition="before" matTooltip="{{element.statusDescription}}">
-        {{element.statusName}} </td>
-    </ng-container>
+      <ng-container matColumnDef="secondName">
+        <th mat-header-cell *matHeaderCellDef> Second Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.secondName}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <ng-container matColumnDef="thirdName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.thirdName}} </td>
+      </ng-container>
 
-  </table>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
 
-</div>
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef> Birthdate </th>
+        <td mat-cell *matCellDef="let element"> {{element.birthDate | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="statusName">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element" matTooltipPosition="before" matTooltip="{{element.statusDescription}}">
+          {{element.statusName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>

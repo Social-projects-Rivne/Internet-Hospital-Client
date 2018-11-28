@@ -88,13 +88,13 @@ import { LoadingComponent } from './Components/loading/loading.component';
     DoctorPlansComponent,
     UpdateDoctorComponent,
     IllnessHistorySearchItemComponent,
-    AppointmentsListComponent,
     AppointmentsItemComponent,
+    AppointmentsListComponent,
     IllnessHistoryComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent,
     MatConfirmDialogComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
