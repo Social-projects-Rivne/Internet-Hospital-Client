@@ -11,6 +11,7 @@ export const API_PATIENT = '/api/Patient/GetDetailedProfile';
 
 export const MY_PLANS = 'my-plans';
 export const USERS_PROFILE = 'users-profile';
+export const DOCTOR_PROFILE = 'doctor-profile';
 
 export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';
@@ -24,6 +25,8 @@ export const PATIENT_GET_HISTORIES = '/api/Patient/GetHistories';
 export const SETTINGS_DOCTOR = 'settings-doctor';
 export const API_DOCTOR_UPDATE = '/api/Doctors/update';
 export const DOCTOR_GET_PROFILE = '/api/Doctors/getProfile';
+export const DOCTOR_GET_AVATAR = '/api/Doctors/getAvatar';
+export const DOCTOR_UPDATE_AVATAR = '/api/Doctors/updateAvatar';
 
 // notification config
 export const TIME_DURATION = 3000;

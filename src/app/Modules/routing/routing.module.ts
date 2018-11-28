@@ -29,12 +29,14 @@ import { ADMIN_PANEL,
           SETTINGS_DOCTOR,
           USERS_PROFILE,
           FEEDBACKS,
-          FILL_ILLNESS
+          FILL_ILLNESS,
+          DOCTOR_PROFILE,
 } from '../../config';
 
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
 import { DoctorPlansComponent } from 'src/app/Components/DoctorPlans/doctorplans/doctorplans.component';
 import { DoctorPageComponent } from '../../Components/doctor-page/doctor-page.component';
+import { DoctorProfileComponent } from '../../Components/DoctorProfile/doctor-profile/doctor-profile.component';
 import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doctor/update-doctor.component';
 import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illness-history.component';
 import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
@@ -47,6 +49,7 @@ const ROUTES: Routes = [
       { path: SIGN_IN, component: SignInComponent },
       { path: DOCTOR_LIST, component: DoctorListComponent },
       { path: USERS_PROFILE, component: UsersProfileComponent},
+      { path: DOCTOR_PROFILE, component: DoctorProfileComponent},
       { path: DOCTOR_PAGE + ':id', component: DoctorPageComponent },
       { path: SETTINGS_PATIENT, component: UpdatePatientComponent, canActivate: [PatientGuard]},
       { path: SETTINGS_DOCTOR, component: UpdateDoctorComponent, canActivate: [DoctorGuard]},
