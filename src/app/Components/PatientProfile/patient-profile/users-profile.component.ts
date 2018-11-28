@@ -10,6 +10,7 @@ import { Patient } from '../../../Models/Patient';
 import { IllnessHistoryFilter } from '../../../Models/IllnessHistoryFilter';
 import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { UpdatePatientService } from '../../../Services/update-patient.service';
 
 const TOKEN = 'currentUser';
 
@@ -22,7 +23,7 @@ export class UsersProfileComponent implements OnInit {
 
   constructor(private patientService: UsersProfileService, private imageValidator: ImageValidationService,
     private notification: NotificationService, private storage: LocalStorageService,
-    private pagService: PaginationService) {
+    private pagService: PaginationService, private updateService: UpdatePatientService) {
   }
   private filter: IllnessHistoryFilter;
 
@@ -31,7 +32,7 @@ export class UsersProfileComponent implements OnInit {
   showLikeRow = true;
   user: ICurrentUser;
   token = TOKEN;
-  patient: Patient;
+  patient: Patient = null;
 
   tempHistory: IllnessHistory[] = null;
 
@@ -52,7 +53,7 @@ export class UsersProfileComponent implements OnInit {
 
   ngOnInit() {
     this.patientService.getProfile().subscribe((profile: any) => { this.patient = profile,
-       this.tempHistory = this.patient.illnessHistory; });
+       this.updateService.patient = profile, this.updateService.setCurrentProfile(); });
     this.patientService.getHistories();
     this.getImageFromService();
     this.filter = new IllnessHistoryFilter();

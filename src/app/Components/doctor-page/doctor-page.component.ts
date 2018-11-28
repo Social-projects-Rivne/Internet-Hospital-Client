@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { DoctorDetails } from '../../Models/DoctorDetails';
 import { DoctorsService } from '../../Services/doctors.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCTOR_LIST } from '../../config';
+import { DOCTOR_LIST, HOST_URL } from '../../config';
 
 const MIN_WIDTH_FOR_ROW = 900;
 
@@ -23,6 +23,7 @@ export class DoctorPageComponent implements OnInit {
     this.service.getDoctor(id).subscribe(
       (data: any) => {
         this.doctor = data;
+        this.doctor.avatarURL = HOST_URL + data.avatarURL;
       },
       _ => {
         this.router.navigate([`/${DOCTOR_LIST}`]);

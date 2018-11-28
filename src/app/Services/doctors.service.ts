@@ -15,10 +15,6 @@ const searchbyspecialization = 'searchbyspecialization';
   providedIn: 'root'
 })
 export class DoctorsService {
-  doctorsList: Doctor[];
-  specializations: Specialization[];
-  doctorsAmount: number;
-
   url = HOST_URL + API_DOCTORS;
 
   httpOptions = {
@@ -26,7 +22,6 @@ export class DoctorsService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set('page', this.paginationService.pageIndex.toString())
       .set('pagecount', this.paginationService.pageSize.toString())
   };
 
@@ -52,25 +47,19 @@ export class DoctorsService {
     } else {
       this.httpOptions.params = this.httpOptions.params.delete(searchbyspecialization);
     }
-
-    this.http.get(doctorsUrl, this.httpOptions)
-    .subscribe((result: any) => {
-      this.doctorsList = result.doctors;
-      this.doctorsAmount = result.totalDoctors;
-  });
+    return this.http.get(doctorsUrl, this.httpOptions);
   }
 
   getSpecializations() {
     const specUrl = this.url + '/specializations';
-    this.http.get<Specialization[]>(specUrl)
-      .subscribe(data => this.specializations = data);
+    return this.http.get<Specialization[]>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
-    illnessHistory.AppointmentId = appointmentId;
-    illnessHistory.FinishAppointmentTime = this.datePipe.transform(new Date(), 'short');
+    illnessHistory.appointmentId = appointmentId;
+    illnessHistory.finishAppointmentTime = this.datePipe.transform(new Date(), 'short');
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
   }

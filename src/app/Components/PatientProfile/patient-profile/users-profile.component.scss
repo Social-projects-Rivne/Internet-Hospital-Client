@@ -1,7 +1,7 @@
 .profile {
     min-height: 100%;
     overflow: unset;
-    padding-bottom: 350px;
+    padding-bottom: 150px;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
@@ -11,22 +11,26 @@
         .example-container {
             background-color: white;
             .top-info {
-                min-height: 550px;
+                min-height: 280px;
                 .patient-photo {
                     img {
-                        height: 400px;
-                        width: 400px;
+                        height: 200px;
+                        width: 200px;
                         border-radius: 50%;
-                        cursor: pointer;
                     }
-                }
-                .patient-name {
+                    img:hover {
+                        cursor: pointer;
+                        opacity: 0.6;
+                    }
+                }                    
+            }
+            .patient-name {
                     font-size: 30px;
-                }
+                    line-height: normal;
             }
         }
     }
-    .mat-card {
+}
+.mat-card {
         min-width: 60%;
-    }
 }

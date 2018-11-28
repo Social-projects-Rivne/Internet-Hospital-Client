@@ -21,6 +21,8 @@ export class SignUpComponent implements OnInit {
      private imageHandling: ImageHandlingService
     ) { }
 
+  load = false;
+
   ngOnInit() {
     this.service.form.controls['Role'].setValue('Patient');
   }
@@ -30,10 +32,12 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
+    this.load = true;
     this.service.postUser(this.imageHandling.fileToUpload)
         .pipe(first())
         .subscribe(
             data => {
+              this.load = false;
               this.router.navigate([SIGN_IN]);
               this.notification.success(data['message']);
               this.service.form.reset();
@@ -41,6 +45,7 @@ export class SignUpComponent implements OnInit {
             },
             error => {
               this.notification.error(error);
+              this.load = false;
             });
   }
 }

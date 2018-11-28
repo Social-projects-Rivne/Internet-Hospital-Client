@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Observable } from 'rxjs';
 import { USERS_PROFILE } from 'src/app/config';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
   selector: 'app-appointments-item',
@@ -18,14 +19,26 @@ export class AppointmentsItemComponent implements OnInit {
 
   constructor(private service: DoctorplansService,
               private authenticationService: AuthenticationService,
-              private router: Router) { }
+              private router: Router,
+              private notification: NotificationService) { }
+
+  load = false;
 
   ngOnInit() {
     this.isPatient = this.authenticationService.isPatient();
   }
 
   onSubscribeToAppointment() {
-    this.service.subscribePatientToAppointment(this.appointment.id).subscribe( res =>
-      this.router.navigate([USERS_PROFILE])
-    );  }
+    this.load = true;
+    this.service.subscribePatientToAppointment(this.appointment.id)
+    .subscribe(() => {
+      this.load = false;
+      this.router.navigate([USERS_PROFILE]);
+      this.notification.success('You have been successfully subscribed for appointment');
+    },
+      error => {
+        this.notification.error(error);
+        this.load = false;
+      });
+  }
 }
