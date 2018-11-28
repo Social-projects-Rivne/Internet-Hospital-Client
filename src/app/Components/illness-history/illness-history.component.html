@@ -1,47 +1,60 @@
 <div id="FatherDiv" fxLayoutAlign="center">
   <form id="FatherForm" [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="Column" fxLayoutAlign="center center">
-    <mat-card>
-      <mat-card-title>Please, fill all necessary info</mat-card-title>
-      <mat-divider></mat-divider>
+    <mat-card-title>Please, fill all required info</mat-card-title>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Required fields
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <mat-card-content id="divider">
         <mat-form-field class="mat-form-fieldStrech">
           <mat-label>Complaints</mat-label>
-          <textarea  required formControlName="Complaints" matInput></textarea>
+          <textarea required formControlName="Complaints" matInput></textarea>
         </mat-form-field>
         <mat-form-field class="mat-form-fieldStrech">
           <mat-label>DiseaseAnamnesis</mat-label>
           <textarea required formControlName="DiseaseAnamnesis" matInput></textarea>
         </mat-form-field>
         <mat-form-field class="mat-form-fieldStrech">
-          <mat-label>LifeAnamnesis</mat-label>
-          <textarea formControlName="LifeAnamnesis" matInput></textarea>
-        </mat-form-field>
-        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>ObjectiveStatus</mat-label>
           <textarea required formControlName="ObjectiveStatus" matInput></textarea>
-        </mat-form-field>
-        <mat-form-field class="mat-form-fieldStrech">
-          <mat-label>LocalStatus</mat-label>
-          <textarea formControlName="LocalStatus" matInput></textarea>
         </mat-form-field>
         <mat-form-field class="mat-form-fieldStrech">
           <mat-label>Diagnose</mat-label>
           <textarea required formControlName="Diagnose" matInput></textarea>
         </mat-form-field>
         <mat-form-field class="mat-form-fieldStrech">
-          <mat-label>SurveyPlan</mat-label>
-          <textarea formControlName="SurveyPlan" matInput></textarea>
-        </mat-form-field>
-        <mat-form-field class="mat-form-fieldStrech">
           <mat-label>TreatmentPlan</mat-label>
           <textarea required formControlName="TreatmentPlan" matInput></textarea>
         </mat-form-field>
       </mat-card-content>
-      <section>
-        <button id="CancelButton" (click)="onCancel()" mat-raised-button>Cancel</button>
-        <button id="ConfirmButton" mat-raised-button type="submit" [disabled]="form.invalid">Confirm</button>
-      </section>
-    </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Optional fields
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card-content id="divider">
+        <mat-form-field class="mat-form-fieldStrech">
+          <mat-label>LifeAnamnesis</mat-label>
+          <textarea formControlName="LifeAnamnesis" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field class="mat-form-fieldStrech">
+          <mat-label>LocalStatus</mat-label>
+          <textarea formControlName="LocalStatus" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field class="mat-form-fieldStrech">
+          <mat-label>SurveyPlan</mat-label>
+          <textarea formControlName="SurveyPlan" matInput></textarea>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-expansion-panel>
+    <section>
+      <button id="CancelButton" mat-raised-button color="warn" (click)="onCancel()" mat-raised-button>Cancel</button>
+      <button id="ConfirmButton" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Confirm</button>
+    </section>
   </form>
   <app-loading *ngIf="load"></app-loading>
 </div>
