@@ -87,12 +87,8 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
     DoctorPlansComponent,
     UpdateDoctorComponent,
     IllnessHistorySearchItemComponent,
-<<<<<<< HEAD
     AppointmentsItemComponent,
     AppointmentsListComponent,
-=======
-    AppointmentsListComponent,
-    AppointmentsItemComponent,
     IllnessHistoryComponent,
     PatientAppointmentsComponent,
     PatAppointItemComponent,

@@ -82,8 +82,6 @@ export class UserManagementComponent implements OnInit {
 
   pageSwitch(event: PageEvent) {
     this._paginationService.change(event);
-    this._userListService.httpOptions.params =
-      this._userListService.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
 
     this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
       result.users.sort((x1, x2) => x1.id - x2.id);

@@ -26,8 +26,8 @@
           </mat-form-field>
           <br>
           <div id="button-box" fxLayout="row" fxLayoutAlign="space-around center">
-            <button (click)="onSearch()" class="example-full-width" mat-raised-button color="primary">Search</button>
-            <button (click)="onClear()" class="example-full-width" mat-raised-button color="warn">Clear</button>
+            <button (click)="onSearch()" mat-raised-button color="primary">Search</button>
+            <button (click)="onClear()" mat-raised-button color="warn">Clear</button>
           </div>
         </mat-card-content>
       </div>
@@ -49,6 +49,11 @@
   </div>
 
   <div class="mat-elevation-z8">
+
+      <mat-paginator fxHide fxShow.sm fxShow.xs [pageSize]="_paginationService.userPageSize"
+      [length]="usersAmount" (page)="pageSwitch($event)">
+      </mat-paginator>
+
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id </th>

@@ -11,8 +11,6 @@ import { PageEvent } from '@angular/material';
 
 const SEARCH_NAME = 'SearchByName';
 const SEARCH_STATUS = 'SearchByStatus';
-const PAGE = 'page';
-const PAGE_SIZE = 'pagecount';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +18,22 @@ const PAGE_SIZE = 'pagecount';
 export class UserListService {
 
 
-  url = HOST_URL + '/api/';
+  url = HOST_URL + '/api/userlist/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set('page', this.paginationService.pageIndex.toString())
-      .set('pagecount', this.paginationService.userPageSize.toString())
+      .set('page', this._paginationService.pageIndex.toString())
+      .set('pagecount', this._paginationService.userPageSize.toString())
   };
 
-  constructor(private http: HttpClient, private paginationService: PaginationService) { }
+  constructor(private http: HttpClient, private _paginationService: PaginationService) { }
 
   getUserList(filter?: UserListFilter, event?: PageEvent) {
-    let typeUrl = this.url + 'userlist/getparams';
+    let typeUrl = this.url + 'getparams';
+    this.httpOptions.params =
+    this.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
 
     if (filter != null) {
         if (filter.searchKey !== undefined && filter.searchKey !== '') {
@@ -46,13 +46,11 @@ export class UserListService {
     return this.http.get(typeUrl, this.httpOptions);
   }
   getStatuses() {
-    const typeUrl = this.url + 'userlist/getstatuses';
+    const typeUrl = this.url + 'getstatuses';
     return this.http.get(typeUrl, this.httpOptions);
   }
 
   StatusConverter(Users: any) {
-
-    console.log(Users);
 
     Users.forEach(element => {
       if (element.statusId === 1 || element.statusName === 'Banned') {
