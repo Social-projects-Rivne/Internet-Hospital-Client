@@ -61,7 +61,7 @@ export class UsersProfileService {
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
                 for (const history of this.illnessHistories) {
-                    history.finishAppointmentTime = this.datePipe.transform(new Date(), 'medium');
+                    history.finishAppointmentTime = this.datePipe.transform(history.finishAppointmentTime, 'medium');
                 }
             });
     }

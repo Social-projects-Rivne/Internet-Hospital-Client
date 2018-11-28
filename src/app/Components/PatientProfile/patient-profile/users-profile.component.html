@@ -13,7 +13,7 @@
           <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutGap="6%">
             <div>{{patient?.firstName}}</div>
             <div>{{patient?.secondName}}</div>
-            <div>{{patient?.thirdName}}</div>              
+            <div>{{patient?.thirdName}}</div>
           </div>
           <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5%">
             <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
@@ -39,12 +39,13 @@
   <mat-card class="profile-bottom mat-elevation-z8" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%">
     <h3 style="text-align:center">Illness History</h3>
     <div class="without_paginator" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1%">
-      <div class="patient-history-search-filter" fxLayoutAlign="center center" fxFlex="30%">
+      <div class="patient-history-search-filter" fxFlex="30%">
         <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
       </div>
       <div class="patient-history" fxFlex>
         <mat-list>
-          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%" fxLayout="row">
+          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%"
+            fxLayout="row">
             <mat-expansion-panel fxFlex>
               <mat-expansion-panel-header>
                 <div fxLayout="row">
@@ -56,24 +57,35 @@
                   </mat-list-item>
                 </div>
               </mat-expansion-panel-header>
-              <div>
-                Complaints: {{IllnessHistory.complaints}}
-              </div>
-              <div>
-                Treatment: {{IllnessHistory.treatmentPlan}}
-              </div>
-              <div>
-                Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
-              </div>
-              <div>
-                Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
-              </div>
+              <div fxLayout="column" fxLayoutGap="5px">
+                <div>
+                  Complaints: {{IllnessHistory.complaints}}
+                </div>                
+                <div>
+                  Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
+                </div>
+                <div>
+                  Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
+                </div>
+                <div>
+                  Objective status: {{IllnessHistory.objectiveStatus}}
+                </div>
+                <div>
+                  Local status: {{IllnessHistory.localStatus}}
+                </div>
+                <div>
+                  Survey plan: {{IllnessHistory.surveyPlan}}
+                </div>
+                <div>
+                  Treatment plan: {{IllnessHistory.treatmentPlan}}
+                </div>
+            </div>
             </mat-expansion-panel>
           </div>
         </mat-list>
       </div>
     </div>
     <mat-paginator fxLayoutAlign="end start" [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize"
-    (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
+      (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
   </mat-card>
 </div>

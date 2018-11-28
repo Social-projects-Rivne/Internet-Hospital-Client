@@ -63,6 +63,7 @@ import { PatientAppointmentsComponent } from './Components/PatientProfile/patien
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { LoadingComponent } from './Components/loading/loading.component';
+import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { LoadingComponent } from './Components/loading/loading.component';
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     LoadingComponent,
+    DoctorProfileComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
