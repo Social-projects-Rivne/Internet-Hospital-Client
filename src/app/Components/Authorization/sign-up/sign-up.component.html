@@ -1,10 +1,11 @@
 <div id="GlobalDiv" fxLayout="row" fxLayoutAlign="center center">
+  <app-loading *ngIf="load"></app-loading>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Registration</mat-card-title>
     </mat-card-header>
-    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" class="normal-form"
-      (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <form fxLayout="row" fxFlexAlign="space-evenly center" [formGroup]="service.form" class="normal-form" (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data">
       <mat-divider></mat-divider>
       <div fxLayout="column" fxLayoutAlign="space-around center" class="inner-div">
         <div class="controles-row">

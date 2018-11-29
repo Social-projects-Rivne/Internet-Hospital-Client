@@ -21,7 +21,6 @@ export class UpdatePatientComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.setCurrentProfile();
   }
 
   onClear() {

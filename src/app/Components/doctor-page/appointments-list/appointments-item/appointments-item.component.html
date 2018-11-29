@@ -14,4 +14,5 @@
             <button  id="btnSubscribe" *ngIf="(isPatient | async)" (click)="onSubscribeToAppointment()" mat-raised-button color="primary">Subscribe</button>
         </div>
     </mat-card>
+<app-loading *ngIf="load"></app-loading>
 </div>

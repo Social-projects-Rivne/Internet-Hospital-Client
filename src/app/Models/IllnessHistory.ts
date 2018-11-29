@@ -1,12 +1,12 @@
 export class IllnessHistory {
-    AppointmentId: Number;
-    Complaints: String;
-    DiseaseAnamnesis: String;
-    LifeAnamnesis: String;
-    ObjectiveStatus: String;
-    LocalStatus: String;
-    Diagnose: String;
-    SurveyPlan: String;
-    TreatmentPlan: String;
-    FinishAppointmentTime: String;
+    appointmentId: Number;
+    complaints: String;
+    diseaseAnamnesis: String;
+    lifeAnamnesis: String;
+    objectiveStatus: String;
+    localStatus: String;
+    diagnose: String;
+    surveyPlan: String;
+    treatmentPlan: String;
+    finishAppointmentTime: String;
 }

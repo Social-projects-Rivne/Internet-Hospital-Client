@@ -6,6 +6,8 @@ import { MatPaginator, PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentFilter } from 'src/app/Models/AppointmentFilter';
 import { NotificationService } from '../../../Services/notification.service';
+import { DatePipe } from '@angular/common';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-appointments-list',
@@ -23,13 +25,24 @@ export class AppointmentsListComponent implements OnInit {
   constructor(private service: DoctorplansService,
     private pagService: PaginationService,
     private activateRoute: ActivatedRoute,
-    private notification: NotificationService) {
+    private notification: NotificationService,
+    private datePipe: DatePipe) {
     this.filter = new AppointmentFilter();
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    params: new HttpParams()
+    .set('page', '1')
+    .set('pagecount', this.pagService.pageSize.toString())
+  };
+
   ngOnInit() {
     this.getDoctorId();
-    this.service.getDoctorAppointments(this.doctorId).subscribe((result: any) => {
+    this.httpOptions.params = this.httpOptions.params.set('doctorId', this.doctorId.toString());
+    this.service.getDoctorAppointments(this.httpOptions).subscribe((result: any) => {
       this.appointmentList = result.appointments;
       this.appointmentsAmount = result.quantity;
     },
@@ -53,8 +66,9 @@ export class AppointmentsListComponent implements OnInit {
 
   pageSwitch(event: PageEvent) {
     this.pagService.change(event);
-    this.service.httpOptions.params = this.service.httpOptions.params.set('page', this.pagService.pageIndex.toString());
-    this.service.getDoctorAppointments(this.doctorId, this.filter.from, this.filter.till).subscribe((result: any) => {
+    this.checkFilters();
+    this.httpOptions.params = this.httpOptions.params.set('page', this.pagService.pageIndex.toString());
+    this.service.getDoctorAppointments(this.httpOptions).subscribe((result: any) => {
       this.appointmentList = result.appointments;
       this.appointmentsAmount = result.quantity;
     },
@@ -64,6 +78,20 @@ export class AppointmentsListComponent implements OnInit {
       this.notification.error(error);
     });
     window.scroll(0, 0);
+  }
+
+  checkFilters() {
+    if (this.filter.from) {
+      this.httpOptions.params = this.httpOptions.params.set('from', this.datePipe.transform(this.filter.from, 'short'));
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('from');
+    }
+
+    if (this.filter.till) {
+      this.httpOptions.params = this.httpOptions.params.set('till', this.datePipe.transform(this.filter.till, 'short'));
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('till');
+    }
   }
 
   onClear() {

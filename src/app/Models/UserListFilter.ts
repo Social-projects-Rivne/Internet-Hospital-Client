@@ -1,5 +1,5 @@
 export class UserListFilter {
-    selectedStatus = '';
+    selectedStatus: number;
     searchKey: string;
     isWithParams: boolean;
 
