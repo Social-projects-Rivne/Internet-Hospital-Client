@@ -8,7 +8,7 @@
         <a class="link-element" *ngIf="(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign out</a>
     </div>
 
-    <div class="content-div" fxLayoutAlign="center center">
+    <div fxHide fxShow.lg class="content-div" fxLayoutAlign="center center">
         <a class="link-element" mat-button href="#">Terms and Conditions</a>
         <a class="link-element" mat-button href="#">Sitemap</a>
         <a class="link-element" mat-button href="#">Search</a>
@@ -20,7 +20,7 @@
             matTooltip="contact moderator or leave feedback">
             <i class="material-icons">announcement</i> Signal
         </a>
-        <a class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center">
+        <a fxHide fxShow.md fxShow.lg class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center">
             <i class="material-icons">local_phone</i>
             <span id="phone-number">
                 +38 (096) 549 7678

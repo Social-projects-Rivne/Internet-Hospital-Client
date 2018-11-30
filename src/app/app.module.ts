@@ -6,9 +6,6 @@ import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -18,7 +15,6 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
 import { Page404Component } from './Components/page404/page404.component';
 import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
-import { MatTableModule } from '@angular/material/table';
 
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService } from './Services/interceptor.service';
@@ -101,8 +97,6 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
-    MatTooltipModule,
-    MatTableModule,
     BrowserModule,
     MaterialModule,
     FormsModule,
@@ -114,8 +108,6 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     AdminpanelModule,
     OverlayModule,
     NgxMaskModule.forRoot(),
-    MatExpansionModule,
-    MatSidenavModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
