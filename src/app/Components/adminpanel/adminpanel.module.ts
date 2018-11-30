@@ -18,29 +18,31 @@ import { ContentItemComponent } from '../adminpanel/content-management/content-i
 
 
 import { MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatProgressSpinnerModule
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatButtonModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
       } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule,
+      import { FlexLayoutModule } from '@angular/flex-layout';
+      import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
+    MatProgressBarModule,
     MatTooltipModule,
     CommonModule,
     AdminpanelRoutingModule,
