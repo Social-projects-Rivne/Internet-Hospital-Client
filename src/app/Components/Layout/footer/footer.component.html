@@ -1,31 +1,31 @@
 <footer fxFlexAlign="end" id="FatherBox" fxLayout="row" fxLayoutAlign="space-between center">
 
     <div class="content-div" fxLayoutAlign="center center">
+        <a class="link-element" mat-button routerLink="/"><i class="material-icons">home</i></a>
+        <a class="link-element" mat-button routerLink="/doctor-list">Doctor's List</a>
         <a class="link-element" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</a>
         <a class="link-element" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</a>
         <a class="link-element" *ngIf="(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign out</a>
-        <a class="link-element" mat-button routerLink="/doctor-list">Doctor's List</a>
     </div>
-    
+
     <div class="content-div" fxLayoutAlign="center center">
         <a class="link-element" mat-button href="#">Terms and Conditions</a>
         <a class="link-element" mat-button href="#">Sitemap</a>
         <a class="link-element" mat-button href="#">Search</a>
         <a class="link-element" mat-button href="#">Privacy Policy</a>
     </div>
-    
-    <div class="content-div" fxLayoutAlign="center center">
-            <a [routerLink]="['/feedbacks']" class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center"
-                matTooltip="contact moderator or leave feedback">
-                <i class="material-icons">announcement</i> Signal
-            </a>
-        <a class="link-element" mat-button
-         fxLayout="row" fxLayoutAlign="center center">
+
+    <div fxLayoutAlign="center center">
+        <a [routerLink]="['/feedbacks']" class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center"
+            matTooltip="contact moderator or leave feedback">
+            <i class="material-icons">announcement</i> Signal
+        </a>
+        <a class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center">
             <i class="material-icons">local_phone</i>
             <span id="phone-number">
                 +38 (096) 549 7678
             </span>
         </a>
     </div>
-    
+
 </footer>
