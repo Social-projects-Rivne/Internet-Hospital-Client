@@ -8,5 +8,5 @@ export class IllnessHistory {
     diagnose: String;
     surveyPlan: String;
     treatmentPlan: String;
-    finishAppointmentTime: String;
+    FinishAppointmentTimeStamp: Number;
 }
