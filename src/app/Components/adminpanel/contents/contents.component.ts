@@ -3,14 +3,14 @@ import { MatPaginator } from '@angular/material';
 import { ShortContentWithEditors } from '../../../Models/Content/ShortContentWithEditors';
 import { CONTENTS_MNG } from '../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
-import { ContentEditingService } from '../services/content-editing.service';
+import { ContentHandlingService } from '../Services/content-handling.service';
 import { Router } from '@angular/router';
 import { ArticleType } from 'src/app/Models/Content/ArticleType';
 import { ContentModerateFilters } from 'src/app/Models/Content/ContentModerateFilters';
 import { FilteredResults } from 'src/app/Models/FilteredResults';
-import { ContentService } from '../services/content.service';
+import { ContentService } from '../Services/content.service';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { ContentTypeService } from '../services/content-type.service';
+import { ContentTypeService } from '../Services/content-type.service';
 import { of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -34,7 +34,7 @@ export class ContentsComponent implements OnInit {
   content: FilteredResults<ShortContentWithEditors> = new FilteredResults<ShortContentWithEditors>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private editingContent: ContentEditingService,
+  constructor(private handlingService: ContentHandlingService,
               private contentService: ContentService,
               private typeService: ContentTypeService,
               private notificationService: NotificationService,
@@ -44,23 +44,19 @@ export class ContentsComponent implements OnInit {
   loadTypes() {
     this.typeService.getContentType().subscribe(((res: any) => {
         this.types = res;
-        console.log(res);
       }),
       error => {
         this.notificationService.error('Couldn\'t load types!!!');
-        setTimeout(this.loadTypes, 5000);
-      });
+    });
   }
 
   log() {
-    console.log(this.filters);
   }
 
   ngOnInit() {
     this.content.amountOfAll = 0;
     this.paginator.pageSize = DEF_PAGE_SIZE;
     this.filters.page = 0;
-    console.log(this.paginator);
     this.loadTypes();
     this.paginator.page.pipe(
         startWith({}),
@@ -68,13 +64,13 @@ export class ContentsComponent implements OnInit {
           this.isLoadingResults = true;
           this.filters.page = this.paginator.pageIndex;
           this.filters.pageSize = this.paginator.pageSize;
-          console.log(this.filters);
           return this.contentService.getShortModeratorContent(this.filters);
         }),
         map((data: any) => {
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           this.content.amountOfAll = data.amount;
+          console.log(data);
           return data.results;
         }),
         catchError(() => {
@@ -82,22 +78,34 @@ export class ContentsComponent implements OnInit {
           this.isRateLimitReached = true;
           return observableOf([]);
         })
-      ).subscribe(data => this.content.data = data);
+      ).subscribe(data => {
+        this.content.data = data;
+        console.log(this.content);
+      });
   }
 
-  onChange(i: number) {
-    // content number get
-    // this.editingContent.setForm(this.contentItems[i]);
-    this.router.navigate([this.contMng]);
+  onChange(content: ShortContentWithEditors) {
+    this.contentService.getContentForEditing(content.id).subscribe(
+      (data: any) => {
+        this.handlingService.setForm(data);
+        this.router.navigate([this.contMng]);
+      },
+      error => {
+        this.notificationService.error('Couldn\'t get this content!');
+      }
+    );
   }
 
-  onDelete(i: number) {
-    this.contentItems.splice(i, 1);
-    // method for delete from DB
+  onDelete(content: ShortContentWithEditors) {
+    this.contentService.deleteContent(content.id).subscribe( _ => {
+      this.notificationService.success(`"${content.title}" was successfully deleted!`);
+      this.paginator.page.emit();
+    }, error => {
+      this.notificationService.error(`"${content.title}" wasn't deleted!`);
+    });
   }
 
   createNewArticle() {
-    this.editingContent.initializeContent();
     this.router.navigate([this.contMng]);
   }
 }

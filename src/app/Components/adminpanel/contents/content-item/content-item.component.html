@@ -7,7 +7,7 @@
       <mat-icon color="warn">delete</mat-icon>
     </button>
   </div>
-  <mat-card-header style="position: relative">
+  <mat-card-header>
     <div class="title-with-date">
       <div class="content-title">
         <div class="date-with-author">
@@ -20,7 +20,8 @@
     <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
   <div class="carousel">
-    <div class="slide-line" [ngStyle]="{'width': content.previewImageUrls.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
+    <div class="slide-line" 
+      [ngStyle]="{'width': content.previewImageUrls.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
       <div *ngFor="let img of content.previewImageUrls" class="image-container" 
         [style.width]="(content.previewImageUrls.length > 0 ? 100 / content.previewImageUrls.length : 100) + '%'">
         <img src="{{ url + img}}"> 
@@ -33,15 +34,15 @@
     <p>
       {{content.shortDescription}}
     </p>
-    <mat-expansion-panel >
+    <mat-expansion-panel *ngIf="content.editions.length > 0">
         <mat-expansion-panel-header>
           <mat-panel-title>
             History of editions
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="edition" *ngFor="let edition of content.editions">
-          <div class="edition-author">edition.author</div>
-          <div class="edition-date">edition.date</div>
+        <div class="edition-block" *ngFor="let edition of content.editions">
+          <div class="edition-author">{{edition.author}}</div>
+          <div class="edition-date">{{edition.dateOfEdit | date}}</div>
         </div>
       </mat-expansion-panel>
   </mat-card-content>

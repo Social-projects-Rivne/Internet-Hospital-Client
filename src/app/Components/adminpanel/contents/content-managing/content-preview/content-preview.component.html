@@ -1,22 +1,32 @@
 <mat-card class="mat-elevation-z10 content-preview">
   <mat-card-header>
-    <mat-card-title>{{editingContentService.form.controls.title.value}}</mat-card-title>
-    <strong *ngFor="let type of editingContentService.form.controls.types.value; index as i">
-      {{type.name + (i < editingContentService.form.controls.types.value.length - 1 ? ', ' : '')}}
-    </strong>
+      <div class="content-title">
+        <div class="content-date">{{date | date}}</div>
+        {{handlingService.form.controls.title.value}}
+        <br>
+        <span class="types" *ngFor="let type of handlingService.form.controls.types.value; index as i">
+          <strong>
+            {{type.name + (i <  handlingService.form.controls.types.value.length - 1 ? ', ' : '')}}
+          </strong>
+        </span>
+      </div>
   </mat-card-header>
   <div class="carousel">
-    <div class="image-container">
-      <img class="slides" *ngFor="let img of editingContentService.croppedImgs" src="{{img}}" 
-        [@imageDisplay]="img === editingContentService.croppedImgs[slideIndex] ? 'displayed' : 'hidden'">
-      <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
-      <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+    <div class="slide-line" [ngStyle]="{'width': handlingService.croppedImgs.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
+      <div *ngFor="let img of handlingService.croppedImgs" class="image-container" 
+        [style.width]="(handlingService.croppedImgs.length > 0 ? 100 / handlingService.croppedImgs.length : 100) + '%'">
+        <img src="{{img}}">
+      </div>
     </div>
+    <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
+    <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
   </div>
-  <mat-card-content class="content-body">
+  <mat-card-content>
     <p>
-      {{editingContentService.form.controls.shortDescription.value}}
+      {{handlingService.form.controls.shortDescription.value}}
     </p>
   </mat-card-content>
-  <button class="source-button" mat-raised-button color="primary">Read full</button>
+  <div class="button-wrapper">
+    <button class="source-button" mat-raised-button color="primary">Read full</button>
+  </div>
 </mat-card>

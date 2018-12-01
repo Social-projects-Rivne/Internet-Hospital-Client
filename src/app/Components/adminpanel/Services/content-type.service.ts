@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { HOST_URL } from '../../../config';
+import { HOST_URL } from 'src/app/config';
 
 @Injectable({
   providedIn: 'root'

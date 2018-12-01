@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ContentEditingService } from '../../../services/content-editing.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ContentHandlingService } from '../../../Services/content-handling.service';
 
 const SLIDE_TIME_IN_MSC = 3500;
 
@@ -8,43 +7,50 @@ const SLIDE_TIME_IN_MSC = 3500;
   selector: 'app-content-preview',
   templateUrl: './content-preview.component.html',
   styleUrls: ['./content-preview.component.scss'],
-  animations: [
-    trigger('imageDisplay', [
-      state('displayed', style({ opacity: '1' })),
-      state('hidden', style({ opacity: '0' })),
-      transition('displayed <=> hidden', animate('500ms cubic-bezier(0.74, 0.97, 0.91, 1)')),
-    ]),
-  ],
 })
 
-export class ContentPreviewComponent implements OnInit {
+export class ContentPreviewComponent implements OnInit, OnDestroy {
 
 
-  constructor(private editingContentService: ContentEditingService) {
-    console.log(this.editingContentService.form);
+  constructor(private handlingService: ContentHandlingService) {
   }
 
+  date = Date.now();
+
   slideIndex = 0;
+  timer: number;
 
   ngOnInit() {
-    setInterval(() => {
+    this.setAutoplay();
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.timer);
+  }
+
+  setAutoplay() {
+    this.timer = window.setInterval(() => {
       this.nextImg();
     }, SLIDE_TIME_IN_MSC);
   }
 
   nextImg() {
-    if (this.slideIndex < this.editingContentService.croppedImgs.length - 1) {
+    window.clearInterval(this.timer);
+    if (this.slideIndex < this.handlingService.croppedImgs.length - 1) {
       this.slideIndex++;
     } else {
       this.slideIndex = 0;
     }
+    this.setAutoplay();
   }
 
   prevImg() {
+    window.clearInterval(this.timer);
     if (this.slideIndex !== 0) {
       this.slideIndex--;
     } else {
-      this.slideIndex = this.editingContentService.croppedImgs.length - 1;
+      this.slideIndex = this.handlingService.croppedImgs.length - 1;
     }
+    this.setAutoplay();
   }
 }

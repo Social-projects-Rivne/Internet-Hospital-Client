@@ -1,46 +1,52 @@
 <mat-card class="mat-elevation-z10 content-edit">
-  <form [formGroup]="contentService.form" class="mat-elavation-z10" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <div *ngIf="contentService.creatingContent === null">
-        {{contentService.editingContent.author}}
+  <form [formGroup]="handlingService.form" class="mat-elavation-z10" (ngSubmit)="onSubmit()">
+    <div id="author-container" *ngIf="handlingService.editingContent">
+        Created by: <span>{{handlingService.editingContent.author}}</span>
     </div>
     <div>
       <mat-form-field>
-        <input required formControlName="title" matInput placeholder="Title" maxlength="1">
+        <input required formControlName="title" matInput placeholder="Title" maxlength="100" minLength="5">
         <mat-error>Title required.</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field>
       <mat-select placeholder="Types" formControlName="types" [multiple]='true'>
-        <mat-option *ngFor="let type of contentService.types" [value]="type">{{type.name}}</mat-option>
+        <mat-option *ngFor="let type of handlingService.types; i as index"
+          [value]="type">{{type.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <div>
       <mat-form-field>
-        <textarea required formControlName="shortDescription" class="text-body" maxlength="1000" matInput placeholder="Body"></textarea>
+        <textarea required formControlName="shortDescription" class="text-body" minLenght="10" 
+          maxlength="1000" matInput placeholder="Description"></textarea>
         <mat-error>Short review required.</mat-error>
       </mat-form-field>
     </div>
     <div style="text-align: center">
-      <!-- (change)="handleFileInput($event.target.files)" -->
-      <input [disabled]="contentService.croppedImgs.length > 5" placeholder="Images" type="file" accept="image/*"
+      <input [disabled]="handlingService.croppedImgs.length > 5" placeholder="Images" type="file" accept="image/*"
         (change)="handleFileInput($event.target.files[0])" />
-      <image-cropper style="width:100%" *ngIf="contentService.imgs.length != 0 && currentImgIndex != -1" [imageBase64]="contentService.imgs[currentImgIndex]"
-        [maintainAspectRatio]="true" [aspectRatio]="16 / 9" [format]="contentService.imgsFiles[currentImgIndex].type.replace('image/','')"
-        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+      <image-cropper *ngIf="handlingService.imgs.length != 0 && handlingService.croppingImgIndex != -1"
+        style="width:100%" [imageChangedEvent]="imageChangedEvent"
+        [imageBase64]="handlingService.imgs[handlingService.croppingImgIndex]" [maintainAspectRatio]="true" 
+        [aspectRatio]="16 / 9" (imageCropped)="handlingService.imageCropped($event)"></image-cropper>
       <div class="cropped-images-container">
-        <div class="img-container" *ngFor="let img of contentService.croppedImgs; index as i">
-          <!-- (click)="delete()" -->
-          <button class="delete-button" (click)="delete(i)" mat-button>&#x2716;</button>
-          <img [src]="img" (click)="putInCropper(i)">
+        <div class="img-container" *ngFor="let img of handlingService.croppedImgs; index as i">
+          <button class="delete-button" (click)="delete(i)" type="button" mat-button>
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+          <img [src]="img" (click)="handlingService.changeCurrentIndex(i)">
         </div>
       </div>
     </div>
     <div id="froala-area">
-      <textarea id="froala" required [froalaEditor]="froalaOptions" [(froalaModel)]="article" formControlName="article"></textarea>
+      <textarea id="froala" required [froalaEditor]="handlingService.froalaService.froalaOptions" 
+        [(froalaModel)]="handlingService.froalaService.article" formControlName="article"></textarea>
     </div>
     <div>
-      <button mat-raised-button color="primary" type="submit" [disabled]="contentService.form.invalid || contentService.croppedFiles.length < 1">Submit</button>
-      <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+      <button class="form-buttons" mat-raised-button color="primary" type="submit" 
+        [disabled]="handlingService.form.invalid || handlingService.croppedFiles.length < 1">
+        {{handlingService.editingContent === null ? 'Create' : 'Update'}}</button>
+      <button class="form-buttons" mat-raised-button color="warn" (click)="clear()">Clear</button>
     </div>
   </form>
 </mat-card>
