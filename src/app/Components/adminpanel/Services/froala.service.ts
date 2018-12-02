@@ -3,7 +3,9 @@ import * as collections from 'typescript-collections';
 import { HOST_URL } from 'src/app/config';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { ImageValidationService } from 'src/app/Services/image-validation.service';
+
 const ARTICLE_IMG_URL = 'HomePage/%$#@_article_id_@$#%/Attachments';
+const IMAGE_NAME_KEY = '%$#@_attachment_#';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class FroalaService {
           const result = e.target.result;
           editor.image.insert(result, true, { 'id': `id-${this.counter}` }, editor.image.get());
         };
-        reader.readAsDataURL(files[0]);
+        reader.readAsDataURL(file);
 
         editor.popups.hideAll();
         return false;
@@ -75,12 +77,13 @@ export class FroalaService {
     froalaDiv.innerHTML = this.article.slice();
     const img = froalaDiv.getElementsByTagName('img');
     const notRemovedImgs = [];
+    this.froalaImgsToSend = [];
     for (let i = 0; i < img.length; i++) {
       const id = img.item(i).getAttribute('data-id');
       if (this.froalaImgsAll.containsKey(id)) {
         this.handleNewImage(img.item(i), id, i);
       } else {
-        notRemovedImgs.push(img.item(i).src.replace(HOST_URL + '/', ''));
+        notRemovedImgs.push(img.item(i).src.replace(HOST_URL, ''));
       }
     }
     this.setRemovedImgs(notRemovedImgs);
@@ -96,7 +99,7 @@ export class FroalaService {
   handleNewImage(img, id, number) {
     const file = this.froalaImgsAll.getValue(id);
     this.froalaImgsToSend.push(file);
-    img.src = `${HOST_URL}/${ARTICLE_IMG_URL}/${number + 1}`;
+    img.src = `${HOST_URL}/${ARTICLE_IMG_URL}/${IMAGE_NAME_KEY}${number + 1}`;
     img.removeAttribute('data-id');
   }
 
@@ -106,10 +109,11 @@ export class FroalaService {
   }
 
   clearFroala() {
+    this.article = '';
     this.froalaImgsToSend = [];
     this.froalaImgsAll = new collections.Dictionary<string, File>();
     this.counter = 0;
     this.existingImages = [];
-    this.article = '';
+    this.removedExistingImages = [];
   }
 }

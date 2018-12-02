@@ -45,13 +45,13 @@ body {
   padding: 20px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 960px) {
   .main-container {
     left: 0px;
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 960px) {
   .push-right {
     #sidebar {
       left: 0 !important;

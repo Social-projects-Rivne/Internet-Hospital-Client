@@ -67,8 +67,11 @@ export class ContentService {
     for (let i = 0; i < content.articleAttachments.length; ++i) {
       formData.append( 'articleAttachments', content.articleAttachments[i]);
     }
-    for (let i = 0; i < content.deletedAttachmentPaths.length; ++i) {
-      formData.append( 'deletedAttachmentPaths', content.deletedAttachmentPaths[i]);
+    for (let i = 0; i < content.deletedArticleAttachmentPaths.length; ++i) {
+      formData.append( 'deletedArticleAttachmentPaths', content.deletedArticleAttachmentPaths[i]);
+    }
+    for (let i = 0; i < content.deletedPreviewAttachmentPaths.length; ++i) {
+      formData.append( 'deletedPreviewAttachmentPaths', content.deletedPreviewAttachmentPaths[i]);
     }
     console.log(content);
     return this.http.put(this.url + MODERATE_URL_PART, formData);

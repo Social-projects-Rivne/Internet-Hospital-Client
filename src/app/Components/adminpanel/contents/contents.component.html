@@ -1,13 +1,18 @@
 <div class="content-page">
-  <button color="primary" mat-raised-button (click)="createNewArticle()" fxLayoutAlign="center">CREATE</button>
-  <div class="filters">
-    <div>
-      <mat-form-field class="search">
-        <input matInput [(ngModel)]="filters.search" placeholder="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
-      </mat-form-field>
-    </div>
+  <button color="primary" mat-raised-button (click)="createNewArticle()">CREATE</button>
+  <div>
+    <mat-form-field class="search">
+      <input matInput [(ngModel)]="filters.search" placeholder="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
+    </mat-form-field>
+  </div>
+  <mat-expansion-panel class="filters">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filters
+      </mat-panel-title>
+    </mat-expansion-panel-header>
     <div class="filter">
-      <mat-checkbox style="margin-top: 15px;" [(ngModel)]="filters.includeAll">Include all</mat-checkbox>
+      <mat-checkbox [(ngModel)]="filters.includeAll">Include all</mat-checkbox>
     </div>
     <div class="filter">
       <mat-form-field>
@@ -30,8 +35,8 @@
         <mat-datepicker #to></mat-datepicker>
       </mat-form-field>
     </div>
-    <button color="primary" mat-raised-button (click)="paginator.pageIndex=0; paginator.page.emit()" fxLayoutAlign="center">FILTER</button>
-  </div>
+    <button color="primary" mat-raised-button (click)="paginator.pageIndex=0; paginator.page.emit()">FILTER</button>
+  </mat-expansion-panel>
   <div fxLayout='row wrap' fxLayout.xs='column wrap' fxLayoutGap="15px grid">
     <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
@@ -40,8 +45,7 @@
       </div>
     </div>
     <div fxFlex.xs="100" fxFlex="50" fxFlex.lg="33.3" fxFlex.xl="20" *ngFor="let cont of content.data;">
-      <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" 
-        (changed)="onChange(cont)" (deleted)="onDelete(cont)">
+      <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" (changed)="onChange(cont)" (deleted)="onDelete(cont)">
       </app-content-item>
     </div>
   </div>

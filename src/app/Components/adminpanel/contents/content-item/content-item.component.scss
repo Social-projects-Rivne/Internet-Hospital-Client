@@ -17,6 +17,7 @@
     padding: 16px;
     display: block;
     padding-top: 0;
+    height: 100px;
 
     @media (max-width: 599px) {
       margin: 0;
@@ -32,6 +33,7 @@
       text-align: left;
 
       .date-with-author {
+        max-width: 30%;
         float: right;
         font-size: 0.5em;
         text-align: right;

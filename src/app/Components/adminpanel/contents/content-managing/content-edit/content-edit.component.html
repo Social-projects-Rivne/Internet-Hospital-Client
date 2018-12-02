@@ -23,28 +23,29 @@
       </mat-form-field>
     </div>
     <div style="text-align: center">
-      <input [disabled]="handlingService.croppedImgs.length > 5" placeholder="Images" type="file" accept="image/*"
-        (change)="handleFileInput($event.target.files[0])" />
-      <image-cropper *ngIf="handlingService.imgs.length != 0 && handlingService.croppingImgIndex != -1"
+      <input [disabled]="imageCroppingService.croppedImgs.length > 5" placeholder="Images" 
+        type="file" accept="image/*" (change)="handleFileInput($event.target.files[0])" />
+      <image-cropper *ngIf="imageCroppingService.imgs.length != 0 && imageCroppingService.croppingImgIndex != -1"
         style="width:100%" [imageChangedEvent]="imageChangedEvent"
-        [imageBase64]="handlingService.imgs[handlingService.croppingImgIndex]" [maintainAspectRatio]="true" 
-        [aspectRatio]="16 / 9" (imageCropped)="handlingService.imageCropped($event)"></image-cropper>
+        [imageBase64]="imageCroppingService.imgs[imageCroppingService.croppingImgIndex]" 
+        [maintainAspectRatio]="true" [aspectRatio]="16 / 9" 
+        (imageCropped)="imageCroppingService.imageCropped($event)"></image-cropper>
       <div class="cropped-images-container">
-        <div class="img-container" *ngFor="let img of handlingService.croppedImgs; index as i">
+        <div class="img-container" *ngFor="let img of imageCroppingService.croppedImgs; index as i">
           <button class="delete-button" (click)="delete(i)" type="button" mat-button>
             <mat-icon color="warn">delete</mat-icon>
           </button>
-          <img [src]="img" (click)="handlingService.changeCurrentIndex(i)">
+          <img [src]="img" (click)="imageCroppingService.changeCurrentIndex(i)">
         </div>
       </div>
     </div>
     <div id="froala-area">
-      <textarea id="froala" required [froalaEditor]="handlingService.froalaService.froalaOptions" 
-        [(froalaModel)]="handlingService.froalaService.article" formControlName="article"></textarea>
+      <textarea id="froala" required [froalaEditor]="froalaService.froalaOptions" 
+        [(froalaModel)]="froalaService.article" formControlName="article"></textarea>
     </div>
     <div>
       <button class="form-buttons" mat-raised-button color="primary" type="submit" 
-        [disabled]="handlingService.form.invalid || handlingService.croppedFiles.length < 1">
+        [disabled]="handlingService.form.invalid || imageCroppingService.croppedFiles.length < 1">
         {{handlingService.editingContent === null ? 'Create' : 'Update'}}</button>
       <button class="form-buttons" mat-raised-button color="warn" (click)="clear()">Clear</button>
     </div>

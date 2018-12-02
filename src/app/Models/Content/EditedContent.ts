@@ -6,5 +6,7 @@ export class EditedContent {
     article: string;
     articlePreviewAttachments: File[];
     articleAttachments: File[];
-    deletedAttachmentPaths: string[];
+    deletedArticleAttachmentPaths: string[];
+    deletedPreviewAttachmentPaths: string[];
+
 }

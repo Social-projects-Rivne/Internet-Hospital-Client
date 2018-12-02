@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ContentHandlingService } from '../../../Services/content-handling.service';
+import { ImagesCroppingService } from '../../../Services/images-cropping.service';
+
 
 @Component({
   selector: 'app-content-preview',
@@ -9,11 +11,22 @@ import { ContentHandlingService } from '../../../Services/content-handling.servi
 
 export class ContentPreviewComponent implements OnInit {
 
-  constructor(private handlingService: ContentHandlingService) {
-  }
-
+  height = 0;
   date = Date.now();
 
+  @HostListener('window:resize')
+  onResize() {
+    const currWidth = document.getElementById('slideshow-container').offsetWidth;
+    this.height = Math.trunc(currWidth / 16 * 9);
+  }
+
+  constructor(private handlingService: ContentHandlingService,
+              private previewImgsService: ImagesCroppingService) {
+  }
+
+
   ngOnInit() {
+    const currWidth = document.getElementById('slideshow-container').offsetWidth;
+    this.height = Math.trunc(currWidth / 16 * 9);
   }
 }

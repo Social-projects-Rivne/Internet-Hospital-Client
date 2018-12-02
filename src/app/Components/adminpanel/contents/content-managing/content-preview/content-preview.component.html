@@ -11,7 +11,9 @@
         </span>
       </div>
   </mat-card-header>
-  <app-image-slider [images]="handlingService.croppedImgs"></app-image-slider>
+  <div id="slideshow-container" style="height: auto">
+    <slideshow [imageUrls]="previewImgsService.croppedImgs" [height]="height + 'px'"></slideshow>
+  </div>
   <mat-card-content>
     <p>
       {{handlingService.form.controls.shortDescription.value}}
