@@ -38,6 +38,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { UserRequestsComponent } from '../../Components/adminpanel/request-management/user-requests/user-requests.component';
+import { DataApproveComponent } from '../../Components/adminpanel/request-management/data-approve/data-approve.component';
+// tslint:disable-next-line:import-spacing
+import { RegistrationConfirmComponent }
+        from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
+import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
 
 @NgModule({
   imports: [
@@ -63,6 +70,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FlexLayoutModule,
     MatSelectModule,
     MatExpansionModule,
+    MatTabsModule,
   ],
   declarations: [
     AdminPanelComponent,
@@ -76,6 +84,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent,
+    UserRequestsComponent,
+    DataApproveComponent,
+    RegistrationConfirmComponent,
+    FeedbackClaimComponent,
   ],
   providers: []
 })
