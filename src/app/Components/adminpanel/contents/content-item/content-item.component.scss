@@ -19,8 +19,8 @@
     padding-top: 0;
 
     @media (max-width: 599px) {
-    margin: 0;
-}
+      margin: 0;
+    }
   }
 
   .title-with-date {
@@ -38,69 +38,13 @@
         margin-left: 5px;
 
         .content-author {
-          color: rgb(20, 9, 180)
+          color: rgb(20, 9, 180);
         }
       }
     }
   }
-    .types {
-      color: grey;
-    }
-
-  .carousel {
-    width: 100%;
-    padding-top: calc(100% / 16 * 9);
-    position: relative;
-    overflow: hidden;
-
-    .slide-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      margin: 0;
-      transition: left ease 0.5s;
-      font-size: 0px;
-
-      .image-container {
-        height: 100%;
-        position: relative;
-        display: inline-block;
-
-        img {
-          max-width: 100%;
-          max-height: 100%;
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-        }
-      }
-    }
-
-    .left-button,
-    .right-button {
-      position: absolute;
-      top: 0px;
-      bottom: 0px;
-      font-size: 10em;
-      opacity: 0;
-    }
-
-    .right-button {
-      right: 0;
-    }
-
-    .left-button {
-      left: 0;
-    }
-
-    .left-button:hover,
-    .right-button:hover {
-      opacity: 0.5;
-    }
+  .types {
+    color: grey;
   }
 
   mat-card-content p {

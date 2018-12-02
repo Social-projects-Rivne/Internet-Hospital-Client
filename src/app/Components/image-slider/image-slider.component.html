@@ -1,0 +1,12 @@
+<div class="slider-container">
+  <div class="wrapper"></div>
+  <div>
+    <img *ngFor="let img of images; index as i" src="{{img}}" 
+      [class.left-image]="i < slideIndex  || (slideIndex === 0 && i === images.length - 1)"
+      [class.right-image]="(i > slideIndex && !(i === images.length - 1 && slideIndex === 0)) 
+                                || (slideIndex === images.length - 1 && i === 0)"
+      [class.active-image]="i === slideIndex">
+  </div>
+  <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
+  <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
+</div>

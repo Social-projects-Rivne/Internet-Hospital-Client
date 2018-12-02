@@ -35,6 +35,7 @@ import { MatFormFieldModule,
       } from '@angular/material';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ImageSliderComponent } from '../image-slider/image-slider.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
@@ -83,7 +84,8 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent,
-    ContentManagingComponent
+    ContentManagingComponent,
+    ImageSliderComponent
   ],
   providers: []
 })

@@ -19,17 +19,21 @@
     </div>
     <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
-  <div class="carousel">
-    <div class="slide-line" 
-      [ngStyle]="{'width': content.previewImageUrls.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
-      <div *ngFor="let img of content.previewImageUrls" class="image-container" 
-        [style.width]="(content.previewImageUrls.length > 0 ? 100 / content.previewImageUrls.length : 100) + '%'">
-        <img src="{{ url + img}}"> 
+  <!-- <div class="carousel">
+    <div class="slide-line" [style.transition]="transition" 
+      [ngStyle]="{'width': imgs.length * 100 + '%', 'left': -slideIndex * 100 + '%'}">
+      <div *ngFor="let img of imgs" class="image-container" 
+        [style.width]="(imgs.length > 0 ? 100 / imgs.length : 100) + '%'">
+        <img src="{{img}}"> 
       </div>
     </div>
     <button class="left-button" mat-button (click)="prevImg()">&#10094;</button>
     <button class="right-button" mat-button (click)="nextImg()">&#10095;</button>
-  </div>
+  
+
+
+  </div> -->
+  <app-image-slider [images]="imgs"></app-image-slider>
   <mat-card-content>
     <p>
       {{content.shortDescription}}
