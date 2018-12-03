@@ -38,7 +38,6 @@ export class ContentItemComponent implements OnInit {
   setSliderHeigth() {
     const currWidth = document.getElementById('slideshow-container').offsetWidth;
     this.height = Math.trunc(currWidth / 16 * 9);
-    console.log(currWidth, this.height);
   }
 
   delete() {
