@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Appointment } from '../../DoctorPlans/Appointment';
-import { AppointmentStatus } from 'src/app/Models/AppointmentStatus';
+import { DoctorsService } from 'src/app/Services/doctors.service';
+import { PreviousAppointment } from 'src/app/Models/PreviousAppointment';
 
 @Component({
   selector: 'app-previous-appointments',
@@ -9,16 +9,26 @@ import { AppointmentStatus } from 'src/app/Models/AppointmentStatus';
 })
 export class PreviousAppointmentsComponent implements OnInit {
 
-  previousAppointments: Appointment[];
+  previousAppointments: PreviousAppointment[];
   pageSize = 5;
   prevAppointCount: number;
-  statuses: AppointmentStatus[];
-  isLoadingResults = true;
+  statuses: string[];
+  isStatusesResult = true;
+  isAppointmentsResult = true;
 
-  constructor() { }
+  constructor(private docService: DoctorsService) { }
 
   ngOnInit() {
-
+    this.docService.getAppointmentStatuses().subscribe(
+      statuses => { this.statuses = statuses; console.log(this.statuses); this.isStatusesResult = false; }
+    );
+    this.docService.getPreviousAppointment().subscribe(
+      previousAppointments => {
+      this.previousAppointments = previousAppointments;
+        console.log(this.previousAppointments);
+        this.isAppointmentsResult = false;
+      }
+    );
   }
 
 }

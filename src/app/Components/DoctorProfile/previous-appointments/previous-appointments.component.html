@@ -4,7 +4,7 @@
       <app-previous-search-item [statuses]="statuses"></app-previous-search-item>
     </div>
     <div fxFlex="80%">
-      <app-loading *ngIf="isLoadingResults"></app-loading>
+      <app-loading *ngIf="isAppointmentsResult && isStatusesResult"></app-loading>
       <mat-list>
         <app-previous-appointment-item *ngFor="let prevApp of previousAppointments" [prevApp]="prevApp"></app-previous-appointment-item>
       </mat-list>

@@ -6,8 +6,7 @@ import { Specialization } from '../Models/Specialization';
 import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
-import { Appointment } from '../Components/DoctorPlans/Appointment';
-import { AppointmentStatus } from '../Models/AppointmentStatus';
+import { PreviousAppointment } from '../Models/PreviousAppointment';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -72,13 +71,13 @@ export class DoctorsService {
   }
 
   getPreviousAppointment() {
-    const specUrl = this.url + '/previousappointment';
-    return this.http.get<Appointment[]>(specUrl);
+    const specUrl = this.url + '/previousappointments';
+    return this.http.get<PreviousAppointment[]>(specUrl);
   }
 
   getAppointmentStatuses() {
     const specUrl = this.url + '/appointmentstatuses';
-    return this.http.get<AppointmentStatus[]>(specUrl);
+    return this.http.get<string[]>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PreviousAppointment } from 'src/app/Models/PreviousAppointment';
 
 @Component({
   selector: 'app-previous-appointment-item',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreviousAppointmentItemComponent implements OnInit {
 
+  @Input()prevApp: PreviousAppointment;
   constructor() { }
 
   ngOnInit() {
