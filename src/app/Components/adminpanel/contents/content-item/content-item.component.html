@@ -20,7 +20,8 @@
     <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
   <div id="slideshow-container">
-    <slideshow [imageUrls]="imgs" [height]="height + 'px'"></slideshow>
+    <slideshow [imageUrls]="imgs" [height]="height + 'px'" 
+      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
   </div>
   <mat-card-content>
     <p>

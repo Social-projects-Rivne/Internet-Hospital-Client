@@ -80,7 +80,7 @@ export class FroalaService {
     for (let i = 0; i < img.length; i++) {
       const id = img.item(i).getAttribute('data-id');
       if (this.froalaImgsAll.containsKey(id)) {
-        this.handleNewImage(img.item(i), id, i);
+        this.handleNewImage(img.item(i), id);
       } else {
         notRemovedImgs.push(img.item(i).src.replace(HOST_URL, ''));
       }
@@ -95,10 +95,10 @@ export class FroalaService {
     });
   }
 
-  handleNewImage(img, id, number) {
+  handleNewImage(img, id) {
     const file = this.froalaImgsAll.getValue(id);
     this.froalaImgsToSend.push(file);
-    img.src = `${HOST_URL}/${ARTICLE_IMG_URL}/${IMAGE_NAME_KEY}${number + 1}`;
+    img.src = `${HOST_URL}/${ARTICLE_IMG_URL}/${IMAGE_NAME_KEY}${this.froalaImgsToSend.length}`;
     img.removeAttribute('data-id');
   }
 

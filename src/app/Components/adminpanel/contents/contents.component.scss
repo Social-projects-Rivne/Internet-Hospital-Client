@@ -1,10 +1,5 @@
-button {
-  margin: 10px;
-}
-
 .search {
   width: 100%;
-  margin: 0 10px;
 }
 
 .filters {
@@ -22,10 +17,6 @@ button {
 }
 
 @media screen and (max-width: 600px) {
-  .search {
-    margin: 0;
-  }
-
   .filter {
     display: block;
     width: 100%;

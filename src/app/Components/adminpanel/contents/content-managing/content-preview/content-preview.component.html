@@ -12,7 +12,9 @@
       </div>
   </mat-card-header>
   <div id="slideshow-container" style="height: auto">
-    <slideshow [imageUrls]="previewImgsService.croppedImgs" [height]="height + 'px'"></slideshow>
+    <slideshow *ngIf="previewImgsService.croppedImgs.length > 0"
+      [imageUrls]="previewImgsService.croppedImgs" [height]="height + 'px'" 
+      [autoPlay]="true" [stopAutoPlayOnSlide]="false" [autoPlayInterval]="2000"></slideshow>
   </div>
   <mat-card-content>
     <p>
