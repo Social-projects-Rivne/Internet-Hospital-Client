@@ -1,0 +1,36 @@
+<mat-expansion-panel fxFlex>
+  <mat-expansion-panel-header fxLayout="row">
+      <mat-panel-title>
+          {{ prevApp.userFirstName prevApp.userSecondName }}
+      </mat-panel-title>
+      <mat-list-item>
+        <div>{{IllnessHistory.finishAppointmentTime}}</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>{{IllnessHistory.diagnose}}</div>
+      </mat-list-item>
+  </mat-expansion-panel-header>
+  <div fxLayout="column" fxLayoutGap="5px">
+    <div>
+      Complaints: {{IllnessHistory.complaints}}
+    </div>
+    <div>
+      Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
+    </div>
+    <div>
+      Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
+    </div>
+    <div>
+      Objective status: {{IllnessHistory.objectiveStatus}}
+    </div>
+    <div>
+      Local status: {{IllnessHistory.localStatus}}
+    </div>
+    <div>
+      Survey plan: {{IllnessHistory.surveyPlan}}
+    </div>
+    <div>
+      Treatment plan: {{IllnessHistory.treatmentPlan}}
+    </div>
+  </div>
+</mat-expansion-panel>

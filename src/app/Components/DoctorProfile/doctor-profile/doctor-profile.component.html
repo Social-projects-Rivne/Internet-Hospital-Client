@@ -13,7 +13,7 @@
           <div class="patient-name">
             {{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}
           </div>
-          <div  fxLayout="column" fxLayoutGap="5%">
+          <div fxLayout="column" fxLayoutGap="5%">
             <div>Born on: {{doctor?.birthDate | date: 'medium'}}</div>
             <div>Phone number: {{doctor?.phone}}</div>
             <div>My specialization: {{doctor?.specialization}}</div>
@@ -30,5 +30,8 @@
         <app-update-doctor></app-update-doctor>
       </mat-drawer>
     </mat-drawer-container>
+    <mat-card>
+      <app-previous-appointments></app-previous-appointments>
+    </mat-card>
   </mat-card>
 </div>
