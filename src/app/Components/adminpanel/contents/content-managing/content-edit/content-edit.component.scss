@@ -19,6 +19,16 @@
   mat-form-field {
     width: 100%;
   }
+
+  .input-file-button {
+    display: none;
+  }
+
+  .image-valid-description {
+    margin-top: 5px;
+    text-align: right;
+    color: red;
+  }
   .cropped-images-container {
     text-align: right;
     background-color: antiquewhite;
@@ -59,8 +69,8 @@
     content: "";
   }
 
-  .text-body {
-    height: 375px;
+  .text-short-body {
+    height: 75px;
   }
 
   #froala {
@@ -68,6 +78,7 @@
   }
   
   #froala-area {
+    margin-top: 5px;
     width: 100%;
   }
 }

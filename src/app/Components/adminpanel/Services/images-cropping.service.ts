@@ -108,11 +108,7 @@ export class ImagesCroppingService {
     const files2 = this.croppedFiles.slice(0, this.existingImgsUrls.length).filter((img, i) => {
       return this.existingImagesStatuses[i] !== UNCHANGED_IMAGE;
     });
-    console.log(files2);
-    console.log(this.croppedFiles);
-    console.log(this.existingImgsUrls);
     files = files2.concat(this.croppedFiles.slice(this.existingImgsUrls.length));
-    console.log(files);
     return files;
   }
 
@@ -121,7 +117,6 @@ export class ImagesCroppingService {
     deletedWithEdited = deletedWithEdited.concat(this.existingImgsUrls.filter((img, i) => {
       return this.existingImagesStatuses[i] !== UNCHANGED_IMAGE;
     }));
-    console.log(deletedWithEdited);
     return deletedWithEdited;
   }
 

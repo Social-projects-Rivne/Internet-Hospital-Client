@@ -22,8 +22,7 @@ export class ContentItemComponent implements OnInit {
 
   @HostListener('window:resize')
   onResize() {
-    const currWidth = document.getElementById('slideshow-container').offsetWidth;
-    this.height = Math.trunc(currWidth / 16 * 9);
+    this.setSliderHeigth();
   }
 
   constructor() {
@@ -33,8 +32,13 @@ export class ContentItemComponent implements OnInit {
     this.content.previewImageUrls.forEach( img => {
       this.imgs.push(HOST_URL + img);
     });
+    this.setSliderHeigth();
+  }
+
+  setSliderHeigth() {
     const currWidth = document.getElementById('slideshow-container').offsetWidth;
     this.height = Math.trunc(currWidth / 16 * 9);
+    console.log(currWidth, this.height);
   }
 
   delete() {

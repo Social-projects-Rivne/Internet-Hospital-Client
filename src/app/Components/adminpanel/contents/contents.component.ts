@@ -16,7 +16,6 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 const DEF_PAGE_SIZE = 12;
 
-
 @Component({
   selector: 'app-contents',
   templateUrl: './contents.component.html',
@@ -50,9 +49,6 @@ export class ContentsComponent implements OnInit {
     });
   }
 
-  log() {
-  }
-
   ngOnInit() {
     this.content.amountOfAll = 0;
     this.paginator.pageSize = DEF_PAGE_SIZE;
@@ -70,7 +66,6 @@ export class ContentsComponent implements OnInit {
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           this.content.amountOfAll = data.amount;
-          console.log(data);
           return data.results;
         }),
         catchError(() => {
@@ -80,7 +75,6 @@ export class ContentsComponent implements OnInit {
         })
       ).subscribe(data => {
         this.content.data = data;
-        console.log(this.content);
       });
   }
 

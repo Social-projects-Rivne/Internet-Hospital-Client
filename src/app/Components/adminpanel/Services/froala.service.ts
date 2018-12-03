@@ -61,7 +61,6 @@ export class FroalaService {
     } else {
       const extension = `.${img[0].type.slice(img[0].type.lastIndexOf('/') + 1)}`;
       const name = this.counter + 1 + extension;
-      console.log(name);
       file = new File([img[0]], name, { lastModified: Date.now() });
     }
     return file;

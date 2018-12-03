@@ -41,8 +41,6 @@ export class ContentEditComponent implements OnInit, OnDestroy {
       this.froalaService.article = this.handlingService.editingContent.text;
       this.froalaService.existingImages = this.handlingService.editingContent.articleAttachmentPaths;
     }
-    console.log(this.handlingService.editingContent);
-    console.log(this.froalaService.froalaOptions);
   }
 
   ngOnDestroy() {
@@ -52,7 +50,9 @@ export class ContentEditComponent implements OnInit, OnDestroy {
   }
 
   handleFileInput(file: File) {
-    this.imageCroppingService.handleFileInput(file);
+    if (file) {
+      this.imageCroppingService.handleFileInput(file);
+    }
   }
 
   delete(i) {
@@ -64,11 +64,7 @@ export class ContentEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.handlingService.editingContent) {
-      this.updateContent();
-    } else {
-      this.createContent();
-    }
+    this.handlingService.editingContent ? this.updateContent() : this.createContent();
   }
 
   createContent() {
