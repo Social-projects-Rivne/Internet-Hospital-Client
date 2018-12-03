@@ -1,3 +1,7 @@
+#Father-box{
+  background-color: #4d5256;
+}
+
 :host {
   display: block;
   position: fixed;
@@ -67,10 +71,16 @@
   color: #e62030;
 }
 
-.header {
+#header {
   font-size: 25px;
+  color: azure;
 }
-
+#doctor-navigator{
+  color: azure;
+}
+.material-icons {
+  color: azure;
+}
 .user-avatar {
   height: 30px;
 }
