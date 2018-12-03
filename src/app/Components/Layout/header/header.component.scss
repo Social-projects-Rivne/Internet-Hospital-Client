@@ -13,11 +13,13 @@
 .color_red {
   color: #e62030;
 }
-
 .header {
   font-size: 25px;
+  color: azure;
 }
-
+.font-view{
+  color: azure;
+}
 .user-avatar {
   border: 1px solid rgba(0, 0, 0, 0.4);
   background-repeat: no-repeat;
@@ -27,4 +29,10 @@
   border-radius: 40px;
   background-size: cover;
   background-position: center center;
+}
+#Father-box{
+  background-color: #4d5256;
+} 
+.material-icons {
+  color: azure;
 }

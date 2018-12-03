@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar id="Father-box">
     <!-- Header -->
     <button id="HeaderButton" mat-button [routerLink]="['/']">
         <img width="40" height="40" src="../../../../assets/img/LogoCircle.png">
@@ -26,13 +26,13 @@
     </mat-menu>
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
-        <a mat-button routerLink="/doctor-list">Doctor's List</a>
+        <a class="font-view" mat-button routerLink="/doctor-list">Doctor's List</a>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
             <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img/>
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
-        <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
-        <button *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
+        <button class="font-view" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
+        <button class="font-view" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</button>
     </div>
 </mat-toolbar>
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">

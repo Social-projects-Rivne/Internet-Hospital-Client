@@ -27,7 +27,6 @@ export class UserManagementComponent implements OnInit {
   usersAmount: number;
 
   isLoadingResults = true;
-  isRateLimitReached = false;
 
   displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
 
@@ -82,11 +81,12 @@ export class UserManagementComponent implements OnInit {
 
   pageSwitch(event: PageEvent) {
     this._paginationService.change(event);
-
+    this.isLoadingResults = true;
     this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
       result.users.sort((x1, x2) => x1.id - x2.id);
       this.dataSource = this._userListService.StatusConverter(result.users);
       this.usersAmount = result.count;
+      this.isLoadingResults = false;
       if (this.usersAmount === 0) {
         this._notificationService.error('There is no users for this request');
       }
