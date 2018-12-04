@@ -83,7 +83,7 @@ import { FeedbackClaimComponent } from '../../Components/adminpanel/request-mana
     MatExpansionModule,
     FroalaEditorModule,
     FroalaViewModule,
-    SlideshowModule
+    SlideshowModule,
     MatTabsModule,
   ],
   declarations: [
@@ -98,7 +98,7 @@ import { FeedbackClaimComponent } from '../../Components/adminpanel/request-mana
     ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent,
-    ContentManagingComponent
+    ContentManagingComponent,
     UserRequestsComponent,
     DataApproveComponent,
     RegistrationConfirmComponent,
