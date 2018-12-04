@@ -73,10 +73,7 @@ export class DoctorsService {
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
     illnessHistory.appointmentId = appointmentId;
-    illnessHistory.FinishAppointmentTimeStamp = Math.floor(Date.now() / 1000);
-    console.log('dasda' + Date.now());
-    console.log('dasda' + Date.now() / 1000);
-    console.log('dasda' + illnessHistory.FinishAppointmentTimeStamp);
+    illnessHistory.FinishAppointmentTime = new Date(new Date().toUTCString());
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
   }
