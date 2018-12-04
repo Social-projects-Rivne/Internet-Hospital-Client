@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EditContentService } from './edit-content.service';
+import { ContentService } from './content.service';
 
-describe('EditContentService', () => {
+describe('ContentService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EditContentService = TestBed.get(EditContentService);
+    const service: ContentService = TestBed.get(ContentService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,0 +1,68 @@
+.content-item {
+  padding: 0;
+  width: 100%;
+
+  .manage-button-container {
+    text-align: right;
+
+    button {
+      padding: 0;
+      min-width: 0;
+      line-height: 0;
+      vertical-align: text-top;
+    }
+  }
+
+  mat-card-header {
+    padding: 16px;
+    display: block;
+    padding-top: 0;
+    height: 100px;
+
+    @media (max-width: 599px) {
+      margin: 0;
+    }
+  }
+
+  .title-with-date {
+    display: block;
+
+    .content-title {
+      font-size: 2em;
+      line-height: normal;
+      text-align: left;
+
+      .date-with-author {
+        max-width: 30%;
+        float: right;
+        font-size: 0.5em;
+        text-align: right;
+        margin-left: 5px;
+
+        .content-author {
+          color: rgb(20, 9, 180);
+        }
+      }
+    }
+  }
+  .types {
+    color: grey;
+  }
+
+  mat-card-content p {
+    padding: 16px;
+    text-align: justify;
+  }
+
+  .edition-block {
+    .edition-author {
+      display: inline-block;
+      width: 60%;
+    }
+
+    .edition-date {
+      display: inline-block;
+      width: 40%;
+    }
+  }
+}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContentManagementComponent } from './content-management.component';
+import { ContentsComponent } from './contents.component';
 
 describe('ContentManagementComponent', () => {
-  let component: ContentManagementComponent;
-  let fixture: ComponentFixture<ContentManagementComponent>;
+  let component: ContentsComponent;
+  let fixture: ComponentFixture<ContentsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentManagementComponent ]
+      declarations: [ ContentsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContentManagementComponent);
+    fixture = TestBed.createComponent(ContentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,27 @@
+<mat-card class="mat-elevation-z10 content-preview">
+  <mat-card-header>
+      <div class="content-title">
+        <div class="content-date">{{date | date}}</div>
+        {{handlingService.form.controls.title.value}}
+        <br>
+        <span class="types" *ngFor="let type of handlingService.form.controls.types.value; index as i">
+          <strong>
+            {{type.name + (i <  handlingService.form.controls.types.value.length - 1 ? ', ' : '')}}
+          </strong>
+        </span>
+      </div>
+  </mat-card-header>
+  <div id="slideshow-container" style="height: auto">
+    <slideshow *ngIf="previewImgsService.croppedImgs.length > 0"
+      [imageUrls]="previewImgsService.croppedImgs" [height]="height + 'px'" 
+      [autoPlay]="true" [stopAutoPlayOnSlide]="false" [autoPlayInterval]="2000"></slideshow>
+  </div>
+  <mat-card-content>
+    <p>
+      {{handlingService.form.controls.shortDescription.value}}
+    </p>
+  </mat-card-content>
+  <div class="button-wrapper">
+    <button class="source-button" mat-raised-button color="primary">Read full</button>
+  </div>
+</mat-card>

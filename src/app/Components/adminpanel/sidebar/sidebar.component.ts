@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG } from '../routesConfig';
+import { CONTENTS, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG } from '../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
 
 @Component({
@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
   users = '/'  + ADMIN_PANEL +  '/' + USERS_MNG;
   moders = '/'  + ADMIN_PANEL +  '/' + MODERATORS_MNG;
-  contents = '/' + ADMIN_PANEL + '/' + CONTENTS_MNG;
+  contents = '/' + ADMIN_PANEL + '/' + CONTENTS;
   requests = '/' + ADMIN_PANEL + '/' + REQUESTS_MNG;
 
   ngOnInit() {

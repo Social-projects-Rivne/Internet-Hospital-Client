@@ -1,0 +1,57 @@
+.search {
+  width: 100%;
+}
+
+.filters {
+  text-align: left;
+  margin: 10px 0;
+
+  mat-checkbox {
+    margin-top: 15px;
+  }
+
+  .filter {
+    display: inline-block;
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .filter {
+    display: block;
+    width: 100%;
+    margin: 0;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  button {
+    width: 100%;
+    margin: 0;
+  }
+
+  .search {
+    margin: 0;
+  }
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
