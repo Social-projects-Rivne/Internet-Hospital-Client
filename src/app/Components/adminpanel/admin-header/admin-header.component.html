@@ -1,11 +1,11 @@
-<mat-toolbar color="primary" class="fix-nav">
+<mat-toolbar id="Father-box">
   <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <div class="nav-brand">
     <button id="HeaderButton" mat-button [routerLink]="['/']">
       <img width="40" height="40" src="../../../assets/img/LogoCircle.png">
-      <span class="header">
+      <span id="header">
         <span class="color_red"> I</span>nternet
         <span class="color_blue"> H</span>ospital
       </span>
@@ -18,12 +18,12 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <br><a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+    <br><a mat-button routerLink="/doctor-list">Doctor's List</a>
     <br><a mat-button routerLink="/sign-in">Sign out</a>
   </mat-menu>
   <!-- Desktop Menu -->
   <div id="DeskMenu" fxHide.xs>
-    <a mat-button routerLink="/doctor-list">Go To Doctor's List</a>
+    <a id="doctor-navigator" mat-button routerLink="/doctor-list">Doctor's List</a>
     <button mat-button [matMenuTriggerFor]="appMenu">
       <img class="user-avatar" src="https://blog.circle.com/content/images/2018/04/rachel.png" />
       <mat-icon>arrow_drop_down</mat-icon>

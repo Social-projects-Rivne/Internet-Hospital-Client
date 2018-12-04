@@ -15,6 +15,7 @@ import { Specialization } from 'src/app/Models/Specialization';
 export class UpdateDoctorComponent implements OnInit {
 
   locale = LOCALE_PHONE;
+  specializations: Specialization[];
 
   constructor(private service: UpdateDoctorService,
     private notification: NotificationService,
@@ -25,7 +26,8 @@ export class UpdateDoctorComponent implements OnInit {
 
   ngOnInit() {
     this.service.setCurrentProfile();
-    this.doctorService.getSpecializations();
+    this.doctorService.getSpecializations()
+      .subscribe((res: Specialization[]) => this.specializations = res);
   }
 
   onClear() {
@@ -38,17 +40,17 @@ export class UpdateDoctorComponent implements OnInit {
   onSubmit() {
     this.service.updateDoctor(this.imageHandling.passportToUpload, this.imageHandling.diplomaToUpload, this.imageHandling.licenceToUpload)
       .subscribe(
-          data => {
-            this.router.navigate(['']);
-            this.notification.success('Successfully updated! Waiting for moderator\'s approvement!');
-            this.service.form.reset();
-            this.service.initializeFormGroup();
-            this.imageHandling.isPassportUploaded = false;
-            this.imageHandling.isDiplomaUploaded = false;
-            this.imageHandling.isLicenseUploaded = false;
-          },
-          error => {
-            this.notification.error(error);
-          });
+        data => {
+          this.router.navigate(['']);
+          this.notification.success('Successfully updated! Waiting for moderator\'s approvement!');
+          this.service.form.reset();
+          this.service.initializeFormGroup();
+          this.imageHandling.isPassportUploaded = false;
+          this.imageHandling.isDiplomaUploaded = false;
+          this.imageHandling.isLicenseUploaded = false;
+        },
+        error => {
+          this.notification.error(error);
+        });
   }
 }

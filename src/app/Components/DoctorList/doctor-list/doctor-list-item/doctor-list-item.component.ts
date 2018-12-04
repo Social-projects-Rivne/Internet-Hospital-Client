@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Doctor } from 'src/app/Models/Doctors';
 import { HOST_URL } from '../../../../config';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Observable } from 'rxjs';
 
 const DEFAULT_IMAGE = '/assets/img/default-avatar.png';
 
@@ -14,11 +16,15 @@ export class DoctorListItemComponent implements OnInit {
   doctor: Doctor;
   urlAvatar: string;
   doctorId = 0;
-  constructor() { }
+  isPatient: Observable<boolean>;
+  isDoctor: Observable<boolean>;
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.urlAvatar = this.doctor.avatarURL ? HOST_URL + this.doctor.avatarURL : DEFAULT_IMAGE;
     this.doctorId = this.doctor.id;
+    this.isPatient = this.authenticationService.isPatient();
+    this.isDoctor = this.authenticationService.isDoctor();
   }
 
 }

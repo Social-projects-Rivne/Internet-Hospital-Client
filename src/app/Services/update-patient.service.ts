@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 
 import { HOST_URL } from '../config';
 import { compareValidator } from '../Directives/compare-validator.directive';
-import { API_PATIENT_UPDATE, PATIENT_UPDATE_AVATAR, LOCALE_PHONE, PATIENT_GET_PROFILE } from '../config';
+import { API_PATIENT_UPDATE, PATIENT_UPDATE_AVATAR, LOCALE_PHONE, API_PATIENT } from '../config';
 import { MaxDateValidator } from '../Directives/date-validator.directive';
 import { Patient } from '../Models/Patient';
 
@@ -15,15 +15,15 @@ import { Patient } from '../Models/Patient';
 export class UpdatePatientService {
   url = HOST_URL + API_PATIENT_UPDATE;
   avatarUpdateUrl = HOST_URL + PATIENT_UPDATE_AVATAR;
-  getProfileUrl = HOST_URL + PATIENT_GET_PROFILE;
+  getProfileUrl = HOST_URL + API_PATIENT;
   patient: Patient;
 
   constructor(private http: HttpClient) { }
   form: FormGroup = new FormGroup({
-  PhoneNumber: new FormControl('', Validators.pattern(/\(\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)),
-    FirstName: new FormControl('', Validators.required),
-    SecondName: new FormControl('', Validators.required),
-    ThirdName: new FormControl('', Validators.required),
+    PhoneNumber: new FormControl('', Validators.pattern(/\(\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)),
+    FirstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
+    SecondName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
+    ThirdName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     BirthDate: new FormControl('', MaxDateValidator),
     PassportURL: new FormControl('')
   });
@@ -40,17 +40,14 @@ export class UpdatePatientService {
   }
 
   setCurrentProfile() {
-    this.getProfile().subscribe((res: any) => {
-      this.patient = res;
-      const correctDate = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
-      this.form.setValue({
-        PhoneNumber: this.patient.phoneNumber,
-        FirstName: this.patient.firstName,
-        SecondName: this.patient.secondName,
-        ThirdName: this.patient.thirdName,
-        BirthDate: correctDate,
-        PassportURL: '',
-      });
+    const correctDate = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
+    this.form.setValue({
+      PhoneNumber: this.patient.phoneNumber,
+      FirstName: this.patient.firstName,
+      SecondName: this.patient.secondName,
+      ThirdName: this.patient.thirdName,
+      BirthDate: correctDate,
+      PassportURL: '',
     });
   }
 

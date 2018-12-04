@@ -1,4 +1,5 @@
 <div id="FatherDiv" fxLayoutAlign="center">
+  <app-loading *ngIf="isLoadingResults"></app-loading>
   <form class="example-container" id="FatherForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-card>
       <mat-card-title>Sign In</mat-card-title>

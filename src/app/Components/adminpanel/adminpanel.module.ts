@@ -16,6 +16,7 @@ import { ContentPreviewComponent } from '../adminpanel/contents/content-managing
 import { ContentEditComponent } from '../adminpanel/contents/content-managing/content-edit/content-edit.component';
 import { ContentItemComponent } from '../adminpanel/contents/content-item/content-item.component';
 
+
 import { MatFormFieldModule,
         MatInputModule,
         MatTableModule,
@@ -31,7 +32,10 @@ import { MatFormFieldModule,
         MatProgressSpinnerModule,
         MatSelectModule,
         MatExpansionModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatTabsModule,
+        MatProgressBarModule
       } from '@angular/material';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
@@ -43,9 +47,17 @@ import { FormsModule,
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ContentManagingComponent } from '../../Components/adminpanel/contents/content-managing/content-managing.component';
+import { UserRequestsComponent } from '../../Components/adminpanel/request-management/user-requests/user-requests.component';
+import { DataApproveComponent } from '../../Components/adminpanel/request-management/data-approve/data-approve.component';
+// tslint:disable-next-line:import-spacing
+import { RegistrationConfirmComponent }
+        from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
+import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
 
 @NgModule({
   imports: [
+    MatProgressBarModule,
+    MatTooltipModule,
     CommonModule,
     AdminpanelRoutingModule,
     MatToolbarModule,
@@ -72,6 +84,7 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     FroalaEditorModule,
     FroalaViewModule,
     SlideshowModule
+    MatTabsModule,
   ],
   declarations: [
     AdminPanelComponent,
@@ -86,6 +99,10 @@ import { ContentManagingComponent } from '../../Components/adminpanel/contents/c
     ContentEditComponent,
     ContentItemComponent,
     ContentManagingComponent
+    UserRequestsComponent,
+    DataApproveComponent,
+    RegistrationConfirmComponent,
+    FeedbackClaimComponent,
   ],
   providers: []
 })

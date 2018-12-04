@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule,
+import {
+          MatTooltipModule,
+          MatSidenavModule,
+          MatToolbarModule,
           MatIconModule,
           MatDialogModule,
           MatNativeDateModule,
@@ -25,6 +28,8 @@ import { MatToolbarModule,
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MAT_MODULS = [
+    MatTooltipModule,
+    MatSidenavModule,
     CommonModule,
     MatToolbarModule,
     MatGridListModule,

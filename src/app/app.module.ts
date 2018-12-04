@@ -6,7 +6,6 @@ import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
@@ -27,6 +26,7 @@ import { PatientGuard } from './Services/Guards/patient.guard';
 import { DoctorGuard } from './Services/Guards/doctor.guard';
 import { ModeratorGuard } from './Services/Guards/moderator.guard';
 import { AdminGuard } from './Services/Guards/admin.guard';
+import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 // tslint:disable-next-line:max-line-length
 import { DoctorListSearchItemComponent } from './Components/DoctorList/doctor-list/doctor-list-search-item/doctor-list-search-item.component';
 
@@ -51,7 +51,16 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CustomDateFormatter, CustomEventTitleFormatter } from './Components/DoctorPlans/doctorplans/dateformat';
 import { DatePipe } from '@angular/common';
 import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/update-doctor.component';
-
+// tslint:disable-next-line:max-line-length
+import { IllnessHistorySearchItemComponent } from './Components/PatientProfile/patient-profile/illness-history-search-item/illness-history-search-item.component';
+import { AppointmentsListComponent } from './Components/doctor-page/appointments-list/appointments-list.component';
+import { AppointmentsItemComponent } from './Components/doctor-page/appointments-list/appointments-item/appointments-item.component';
+import { IllnessHistoryComponent } from './Components/illness-history/illness-history.component';
+import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
+import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
+import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
+import { LoadingComponent } from './Components/loading/loading.component';
+import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 
 @NgModule({
   declarations: [
@@ -75,9 +84,18 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
     UpdatePatientComponent,
     DateValidatorDirective,
     DoctorPlansComponent,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    IllnessHistorySearchItemComponent,
+    AppointmentsItemComponent,
+    AppointmentsListComponent,
+    IllnessHistoryComponent,
+    PatientAppointmentsComponent,
+    PatAppointItemComponent,
+    MatConfirmDialogComponent,
+    LoadingComponent,
+    DoctorProfileComponent
   ],
-  entryComponents: [ ImageModalDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,
@@ -90,7 +108,6 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
     AdminpanelModule,
     OverlayModule,
     NgxMaskModule.forRoot(),
-    MatExpansionModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -108,7 +125,7 @@ import { UpdateDoctorComponent } from './Components/DoctorProfile/update-doctor/
     )
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe,
+  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
