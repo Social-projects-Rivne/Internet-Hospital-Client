@@ -23,8 +23,6 @@ export class FinishAppointmentGuard implements CanActivate {
         }
         const start = this.appointmentStart;
         const now = new Date();
-        console.log(start);
-        console.log(now);
 
         if (start > now) {
             this.notification.error('Please wait for the appointment beginning');

@@ -60,9 +60,9 @@ export class UsersProfileService {
             .subscribe((result: any) => {
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
-                // for (const history of this.illnessHistories) {
-                //     history.finishAppointmentTime = history.finishAppointmentTime;
-                // }
+                for (const history of this.illnessHistories) {
+                    history.FinishAppointmentTime = history.FinishAppointmentTime;
+                }
             });
     }
 }
