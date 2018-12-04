@@ -1,7 +1,7 @@
 <div class="container">
-  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
     <div fxFlex="20%">
-      <app-previous-search-item [statuses]="statuses"></app-previous-search-item>
+      <app-previous-search-item [statuses]="statuses" (search)="onSearch($event)"></app-previous-search-item>
     </div>
     <div fxFlex="80%">
       <app-loading *ngIf="isAppointmentsResult && isStatusesResult"></app-loading>

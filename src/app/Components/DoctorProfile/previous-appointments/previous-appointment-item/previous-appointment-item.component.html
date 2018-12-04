@@ -1,36 +1,41 @@
-<mat-expansion-panel fxFlex>
-  <mat-expansion-panel-header fxLayout="row">
+<div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
       <mat-panel-title>
-          {{ prevApp.userFullName }}
+        {{ prevApp.userFullName }}
       </mat-panel-title>
       <mat-list-item>
-        <div>{{IllnessHistory.finishAppointmentTime}}</div>
+        <div>{{prevApp.status}}</div>
       </mat-list-item>
       <mat-list-item>
-        <div>{{IllnessHistory.diagnose}}</div>
+        <div>{{prevApp.startTime | date:'dd.MM HH:mm'}}</div>
       </mat-list-item>
-  </mat-expansion-panel-header>
-  <div fxLayout="column" fxLayoutGap="5px">
+      <mat-list-item>
+        <div>{{prevApp.endTime | date:'dd.MM HH:mm'}}</div>
+      </mat-list-item>
+    </mat-expansion-panel-header>
     <div>
-      Complaints: {{IllnessHistory.complaints}}
+      <div>
+        Complaints: {{prevApp.illnessHistory?.complaints}}
+      </div>
+      <div>
+        Disease Anamnesis: {{prevApp.illnessHistory?.diseaseAnamnesis}}
+      </div>
+      <div>
+        Life Anamnesis: {{prevApp.illnessHistory?.lifeAnamnesis}}
+      </div>
+      <div>
+        Objective status: {{prevApp.illnessHistory?.objectiveStatus}}
+      </div>
+      <div>
+        Local status: {{prevApp.illnessHistory?.localStatus}}
+      </div>
+      <div>
+        Survey plan: {{prevApp.illnessHistory?.surveyPlan}}
+      </div>
+      <div>
+        Treatment plan: {{prevApp.illnessHistory?.treatmentPlan}}
+      </div>
     </div>
-    <div>
-      Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
-    </div>
-    <div>
-      Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
-    </div>
-    <div>
-      Objective status: {{IllnessHistory.objectiveStatus}}
-    </div>
-    <div>
-      Local status: {{IllnessHistory.localStatus}}
-    </div>
-    <div>
-      Survey plan: {{IllnessHistory.surveyPlan}}
-    </div>
-    <div>
-      Treatment plan: {{IllnessHistory.treatmentPlan}}
-    </div>
-  </div>
-</mat-expansion-panel>
+  </mat-expansion-panel>
+</div>

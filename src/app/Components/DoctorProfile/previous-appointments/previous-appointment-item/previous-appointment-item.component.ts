@@ -8,7 +8,9 @@ import { PreviousAppointment } from 'src/app/Models/PreviousAppointment';
 })
 export class PreviousAppointmentItemComponent implements OnInit {
 
-  @Input()prevApp: PreviousAppointment;
+  @Input()
+  prevApp: PreviousAppointment;
+
   constructor() { }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
 import { PreviousAppointment } from '../Models/PreviousAppointment';
+import { PreviousAppointmentFilter } from '../Models/PreviousAppointmentFilter';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -70,9 +71,33 @@ export class DoctorsService {
     return this.http.get<Specialization[]>(specUrl);
   }
 
-  getPreviousAppointment() {
+  getPreviousAppointment(filter: PreviousAppointmentFilter, pageIndex: number, pageSize: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams()
+    };
+
+    if (pageIndex) {
+      this.httpOptions.params = this.httpOptions.params.set('pageIndex', pageIndex.toString());
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('pageIndex');
+    }
+
+    if (pageSize) {
+      this.httpOptions.params = this.httpOptions.params.set('pageSize', pageSize.toString());
+    } else {
+      this.httpOptions.params = this.httpOptions.params.delete('pageSize');
+    }
+
+    if (filter) {
+    } else {
+
+    }
+
     const specUrl = this.url + '/previousappointments';
-    return this.http.get<PreviousAppointment[]>(specUrl);
+    return this.http.get<any>(specUrl, httpOptions);
   }
 
   getAppointmentStatuses() {
