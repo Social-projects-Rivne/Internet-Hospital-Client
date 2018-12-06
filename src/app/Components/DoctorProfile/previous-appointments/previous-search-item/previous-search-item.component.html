@@ -8,7 +8,7 @@
   <div fxFlex="20%">
     <div *ngFor="let status of statuses">
       <label>
-        <mat-checkbox name="statuses" value="{{status.value}}" [(ngModel)]="status.checked"> {{status.name}}
+        <mat-checkbox color="primary" name="statuses" value="{{status.value}}" [(ngModel)]="status.checked"> {{status.name}}
         </mat-checkbox>
       </label>
     </div>
