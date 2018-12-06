@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PreviousAppointment } from 'src/app/Models/PreviousAppointment';
-import { MatPaginator, PageEvent } from '@angular/material';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { MatPaginator } from '@angular/material';
+import { switchMap } from 'rxjs/operators';
 import { AppointmentStatus } from 'src/app/Models/AppointmentStatus';
 import { PreviousAppointmentFilter } from 'src/app/Models/PreviousAppointmentFilter';
 
@@ -15,35 +14,44 @@ import { PreviousAppointmentFilter } from 'src/app/Models/PreviousAppointmentFil
 export class PreviousAppointmentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageEvent: PageEvent;
 
   previousAppointments: PreviousAppointment[];
-  pageSize = 7;
+  statuses: AppointmentStatus[] = [];
   prevAppointCount: number;
-  statuses: AppointmentStatus[];
+  filter: PreviousAppointmentFilter = null;
   isStatusesResult = true;
   isAppointmentsResult = true;
+  pageSize = 5;
 
   constructor(private docService: DoctorsService) {
-    this.pageEvent = new PageEvent();
-   }
+  }
 
   ngOnInit() {
-    this.paginator.pageIndex = 1;
     this.paginator.pageSize = this.pageSize;
+
     this.docService.getAppointmentStatuses().subscribe(
       statuses => {
         this.initializeAppoitmentStatus(statuses);
         this.isStatusesResult = false;
       }
     );
-    // this.docService.getPreviousAppointment().subscribe(
-    //   result => {
-    //   this.previousAppointments = result.appointments;
-    //   this.prevAppointCount = result.quantity;
-    //   this.isAppointmentsResult = false;
-    //   }
-    // );
+
+    this.paginator.page
+      .pipe(
+        switchMap(() => {
+          this.isAppointmentsResult = true;
+          return this.docService.getPreviousAppointment(
+            this.filter,
+            this.paginator.pageIndex,
+            this.paginator.pageSize);
+        })
+      ).subscribe(result => {
+        this.previousAppointments = result.appointments;
+        this.prevAppointCount = result.quantity;
+        this.isAppointmentsResult = false;
+      });
+
+    this.paginator.page.emit();
   }
 
   initializeAppoitmentStatus(initializeAppoitmentStatus: string[]) {
@@ -53,46 +61,9 @@ export class PreviousAppointmentsComponent implements OnInit {
     });
   }
 
-  onSearch(event: PreviousAppointmentFilter) {
-    // selectedStatus
-    // searchKey
-    // // {searchKey : $event.searchKey, selectedStatus: $event.selectedStatus };
-    // const previousAppointmentFilter = new PreviousAppointmentFilter();
-
-    // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    this.paginator.pageIndex = 1;
-    // this.paginator.firstPage();
-    this.paginator.page
-      .pipe(
-        switchMap(() => {
-          this.isAppointmentsResult = true;
-          return this.docService.getPreviousAppointment(event,
-            this.paginator.pageIndex,
-            this.paginator.pageSize);
-        })
-      ).subscribe(
-        result => {
-        this.previousAppointments = result.appointments;
-        this.prevAppointCount = result.quantity;
-        this.isAppointmentsResult = false;
-        });
-
-        // const event = new PageEvent();
-        // event.pageIndex = 1;
-        // event.pageSize = 5;
-        // event.length = this.prevAppointCount;
-        // this.pageSwitch(event);
-
-    // this.docService.getPreviousAppointment($event).subscribe(
-    //   result => {
-    //   this.previousAppointments = result.appointments;
-    //   this.prevAppointCount = result.quantity;
-    //   this.isAppointmentsResult = false;
-     // }
-    // );
-  }
-
-  pageSwitch(event: PageEvent) {
-
+  onSearch($event: PreviousAppointmentFilter) {
+    this.paginator.pageIndex = 0;
+    this.filter = $event;
+    this.paginator.page.emit();
   }
 }

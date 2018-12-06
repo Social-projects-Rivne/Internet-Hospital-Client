@@ -80,20 +80,41 @@ export class DoctorsService {
     };
 
     if (pageIndex) {
-      this.httpOptions.params = this.httpOptions.params.set('pageIndex', pageIndex.toString());
+      httpOptions.params = httpOptions.params.set('page', (pageIndex + 1).toString());
     } else {
-      this.httpOptions.params = this.httpOptions.params.delete('pageIndex');
+      httpOptions.params = httpOptions.params.delete('page');
     }
 
     if (pageSize) {
-      this.httpOptions.params = this.httpOptions.params.set('pageSize', pageSize.toString());
+      httpOptions.params = httpOptions.params.set('pageCount', pageSize.toString());
     } else {
-      this.httpOptions.params = this.httpOptions.params.delete('pageSize');
+      httpOptions.params = httpOptions.params.delete('pageCount');
     }
 
     if (filter) {
-    } else {
-
+      if (filter.searchKey) {
+        httpOptions.params = httpOptions.params.set(searchbyname, filter.searchKey);
+      } else {
+        httpOptions.params = httpOptions.params.delete(searchbyname);
+      }
+      if (filter.from) {
+        httpOptions.params = httpOptions.params.set('from', filter.from.toDateString());
+      } else {
+        httpOptions.params = httpOptions.params.delete('from');
+      }
+      if (filter.till) {
+        httpOptions.params = httpOptions.params.set('till', filter.till.toDateString());
+      } else {
+        httpOptions.params = httpOptions.params.delete('till');
+      }
+      if (filter.statuses) {
+        httpOptions.params = httpOptions.params.delete('statuses');
+        filter.statuses.forEach((element) => {
+          httpOptions.params = httpOptions.params.append('statuses', element.toString());
+        });
+      } else {
+        httpOptions.params = httpOptions.params.delete('statuses');
+      }
     }
 
     const specUrl = this.url + '/previousappointments';

@@ -1,16 +1,33 @@
 <div class="container" fxLayout="column" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
-    <mat-form-field fxFlex="40%" class="search-form-field" floatLabel="never">
-      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field fxFlex="40%">
-      <div *ngfor="let status of statuses">
-          <label>
-            <input type="checkbox" name="statuses" value="{{status.value}}" [(ngModel)]="status.checked" (change)="selected($event)"> {{status.name}}
-          </label>
-      </div>
-    </mat-form-field>
-    <button fxFlex="20%" mat-raised-button color="primary" (click)="onSearch()">Search</button>
+  <mat-form-field fxFlex="20%" class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="filter.searchKey" placeholder="Search" autocomplete="off">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div fxFlex="20%">
+    <div *ngFor="let status of statuses">
+      <label>
+        <mat-checkbox name="statuses" value="{{status.value}}" [(ngModel)]="status.checked"> {{status.name}}
+        </mat-checkbox>
+      </label>
+    </div>
   </div>
+  <mat-form-field fxFlex="20%">
+    <input matInput [(ngModel)]="filter.from" [matDatepicker]="fromPicker" placeholder="From" (dateChange)="beginDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+    <mat-datepicker #fromPicker startView="month" [startAt]="filter.from"></mat-datepicker>
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.from" (click)="onFromClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field fxFlex="20%">
+    <input matInput [(ngModel)]="filter.till" [matDatepicker]="toPicker" placeholder="To" (dateChange)="finishDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+    <mat-datepicker #toPicker startView="month" [startAt]="filter.till"></mat-datepicker>
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.till" (click)="onTillClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button fxFlex="20%" mat-raised-button color="primary" (click)="onSearch()">Search</button>
+</div>

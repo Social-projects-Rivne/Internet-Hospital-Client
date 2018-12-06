@@ -15,26 +15,26 @@
       </mat-list-item>
     </mat-expansion-panel-header>
     <div>
-      <div>
-        Complaints: {{prevApp.illnessHistory?.complaints}}
+      <div *ngIf="prevApp.illnessHistory?.complaints">
+        Complaints: {{prevApp.illnessHistory.complaints}}
       </div>
-      <div>
-        Disease Anamnesis: {{prevApp.illnessHistory?.diseaseAnamnesis}}
+      <div *ngIf="prevApp.illnessHistory?.diseaseAnamnesis">
+        Disease Anamnesis: {{prevApp.illnessHistory.diseaseAnamnesis}}
       </div>
-      <div>
-        Life Anamnesis: {{prevApp.illnessHistory?.lifeAnamnesis}}
+      <div *ngIf="prevApp.illnessHistory?.lifeAnamnesis">
+        Life Anamnesis: {{prevApp.illnessHistory.lifeAnamnesis}}
       </div>
-      <div>
-        Objective status: {{prevApp.illnessHistory?.objectiveStatus}}
+      <div *ngIf="prevApp.illnessHistory?.objectiveStatus">
+        Objective status: {{prevApp.illnessHistory.objectiveStatus}}
       </div>
-      <div>
-        Local status: {{prevApp.illnessHistory?.localStatus}}
+      <div *ngIf="prevApp.illnessHistory?.localStatus">
+        Local status: {{prevApp.illnessHistory.localStatus}}
       </div>
-      <div>
-        Survey plan: {{prevApp.illnessHistory?.surveyPlan}}
+      <div *ngIf="prevApp.illnessHistory?.surveyPlan">
+        Survey plan: {{prevApp.illnessHistory.surveyPlan}}
       </div>
-      <div>
-        Treatment plan: {{prevApp.illnessHistory?.treatmentPlan}}
+      <div *ngIf="prevApp.illnessHistory?.treatmentPlan">
+        Treatment plan: {{prevApp.illnessHistory.treatmentPlan}}
       </div>
     </div>
   </mat-expansion-panel>

@@ -1,4 +1,3 @@
-
 export class AppointmentStatus {
     name: string;
     value: number;

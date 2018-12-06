@@ -10,7 +10,6 @@
       </mat-list>
     </div>
   </div>
-  <mat-paginator fxLayoutAlign="end start" [length]="prevAppointCount" [pageSize]="pageSize" (page)="pageSwitch($event)"
-    [hidePageSize]="true">
+  <mat-paginator fxLayoutAlign="end start" [length]="prevAppointCount" [pageSize]="pageSize" [hidePageSize]="true" showFirstLastButtons>
   </mat-paginator>
 </div>
