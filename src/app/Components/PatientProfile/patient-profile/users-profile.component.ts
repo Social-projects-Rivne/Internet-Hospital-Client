@@ -5,6 +5,7 @@ import { NotificationService } from '../../../Services/notification.service';
 import { HOST_URL } from '../../../config';
 import { IllnessHistory } from 'src/app/Models/IllnessHistory';
 import { ICurrentUser } from '../../../Models/CurrentUser';
+import { PatientSettings } from '../../../Models/ProfileSettings/PatientSettings';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { Patient } from '../../../Models/Patient';
 import { IllnessHistoryFilter } from '../../../Models/IllnessHistoryFilter';
@@ -33,6 +34,7 @@ export class UsersProfileComponent implements OnInit {
   user: ICurrentUser;
   token = TOKEN;
   patient: Patient = null;
+  sex = 2;
 
   tempHistory: IllnessHistory[] = null;
 
@@ -43,6 +45,14 @@ export class UsersProfileComponent implements OnInit {
   defaultImage = '../../assets/img/default.png';
   fileAvatar: File = null;
   imageToShow = this.defaultImage;
+
+  patientSettings = PatientSettings;
+
+  changeSettings(id: number) {
+    const result = id;
+    console.log(result);
+    return result;
+  }
 
   getImageFromService() {
     this.patientService.getImage().subscribe((data: any) => {

@@ -1,91 +1,113 @@
 <div class="profile" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="40px">
-  <mat-card class="profile-top mat-elevation-z8">
-    <mat-drawer-container class="example-container" hasBackdrop="true" fxFlex>
-      <div class="top-info" fxLayout="row" fxFlex>
-        <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
-          <form enctype="multipart/form-data">
-            <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
-            <img [src]="imageToShow" alt="Avatar" (click)="Image.click()" title="Change your profile photo" (error)="img.src = defaultImage"
-              #img/>
-          </form>
-        </div>
-        <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
-          <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutGap="6%">
-            <div>{{patient?.firstName}}</div>
-            <div>{{patient?.secondName}}</div>
-            <div>{{patient?.thirdName}}</div>
-          </div>
-          <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5%">
-            <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
-            <div>Phone number: {{patient?.phoneNumber}}</div>
-          </div>
-        </div>
-        <div class="example-sidenav-content" fxLayoutAlign="center start">
-          <button type="button" mat-button (click)="drawer.toggle()">
+  <!-- <div fxLayout="row" fxLayoutAlign="space-around center"> -->
+    <mat-drawer-container class="example-container" hasBackdrop="true" autozise>
+      <mat-drawer #drawer mode="over" class="example-sidenav">
+        <div fxLayout="column" fxLayoutGap="10%">
+          <button (click)="result = changeSettings(patientSettings.MyProfile)" [disabled]="result===patientSettings.MyProfile"
+            mat-raised-button>
+            My profile
+          </button>
+          <button (click)="result = changeSettings(patientSettings.EditProfile)" [disabled]="result===patientSettings.EditProfile"
+            mat-raised-button>
             Edit profile
           </button>
+          <button (click)="result = changeSettings(patientSettings.IllnessHistories)" [disabled]="result===patientSettings.IllnessHistories"
+            mat-raised-button>
+            My illness histories
+          </button>
+          <button (click)="result = changeSettings(patientSettings.Appointments)" [disabled]="result===patientSettings.Appointments"
+            mat-raised-button>
+            My appointments
+          </button>
         </div>
-      </div>
-      <mat-drawer #drawer mode="over" class="example-sidenav" autozise>
-        <app-update-patient></app-update-patient>
       </mat-drawer>
-    </mat-drawer-container>
-  </mat-card>
-
-  <mat-card class="pation-additional-info mat-elevation-z8">
-    <app-patient-appointments></app-patient-appointments>
-  </mat-card>
-
-  <mat-card class="profile-bottom mat-elevation-z8" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%">
-    <h3 style="text-align:center">Illness History</h3>
-    <div class="without_paginator" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1%">
-      <div class="patient-history-search-filter" fxFlex="30%">
-        <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
-      </div>
-      <div class="patient-history" fxFlex>
-        <mat-list>
-          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%"
-            fxLayout="row">
-            <mat-expansion-panel fxFlex>
-              <mat-expansion-panel-header>
-                <div fxLayout="row">
-                  <mat-list-item>
-                    <div>{{IllnessHistory.finishAppointmentTime}}</div>
-                  </mat-list-item>
-                  <mat-list-item>
-                    <div>{{IllnessHistory.diagnose}}</div>
-                  </mat-list-item>
-                </div>
-              </mat-expansion-panel-header>
-              <div fxLayout="column" fxLayoutGap="5px">
-                <div>
-                  Complaints: {{IllnessHistory.complaints}}
-                </div>                
-                <div>
-                  Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
-                </div>
-                <div>
-                  Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
-                </div>
-                <div>
-                  Objective status: {{IllnessHistory.objectiveStatus}}
-                </div>
-                <div>
-                  Local status: {{IllnessHistory.localStatus}}
-                </div>
-                <div>
-                  Survey plan: {{IllnessHistory.surveyPlan}}
-                </div>
-                <div>
-                  Treatment plan: {{IllnessHistory.treatmentPlan}}
-                </div>
+      <div class="content" fxLayout="row">
+        <div class="example-sidenav-content">
+          <button type="button" mat-button (click)="drawer.toggle()">
+            Settings
+          </button>
+        </div>
+        <app-update-patient *ngIf="result===patientSettings.EditProfile"></app-update-patient>
+        <mat-card *ngIf="result===patientSettings.MyProfile" class="profile-top mat-elevation-z8" fxFlex>
+          <div class="top-info" fxLayout="row" fxFlex>
+            <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
+              <form enctype="multipart/form-data">
+                <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
+                <img [src]="imageToShow" alt="Avatar" (click)="Image.click()" title="Change your profile photo" (error)="img.src = defaultImage"
+                  #img />
+              </form>
             </div>
-            </mat-expansion-panel>
+            <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
+              <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center"
+                fxLayoutGap="6%">
+                <div>{{patient?.firstName}}</div>
+                <div>{{patient?.secondName}}</div>
+                <div>{{patient?.thirdName}}</div>
+              </div>
+              <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5%">
+                <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
+                <div>Phone number: {{patient?.phoneNumber}}</div>
+              </div>
+            </div>
           </div>
-        </mat-list>
+        </mat-card>
+        <mat-card *ngIf="result===patientSettings.IllnessHistories" class="profile-bottom mat-elevation-z8" fxLayout="column"
+          fxFlex="50%" fxLayoutGap="0.5%">
+          <h3 style="text-align:center">Illness History</h3>
+          <div class="without_paginator" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1%">
+            <div class="patient-history-search-filter" fxFlex="30%">
+              <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
+            </div>
+            <div class="patient-history" fxFlex>
+              <mat-list>
+                <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%"
+                  fxLayout="row">
+                  <mat-expansion-panel fxFlex>
+                    <mat-expansion-panel-header>
+                      <div fxLayout="row">
+                        <mat-list-item>
+                          <div>{{IllnessHistory.finishAppointmentTime}}</div>
+                        </mat-list-item>
+                        <mat-list-item>
+                          <div>{{IllnessHistory.diagnose}}</div>
+                        </mat-list-item>
+                      </div>
+                    </mat-expansion-panel-header>
+                    <div fxLayout="column" fxLayoutGap="5px">
+                      <div>
+                        Complaints: {{IllnessHistory.complaints}}
+                      </div>
+                      <div>
+                        Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
+                      </div>
+                      <div>
+                        Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
+                      </div>
+                      <div>
+                        Objective status: {{IllnessHistory.objectiveStatus}}
+                      </div>
+                      <div>
+                        Local status: {{IllnessHistory.localStatus}}
+                      </div>
+                      <div>
+                        Survey plan: {{IllnessHistory.surveyPlan}}
+                      </div>
+                      <div>
+                        Treatment plan: {{IllnessHistory.treatmentPlan}}
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </mat-list>
+            </div>
+          </div>
+          <mat-paginator fxLayoutAlign="end start" [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize"
+            (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
+        </mat-card>
+        <mat-card *ngIf="result===patientSettings.Appointments" class="pation-additional-info mat-elevation-z8">
+          <app-patient-appointments></app-patient-appointments>
+        </mat-card>
       </div>
-    </div>
-    <mat-paginator fxLayoutAlign="end start" [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize"
-      (page)="pageSwitch($event)" [hidePageSize]="true"></mat-paginator>
-  </mat-card>
+    </mat-drawer-container>
+  <!-- </div> -->
 </div>
