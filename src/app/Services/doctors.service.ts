@@ -71,54 +71,20 @@ export class DoctorsService {
     return this.http.get<Specialization[]>(specUrl);
   }
 
-  getPreviousAppointment(filter: PreviousAppointmentFilter, pageIndex: number, pageSize: number) {
+  getPreviousAppointment(filter: PreviousAppointmentFilter) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
       params: new HttpParams()
     };
-
-    if (pageIndex) {
-      httpOptions.params = httpOptions.params.set('page', (pageIndex + 1).toString());
-    } else {
-      httpOptions.params = httpOptions.params.delete('page');
-    }
-
-    if (pageSize) {
-      httpOptions.params = httpOptions.params.set('pageCount', pageSize.toString());
-    } else {
-      httpOptions.params = httpOptions.params.delete('pageCount');
-    }
+    let url = this.url + '/previousappointments';
 
     if (filter) {
-      if (filter.searchKey) {
-        httpOptions.params = httpOptions.params.set(searchbyname, filter.searchKey);
-      } else {
-        httpOptions.params = httpOptions.params.delete(searchbyname);
-      }
-      if (filter.from) {
-        httpOptions.params = httpOptions.params.set('from', filter.from.toDateString());
-      } else {
-        httpOptions.params = httpOptions.params.delete('from');
-      }
-      if (filter.till) {
-        httpOptions.params = httpOptions.params.set('till', filter.till.toDateString());
-      } else {
-        httpOptions.params = httpOptions.params.delete('till');
-      }
-      if (filter.statuses) {
-        httpOptions.params = httpOptions.params.delete('statuses');
-        filter.statuses.forEach((element) => {
-          httpOptions.params = httpOptions.params.append('statuses', element.toString());
-        });
-      } else {
-        httpOptions.params = httpOptions.params.delete('statuses');
-      }
+      url += filter.getUrl();
     }
 
-    const specUrl = this.url + '/previousappointments';
-    return this.http.get<any>(specUrl, httpOptions);
+    return this.http.get<any>(url, httpOptions);
   }
 
   getAppointmentStatuses() {

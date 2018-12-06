@@ -18,12 +18,13 @@ export class PreviousAppointmentsComponent implements OnInit {
   previousAppointments: PreviousAppointment[];
   statuses: AppointmentStatus[] = [];
   prevAppointCount: number;
-  filter: PreviousAppointmentFilter = null;
+  filter: PreviousAppointmentFilter;
   isStatusesResult = true;
   isAppointmentsResult = true;
   pageSize = 5;
 
   constructor(private docService: DoctorsService) {
+    this.filter = new PreviousAppointmentFilter();
   }
 
   ngOnInit() {
@@ -40,10 +41,9 @@ export class PreviousAppointmentsComponent implements OnInit {
       .pipe(
         switchMap(() => {
           this.isAppointmentsResult = true;
-          return this.docService.getPreviousAppointment(
-            this.filter,
-            this.paginator.pageIndex,
-            this.paginator.pageSize);
+          this.filter.pageIndex = this.paginator.pageIndex;
+          this.filter.pageSize = this.paginator.pageSize;
+          return this.docService.getPreviousAppointment(this.filter);
         })
       ).subscribe(result => {
         this.previousAppointments = result.appointments;
