@@ -27,8 +27,14 @@
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
         <a class="font-view" mat-button routerLink="/doctor-list">Doctor's List</a>
+        <button *ngIf="(isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="notificationMenu" (menuOpened)="menuOpened()"
+            (menuClosed)="menuClosed()">
+            <mat-icon [matBadge]="1" matBadgeColor="warn" matBadgePosition="above after" matBadgeSize="medium">
+                notification_important
+            </mat-icon>
+        </button>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
-            <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img/>
+            <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img />
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <button class="font-view" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
@@ -42,4 +48,19 @@
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
+</mat-menu>
+<mat-menu #notificationMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="notification-menu">
+    <app-loading *ngIf="load"></app-loading>
+    <div class="scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
+        [scrollWindow]="false">
+        <div *ngFor="let item of testArray" class="message">
+            <div class="ttt">
+                <img src="../../../../assets/img/default-avatar.png" class="user-avatar">
+                {{item.message}} {{item.readStatus}}
+                <button mat-icon-button class="notification_btn" (click)="changeStatus(item); $event.stopPropagation();">
+                    <mat-icon [ngStyle]="{ 'color': (item.isRead ? 'red' : 'blue') }">face</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
 </mat-menu>
