@@ -1,3 +1,56 @@
-<p>
-  user-requests works!
-</p>
+<div id="father-div" fxLayout="column" fxLayoutAlign="space-around center">
+
+  <div id="component-box" fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div id="navigate-div">
+      <mat-form-field class="example-full-width margin-ten">
+        <input autocomplete="off" matInput [(ngModel)]="search" 
+        (change)="paginator.pageIndex=0; paginator.page.emit()" 
+        placeholder="Text Search">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width margin-ten">
+        <mat-select [(value)]="selectedType" placeholder="Type" [(value)]="selected">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let item of typeslist" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="margin-ten" (click)="onSearch()" mat-raised-button color="primary">Search</button>
+    </div>
+
+    <mat-paginator
+    showFirstLastButtons
+    [pageSize]="_paginationService.pageSize"
+     [length]="usersAmount" (page)="pageSwitch($event)">
+    </mat-paginator>
+
+  </div>
+
+  <mat-progress-bar *ngIf="isLoadingResult" mode="buffer"></mat-progress-bar>
+  <mat-card fxLayout="row" class="feedback-card" *ngFor='let item of feedbacksmodels'>
+    <div id="username-box" fxFlex="100" fxFlex.gt-md="30">
+      <p class="username">{{item.usersFirstName}}</p>
+      <p class="username">{{item.usersSecondName}}</p>
+      <p class="username">{{item.usersThirdName}}</p>
+      <p class="else-info">{{item.usersEmail}}</p>
+      <div fxHide fxShow.gt-md>
+        <mat-card-subtitle>{{item.feedbackTypeName}}</mat-card-subtitle>
+        <mat-card-subtitle>{{item.dateTime | date}}</mat-card-subtitle>
+      </div>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-md="70">
+      <p>
+        {{item.text}}
+      </p>
+    </div>
+    <mat-card-actions fxShow fxHide.gt-md fxLayout="row" fxLayoutAlign="space-around center" fxFlex="100" fxFlex.gt-md="100">
+      <mat-card-subtitle>{{item.feedbackTypeName}}</mat-card-subtitle>
+      <mat-card-subtitle>{{item.dateTime | date}}</mat-card-subtitle>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

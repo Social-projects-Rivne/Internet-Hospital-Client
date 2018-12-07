@@ -45,9 +45,11 @@ import { DataApproveComponent } from '../../Components/adminpanel/request-manage
 import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
+    MatProgressBarModule,
     MatTooltipModule,
     CommonModule,
     AdminpanelRoutingModule,
