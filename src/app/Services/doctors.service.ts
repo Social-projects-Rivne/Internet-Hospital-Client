@@ -14,6 +14,9 @@ const searchbyspecialization = 'searchbyspecialization';
 const INCLUDE_ALL = 'includeAll';
 const PAGE = 'page';
 const PAGE_SIZE = 'pageSize';
+const SEARCH_BY_NAME = 'searchByName';
+const SORT = 'sort';
+const ORDER_BY = 'order';
 
 @Injectable({
   providedIn: 'root'
@@ -83,11 +86,14 @@ export class DoctorsService {
     return this.http.post(url, illnessHistory);
   }
 
-  getMyPatients(page: number, includeAll: boolean, pageSize: number): Observable<MyPatients> {
+  getMyPatients(sort: string,
+    order: string, searchByName: string, page: number, includeAll: boolean, pageSize: number): Observable<MyPatients> {
     const url = this.url + '/mypatients' + `?${PAGE}=${page + 1}&`
               + `${PAGE_SIZE}=${pageSize}&`
-              + `${INCLUDE_ALL}=${includeAll}&`;
-    // const url = this.url + '/mypatients';
+              + `${INCLUDE_ALL}=${includeAll}&`
+              + `${SEARCH_BY_NAME}=${searchByName}&`
+              + `${ORDER_BY}=${order}&`
+              + `${SORT}=${sort}`;
     return this.http.get<MyPatients>(url, this.httpOptions);
   }
 }

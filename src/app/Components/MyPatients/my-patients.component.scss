@@ -1,0 +1,53 @@
+.checkbox-for-filtering {
+    display: block; 
+    margin: 20px 0;
+  }
+  
+  .filtering-block {
+    padding: 10px;
+  
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  .table-container {
+    position: relative;
+  
+    .loading-shade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .rate-limit-reached {
+        color: #980000;
+        max-width: 360px;
+        text-align: center;
+      }
+  
+      table {
+        width: 100%;
+  
+        .delete-column{
+          width:50px;
+          padding: 0;
+        }
+    }    
+  }
+  
+  .mat-paginator {
+    margin-bottom: 20px;
+  }
+  
+  button, a {
+    margin: 0 10px 0 0;
+  }
+  
