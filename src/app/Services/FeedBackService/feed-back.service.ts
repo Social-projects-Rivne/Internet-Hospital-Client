@@ -51,14 +51,14 @@ export class FeedBackService {
       this.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
 
       typeUrl += `?page=${this._paginationService.pageIndex}&`;
-      typeUrl += `pagecount=${this._paginationService.pageSize}`;
+      typeUrl += `pagecount=${this._paginationService.pageSize}&`;
 
     if (filter != null) {
       if (filter.searchKey !== undefined && filter.searchKey !== '') {
-        typeUrl += `?${SEARCH_NAME}=${filter.searchKey}&`;
+        typeUrl += `${SEARCH_NAME}=${filter.searchKey}&`;
       }
       if (filter.selectedType !== 0 && filter.selectedType !== undefined) {
-        typeUrl += `?${SEARCH_STATUS}=${filter.selectedType}`;
+        typeUrl += `${SEARCH_STATUS}=${filter.selectedType}`;
       }
     }
     return this.http.get(typeUrl);

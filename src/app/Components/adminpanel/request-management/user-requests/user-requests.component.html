@@ -1,14 +1,13 @@
 <div id="father-div" fxLayout="column" fxLayoutAlign="space-around center">
 
-  <div id="component-box" fxLayout="row" fxLayoutAlign="space-around center">
+  <div id="component-box">
 
     <div id="navigate-div">
       <mat-form-field class="example-full-width margin-ten">
-        <input autocomplete="off" matInput [(ngModel)]="search" 
-        (change)="paginator.pageIndex=0; paginator.page.emit()" 
-        placeholder="Text Search">
+        <input autocomplete="off" matInput [(ngModel)]="search" (change)="paginator.pageIndex=0; paginator.page.emit()"
+          placeholder="Text Search">
       </mat-form-field>
-
+      <br fxHide.gt-md>
       <mat-form-field class="example-full-width margin-ten">
         <mat-select [(value)]="selectedType" placeholder="Type" [(value)]="selected">
           <mat-option>None</mat-option>
@@ -17,40 +16,73 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
+      <br fxHide.gt-md>
       <button class="margin-ten" (click)="onSearch()" mat-raised-button color="primary">Search</button>
+      <button (click)="onClear()" mat-raised-button color="warn">Clear</button>
     </div>
-
-    <mat-paginator
-    showFirstLastButtons
-    [pageSize]="_paginationService.pageSize"
-     [length]="usersAmount" (page)="pageSwitch($event)">
-    </mat-paginator>
 
   </div>
 
   <mat-progress-bar *ngIf="isLoadingResult" mode="buffer"></mat-progress-bar>
-  <mat-card fxLayout="row" class="feedback-card" *ngFor='let item of feedbacksmodels'>
-    <div id="username-box" fxFlex="100" fxFlex.gt-md="30">
-      <p class="username">{{item.usersFirstName}}</p>
-      <p class="username">{{item.usersSecondName}}</p>
-      <p class="username">{{item.usersThirdName}}</p>
-      <p class="else-info">{{item.usersEmail}}</p>
-      <div fxHide fxShow.gt-md>
-        <mat-card-subtitle>{{item.feedbackTypeName}}</mat-card-subtitle>
-        <mat-card-subtitle>{{item.dateTime | date}}</mat-card-subtitle>
-      </div>
-    </div>
 
-    <div fxFlex="100" fxFlex.gt-md="70">
-      <p>
-        {{item.text}}
-      </p>
-    </div>
-    <mat-card-actions fxShow fxHide.gt-md fxLayout="row" fxLayoutAlign="space-around center" fxFlex="100" fxFlex.gt-md="100">
-      <mat-card-subtitle>{{item.feedbackTypeName}}</mat-card-subtitle>
-      <mat-card-subtitle>{{item.dateTime | date}}</mat-card-subtitle>
-    </mat-card-actions>
-  </mat-card>
+  <table matSort mat-table [dataSource]="feedbacksmodels" multiTemplateDataRows class="mat-elevation-z8">
 
+    <ng-container matColumnDef="usersEmail">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>users email</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.usersEmail}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="dateTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>date</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.dateTime | date}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="feedbackTypeName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.feedbackTypeName}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="isViewed">
+      <th mat-header-cell *matHeaderCellDef>status</th>
+      <td mat-cell *matCellDef="let row">
+        <a class="status-buttons" *ngIf="isViewed" mat-button><i class="material-icons">done</i></a>
+        <a class="status-buttons" *ngIf="!isViewed" mat-button><i class="material-icons">send</i></a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div fxLayout="row" fxLayoutAlign="space-around center" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="minwidth" fxFlex="10" fxLayout="column" fxLayoutAlign="space-around center">
+            <img [src]="element.usersAvatarURL" />
+          </div>
+          <div class="minwidth" fxFlex="10" fxLayout="column" fxLayoutAlign="space-around center">
+            <div class="example-element-detail"> {{element.usersFirstName}} 
+              {{element.usersSecondName}}
+              {{element.usersThirdName}} </div>
+            <div class="example-element-description"> {{element.usersBirthDate | date}} </div>
+          </div>
+          <div class="minwidth" fxFlex="80" class="example-element-description">
+            <p id="maintextbox">{{element.text}}</p>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+</div>
+
+<div>
+  <mat-paginator showFirstLastButtons [pageSize]="_paginationService.pageSize" [pageSizeOptions]="[5, 10, 15]" [length]="usersAmount"
+    (page)="pageSwitch($event)">
+  </mat-paginator>
 </div>
