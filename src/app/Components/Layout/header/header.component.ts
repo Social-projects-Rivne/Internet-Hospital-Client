@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HOST_URL, API_DOCTORS } from '../../../config';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { HttpClient } from '@angular/common/http';
@@ -66,31 +66,22 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // getItems() {
-  //   this.load = true;
-  //   const doctorsUrl = this.url;
-  //   this.http.get(doctorsUrl + '?page=' + this.page.toString()).subscribe((data: any) => {
-  //     this.success(data.doctors);
-  //     this.load = false;
-  //   },
-  //   error => {
-  //     this.load = false;
-  //   });
-  // }
-
   getItems() {
     this.http.get('https://localhost:44357/api/notification' + '?page=' + this.page.toString() + '&pagecount=' + 5)
-    .subscribe((data: any) => {
-      console.log(data);
-      this.success(data.entities);
-      this.load = false;
-    });
+      .subscribe((data: any) => {
+        console.log(data);
+        this.success(data.entities);
+        this.load = false;
+      },
+      error => {
+        this.load = false;
+      });
   }
 
   changeStatus(item: any) {
     console.log(item);
     this.http.patch('https://localhost:44357/api/notification/change', item.id).subscribe(() => {
-       item.isRead = ! item.isRead;
+      item.isRead = !item.isRead;
     });
   }
 }

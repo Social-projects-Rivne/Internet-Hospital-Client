@@ -62,25 +62,57 @@
 }
 
 .message {
-  margin: 5px; height: 55px;width: auto; background-color: white;position: relative; 
+  margin: 5px; 
+  min-height: 55px;
+  width: auto; 
+  background-color: white;
+  position: relative; 
+  border-radius: 5px;
+  border: #ffffff 0.5px solid;
 }
 
 .message:hover {
- background-color: rgb(196, 195, 195)
+ border: #88898a 0.5px solid;
 }
 
 .notification-menu {
   position: relative;
-  background-color: #b4bbbb 
+  background-color: #b4bbbb;
 }
 
-.notification_btn .material-icons {
-  color: rgb(19, 33, 158);
+.notification-info { 
+  position: relative;
 }
 
-.ttt {
-  margin-left: 10px;
-  position: absolute;
+.notification_btn {
+  float: right;  
+  .mat-icon-button {
+    height:24px;
+    width: 24px;
+  }
+
+  .material-icons {
+    font-size: 10px;
+  }
+
+  .material-icons:hover {
+    font-size: 12px;
+  }
+}
+
+.notification-message {
+  padding: 5px;
+  text-align: justify;
+
+  a {
+    color: #444749; 
+  }
+}
+
+.notification-date {
+    margin-left: 10px;
+    position: absolute;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
+    color: #5e6468
 }

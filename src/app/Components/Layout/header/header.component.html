@@ -27,8 +27,7 @@
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
         <a class="font-view" mat-button routerLink="/doctor-list">Doctor's List</a>
-        <button *ngIf="(isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="notificationMenu" (menuOpened)="menuOpened()"
-            (menuClosed)="menuClosed()">
+        <button *ngIf="(isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="notificationMenu" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">
             <mat-icon [matBadge]="1" matBadgeColor="warn" matBadgePosition="above after" matBadgeSize="medium">
                 notification_important
             </mat-icon>
@@ -51,15 +50,31 @@
 </mat-menu>
 <mat-menu #notificationMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="notification-menu">
     <app-loading *ngIf="load"></app-loading>
-    <div class="scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
-        [scrollWindow]="false">
-        <div *ngFor="let item of testArray" class="message">
-            <div class="ttt">
-                <img src="../../../../assets/img/default-avatar.png" class="user-avatar">
-                {{item.message}} {{item.readStatus}}
-                <button mat-icon-button class="notification_btn" (click)="changeStatus(item); $event.stopPropagation();">
-                    <mat-icon [ngStyle]="{ 'color': (item.isRead ? 'red' : 'blue') }">face</mat-icon>
-                </button>
+    <div class="scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+        <div *ngFor="let item of testArray" class="message" (click)="$event.stopPropagation()" [ngStyle]="{ 'background': (item.isRead ? 'white' : 'azure') }">
+            <div fxLayout="row">
+                <div fxFlex="100%" class="notification-message">
+                    <a>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum consectetur totam, unde earum reiciendis
+                        alias explicabo deserunt quisquam ipsam nesciunt cum reprehenderit iste est, incidunt, labore facilis
+                        natus magni odio!</a>
+                </div>
+            </div>           
+            <div fxLayout="row" class="notification-info">
+                <div fxFlex="50%">
+                    <div fxLayout="row">
+                        <div fxFlex="20%">
+                                <a class="notification-date">{{item.date | date:'HH:mm'}}</a>
+                        </div>
+                        <div fxFlex="20%">
+                                <a class="notification-date">{{item.date | date:'dd.MMM.yy'}}</a>
+                        </div>
+                    </div>
+                </div>               
+                <div fxFlex="50%">
+                    <button mat-icon-button class="notification_btn" (click)="changeStatus(item)" [matTooltip]="item.isRead ? 'mark as unread' : 'mark as read'">
+                        <mat-icon [ngStyle]="{ 'color': (item.isRead ? 'grey' : 'red') }">fiber_manual_record</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
