@@ -6,9 +6,14 @@ import { Specialization } from '../Models/Specialization';
 import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { MyPatients } from '../Models/MyPatients';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
+const INCLUDE_ALL = 'includeAll';
+const PAGE = 'page';
+const PAGE_SIZE = 'pageSize';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +81,13 @@ export class DoctorsService {
     illnessHistory.finishAppointmentTime = this.datePipe.transform(new Date(), 'short');
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
+  }
+
+  getMyPatients(page: number, includeAll: boolean, pageSize: number): Observable<MyPatients> {
+    const url = this.url + '/mypatients' + `?${PAGE}=${page + 1}&`
+              + `${PAGE_SIZE}=${pageSize}&`
+              + `${INCLUDE_ALL}=${includeAll}&`;
+    // const url = this.url + '/mypatients';
+    return this.http.get<MyPatients>(url, this.httpOptions);
   }
 }
