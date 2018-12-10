@@ -59,13 +59,6 @@ export class MyPatientsComponent implements OnInit {
   }
 
   select(event, id) {
-    const index = this.selected.indexOf(id);
-    if (event.checked) {
-      if (index === -1) {
-        this.selected.push(id);
-      }
-    } else if (index !== -1) {
-      this.selected.splice(index, 1);
-    }
+    // method for added to black list
   }
 }
