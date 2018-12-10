@@ -36,6 +36,7 @@
 .material-icons {
   color: azure;
 }
+
 .mat-menu-panel.notification-menu {
   max-width: 500px;
 }
@@ -58,7 +59,9 @@
 }
 
 .scroll {
-  height: 200px; overflow-y: scroll;width:445px;
+  height: 200px; 
+  overflow-y: scroll;
+  width:445px;
 }
 
 .message {
