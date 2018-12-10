@@ -34,6 +34,7 @@ export class DoctorListComponent implements OnInit {
       this.doctorsList = result.doctors;
       this.doctorsAmount = result.totalDoctors;
       this.isLoadingResults = false;
+      console.log(result);
     },
     error => {
       this.notification.error(error);
