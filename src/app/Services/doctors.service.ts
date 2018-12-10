@@ -104,7 +104,6 @@ export class DoctorsService {
     if (sort) {
       url += `${SORT}=${sort}`;
     }
-    console.log(url);
     return this.http.get<MyPatients>(url, this.httpOptions);
   }
 
