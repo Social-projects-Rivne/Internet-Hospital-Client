@@ -7,7 +7,6 @@ import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { MyPatients } from '../Models/MyPatients';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -91,7 +90,7 @@ export class DoctorsService {
     searchByName: string,
     page: number,
     includeAll: boolean,
-    pageSize: number): Observable<MyPatients> {
+    pageSize: number): Observable<any> {
     let url = this.url + '/mypatients' + `?${PAGE}=${page + 1}&`
       + `${PAGE_SIZE}=${pageSize}&`
       + `${INCLUDE_ALL}=${includeAll}&`;
@@ -104,6 +103,6 @@ export class DoctorsService {
     if (sort) {
       url += `${SORT}=${sort}`;
     }
-    return this.http.get<MyPatients>(url, this.httpOptions);
+    return this.http.get<any>(url, this.httpOptions);
   }
 }
