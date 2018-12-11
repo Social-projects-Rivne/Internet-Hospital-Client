@@ -10,6 +10,14 @@
                 {{appointment.startTime | date:'HH.mm'}} - {{appointment.endTime | date:'HH.mm'}}
             </mat-card-content>
         </div>
+        <mat-checkbox color="primary" [(checked)]="isAllow">
+            <i class="far fa-question-circle" matTooltip="Allow doctor to see your illness history"></i>
+            <!-- <mat-icon [matTooltipPosition]="above" matTooltip="Allow doctor to see your illness history" 
+            aria-label="Example icon-button with a heart icon">
+                favorite
+            </mat-icon> -->
+            Allow info?
+        </mat-checkbox>
         <div class="marginTen">
             <button  id="btnSubscribe" *ngIf="(isPatient | async)" (click)="onSubscribeToAppointment()" mat-raised-button color="primary">Subscribe</button>
         </div>

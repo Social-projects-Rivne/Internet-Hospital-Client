@@ -42,9 +42,9 @@ export class DoctorplansService {
     return this.http.get(specUrl, httpOptions);
   }
 
-  subscribePatientToAppointment(appointmentId: number) {
+  subscribePatientToAppointment(appointmentId: number, isAllow: boolean) {
     const scecUrl = HOST_URL + '/api/Appointments/subscribe';
-    return this.http.post(scecUrl, { Id: appointmentId });
+    return this.http.post(scecUrl, { Id: appointmentId, IsAllowPatientInfo: isAllow });
   }
 
   getPatientAppointments() {
