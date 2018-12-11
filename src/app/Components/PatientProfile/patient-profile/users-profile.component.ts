@@ -34,13 +34,7 @@ export class UsersProfileComponent implements OnInit {
   user: ICurrentUser;
   token = TOKEN;
   patient: Patient = null;
-  sex = 2;
-
   tempHistory: IllnessHistory[] = null;
-
-  tempText = `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-   Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta,
-   quasi a, recusandae, nesciunt dolores aperiam eius tempore ad.`;
 
   defaultImage = '../../assets/img/default.png';
   fileAvatar: File = null;
@@ -48,10 +42,10 @@ export class UsersProfileComponent implements OnInit {
 
   patientSettings = PatientSettings;
 
+  currentMenuItem = 1;
+
   changeSettings(id: number) {
-    const result = id;
-    console.log(result);
-    return result;
+    this.currentMenuItem = id;
   }
 
   getImageFromService() {

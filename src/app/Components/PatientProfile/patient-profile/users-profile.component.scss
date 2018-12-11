@@ -1,43 +1,31 @@
 .profile {
     min-height: 100%;
     overflow: unset;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 70%;
+    margin-left: 3%;
     font-size: 16;
-    .example-container {
-        width: 100%;
-        background-color: white;
-        .profile-top {
-            margin-top: 5%;
-            .top-info {
-                min-height: 280px;
-                .patient-photo {
-                    img {
-                        height: 200px;
-                        width: 200px;
-                        border-radius: 50%;
-                    }
-                    img:hover {
-                        cursor: pointer;
-                        opacity: 0.6;
-                    }
+    .settings-expanded-item {
+        margin-top: 5%;
+    }
+    .profile-menu {
+        margin-top: 5%;
+    }
+    .profile-top {
+            .patient-photo {
+                img {
+                    height: 200px;
+                    width: 200px;
+                    border-radius: 50%;
+                }
+                img:hover {
+                    cursor: pointer;
+                    opacity: 0.6;
                 }
             }
-            .patient-name {
-                font-size: 30px;
-                line-height: normal;
-            }
+        
+        .patient-name {
+            font-size: 30px;
+            line-height: normal;
         }
     }
-}
-
-.mat-card {
-    min-width: 60%;
-}
-.mat-drawer-inner-container {
-    display: inline-block;
-}
-.content{
-    height: -webkit-fill-available;
 }
