@@ -12,6 +12,7 @@ export const API_PATIENT = '/api/Patient/GetDetailedProfile';
 export const MY_PLANS = 'my-plans';
 export const USERS_PROFILE = 'users-profile';
 export const DOCTOR_PROFILE = 'doctor-profile';
+export const MY_PATIENTS = 'my-patients';
 
 export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';

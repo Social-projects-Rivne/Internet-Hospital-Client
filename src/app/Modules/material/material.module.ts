@@ -21,6 +21,7 @@ import {
           MatPaginatorModule,
           MatDividerModule,
           MatTableModule,
+          MatSortModule,
           MatMenuModule,
           MatButtonToggleModule,
           MatExpansionModule,
@@ -51,6 +52,7 @@ const MAT_MODULS = [
     MatMenuModule,
     MatListModule,
     MatTableModule,
+    MatSortModule,
     MatButtonToggleModule,
     MatExpansionModule,
     MatProgressSpinnerModule

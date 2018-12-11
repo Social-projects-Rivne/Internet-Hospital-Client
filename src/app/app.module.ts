@@ -66,6 +66,7 @@ import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previo
 import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
 // tslint:disable-next-line:max-line-length
 import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/pre
     DoctorProfileComponent,
     PreviousAppointmentsComponent,
     PreviousSearchItemComponent,
-    PreviousAppointmentItemComponent
+    PreviousAppointmentItemComponent,
+    MyPatientsComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
