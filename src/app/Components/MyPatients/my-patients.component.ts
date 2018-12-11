@@ -46,8 +46,8 @@ export class MyPatientsComponent implements OnInit {
         }),
         map((data: any) => {
           this.isLoadingResults = false;
-          this.amountOfPatients = data.amountOfAllFiltered;
-          return data.myPatients;
+          this.amountOfPatients = data.amount;
+          return data.results;
         }),
         catchError(() => {
           this.isLoadingResults = false;
