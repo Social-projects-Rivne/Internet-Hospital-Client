@@ -37,24 +37,20 @@
   color: azure;
 }
 
-.mat-menu-panel.notification-menu {
-  max-width: 500px;
-}
-
 /* width */
-.notification-menu ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 5px;
 }
 
 /* Handle */
-.notification-menu ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background:#5e6468;
   opacity: 80%;
   border-radius: 5px; 
 }
 
 /* Handle on hover */
-.notification-menu ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background-color:#444749 
 }
 
@@ -76,11 +72,6 @@
 
 .message:hover {
  border: #88898a 0.5px solid;
-}
-
-.notification-menu {
-  position: relative;
-  background-color: #b4bbbb;
 }
 
 .notification-info { 

@@ -1,22 +1,19 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
-import { HOST_URL, API_DOCTORS } from '../../../config';
+import { HOST_URL } from '../../../config';
 import { LocalStorageService } from '../../../Services/local-storage.service';
-import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private storage: LocalStorageService,
-              private http: HttpClient,
               private message: MessageService) { }
 
   isLoggedIn: Observable<boolean>;
@@ -30,7 +27,6 @@ export class HeaderComponent implements OnInit {
   defaultImage = '../../assets/img/default.png';
   notifications = [];
   page = 1;
-  url = HOST_URL + API_DOCTORS;
   load = false;
 
   ngOnInit() {
@@ -47,6 +43,9 @@ export class HeaderComponent implements OnInit {
     this.storage.watchStorage().subscribe((data: any) => {
       this.userAvatar = HOST_URL + data;
     });
+    if (this.authenticationService.hasAccessToken()) {
+      this.message.startConnection();
+    }
   }
 
   onScroll() {
@@ -55,7 +54,6 @@ export class HeaderComponent implements OnInit {
   }
 
   menuOpened() {
-    this.load = true;
     this.getItems();
   }
 
@@ -64,7 +62,7 @@ export class HeaderComponent implements OnInit {
     this.notifications = [];
   }
 
-  success(res) {
+  addItems(res) {
     if (res !== undefined) {
       res.forEach(item => {
         this.notifications.push(item);
@@ -73,18 +71,20 @@ export class HeaderComponent implements OnInit {
   }
 
   getItems() {
-    this.http.get('https://localhost:44357/api/notification' + '?page=' + this.page.toString() + '&pagecount=' + 5)
+    this.load = true;
+    this.message.getNotifications(this.page)
       .subscribe((data: any) => {
-        this.success(data.entities);
+        this.addItems(data.entities);
         this.load = false;
       },
-      error => {
+      () => {
         this.load = false;
       });
   }
 
   changeStatus(item: any) {
-    this.http.patch('https://localhost:44357/api/notification/change', item.id).subscribe(() => {
+    this.message.changeStatus(item.id)
+    .subscribe(() => {
       item.isRead = !item.isRead;
     });
   }

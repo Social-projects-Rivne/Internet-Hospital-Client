@@ -162,3 +162,13 @@ border-radius: 0px;
   text-align: center;
   font-size: 20px;
 } 
+
+/* Notification menu global styles */
+.notification-menu {
+  position: relative;
+  background-color: #b4bbbb;
+}
+
+.mat-menu-panel.notification-menu {
+  max-width: 500px;
+}

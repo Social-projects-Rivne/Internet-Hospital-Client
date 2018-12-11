@@ -1,59 +1,50 @@
 import { Injectable } from '@angular/core';
-import {HubConnection, HubConnectionBuilder} from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { HOST_URL } from '../config';
+import { HttpClient } from '@angular/common/http';
+import { TokenService } from './token.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
     hubConnection: HubConnection;
-    refresh = false;
     audio = new Audio();
-    constructor() {
+
+    constructor(private http: HttpClient, private tokenService: TokenService) {
         this.audio.src = '.../../assets/beep.wav';
         this.audio.load();
         this.createConnection();
         this.registerOnServerEvents();
-        this.connect();
     }
-    count = 0;
 
-    private ifUnreadMessage = new BehaviorSubject<boolean>(this.hasUnread());
-    private unReadMessages = new BehaviorSubject<number>(this.howMany());
+    /* Observable items */
+    private ifUnreadMessage = new BehaviorSubject<boolean>(true);
+    private unReadMessages = new BehaviorSubject<number>(0);
+
     ifUnread(): Observable<boolean> {
         return this.ifUnreadMessage.asObservable();
     }
-    private hasUnread(): boolean {
-        return this.count > 0;
-    }
-
     unreadCount(): Observable<number> {
         return this.unReadMessages.asObservable();
     }
-    private howMany(): number {
-        return this.count;
+
+    /* Work with API*/
+    getNotifications(page: number) {
+        return this.http.get(HOST_URL + '/api/notification?page=' + page.toString() + '&pagecount=' + 5);
     }
 
-    connect() {
-        this.startConnection();
+    changeStatus(id: number) {
+        return this.http.patch(HOST_URL + '/api/notification/change', id);
     }
 
+    /* SignalR settings */
     private createConnection() {
         this.hubConnection = new HubConnectionBuilder()
-        .withUrl('https://localhost:44357' + '/notifications', { accessTokenFactory: () => this.getAuthToken()})
+        .withUrl(HOST_URL + '/notifications', { accessTokenFactory: () => this.tokenService.getAuthToken()})
         .build();
-    }
-
-    public stopConnection() {
-        this.hubConnection.stop();
-    }
-
-    getAuthToken(): string {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser != null) {
-            return currentUser.access_token;
-        }
-        return '';
     }
 
     private registerOnServerEvents(): void {
@@ -76,13 +67,30 @@ export class MessageService {
                 this.unReadMessages.next(0);
             }
         });
+        this.hubConnection.onclose((e) => {
+            console.log('Disconnect');
+        });
     }
 
-    private startConnection(): void {
+    startConnection() {
         this.hubConnection
         .start()
         .then(() => {
             console.log('Hub connection started');
+        }).catch(err => {
+            console.log(err);
+            this.tokenService.refresh().subscribe(
+                user => {
+                    if (user && user.access_token) {
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        this.startConnection();
+                    }
+                }
+            );
         });
+    }
+
+    stopConnection() {
+        this.hubConnection.stop();
     }
 }
