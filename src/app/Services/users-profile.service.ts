@@ -58,10 +58,13 @@ export class UsersProfileService {
         }
         this.http.get(historiesUrl, this.httpOptions)
             .subscribe((result: any) => {
+                console.log(result);
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
                 for (const history of this.illnessHistories) {
                     history.finishAppointmentTime = new Date(history.finishAppointmentTimeStamp.toString());
+                    console.log(history.finishAppointmentTimeStamp);
+                    console.log(history.finishAppointmentTime);
                 }
             });
     }
