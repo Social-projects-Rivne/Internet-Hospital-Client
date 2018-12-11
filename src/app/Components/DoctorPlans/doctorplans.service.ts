@@ -56,4 +56,12 @@ export class DoctorplansService {
     const scecUrl = HOST_URL + '/api/Appointments/unsubscribe';
     return this.http.post(scecUrl, { id: appointmentId });
   }
+
+  changePersonalInfoAccessibility(appointmentId: number, isAllow: boolean) {
+    const scecUrl = HOST_URL + '/api/Appointments/changeAccess';
+    console.log('dasd');
+    return this.http.patch(scecUrl, { Id: appointmentId, IsAllowPatientInfo: isAllow });
+    console.log('dasd2');
+
+  }
 }

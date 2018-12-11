@@ -39,4 +39,11 @@ export class PatAppointItemComponent implements OnInit {
       }
     });
   }
+
+  changeAccessibility() {
+    console.log(!this.patAppointment.isAllowPatientInfo);
+    this.service.changePersonalInfoAccessibility(this.patAppointment.id, !this.patAppointment.isAllowPatientInfo)
+    .subscribe(res => console.log(res), err => console.log(err));
+    console.log(this.patAppointment.isAllowPatientInfo);
+  }
 }
