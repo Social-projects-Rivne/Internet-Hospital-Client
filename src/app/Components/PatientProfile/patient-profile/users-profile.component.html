@@ -45,21 +45,21 @@
       <div class="illness-header">
         <h3 style="text-align:center">Illness History</h3>
       </div>
-      <div class="without_paginator" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1%" fxFlex>
-        <div class="patient-history-search-filter" fxFlex>
+      <div class="without_paginator_shit" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1%">
+        <div class="patient-history-search-filter" fxFlex="35%">
           <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
         </div>
-        <div class="patient-history" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-between stretch" fxFlex>
-          <mat-list class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories">
+        <div class="patient-history" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-between stretch">
+          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <div class="histories-top" fxLayout="row">
-                  <mat-list-item>
-                    {{IllnessHistory.finishAppointmentTime | date: 'medium' }}
-                  </mat-list-item>
-                  <mat-list-item>
+                <div class="histories-top" fxLayout="row" fxFlex>
+                  <div fxFlex>
+                    {{IllnessHistory.finishAppointmentTime }}
+                  </div>
+                  <div fxFlex>
                     {{IllnessHistory.diagnose}}
-                  </mat-list-item>
+                  </div>
                 </div>
               </mat-expansion-panel-header>
               <div fxLayout="column" fxLayoutGap="5px">
@@ -86,13 +86,11 @@
                 </div>
               </div>
             </mat-expansion-panel>
-          </mat-list>
+          </div>
         </div>
       </div>
-      <div>
         <mat-paginator [length]="patientService.illnessHistoriesAmount" [pageSize]="pagService.pageSize" (page)="pageSwitch($event)"
-          [hidePageSize]="true" fxFlex></mat-paginator>
-      </div>
+          [hidePageSize]="true"></mat-paginator>
     </div>
     <div *ngSwitchCase="patientSettings.Appointments" class="patient-additional-info">
       <app-patient-appointments></app-patient-appointments>
