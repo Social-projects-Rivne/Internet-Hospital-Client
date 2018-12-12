@@ -58,11 +58,14 @@
                     {{IllnessHistory.finishAppointmentTime }}
                   </div>
                   <div fxFlex>
-                    {{IllnessHistory.diagnose}}
+                    Doctor: {{IllnessHistory.doctorName}}
                   </div>
                 </div>
               </mat-expansion-panel-header>
               <div fxLayout="column" fxLayoutGap="5px">
+                <div>
+                  Diagnose: {{IllnessHistory.diagnose}}
+                </div>
                 <div>
                   Complaints: {{IllnessHistory.complaints}}
                 </div>
