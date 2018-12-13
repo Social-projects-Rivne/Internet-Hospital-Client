@@ -4,7 +4,6 @@ import { IllnessHistory } from '../Models/IllnessHistory';
 import { PaginationService } from './pagination.service';
 import { HOST_URL, PATIENT_GET_AVATAR, PATIENT_UPDATE_AVATAR, API_PATIENT, PATIENT_GET_HISTORIES } from '../config';
 import { DatePipe } from '@angular/common';
-import { setMilliseconds } from 'date-fns';
 
 const start = 'searchfromdate';
 const end = 'searchtodate';
@@ -62,7 +61,7 @@ export class UsersProfileService {
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
                 for (const history of this.illnessHistories) {
-                    history.finishAppointmentTime = new Date(history.finishAppointmentTimeStamp.valueOf());
+                    history.finishAppointmentTime = new Date(history.finishAppointmentTimeStamp.toString());
                 }
             });
     }
