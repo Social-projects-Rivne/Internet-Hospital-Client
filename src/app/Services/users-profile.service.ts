@@ -59,37 +59,11 @@ export class UsersProfileService {
         }
         this.http.get(historiesUrl, this.httpOptions)
             .subscribe((result: any) => {
-                console.log(result);
                 this.illnessHistories = result.histories;
                 this.illnessHistoriesAmount = result.totalHistories;
                 for (const history of this.illnessHistories) {
-                    history.finishAppointmentTime = new Date(null);
-                    console.log(history.finishAppointmentTime);
-                    history.finishAppointmentTime.setTime(history.finishAppointmentTimeStamp.valueOf());
-                    console.log(history.finishAppointmentTimeStamp.valueOf());
-                    console.log(history.finishAppointmentTime);
-
-                    const ticks = history.finishAppointmentTimeStamp.valueOf();
-                    const fff = ticks * 1000;
-                    const todayTicks = new Date().setMilliseconds(fff);
-                    // const diff = fff - todayTicks;
-                    console.log(fff);
-                    console.log(todayTicks);
-                    // console.log(diff);
-                    // const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-                    // const hours = (diff / (60 * 60 * 1000)) % 24;
-                    // const mins = (diff / (60 * 1000)) % 60;
-
-                    // console.log(hours);
-                    const hh = Math.floor(ticks / 3600);
-                    const mm = Math.floor((ticks % 3600) / 60);
-                    const ss = ticks % 60;
-                    // console.log(this.pad(hh, 2) + ':' + this.pad(mm, 2) + ':' + this.pad(ss, 2) );
+                    history.finishAppointmentTime = new Date(history.finishAppointmentTimeStamp.valueOf());
                 }
             });
-    }
-    pad(n, width) {
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
     }
 }
