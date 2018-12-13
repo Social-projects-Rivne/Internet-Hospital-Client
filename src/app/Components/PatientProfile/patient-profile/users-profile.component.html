@@ -27,13 +27,13 @@
             #img />
         </form>
       </div>
-      <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
-        <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutGap="6%">
-          <div>{{patient?.firstName}}</div>
-          <div>{{patient?.secondName}}</div>
-          <div>{{patient?.thirdName}}</div>
+      <div class="patient-general-info" fxLayout="column"  fxLayoutGap="20%" fxFlex>
+        <div class="patient-name">
+          <div>
+            {{patient?.firstName}} {{patient?.secondName}} {{patient?.thirdName}}
+          </div>
         </div>
-        <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5%">
+        <div fxLayout="column" fxLayoutGap="5%">
           <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
           <div>Phone number: {{patient?.phoneNumber}}</div>
         </div>
