@@ -16,6 +16,9 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.margin-ten-full{
+  margin: 5px;
+}
 .status-buttons{
     margin-left: -25px;
 }
@@ -30,6 +33,10 @@
 }
 #maintextbox{
     text-align: justify;
+}
+#doc-pic{
+  width: 200px;
+  border-radius:5%;
 }
 table {
     width: 100%;
@@ -78,3 +85,4 @@ table {
   .example-element-description-attribution {
     opacity: 0.5;
   }
+  

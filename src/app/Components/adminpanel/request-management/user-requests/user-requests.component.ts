@@ -1,13 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FeedBackService } from 'src/app/Services/FeedBackService/feed-back.service';
 import { FeedBack } from 'src/app/Models/FeedBack';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { RequestFilter } from 'src/app/Models/RequestFilter';
 import { FeedbackViewModel } from 'src/app/Models/FeedbackViewModel';
 import { PaginationService } from 'src/app/Services/pagination.service';
-import { PageEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FeedBackType } from 'src/app/Models/FeedBackType';
 import { trigger, state, transition, animate, style } from '@angular/animations';
+import { HOST_URL } from 'src/app/config';
+import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
+import { stringify } from '@angular/core/src/render3/util';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-user-requests',
@@ -21,13 +25,16 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
     ])
   ]
 })
+
 export class UserRequestsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  feedbacksmodels: MatTableDataSource<FeedbackViewModel>;
-  columnsToDisplay = ['usersEmail', 'dateTime', 'feedbackTypeName', 'isViewed'];
+  hostUrl = HOST_URL;
+
+  feedbacksmodels: FeedbackViewModel[] = [];
+  columnsToDisplay = ['usersEmail', 'dateTime', 'feedbackTypeName'];
   expandedElement: FeedbackViewModel | null;
   typeslist: FeedBackType;
   usersAmount: number;
@@ -35,10 +42,13 @@ export class UserRequestsComponent implements OnInit {
   isLoadingResult = true;
   search: string;
   selectedType: number;
+  selectedEmail: string;
+  selectedReplyModel: FeedbackViewModel;
 
   constructor(private _feedbackService: FeedBackService,
               private _notificationService: NotificationService,
-              private _paginationService: PaginationService
+              private _paginationService: PaginationService,
+              public dialog: MatDialog
     ) {
       this.filter = new RequestFilter();
      }
@@ -101,6 +111,22 @@ export class UserRequestsComponent implements OnInit {
         this._notificationService.error(error);
         this.isLoadingResult = false;
       });
+  }
+
+  openDialog(selectedId: number) {
+
+    this.selectedReplyModel = this.feedbacksmodels.find(x => x.id === selectedId);
+    console.log(selectedId);
+    console.log(this.selectedReplyModel.id);
+
+    const dialogRef = this.dialog.open(ReplyDialogComponent, {
+      data: {selectedUser: this.selectedReplyModel }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.selectedReplyModel = result;
+    });
   }
 
 }

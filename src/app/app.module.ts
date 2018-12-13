@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import { ReplyDialogComponent } from './Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
@@ -98,7 +99,7 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     LoadingComponent,
     DoctorProfileComponent
   ],
-  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
     BrowserModule,
     MaterialModule,

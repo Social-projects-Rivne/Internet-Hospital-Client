@@ -1,0 +1,8 @@
+<h5> Reply to {{data.selectedUser.usersEmail}}</h5>
+<mat-form-field class="area-width example-full-width">
+  <textarea [ngModel]="replyText" id="input" matInput placeholder="This text will be shown to client"></textarea>
+</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="space-between center" >
+  <button (click)="saveClick()"  [mat-dialog-close]="data.replyText" mat-raised-button color="primary">Send</button>
+  <button (click)="onNoClick()" cdkFocusInitial mat-raised-button color="warn">Cancel</button>
+</div>

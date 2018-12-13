@@ -46,9 +46,12 @@ import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material';
+import { ReplyDialogComponent } from '../../Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 
 @NgModule({
   imports: [
+    MatDialogModule,
     MatProgressBarModule,
     MatTooltipModule,
     CommonModule,
@@ -90,6 +93,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     DataApproveComponent,
     RegistrationConfirmComponent,
     FeedbackClaimComponent,
+    ReplyDialogComponent,
   ],
   providers: []
 })

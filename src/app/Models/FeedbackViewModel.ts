@@ -12,4 +12,6 @@ export class FeedbackViewModel {
     usersAvatarURL: string;
     usersBirthDate: string;
     isViewed: boolean;
+    reply: string;
+    selectedUser: this;
 }

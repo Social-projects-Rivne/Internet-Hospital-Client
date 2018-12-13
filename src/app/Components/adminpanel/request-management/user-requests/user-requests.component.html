@@ -28,28 +28,21 @@
   <table matSort mat-table [dataSource]="feedbacksmodels" multiTemplateDataRows class="mat-elevation-z8">
 
     <ng-container matColumnDef="usersEmail">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>users email</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="email">users email</th>
       <td mat-cell *matCellDef="let row">
         {{row.usersEmail}}
       </td>
     </ng-container>
     <ng-container matColumnDef="dateTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>date</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="date">date</th>
       <td mat-cell *matCellDef="let row">
         {{row.dateTime | date}}
       </td>
     </ng-container>
     <ng-container matColumnDef="feedbackTypeName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="type">type</th>
       <td mat-cell *matCellDef="let row">
         {{row.feedbackTypeName}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="isViewed">
-      <th mat-header-cell *matHeaderCellDef>status</th>
-      <td mat-cell *matCellDef="let row">
-        <a class="status-buttons" *ngIf="isViewed" mat-button><i class="material-icons">done</i></a>
-        <a class="status-buttons" *ngIf="!isViewed" mat-button><i class="material-icons">send</i></a>
       </td>
     </ng-container>
 
@@ -57,15 +50,22 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
         <div fxLayout="row" fxLayoutAlign="space-around center" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="minwidth" fxFlex="10" fxLayout="column" fxLayoutAlign="space-around center">
-            <img [src]="element.usersAvatarURL" />
+            <img id="doc-pic" [src]="hostUrl + element.usersAvatarURL" />
+            <!-- <a [routerLink]="element.userId" mat-button>Profile</a> -->
           </div>
-          <div class="minwidth" fxFlex="10" fxLayout="column" fxLayoutAlign="space-around center">
-            <div class="example-element-detail"> {{element.usersFirstName}} 
+          <div class="minwidth" fxFlex="15" fxLayout="column" fxLayoutAlign="space-around center">
+            <div class="example-element-detail"> {{element.usersFirstName}}
               {{element.usersSecondName}}
               {{element.usersThirdName}} </div>
             <div class="example-element-description"> {{element.usersBirthDate | date}} </div>
+            <div>
+              <a *ngIf="element.isViewed" matTooltipPosition="above" matTooltip="mark as done" mat-button> <i class="material-icons">done</i></a>
+              <a *ngIf="element.isViewed" matTooltipPosition="above" matTooltip="reply" mat-button (click)="openDialog(element.id)">
+                <i class="material-icons">send</i></a>
+              <a *ngIf="!element.isViewed" mat-button>Done <i class="material-icons">done_all</i></a>
+            </div>
           </div>
-          <div class="minwidth" fxFlex="80" class="example-element-description">
+          <div fxFlex="75" class="example-element-description">
             <p id="maintextbox">{{element.text}}</p>
           </div>
         </div>
