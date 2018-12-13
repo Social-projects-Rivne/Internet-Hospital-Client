@@ -1,96 +1,116 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HOST_URL } from '../config';
-import { HttpClient } from '@angular/common/http';
+import { HOST_URL, RESTART_TIME, HUB_CONNECTION,
+         NOTIFICATIONS_GET, NOTIFICATIONS_CHANGE,
+         HUB_ON_LOAD, HUB_ON_NOTIFY, AUDIO } from '../config';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { TokenService } from './token.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class MessageService {
-
     hubConnection: HubConnection;
     audio = new Audio();
+    reconnect = false;
 
     constructor(private http: HttpClient, private tokenService: TokenService) {
-        this.audio.src = '.../../assets/beep.wav';
+        this.audio.src = AUDIO;
         this.audio.load();
         this.createConnection();
         this.registerOnServerEvents();
     }
 
     /* Observable items */
-    private ifUnreadMessage = new BehaviorSubject<boolean>(true);
+    private ifUnreadMessage = new BehaviorSubject<boolean>(false);
     private unReadMessages = new BehaviorSubject<number>(0);
 
     ifUnread(): Observable<boolean> {
         return this.ifUnreadMessage.asObservable();
     }
+
     unreadCount(): Observable<number> {
         return this.unReadMessages.asObservable();
     }
 
     /* Work with API*/
-    getNotifications(page: number) {
-        return this.http.get(HOST_URL + '/api/notification?page=' + page.toString() + '&pagecount=' + 5);
+    getNotifications(page: number, count: number) {
+        const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pagecount', count.toString());
+        return this.http.get(HOST_URL + NOTIFICATIONS_GET, { params: params });
     }
 
     changeStatus(id: number) {
-        return this.http.patch(HOST_URL + '/api/notification/change', id);
+        return this.http.patch(HOST_URL + NOTIFICATIONS_CHANGE, id);
     }
 
     /* SignalR settings */
     private createConnection() {
         this.hubConnection = new HubConnectionBuilder()
-        .withUrl(HOST_URL + '/notifications', { accessTokenFactory: () => this.tokenService.getAuthToken()})
-        .build();
+            .withUrl(HOST_URL + HUB_CONNECTION, { accessTokenFactory: () => this.tokenService.getAuthToken() })
+            .build();
     }
 
     private registerOnServerEvents(): void {
-        this.hubConnection.on('Notify', (count: number) => {
+        this.hubConnection.on(HUB_ON_NOTIFY, (count: number) => {
             this.audio.play();
-            if (count > 0) {
-                this.ifUnreadMessage.next(true);
-                this.unReadMessages.next(count);
-            } else {
-                this.ifUnreadMessage.next(false);
-                this.unReadMessages.next(0);
-            }
+            this.notificationDisplay(count);
         });
-        this.hubConnection.on('OnLoad', (count: number) => {
-            if (count > 0) {
-                this.ifUnreadMessage.next(true);
-                this.unReadMessages.next(count);
-            } else {
-                this.ifUnreadMessage.next(false);
-                this.unReadMessages.next(0);
-            }
+        this.hubConnection.on(HUB_ON_LOAD, (count: number) => {
+            this.notificationDisplay(count);
         });
         this.hubConnection.onclose((e) => {
-            console.log('Disconnect');
+            // if connection wasn't closed properly we try to restart connection
+            if (e !== undefined) {
+                this.reconnect = true;
+                this.restartConnection();
+            }
         });
+    }
+
+    private notificationDisplay(count: number) {
+        if (count > 0) {
+            this.ifUnreadMessage.next(true);
+            this.unReadMessages.next(count);
+        } else {
+            this.ifUnreadMessage.next(false);
+            this.unReadMessages.next(0);
+        }
     }
 
     startConnection() {
         this.hubConnection
-        .start()
-        .then(() => {
-            console.log('Hub connection started');
-        }).catch(err => {
-            console.log(err);
-            this.tokenService.refresh().subscribe(
-                user => {
-                    if (user && user.access_token) {
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        this.startConnection();
-                    }
-                }
-            );
-        });
+            .start()
+            .then(() => this.reconnect = false)
+            .catch(err => {
+                this.errorHandler(err);
+            });
     }
 
     stopConnection() {
+        this.reconnect = false;
         this.hubConnection.stop();
+    }
+
+    private errorHandler(err: any) {
+        if (err.statusCode === 401) {
+            // if Unauthorized error we try to referesh our access token
+            this.getNotifications(1, 1).subscribe(() => this.startConnection());
+        } else {
+            // if another error we try to restart connection
+            this.reconnect = true;
+            this.restartConnection();
+        }
+    }
+
+    private restartConnection() {
+        console.log('Reconnection...');
+        setTimeout(() => {
+            if (this.reconnect) {
+                this.startConnection();
+            }
+        }, RESTART_TIME);
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
-import { HOST_URL } from '../../../config';
+import { HOST_URL, LOAD_PAGES } from '../../../config';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { MessageService } from 'src/app/Services/message.service';
 
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private storage: LocalStorageService,
-              private message: MessageService) { }
+              private messageService: MessageService) { }
 
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
@@ -35,17 +35,14 @@ export class HeaderComponent implements OnInit {
     this.isDoctor = this.authenticationService.isDoctor();
     this.isModerator = this.authenticationService.isModerator();
     this.isAdmin = this.authenticationService.isAdmin();
-    this.ifUnread = this.message.ifUnread();
-    this.unreadCount = this.message.unreadCount();
+    this.ifUnread = this.messageService.ifUnread();
+    this.unreadCount = this.messageService.unreadCount();
     this.authenticationService.getAvatarURL()
       .subscribe(value => this.userAvatar = value);
 
     this.storage.watchStorage().subscribe((data: any) => {
       this.userAvatar = HOST_URL + data;
     });
-    if (this.authenticationService.hasAccessToken()) {
-      this.message.startConnection();
-    }
   }
 
   onScroll() {
@@ -72,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   getItems() {
     this.load = true;
-    this.message.getNotifications(this.page)
+    this.messageService.getNotifications(this.page, LOAD_PAGES)
       .subscribe((data: any) => {
         this.addItems(data.entities);
         this.load = false;
@@ -83,7 +80,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeStatus(item: any) {
-    this.message.changeStatus(item.id)
+    this.messageService.changeStatus(item.id)
     .subscribe(() => {
       item.isRead = !item.isRead;
     });
