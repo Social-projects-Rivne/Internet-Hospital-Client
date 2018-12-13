@@ -8,6 +8,7 @@ import { ICurrentUser } from '../../../Models/CurrentUser';
 import { NotificationService } from '../../../Services/notification.service';
 import { ActivatedRoute } from '@angular/router';
 import { Specialization } from '../../../Models/Specialization';
+import { DoctorSettings } from 'src/app/Models/ProfileSettings/DoctorSettings';
 
 const TOKEN = 'currentUser';
 
@@ -26,6 +27,13 @@ export class DoctorProfileComponent implements OnInit {
 
   user: ICurrentUser;
   token = TOKEN;
+
+  doctorSettings = DoctorSettings;
+  currentMenuItem = 1;
+
+  changeSettings(id: number) {
+    this.currentMenuItem = id;
+  }
 
   getImageFromService() {
     this.doctorService.getImage().subscribe((data: any) => {

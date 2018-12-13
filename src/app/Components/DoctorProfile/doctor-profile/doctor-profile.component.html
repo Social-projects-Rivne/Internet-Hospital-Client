@@ -1,37 +1,49 @@
-<div class="profile" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="40px">
-  <mat-card class="profile-top mat-elevation-z8">
-    <mat-drawer-container class="example-container" hasBackdrop="true" fxFlex>
-      <div class="top-info" fxLayout="row" fxFlex>
-        <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
-          <form enctype="multipart/form-data">
-            <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
-            <img [src]="imageToShow" alt="Avatar" (click)="Image.click()" title="Change your profile photo" (error)="img.src = defaultImage"
-              #img>
-          </form>
-        </div>
-        <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
-          <div class="patient-name">
-            {{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}
+<div class="profile" fxLayout="row" fxLayoutGap="20%">
+  <div class="profile-menu" fxLayout="column" fxLayoutGap="8%" fxLayoutAlign="start">
+    <button class="menu-button" (click)="changeSettings(doctorSettings.MyProfile)" [disabled]="currentMenuItem===doctorSettings.MyProfile"
+      mat-raised-button>
+      My profile
+    </button>
+    <button (click)="changeSettings(doctorSettings.EditProfile)" [disabled]="currentMenuItem===doctorSettings.EditProfile"
+      mat-raised-button>
+      Edit profile
+    </button>
+    <button (click)="changeSettings(doctorSettings.PreviousAppointments)" [disabled]="currentMenuItem===doctorSettings.PreviousAppointments"
+      mat-raised-button>
+      Appointments
+    </button>
+  </div>
+  <div class="settings-expanded-item" fxLayout="row" fxFlex [ngSwitch]="currentMenuItem">
+    <div *ngSwitchCase="doctorSettings.MyProfile" class="profile-top" fxLayout="row" fxLayoutAlign="center center"
+      fxFlex>
+      <div class="example-container" hasBackdrop="true" fxFlex>
+        <div class="top-info" fxLayout="row" fxFlex>
+          <div class="doctor-photo" fxLayoutAlign="center center" fxFlex>
+            <form enctype="multipart/form-data">
+              <input style="display: none" type="file" (change)="getAvatar($event.target.files)" name="Image" #Image>
+              <img [src]="imageToShow" alt="Avatar" (click)="Image.click()" title="Change your profile photo" (error)="img.src = defaultImage"
+                #img>
+            </form>
           </div>
-          <div fxLayout="column" fxLayoutGap="5%">
-            <div>Born on: {{doctor?.birthDate | date: 'medium'}}</div>
-            <div>Phone number: {{doctor?.phone}}</div>
-            <div>My specialization: {{doctor?.specialization}}</div>
-            <div>My work address: {{doctor?.address}}</div>
+          <div class="doctor-general-info" fxLayout="column" fxLayoutGap="20%" fxFlex>
+            <div class="doctor-name">
+              {{doctor?.firstName}} {{doctor?.secondName}} {{doctor?.thirdName}}
+            </div>
+            <div fxLayout="column" fxLayoutGap="5%">
+              <div>Born on: {{doctor?.birthDate | date: 'mediumDate'}}</div>
+              <div>Phone number: {{doctor?.phone}}</div>
+              <div>My specialization: {{doctor?.specialization}}</div>
+              <div>My work address: {{doctor?.address}}</div>
+            </div>
           </div>
-        </div>
-        <div class="example-sidenav-content" fxLayoutAlign="center start">
-          <button type="button" mat-button (click)="drawer.toggle()">
-            Edit profile
-          </button>
         </div>
       </div>
-      <mat-drawer #drawer mode="over" class="example-sidenav" autozise>
-        <app-update-doctor></app-update-doctor>
-      </mat-drawer>
-    </mat-drawer-container>
-  </mat-card>
-  <mat-card>
-    <app-previous-appointments></app-previous-appointments>
-  </mat-card>
+    </div>
+    <div *ngSwitchCase="doctorSettings.EditProfile" fxFlex>
+      <app-update-doctor></app-update-doctor>
+    </div>
+    <div *ngSwitchCase="doctorSettings.PreviousAppointments">
+      <app-previous-appointments></app-previous-appointments>
+    </div>
+  </div>
 </div>
