@@ -62,6 +62,12 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +100,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     LoadingComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    PreviousAppointmentsComponent,
+    PreviousSearchItemComponent,
+    PreviousAppointmentItemComponent,
+    MyPatientsComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [

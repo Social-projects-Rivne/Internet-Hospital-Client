@@ -45,7 +45,6 @@ export class IllnessHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.appointmentId = this.activateRoute.snapshot.params['id'];
-    console.log(this.appointmentId);
     this.initializeFormGroup();
   }
 

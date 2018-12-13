@@ -28,10 +28,12 @@ export class DoctorplansService {
   }
 
   addAppointment(start: Date, end: Date) {
+    const utcStartTime = new Date(start.toUTCString());
+    const utcEndTime = new Date(end.toUTCString());
     const specUrl = HOST_URL + '/api/Appointments/create';
     return this.http.post(specUrl, {
-      starttime: this.datePipe.transform(start, 'short'),
-      endtime: this.datePipe.transform(end, 'short')
+      starttime: this.datePipe.transform(utcStartTime, 'short'),
+      endtime: this.datePipe.transform(utcEndTime, 'short')
     });
   }
 
