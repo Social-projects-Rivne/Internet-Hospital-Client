@@ -113,7 +113,6 @@ export class MessageService {
     }
 
     private restartConnection() {
-        console.log('Reconnection...');
         setTimeout(() => {
             if (this.reconnect) {
                 this.startConnection();
