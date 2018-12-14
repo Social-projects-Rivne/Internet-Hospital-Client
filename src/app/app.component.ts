@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MessageService } from './Services/message.service';
+import { AuthenticationService } from './Services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'InternetHospitalWebUI';
+
+  constructor(private messageService: MessageService, private authenticationService: AuthenticationService) {
+    if (this.authenticationService.hasAccessToken()) {
+      this.messageService.startConnection();
+    }
+  }
 }

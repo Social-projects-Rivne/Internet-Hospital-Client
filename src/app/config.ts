@@ -36,3 +36,13 @@ export const VERTICAL_ALIGN = 'top';
 export const NOTIFICATION_CLASS = 'notification';
 export const SUCCESS_CLASS = 'success';
 export const ERROR_CLASS = 'error';
+
+// signalR notifications config
+export const AUDIO = '.../../assets/beep.wav';
+export const RESTART_TIME = 20000;
+export const LOAD_PAGES = 5;
+export const HUB_CONNECTION = '/notifications';
+export const NOTIFICATIONS_GET = '/api/notification';
+export const NOTIFICATIONS_CHANGE = '/api/notification/change';
+export const NOTIFICATION_NOTIFY = 'Notify';
+

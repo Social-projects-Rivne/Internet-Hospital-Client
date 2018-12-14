@@ -30,8 +30,10 @@ export class DoctorProfileComponent implements OnInit {
   getImageFromService() {
     this.doctorService.getImage().subscribe((data: any) => {
       this.imageToShow = HOST_URL + data.avatarURL;
-    }
-    );
+    },
+    error => {
+      this.notification.error('Error');
+    });
   }
   constructor(private doctorService: DoctorsService, private imageValidator: ImageValidationService,
     private storage: LocalStorageService, private notification: NotificationService, private activateRoute: ActivatedRoute) { }
