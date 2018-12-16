@@ -75,8 +75,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   onClear() {
-    this.searchInput = '';
-    this.selectedStatus = 0;
+    this.searchInput = undefined;
+    this.selectedStatus = undefined;
     this.ngOnInit();
   }
 

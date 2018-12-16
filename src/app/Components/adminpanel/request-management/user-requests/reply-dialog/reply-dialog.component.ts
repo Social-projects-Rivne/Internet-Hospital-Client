@@ -23,7 +23,13 @@ export class ReplyDialogComponent implements OnInit {
   }
 
   saveClick() {
-    alert(this.data.selectedUser.text);
+    this.data.selectedUser.reply = this.replyText;
+    this.data.isViewed = true;
+    this.dialogRef.close(this.data.selectedUser);
+  }
+
+  onKey(event: any) {
+    this.replyText = event.target.value;
   }
 
 }

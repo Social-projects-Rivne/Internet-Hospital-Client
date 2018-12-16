@@ -6,6 +6,7 @@ import { NotificationService } from '../../Services/notification.service';
 import { PaginationService } from '../pagination.service';
 import { PageEvent } from '@angular/material';
 import { RequestFilter } from 'src/app/Models/RequestFilter';
+import { FeedbackViewModel } from 'src/app/Models/FeedbackViewModel';
 
 const SEARCH_NAME = 'SearchByName';
 const SEARCH_STATUS = 'SearchByType';
@@ -15,7 +16,7 @@ const SEARCH_STATUS = 'SearchByType';
 })
 export class FeedBackService {
 
-  url = HOST_URL + '/api/feedback/';
+  url = HOST_URL + '/api/feedBack/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -43,6 +44,12 @@ export class FeedBackService {
   getFeedBackTypes() {
     const typeUrl = this.url + 'feedbacktypes';
     return this.http.get(typeUrl);
+  }
+
+  updateFeedback(feedbackModel: FeedbackViewModel) {
+    const typeUrl = this.url + 'updatefeedback';
+    alert('service');
+    return this.http.put(typeUrl, feedbackModel);
   }
 
   getFeedBackViewModels(filter?: RequestFilter) {

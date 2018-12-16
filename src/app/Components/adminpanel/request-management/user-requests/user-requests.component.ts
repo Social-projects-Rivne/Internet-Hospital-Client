@@ -124,8 +124,9 @@ export class UserRequestsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.selectedReplyModel = result;
+      alert(this.selectedReplyModel.reply);
+      this._feedbackService.updateFeedback(this.selectedReplyModel);
     });
   }
 
