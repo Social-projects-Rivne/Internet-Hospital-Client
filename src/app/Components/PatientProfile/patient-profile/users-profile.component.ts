@@ -12,6 +12,7 @@ import { IllnessHistoryFilter } from '../../../Models/IllnessHistoryFilter';
 import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
+import { DatePipe } from '@angular/common';
 
 const TOKEN = 'currentUser';
 
@@ -56,8 +57,12 @@ export class UsersProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    let stringDate: string;
     this.patientService.getProfile().subscribe((profile: any) => { this.patient = profile,
-       this.updateService.patient = profile, this.updateService.setCurrentProfile(); });
+       this.updateService.patient = profile,
+       stringDate = new DatePipe('en-US').transform(profile.birthDate, 'MMMM d, y');
+       this.patient.birthDate = stringDate;
+       this.updateService.setCurrentProfile(); });
     this.patientService.getHistories();
     this.getImageFromService();
     this.filter = new IllnessHistoryFilter();
