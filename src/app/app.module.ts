@@ -67,6 +67,8 @@ import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous
 // tslint:disable-next-line:max-line-length
 import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
+import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
+import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { MyPatientsComponent } from './Components/MyPatients/my-patients.compone
     PreviousSearchItemComponent,
     PreviousAppointmentItemComponent,
     MyPatientsComponent,
+    BlackListComponent,
+    ActivePatientsComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [

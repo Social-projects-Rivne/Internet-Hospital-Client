@@ -129,4 +129,42 @@ export class DoctorsService {
     }
     return this.http.get<any>(url, this.httpOptions);
   }
+
+  addToBlackListSelected(userId: number[], description?: string) {
+    const specUrl = HOST_URL + '/api/Doctors/addtoblacklist';
+
+    return this.http.post(specUrl, {
+      id: userId,
+      description: description,
+    }, this.httpOptions);
+  }
+
+  getMyBlackList(sort: string,
+                  order: string,
+                  searchByName: string,
+                  page: number,
+                  includeAll: boolean,
+                  pageSize: number): Observable<any> {
+    let url = this.url + '/myblacklist' + `?${PAGE}=${page + 1}&`
+      + `${PAGE_SIZE}=${pageSize}&`
+      + `${INCLUDE_ALL}=${includeAll}&`;
+    if (searchByName) {
+      url += `${SEARCH_BY_NAME}=${searchByName}&`;
+    }
+    if (order) {
+      url += `${ORDER_BY}=${order}&`;
+    }
+    if (sort) {
+      url += `${SORT}=${sort}`;
+    }
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
+  removeFromBlackListSelected(userId: number[]) {
+    const specUrl = HOST_URL + '/api/Doctors/removefromblacklist';
+
+    return this.http.post(specUrl, {
+      id: userId,
+    }, this.httpOptions);
+  }
 }
