@@ -32,7 +32,9 @@ export class HomeNewsComponent implements OnInit {
       this.isLoading = true;
       this.contentService.getShortModeratorContent(this.amountForLoading, this.lastId)
         .subscribe((data: any) => {
-          this.contents = this.contents.concat(data.articles);
+          data.articles.forEach(item => {
+            this.contents.push(item);
+          });
           this.lastId = data.lastArticleId;
           this.isLast = data.isLast;
           this.isLoading = false;
