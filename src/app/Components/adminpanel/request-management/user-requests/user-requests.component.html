@@ -48,10 +48,9 @@
 
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-        <div fxLayout="row" fxLayoutAlign="space-around center" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div id="expanded-box" fxLayout="row" fxLayoutAlign="space-around start" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="minwidth" fxFlex="10" fxLayout="column" fxLayoutAlign="space-around center">
             <img id="doc-pic" [src]="hostUrl + element.usersAvatarURL" />
-            <!-- <a [routerLink]="element.userId" mat-button>Profile</a> -->
           </div>
           <div class="minwidth" fxFlex="15" fxLayout="column" fxLayoutAlign="space-around center">
             <div class="example-element-detail"> {{element.usersFirstName}}
@@ -59,14 +58,19 @@
               {{element.usersThirdName}} </div>
             <div class="example-element-description"> {{element.usersBirthDate | date}} </div>
             <div>
-              <a *ngIf="element.isViewed" matTooltipPosition="above" matTooltip="mark as done" mat-button> <i class="material-icons">done</i></a>
-              <a *ngIf="element.isViewed" matTooltipPosition="above" matTooltip="reply" mat-button (click)="openDialog(element.id)">
+              <a *ngIf="!element.isViewed" matTooltipPosition="above" matTooltip="mark as done" mat-button (click)="asDone(element.id)"> <i class="material-icons">done</i></a>
+              <a *ngIf="!element.isViewed" matTooltipPosition="above" matTooltip="reply" mat-button (click)="openDialog(element.id)">
                 <i class="material-icons">send</i></a>
-              <a *ngIf="!element.isViewed" mat-button>Done <i class="material-icons">done_all</i></a>
+              <a *ngIf="element.isViewed" mat-button>Done <i class="material-icons">done_all</i></a>
             </div>
           </div>
-          <div fxFlex="75" class="example-element-description">
+          <div fxFlex="50" class="example-element-description">
+            <h4 id="header-text">Text</h4>
             <p id="maintextbox">{{element.text}}</p>
+          </div>
+          <div *ngIf="element.reply" fxFlex="25" class="example-element-description">
+              <h4 id="header-text">Reply</h4>
+            <p id="maintextbox">{{element.reply}}</p>
           </div>
         </div>
       </td>
@@ -82,7 +86,7 @@
 </div>
 
 <div>
-  <mat-paginator showFirstLastButtons [pageSize]="_paginationService.pageSize" [pageSizeOptions]="[5, 10, 15]" [length]="usersAmount"
+  <mat-paginator showFirstLastButtons [pageSize]="_paginationService.feedbackPageSize" [pageSizeOptions]="[5, 10, 15, 25, 50]" [length]="usersAmount"
     (page)="pageSwitch($event)">
   </mat-paginator>
 </div>

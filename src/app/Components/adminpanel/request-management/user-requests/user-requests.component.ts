@@ -59,7 +59,7 @@ export class UserRequestsComponent implements OnInit {
       this.usersAmount = type.quantity;
       console.log(this.feedbacksmodels);
       console.log(this._paginationService.pageIndex);
-      console.log(this._paginationService.pageSize);
+      console.log(this._paginationService.feedbackPageSize);
       this.isLoadingResult = false;
     },
       error => {
@@ -83,7 +83,7 @@ export class UserRequestsComponent implements OnInit {
     this.paginator.firstPage();
     const event = new PageEvent();
 
-    event.pageSize = this._paginationService.pageSize;
+    event.pageSize = this._paginationService.feedbackPageSize;
     event.pageIndex = this._paginationService.pageIndex - 1;
     event.length = this.usersAmount;
 
@@ -125,9 +125,17 @@ export class UserRequestsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.selectedReplyModel = result;
-      alert(this.selectedReplyModel.reply);
-      this._feedbackService.updateFeedback(this.selectedReplyModel);
+      if (result !== undefined ) {
+        this._feedbackService.updateFeedback(this.selectedReplyModel);
+      }
     });
   }
 
+  asDone(selectedId: number) {
+    this.selectedReplyModel = this.feedbacksmodels.find(x => x.id === selectedId);
+    this.selectedReplyModel.isViewed = true;
+    this._feedbackService.updateFeedback(this.selectedReplyModel);
+  }
+
 }
+

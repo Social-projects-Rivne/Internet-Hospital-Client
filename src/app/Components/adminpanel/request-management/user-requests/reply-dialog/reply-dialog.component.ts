@@ -24,7 +24,7 @@ export class ReplyDialogComponent implements OnInit {
 
   saveClick() {
     this.data.selectedUser.reply = this.replyText;
-    this.data.isViewed = true;
+    this.data.selectedUser.isViewed = true;
     this.dialogRef.close(this.data.selectedUser);
   }
 

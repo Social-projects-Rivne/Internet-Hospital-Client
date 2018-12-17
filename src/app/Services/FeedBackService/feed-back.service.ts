@@ -23,11 +23,11 @@ export class FeedBackService {
     }),
     params: new HttpParams()
       .set('page', this._paginationService.pageIndex.toString())
-      .set('pagecount', this._paginationService.pageSize.toString())
+      .set('pagecount', this._paginationService.feedbackPageSize.toString())
   };
 
   constructor(private http: HttpClient,
-    private _notification: NotificationService,
+    private _notificationService: NotificationService,
     private _paginationService: PaginationService
   ) { }
 
@@ -48,8 +48,12 @@ export class FeedBackService {
 
   updateFeedback(feedbackModel: FeedbackViewModel) {
     const typeUrl = this.url + 'updatefeedback';
-    alert('service');
-    return this.http.put(typeUrl, feedbackModel);
+    return this.http.put(typeUrl, feedbackModel).subscribe( (result: any) => {
+      this._notificationService.success('Your reply successfully deployed');
+    },
+    error => {
+      this._notificationService.error(error);
+    });
   }
 
   getFeedBackViewModels(filter?: RequestFilter) {
@@ -58,7 +62,7 @@ export class FeedBackService {
       this.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
 
       typeUrl += `?page=${this._paginationService.pageIndex}&`;
-      typeUrl += `pagecount=${this._paginationService.pageSize}&`;
+      typeUrl += `pagecount=${this._paginationService.feedbackPageSize}&`;
 
     if (filter != null) {
       if (filter.searchKey !== undefined && filter.searchKey !== '') {
