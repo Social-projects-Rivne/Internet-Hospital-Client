@@ -83,11 +83,6 @@ export class HeaderComponent implements OnInit {
     this.messageService.changeStatus(item.id)
     .subscribe(() => {
       item.isRead = !item.isRead;
-      if (item.isRead) {
-        this.messageService.displayNotification(--this.messageService.unreadedMessages);
-      } else {
-        this.messageService.displayNotification(++this.messageService.unreadedMessages);
-      }
     });
   }
 }

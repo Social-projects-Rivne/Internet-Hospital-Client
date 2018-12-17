@@ -3,7 +3,7 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HOST_URL, RESTART_TIME, HUB_CONNECTION,
          NOTIFICATIONS_GET, NOTIFICATIONS_CHANGE,
-         NOTIFICATION_NOTIFY, AUDIO } from '../config';
+         NOTIFICATION_NOTIFY, NOTIFICATION_ONLOAD, AUDIO } from '../config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TokenService } from './token.service';
 
@@ -14,8 +14,6 @@ export class MessageService {
     hubConnection: HubConnection;
     audio = new Audio();
     reconnect = false;
-    unreadedMessages = 0;
-    connected = false;
 
     constructor(private http: HttpClient, private tokenService: TokenService) {
         this.audio.src = AUDIO;
@@ -26,7 +24,7 @@ export class MessageService {
 
     /* Observable items */
     private ifUnreadMessage = new BehaviorSubject<boolean>(false);
-    private unReadMessages = new BehaviorSubject<number>(this.unreadedMessages);
+    private unReadMessages = new BehaviorSubject<number>(0);
 
     ifUnread(): Observable<boolean> {
         return this.ifUnreadMessage.asObservable();
@@ -57,16 +55,17 @@ export class MessageService {
 
     private registerOnServerEvents(): void {
         this.hubConnection.on(NOTIFICATION_NOTIFY, (count: number) => {
-            if (this.connected) {
-                this.audio.play();
-            }
+            this.audio.play();
             this.displayNotification(count);
-            this.connected = true;
+        });
+        this.hubConnection.on(NOTIFICATION_ONLOAD, (count: number) => {
+            this.displayNotification(count);
         });
         this.hubConnection.onclose((e) => {
+            this.ifUnreadMessage.next(false);
+            this.unReadMessages.next(0);
             // if connection wasn't closed properly we try to restart connection
             if (e !== undefined) {
-                this.connected = false;
                 this.reconnect = true;
                 this.restartConnection();
             }
@@ -76,8 +75,7 @@ export class MessageService {
     displayNotification(count: number) {
         if (count > 0) {
             this.ifUnreadMessage.next(true);
-            this.unreadedMessages = count;
-            this.unReadMessages.next(this.unreadedMessages);
+            this.unReadMessages.next(count);
         } else {
             this.ifUnreadMessage.next(false);
             this.unReadMessages.next(0);
@@ -96,7 +94,6 @@ export class MessageService {
     }
 
     stopConnection() {
-        this.connected = false;
         this.reconnect = false;
         this.hubConnection.stop();
     }
