@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { FILL_ILLNESS } from 'src/app/config';
+import { FILL_ILLNESS, PATIENT_INFO } from 'src/app/config';
 import { Appointment } from 'src/app/Components/DoctorPlans/Appointment';
 
 @Component({
@@ -20,5 +20,9 @@ export class DoctorAppointmentItemComponent implements OnInit {
 
   onFinish() {
     this.router.navigate([FILL_ILLNESS + `/${this.appointment.id}`]);
+  }
+
+  onWatchInfo() {
+    this.router.navigate([PATIENT_INFO + `/${this.appointment.userId}`]);
   }
 }

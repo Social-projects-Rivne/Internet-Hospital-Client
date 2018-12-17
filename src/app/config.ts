@@ -7,6 +7,7 @@ export const DOCTOR_PAGE = DOCTOR_LIST + '/';
 export const PAGE_404 = '404';
 export const FEEDBACKS = 'feedbacks';
 export const FILL_ILLNESS = 'fill-illness';
+export const PATIENT_INFO = 'patient-info';
 export const API_PATIENT = '/api/Patient/GetDetailedProfile';
 
 export const MY_PLANS = 'my-plans';
