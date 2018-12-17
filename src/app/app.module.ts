@@ -62,6 +62,13 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 
+
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { HomeNewsItemVer2Component } from './Components/Home/home/home-news/home-news-item-ver2/home-news-item-ver2.component';
+import { HomeNewsItemVer3Component } from './Components/Home/home/home-news/home-news-item-ver3/home-news-item-ver3.component';
+import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,10 +100,20 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     LoadingComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+
+    HomeNewsItemVer2Component,
+
+    HomeNewsItemVer3Component,
+
+    GreetingItemComponent,
+
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
+
+    SlideshowModule,
+
     BrowserModule,
     MaterialModule,
     FormsModule,

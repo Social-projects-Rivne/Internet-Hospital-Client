@@ -1,6 +1,26 @@
-<mat-card class="news-item-card">
+<mat-card class="mat-elevation-z10 content-item">
   <mat-card-header>
-    <mat-card-title>{{image.title}}</mat-card-title>
+    <div class="title-with-date">
+      <div class="content-title">
+        <div class="date-with-author">
+          <div class="content-date">{{content.dateOfCreation | date}}</div>
+          <div class="content-author" color="primary">{{content.author}}</div>
+        </div>
+      {{content.title}}
+      </div>
+    </div>
+    <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
-  <img mat-card-image [src]="image.url">
+  <div id="slideshow-container">
+    <slideshow [imageUrls]="imageUrls" [height]="height + 'px'" 
+      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
+  </div>
+  <mat-card-content>
+    <p>
+      {{content.shortDescription}}
+    </p>
+  </mat-card-content>
+  <div class="button-container">
+    <button mat-raised-button color="primary">READ FULL</button>
+  </div>
 </mat-card>

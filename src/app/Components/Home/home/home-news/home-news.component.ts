@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HomeImages } from '../../../../Models/Temp/HomeImage';
-import { HomeService } from 'src/app/Services/home.service';
+import { Component, OnInit } from '@angular/core';
+import { ShortContentWithEditors } from 'src/app/Models/Content/ShortContentWithEditors';
+import { ContentModerateFilters } from 'src/app/Models/Content/ContentModerateFilters';
+
+import { ContentService } from 'src/app/Components/adminpanel/Services/content.service';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home-news',
@@ -8,17 +12,24 @@ import { HomeService } from 'src/app/Services/home.service';
   styleUrls: ['./home-news.component.scss']
 })
 export class HomeNewsComponent implements OnInit {
-  @Input()
-  homeImages: HomeImages[];
+  contents: ShortContentWithEditors[];
+  isLoggedIn: Observable<boolean>;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private contentService: ContentService,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.getHomeImages();
+    this.loadContent();
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 
-  getHomeImages(): void {
-    this.homeService.getHomeImages()
-        .subscribe(homeImages => this.homeImages = homeImages);
+  loadContent() {
+    const filter = new ContentModerateFilters();
+    filter.page = 0;
+    filter.pageSize = 1000;
+    this.contentService.getShortModeratorContent(filter).subscribe((data: any) => {
+      console.log(data);
+      this.contents = data.results;
+    });
   }
 }

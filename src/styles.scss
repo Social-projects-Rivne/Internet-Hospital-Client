@@ -46,6 +46,24 @@ snack-bar-container.notification simple-snack-bar {
     format("opentype");
 }
 
+@font-face {
+  font-family: "Coneria Script";
+  src: url("./assets/fonts/Demo_ConeriaScript.ttf");
+  }
+
+     @font-face {
+      font-family: "Angeline Vintage";
+      src: url("./assets/fonts/Angeline_Vintage_Demo.ttf");
+      }
+      @font-face {
+        font-family: "Midtown";
+        src: url("./assets/fonts/Midtown.ttf");
+        }
+        @font-face {
+          font-family: "Calling Heart";
+          src: url("./assets/fonts/Calling_Heart.ttf");
+          }
+
 $custom-typography: mat-typography-config(
   $font-family: "Fontil Sans, monospace",
   $headline: mat-typography-level(32px, 48px, 700),

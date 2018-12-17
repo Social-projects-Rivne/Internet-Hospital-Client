@@ -1,0 +1,41 @@
+<div class="greeting-slider">
+  <div class="wrapper"></div>
+  <div *ngFor="let greeting of greetings; index as i" class="container" [style.opacity]="currentContainer == i ? 1 : 0">
+    <span class="greeting-text"
+      [style.top.%]="greeting.greeting.top"
+      [style.right.%]="greeting.greeting.right"
+      [style.bottom.%]="greeting.greeting.bottom"
+      [style.left.%]="greeting.greeting.left"
+      [@textApearing]="animationShowing.greeting && currentContainer == i ? 'showText' : 'hideText'">
+      {{greeting.greeting.text}}</span>
+    <span class="information-about-site"
+      [style.top.%]="greeting.aboutSite.top"
+      [style.right.%]="greeting.aboutSite.right"
+      [style.bottom.%]="greeting.aboutSite.bottom"
+      [style.left.%]="greeting.aboutSite.left" 
+      [@textFromRight]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
+      {{greeting.aboutSite.text}}
+    </span>
+    <span class="information-about-users"
+      [style.top.%]="greeting.aboutUsers.top"
+      [style.right.%]="greeting.aboutUsers.right"
+      [style.bottom.%]="greeting.aboutUsers.bottom"
+      [style.left.%]="greeting.aboutUsers.left" 
+      [@textFromLeft]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
+      {{greeting.aboutUsers.text}}
+    </span>
+    <a class="pulse" [routerLink]="'sign-up'" 
+      [@textApearing]="animationShowing.registerButton && currentContainer == i ? 'showText' : 'hideText'">
+      REGISTER
+    </a>
+    <div class="image-container">
+      <img [src]="greeting.imageUrl">
+    </div>
+  </div>
+  <!-- <button mat-button class="left" (click)="nextContainer()">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button mat-button class="right" (click)="previousContainer()">
+    <mat-icon>navigate_next</mat-icon>
+  </button> -->
+</div>

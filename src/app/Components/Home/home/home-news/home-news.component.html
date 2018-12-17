@@ -1,1 +1,16 @@
-<app-home-news-item *ngFor="let image of homeImages" [image]="image"></app-home-news-item>
+<div class="side-block"></div>
+<div class="main-block">
+    <app-greeting-item *ngIf="!(isLoggedIn | async)"></app-greeting-item>
+    <app-home-news-item *ngFor="let content of contents" [content]="content"></app-home-news-item>
+    <div class="news-container">
+
+        <app-home-news-item-ver2 class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item-ver2>
+        <app-home-news-item-ver2 class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item-ver2>
+
+        <app-home-news-item-ver3 class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item-ver3>
+        <app-home-news-item-ver3 class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item-ver3>
+    </div>
+
+
+</div>
+<div class="side-block"></div>
