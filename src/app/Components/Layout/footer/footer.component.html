@@ -1,35 +1,29 @@
-<div class="footer" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="end" fxFlex>
-    <div class="footer-top" fxLayoutAlign="space-around center" fxFlex="80%">
-        <img fxHide.lt-sm src="../../../../assets/img/LogoCircle.png">
-        <div class="footer-contacts" fxLayout="row" fxLayoutGap="5px" fxLayout="column">
-            <h2>Contacts</h2>
-            <div>
-                <p>Rivne Office</p>
-                <p>Rivne, Slovatskoho Str. 4/6, floor 2</p>
-                <p>+38 (096) 549 7678</p>
-            </div>
-        </div>
+<footer fxFlexAlign="end" id="FatherBox" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="content-div" fxLayoutAlign="center center">
+        <a class="link-element" mat-button routerLink="/"><i class="material-icons">home</i></a>
+        <a class="link-element" mat-button routerLink="/doctor-list">Doctor's List</a>
+        <a class="link-element" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</a>
+        <a class="link-element" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-up']">Sign Up</a>
+        <a class="link-element" *ngIf="(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign out</a>
     </div>
-    <div class="footer-bottom" fxLayout="row" fxLayoutAlign="center">
-        <div class="footer-menu" fxLayout.lt-md="column" fxLayoutGap="15px" fxFlex="80%">
-            <div class="footer-menu-nav" fxLayoutGap="5px" fxLayoutAlign="start" fxLayoutAlign.lt-md="start" fxFlex="50%">
-                <a href="#">Privacy Policy</a>
-                <span>-</span>
-                <a href="#">Terms and Conditions</a>
-                <span>-</span>
-                <a href="#">Sitemap</a>
-                <span>-</span>
-                <a routerLink="/feedbacks">Leave feedback</a>
-            </div>
-            <div class="footer-menu-social" fxLayoutGap="5px" fxLayoutAlign="end" fxLayoutAlign.lt-md="start" fxFlex="50%">
-                <a href="#">Facebook</a>
-                <span>-</span>
-                <a href="#">Twitter</a>
-                <span>-</span>
-                <a href="#">LinkedIn</a>
-                <span>-</span>
-                <a href="#">YouTube</a>
-            </div>
-        </div>
+
+    <div fxHide fxShow.lg class="content-div" fxLayoutAlign="center center">
+        <a class="link-element" mat-button href="#">Terms and Conditions</a>
+        <a class="link-element" mat-button href="#">Sitemap</a>
+        <a class="link-element" mat-button href="#">Search</a>
+        <a class="link-element" mat-button href="#">Privacy Policy</a>
     </div>
-</div>
+
+    <div fxLayoutAlign="center center">
+        <a [routerLink]="['/feedbacks']" class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center"
+            matTooltip="contact moderator or leave feedback">
+            <i class="material-icons">announcement</i> Signal
+        </a>
+        <a fxHide fxShow.md fxShow.lg class="link-element" mat-button fxLayout="row" fxLayoutAlign="center center">
+            <i class="material-icons">local_phone</i>
+            <span id="phone-number">
+                +38 (096) 549 7678
+            </span>
+        </a>
+    </div>
+</footer>

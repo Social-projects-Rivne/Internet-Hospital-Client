@@ -1,0 +1,42 @@
+<mat-card class="mat-elevation-z10 content-item">
+  <div class="manage-button-container">
+    <button mat-button (click)="edit()">
+      <mat-icon color="primary">edit</mat-icon>
+    </button>
+    <button mat-button (click)="delete()">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+  </div>
+  <mat-card-header>
+    <div class="title-with-date">
+      <div class="content-title">
+        <div class="date-with-author">
+          <div class="content-date">{{content.dateOfCreation | date}}</div>
+          <div class="content-author" color="primary">{{content.author}}</div>
+        </div>
+      {{content.title}}
+      </div>
+    </div>
+    <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
+  </mat-card-header>
+  <div id="slideshow-container">
+    <slideshow [imageUrls]="imgs" [height]="height + 'px'" 
+      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
+  </div>
+  <mat-card-content>
+    <p>
+      {{content.shortDescription}}
+    </p>
+    <mat-expansion-panel *ngIf="content.editions.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            History of editions
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="edition-block" *ngFor="let edition of content.editions">
+          <div class="edition-author">{{edition.author}}</div>
+          <div class="edition-date">{{edition.dateOfEdit | date}}</div>
+        </div>
+      </mat-expansion-panel>
+  </mat-card-content>
+</mat-card>

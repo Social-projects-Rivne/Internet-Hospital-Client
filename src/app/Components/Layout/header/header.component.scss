@@ -13,11 +13,13 @@
 .color_red {
   color: #e62030;
 }
-
 .header {
   font-size: 25px;
+  color: azure;
 }
-
+.font-view{
+  color: azure;
+}
 .user-avatar {
   border: 1px solid rgba(0, 0, 0, 0.4);
   background-repeat: no-repeat;
@@ -27,4 +29,84 @@
   border-radius: 40px;
   background-size: cover;
   background-position: center center;
+}
+#Father-box{
+  background-color: #4d5256;
+} 
+.material-icons {
+  color: azure;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#5e6468;
+  opacity: 80%;
+  border-radius: 5px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color:#444749 
+}
+
+.scroll {
+  height: 200px; 
+  overflow-y: scroll;
+  width:445px;
+}
+
+.message {
+  margin: 5px; 
+  min-height: 55px;
+  width: auto; 
+  background-color: white;
+  position: relative; 
+  border-radius: 5px;
+  border: #ffffff 0.5px solid;
+}
+
+.message:hover {
+ border: #88898a 0.5px solid;
+}
+
+.notification-info { 
+  position: relative;
+}
+
+.notification_btn {
+  float: right;  
+  .mat-icon-button {
+    height:24px;
+    width: 24px;
+  }
+
+  .material-icons {
+    font-size: 10px;
+  }
+
+  .material-icons:hover {
+    font-size: 12px;
+  }
+}
+
+.notification-message {
+  padding: 5px;
+  text-align: justify;
+
+  a {
+    color: #444749; 
+  }
+}
+
+.notification-date {
+    margin-left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5e6468
 }

@@ -11,10 +11,10 @@ import { UserManagementComponent } from '../adminpanel/user-management/user-mana
 import { RequestManagementComponent } from '../adminpanel/request-management/request-management.component';
 import { ModeratorManagementComponent } from '../adminpanel/moderator-management/moderator-management.component';
 import { ModeratorCreateComponent } from '../adminpanel/moderator-management/moderator-create/moderator-create.component';
-import { ContentManagementComponent } from '../adminpanel/content-management/content-management.component';
-import { ContentPreviewComponent } from '../adminpanel/content-management/content-preview/content-preview.component';
-import { ContentEditComponent } from '../adminpanel/content-management/content-edit/content-edit.component';
-import { ContentItemComponent } from '../adminpanel/content-management/content-item/content-item.component';
+import { ContentsComponent } from '../adminpanel/contents/contents.component';
+import { ContentPreviewComponent } from '../adminpanel/contents/content-managing/content-preview/content-preview.component';
+import { ContentEditComponent } from '../adminpanel/contents/content-managing/content-edit/content-edit.component';
+import { ContentItemComponent } from '../adminpanel/contents/content-item/content-item.component';
 
 
 import { MatFormFieldModule,
@@ -29,23 +29,30 @@ import { MatFormFieldModule,
         MatListModule,
         MatButtonModule,
         MatMenuModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatExpansionModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatTabsModule,
+        MatProgressBarModule
       } from '@angular/material';
+
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { SlideshowModule } from 'ng-simple-slideshow';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule,
         ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSelectModule } from '@angular/material/select';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ContentManagingComponent } from '../../Components/adminpanel/contents/content-managing/content-managing.component';
 import { UserRequestsComponent } from '../../Components/adminpanel/request-management/user-requests/user-requests.component';
 import { DataApproveComponent } from '../../Components/adminpanel/request-management/data-approve/data-approve.component';
 // tslint:disable-next-line:import-spacing
 import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material';
 import { ReplyDialogComponent } from '../../Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 
@@ -69,12 +76,17 @@ import { ReplyDialogComponent } from '../../Components/adminpanel/request-manage
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSortModule,
+    MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    ImageCropperModule,
     MatSelectModule,
     MatExpansionModule,
+    FroalaEditorModule,
+    FroalaViewModule,
+    SlideshowModule,
     MatTabsModule,
   ],
   declarations: [
@@ -85,10 +97,11 @@ import { ReplyDialogComponent } from '../../Components/adminpanel/request-manage
     RequestManagementComponent,
     ModeratorManagementComponent,
     ModeratorCreateComponent,
-    ContentManagementComponent,
+    ContentsComponent,
     ContentPreviewComponent,
     ContentEditComponent,
     ContentItemComponent,
+    ContentManagingComponent,
     UserRequestsComponent,
     DataApproveComponent,
     RegistrationConfirmComponent,

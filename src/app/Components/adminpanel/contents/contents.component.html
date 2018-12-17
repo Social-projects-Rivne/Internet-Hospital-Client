@@ -1,0 +1,53 @@
+<div class="content-page">
+  <button color="primary" mat-raised-button (click)="createNewArticle()">CREATE</button>
+  <div>
+    <mat-form-field class="search">
+      <input matInput [(ngModel)]="filters.search" placeholder="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
+    </mat-form-field>
+  </div>
+  <mat-expansion-panel class="filters">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filters
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="filter">
+      <mat-checkbox [(ngModel)]="filters.includeAll">Include all</mat-checkbox>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <mat-select placeholder="Selected types" [(ngModel)]="filters.typeIds" [multiple]='true'>
+          <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <input matInput [(ngModel)]="filters.from" [matDatepicker]="from" placeholder="From">
+        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+        <mat-datepicker #from></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <input matInput [(ngModel)]="filters.to" [matDatepicker]="to" placeholder="To">
+        <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+        <mat-datepicker #to></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <button color="primary" mat-raised-button (click)="paginator.pageIndex=0; paginator.page.emit()">FILTER</button>
+  </mat-expansion-panel>
+  <div fxLayout='row wrap' fxLayout.xs='column wrap' fxLayoutGap="15px grid">
+    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="rate-limit-reached" *ngIf="isRateLimitReached">
+        InternetHospital's API rate limit has been reached. It will be reset in one minute.
+      </div>
+    </div>
+    <div fxFlex.xs="100" fxFlex="50" fxFlex.lg="33.3" fxFlex.xl="20" *ngFor="let cont of content.data;">
+      <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" (changed)="onChange(cont)" (deleted)="onDelete(cont)">
+      </app-content-item>
+    </div>
+  </div>
+  <mat-paginator [pageIndex]="filters.page" [pageSize]="filters.pageSize" [pageSizeOptions]="[12, 24, 36, 48]" [length]="content.amountOfAll"></mat-paginator>
+</div>

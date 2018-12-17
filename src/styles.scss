@@ -3,6 +3,28 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~@angular/material/theming";
 
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+#mainPage {
+  min-height: 100%;
+  padding-bottom: 50px;
+}
+
+#FatherBox{
+  height: 50px;
+  background-color: #4d5256;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
 snack-bar-container.error {
   background-color: #e05744;
   color: #fff;
@@ -45,13 +67,13 @@ body {
   padding: 20px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 960px) {
   .main-container {
     left: 0px;
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 960px) {
   .push-right {
     #sidebar {
       left: 0 !important;
@@ -135,8 +157,18 @@ border-radius: 0px;
   border-radius: 0px;
 }
 
-.confirm-dialog-container span.content-span{
+.confirm-dialog-container span.content-span {
   padding:  35px 16px;
   text-align: center;
   font-size: 20px;
+} 
+
+/* Notification menu global styles */
+.notification-menu {
+  position: relative;
+  background-color: #b4bbbb;
+}
+
+.mat-menu-panel.notification-menu {
+  max-width: 500px;
 }

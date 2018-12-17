@@ -27,7 +27,7 @@ export class FeedbacksComponent implements OnInit {
   onSubmit() {
     this._feedbackService.CreateFeedBack().subscribe(
         data => {
-          this._notification.success('Thanks for your feedback');
+          this._notification.success('Signal successfully deployed');
           this._router.navigate(['/']);
         },
         error => {

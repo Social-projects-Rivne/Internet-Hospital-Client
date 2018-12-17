@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ModeratorManagementComponent } from './moderator-management/moderator-management.component';
 import { RequestManagementComponent } from './request-management/request-management.component';
-import { ContentManagementComponent } from './content-management/content-management.component';
+import { ContentsComponent } from './contents/contents.component';
+import { ContentManagingComponent } from './contents/content-managing/content-managing.component';
 import { ModeratorCreateComponent } from './moderator-management/moderator-create/moderator-create.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { AdminPanelComponent } from './adminpanel.component';
 
 import { AdminGuard } from '../../Services/Guards/admin.guard';
 
-import { CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
+import { CONTENTS, CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
 
 import { ADMIN_PANEL } from '../../config';
 const routes: Routes = [
@@ -40,8 +41,13 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: CONTENTS,
+        component: ContentsComponent,
+        pathMatch: 'full'
+      },
+      {
         path: CONTENTS_MNG,
-        component: ContentManagementComponent,
+        component: ContentManagingComponent,
         pathMatch: 'full'
       },
       {

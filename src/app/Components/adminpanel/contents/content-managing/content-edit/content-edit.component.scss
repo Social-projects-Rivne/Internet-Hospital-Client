@@ -1,0 +1,84 @@
+.content-edit {
+  display: block;
+  text-align: center;
+
+  #author-container {
+    padding: 10px;
+
+    span {
+      color: mediumblue;
+      font-size: 1.2em;
+    }
+  }
+
+  .form-buttons {
+    width: calc(50% - 10px);
+    margin: 5px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .input-file-button {
+    display: none;
+  }
+
+  .image-valid-description {
+    margin-top: 5px;
+    text-align: right;
+    color: red;
+  }
+  .cropped-images-container {
+    text-align: right;
+    background-color: antiquewhite;
+    
+    .img-container {
+      float: left;
+      width: 128px;
+      height: 81px;
+      max-width: 128px;
+      margin: 5px;
+      position: relative;
+      background: white;
+      box-shadow: 10px;
+
+      img {
+        margin: auto;
+        position: absolute;
+        width: 128px;
+        height: 81px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .delete-button {
+        padding: 0;
+        min-width: 0;
+        line-height: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+  .cropped-images-container::after {
+    clear: both;
+    display: block;
+    content: "";
+  }
+
+  .text-short-body {
+    height: 75px;
+  }
+
+  #froala {
+    z-index: 0;
+  }
+  
+  #froala-area {
+    margin-top: 5px;
+    width: 100%;
+  }
+}

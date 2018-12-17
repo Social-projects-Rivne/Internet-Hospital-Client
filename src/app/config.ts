@@ -12,6 +12,7 @@ export const API_PATIENT = '/api/Patient/GetDetailedProfile';
 export const MY_PLANS = 'my-plans';
 export const USERS_PROFILE = 'users-profile';
 export const DOCTOR_PROFILE = 'doctor-profile';
+export const MY_PATIENTS = 'my-patients';
 
 export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';
@@ -35,3 +36,13 @@ export const VERTICAL_ALIGN = 'top';
 export const NOTIFICATION_CLASS = 'notification';
 export const SUCCESS_CLASS = 'success';
 export const ERROR_CLASS = 'error';
+
+// signalR notifications config
+export const AUDIO = '.../../assets/beep.wav';
+export const RESTART_TIME = 20000;
+export const LOAD_PAGES = 5;
+export const HUB_CONNECTION = '/notifications';
+export const NOTIFICATIONS_GET = '/api/notification';
+export const NOTIFICATIONS_CHANGE = '/api/notification/change';
+export const NOTIFICATION_NOTIFY = 'Notify';
+

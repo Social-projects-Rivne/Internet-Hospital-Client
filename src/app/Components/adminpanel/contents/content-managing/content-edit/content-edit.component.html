@@ -1,0 +1,62 @@
+<mat-card class="mat-elevation-z10 content-edit">
+  <form [formGroup]="handlingService.form" class="mat-elavation-z10" (ngSubmit)="onSubmit()">
+    <div id="author-container" *ngIf="handlingService.editingContent">
+        Created by: <span>{{handlingService.editingContent.author}}</span>
+    </div>
+    <div>
+      <mat-form-field>
+        <input required formControlName="title" matInput placeholder="Title" maxlength="100" minLength="5">
+        <mat-error>Title required.</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-select placeholder="Types" formControlName="types" [multiple]='true'>
+        <mat-option *ngFor="let type of handlingService.types; i as index"
+          [value]="type">{{type.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <textarea required formControlName="shortDescription" class="text-short-body" minLenght="10" 
+          maxlength="1000" matInput placeholder="Description"></textarea>
+        <mat-error>Short review required.</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="text-align: center">
+      <button type="button" mat-raised-button (click)="imageLoader.click()" color="primary" 
+        [disabled]="imageCroppingService.croppedImgs.length >= 10">
+        LOAD IMAGE <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+      <div class="image-valid-description" >
+        *<span *ngIf="imageCroppingService.croppedImgs.length < 3">Required minimum 3 images. </span>
+        <span *ngIf="imageCroppingService.croppedImgs.length >= 10">Max amount - 10. </span> 
+        <span>Width > 300 and < 2000. Height > 300 and < 2000.</span>
+      </div>
+      <input class="input-file-button" #imageLoader [disabled]="imageCroppingService.croppedImgs.length >= 10" 
+        type="file" accept="image/*" (change)="handleFileInput($event.target.files[0])" />
+      <image-cropper *ngIf="imageCroppingService.imgs.length != 0 && imageCroppingService.croppingImgIndex != -1"
+        style="width:100%" [imageChangedEvent]="imageChangedEvent"
+        [imageBase64]="imageCroppingService.imgs[imageCroppingService.croppingImgIndex]" 
+        [maintainAspectRatio]="true" [aspectRatio]="16 / 9" 
+        (imageCropped)="imageCroppingService.imageCropped($event)"></image-cropper>
+      <div class="cropped-images-container">
+        <div class="img-container" *ngFor="let img of imageCroppingService.croppedImgs; index as i">
+          <button class="delete-button" (click)="delete(i)" type="button" mat-button>
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+          <img [src]="img" (click)="imageCroppingService.changeCurrentIndex(i)">
+        </div>
+      </div>
+    </div>
+    <div id="froala-area">
+      <textarea id="froala" required [froalaEditor]="froalaService.froalaOptions" 
+        [(froalaModel)]="froalaService.article" formControlName="article"></textarea>
+    </div>
+    <div>
+      <button class="form-buttons" mat-raised-button color="primary" type="submit" 
+        [disabled]="handlingService.form.invalid || imageCroppingService.croppedFiles.length < 1">
+        {{handlingService.editingContent === null ? 'Create' : 'Update'}}</button>
+      <button class="form-buttons" mat-raised-button color="warn" (click)="clear()">Clear</button>
+    </div>
+  </form>
+</mat-card>

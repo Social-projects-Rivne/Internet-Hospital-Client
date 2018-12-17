@@ -6,9 +6,18 @@ import { Specialization } from '../Models/Specialization';
 import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { PreviousAppointment } from '../Models/PreviousAppointment';
+import { PreviousAppointmentFilter } from '../Models/PreviousAppointmentFilter';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
+const INCLUDE_ALL = 'includeAll';
+const PAGE = 'page';
+const PAGE_SIZE = 'pageSize';
+const SEARCH_BY_NAME = 'searchByName';
+const SORT = 'sort';
+const ORDER_BY = 'order';
 
 @Injectable({
   providedIn: 'root'
@@ -69,12 +78,55 @@ export class DoctorsService {
     return this.http.get<Specialization[]>(specUrl);
   }
 
+  getPreviousAppointment(filter: PreviousAppointmentFilter) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams()
+    };
+    let url = this.url + '/previousappointments';
+
+    if (filter) {
+      url += filter.getUrl();
+    }
+
+    return this.http.get<any>(url, httpOptions);
+  }
+
+  getAppointmentStatuses() {
+    const specUrl = this.url + '/appointmentstatuses';
+    return this.http.get<string[]>(specUrl);
+  }
+
   fillIllness(form: FormGroup, appointmentId: number) {
     let illnessHistory = new IllnessHistory();
     illnessHistory = form.value;
     illnessHistory.appointmentId = appointmentId;
-    illnessHistory.finishAppointmentTime = this.datePipe.transform(new Date(), 'short');
+    illnessHistory.finishAppointmentTime = new Date(new Date().toUTCString());
+    illnessHistory.finishAppointmentTimeStamp = illnessHistory.finishAppointmentTime.valueOf();
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
+  }
+
+  getMyPatients(sort: string,
+    order: string,
+    searchByName: string,
+    page: number,
+    includeAll: boolean,
+    pageSize: number): Observable<any> {
+    let url = this.url + '/mypatients' + `?${PAGE}=${page + 1}&`
+      + `${PAGE_SIZE}=${pageSize}&`
+      + `${INCLUDE_ALL}=${includeAll}&`;
+    if (searchByName) {
+      url += `${SEARCH_BY_NAME}=${searchByName}&`;
+    }
+    if (order) {
+      url += `${ORDER_BY}=${order}&`;
+    }
+    if (sort) {
+      url += `${SORT}=${sort}`;
+    }
+    return this.http.get<any>(url, this.httpOptions);
   }
 }

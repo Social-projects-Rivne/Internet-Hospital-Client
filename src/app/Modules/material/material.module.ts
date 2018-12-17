@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule,
+import {
+          MatTooltipModule,
+          MatSidenavModule,
+          MatToolbarModule,
           MatIconModule,
           MatDialogModule,
           MatNativeDateModule,
@@ -18,13 +21,17 @@ import { MatToolbarModule,
           MatPaginatorModule,
           MatDividerModule,
           MatTableModule,
+          MatSortModule,
           MatMenuModule,
           MatButtonToggleModule,
           MatExpansionModule,
-          MatProgressSpinnerModule } from '@angular/material';
+          MatProgressSpinnerModule,
+          MatBadgeModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MAT_MODULS = [
+    MatTooltipModule,
+    MatSidenavModule,
     CommonModule,
     MatToolbarModule,
     MatGridListModule,
@@ -46,9 +53,11 @@ const MAT_MODULS = [
     MatMenuModule,
     MatListModule,
     MatTableModule,
+    MatSortModule,
     MatButtonToggleModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatBadgeModule
   ];
 
 @NgModule({

@@ -6,8 +6,6 @@ import { MaterialModule } from './Modules/material/material.module';
 import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { ReplyDialogComponent } from './Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { AppComponent } from './app.component';
@@ -18,7 +16,6 @@ import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-new
 import { Page404Component } from './Components/page404/page404.component';
 import { DoctorListComponent } from './Components/DoctorList/doctor-list/doctor-list.component';
 import { DoctorListItemComponent } from './Components/DoctorList/doctor-list/doctor-list-item/doctor-list-item.component';
-import {MatTableModule} from '@angular/material/table';
 
 import { AuthenticationService } from './Services/authentication.service';
 import { InterceptorService } from './Services/interceptor.service';
@@ -65,6 +62,13 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +101,11 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     LoadingComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    PreviousAppointmentsComponent,
+    PreviousSearchItemComponent,
+    PreviousAppointmentItemComponent,
+    MyPatientsComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
@@ -112,8 +120,6 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     AdminpanelModule,
     OverlayModule,
     NgxMaskModule.forRoot(),
-    MatExpansionModule,
-    MatSidenavModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -128,7 +134,8 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
           useClass: CustomEventTitleFormatter
         }
       },
-    )
+    ),
+    InfiniteScrollModule
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,

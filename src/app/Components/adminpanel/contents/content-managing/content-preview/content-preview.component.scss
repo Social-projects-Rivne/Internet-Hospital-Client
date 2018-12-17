@@ -1,0 +1,42 @@
+.content-preview {
+  display: block;
+  padding: 0;
+  margin: 10px 0;
+
+  mat-card-header,
+  .content-body {
+    padding: 16px;
+  }
+}
+
+  .content-title {
+    font-size: 2em;
+    line-height: normal;
+    text-align: left;
+    display: block;
+    width: 100%;
+
+    .content-date {
+      float: right;
+      font-size: 0.5em;
+      text-align: right;
+      margin-left: 5px;
+      color: rgb(20, 9, 180)
+    }
+  }
+
+.types {
+  color: grey;
+  font-size: 0.5em;
+}
+
+mat-card-content p {
+  padding: 16px;
+  text-align: justify;
+}
+
+.button-wrapper {
+  text-align: right;
+  margin-right: 10px;
+  padding-bottom: 10px;
+}
