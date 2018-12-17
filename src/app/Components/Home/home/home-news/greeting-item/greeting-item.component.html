@@ -6,7 +6,7 @@
       [style.right.%]="greeting.greeting.right"
       [style.bottom.%]="greeting.greeting.bottom"
       [style.left.%]="greeting.greeting.left"
-      [@textApearing]="animationShowing.greeting && currentContainer == i ? 'showText' : 'hideText'">
+      [@textAppearing]="animationShowing.greeting && currentContainer == i ? 'showText' : 'hideText'">
       {{greeting.greeting.text}}</span>
     <span class="information-about-site"
       [style.top.%]="greeting.aboutSite.top"
@@ -25,7 +25,11 @@
       {{greeting.aboutUsers.text}}
     </span>
     <a class="pulse" [routerLink]="'sign-up'" 
-      [@textApearing]="animationShowing.registerButton && currentContainer == i ? 'showText' : 'hideText'">
+      [style.top.%]="greeting.registerButton.top"
+      [style.right.%]="greeting.registerButton.right"
+      [style.bottom.%]="greeting.registerButton.bottom"
+      [style.left.%]="greeting.registerButton.left"
+      [@textAppearing]="animationShowing.registerButton && currentContainer == i ? 'showText' : 'hideText'">
       REGISTER
     </a>
     <div class="image-container">

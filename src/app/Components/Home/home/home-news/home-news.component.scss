@@ -29,3 +29,12 @@
         width: 33%
     }
 }
+
+.loading-spinner {
+    text-align: center;
+    margin: 10%;
+
+    mat-spinner {
+        margin: auto;
+    }
+}

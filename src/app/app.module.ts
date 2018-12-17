@@ -68,6 +68,8 @@ import { HomeNewsItemVer2Component } from './Components/Home/home/home-news/home
 import { HomeNewsItemVer3Component } from './Components/Home/home/home-news/home-news-item-ver3/home-news-item-ver3.component';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [
@@ -113,6 +115,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
   imports: [
 
     SlideshowModule,
+    InfiniteScrollModule,
 
     BrowserModule,
     MaterialModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, keyframes, trigger } from '@angular/animations';
-import { Greeting, TextWithPositon } from 'src/app/Models/Greeting';
+import { Greeting, TextWithPositon, ButtonPosition } from 'src/app/Models/Greeting';
 const TIME_FOR_CHANGE_CONTAINER = 10000;
 
 @Component({
@@ -8,7 +8,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
   templateUrl: './greeting-item.component.html',
   styleUrls: ['./greeting-item.component.scss'],
   animations: [
-    trigger('textApearing', [
+    trigger('textAppearing', [
       state('showText', style({opacity: 1})),
       state('hideText', style({opacity: 0})),
       transition('hideText => showText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
@@ -126,17 +126,20 @@ export class GreetingItemComponent implements OnInit {
   ngOnInit() {
     this.setPlay();
     let greeting = new Greeting();
-    greeting.greeting = new TextWithPositon('HELLO GUEST', 10, null, null, 10);
-    greeting.aboutSite = new TextWithPositon('You visited site for finding doctor?', null, 2, 35, null);
-    greeting.aboutUsers = new TextWithPositon('There are more than 1000 verified doctors!', null, null, 15, 2);
-    greeting.imageUrl = '../../../../../../assets/img/greeting-image-1.jpg';
+    greeting.greeting = new TextWithPositon('HELLO GUEST', 10, 5, null, null);
+    greeting.aboutSite = new TextWithPositon('You visited site for finding doctor?', 30, 5, null, null);
+    greeting.aboutUsers = new TextWithPositon('There are more than 1000 verified doctors!', 50, 5, null, null);
+    greeting.imageUrl = '../../../../../../assets/img/images2.jpg';
+    greeting.registerButton = new ButtonPosition(70, 20, null, null);
     this.greetings.push(greeting);
     greeting = new Greeting();
 
-    greeting.greeting = new TextWithPositon('HELLO GUEST', 15, 5, null, null);
-    greeting.aboutSite = new TextWithPositon('You are doctor and want to increase number of clients?', null, 2, 30, null);
-    greeting.aboutUsers =  new TextWithPositon('There are more than 1000 doctors!', null, null, 10, 10);
-    greeting.imageUrl = '../../../../../../assets/img/greeting-image-2.jpg';
+    greeting.greeting = new TextWithPositon('HELLO GUEST', 10, null, null, 5);
+    greeting.aboutSite = new TextWithPositon('You are doctor and want to increase number of clients?', 30, null, null, 5);
+    greeting.aboutUsers =  new TextWithPositon('There are more than 10000 verified users!', 50, null, null, 5);
+    greeting.imageUrl = '../../../../../../assets/img/images4.jpg';
+    greeting.registerButton = new ButtonPosition(null, null, 10, 20);
+
     this.greetings.push(greeting);
   }
 
