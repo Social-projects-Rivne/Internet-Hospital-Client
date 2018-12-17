@@ -9,5 +9,6 @@ export class IllnessHistory {
     surveyPlan: String;
     treatmentPlan: String;
     finishAppointmentTime: Date;
-    finishAppointmentTimeStamp: Number;
+    finishAppointmentTimeStamp: number;
+    doctorName: string;
 }
