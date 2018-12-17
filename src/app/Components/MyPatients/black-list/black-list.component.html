@@ -41,7 +41,7 @@
       <ng-container matColumnDef="dateOfBanned">
         <th mat-header-cell *matHeaderCellDef mat-sort-header><b>DATE OF BANNED</b></th>
         <td mat-cell *matCellDef="let row">
-          {{row.dateOfBanned | date:'dd.MM.y'}}
+          {{row.dateOfBanned | date:'dd.MM.y HH.mm'}}
         </td>
       </ng-container>
       <ng-container matColumnDef="description">

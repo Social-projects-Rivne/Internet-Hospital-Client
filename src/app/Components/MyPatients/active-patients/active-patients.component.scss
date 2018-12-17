@@ -3,9 +3,7 @@
     margin: 20px 0;
   }
   
-  .filtering-block {
-    padding: 10px;
-  
+  .filtering-block {  
     mat-form-field {
       width: 100%;
     }
@@ -41,5 +39,9 @@ h3 {
 
 .bannPatients {
   margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
 }
   

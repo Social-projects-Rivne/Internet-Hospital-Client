@@ -15,7 +15,9 @@
         </button>
       </div>
       <div fxFlex="80%">
-        <input matInput placeholder="Description" [(ngModel)]="description">
+        <mat-form-field>
+          <input id="tbDescription" matInput placeholder="Description" [(ngModel)]="description">
+        </mat-form-field>
       </div>
     </div>
     <table mat-table [dataSource]="dataSource" matSort>
