@@ -1,0 +1,15 @@
+<div class="container">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
+    <div fxFlex="20%">
+      <app-doctor-appointments-search-item [statuses]="statuses" (search)="onSearch($event)"></app-doctor-appointments-search-item>
+    </div>
+    <div fxFlex="80%">
+      <app-loading *ngIf="isAppointmentsResult && isStatusesResult"></app-loading>
+      <mat-list>
+        <app-doctor-appointment-appointment-item *ngFor="let appointment of appointments" [appointment]="appointment"></app-doctor-appointment-appointment-item>
+      </mat-list>
+    </div>
+  </div>
+  <mat-paginator fxLayoutAlign="end start" [length]="appointmentCount" [hidePageSize]="true" showFirstLastButtons>
+  </mat-paginator>
+</div>

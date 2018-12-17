@@ -1,36 +1,37 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
-import { PreviousAppointment } from 'src/app/Models/PreviousAppointment';
 import { MatPaginator } from '@angular/material';
 import { switchMap } from 'rxjs/operators';
 import { AppointmentStatus } from 'src/app/Models/AppointmentStatus';
-import { PreviousAppointmentFilter } from 'src/app/Models/PreviousAppointmentFilter';
+import { DoctorAppointmentFilter } from 'src/app/Models/DoctorAppointmentFilter';
+import { Appointment } from '../../DoctorPlans/Appointment';
+import { DoctorplansService } from '../../DoctorPlans/doctorplans.service';
 
 @Component({
-  selector: 'app-previous-appointments',
-  templateUrl: './previous-appointments.component.html',
-  styleUrls: ['./previous-appointments.component.scss']
+  selector: 'app-doctor-appointments',
+  templateUrl: './doctor-appointments.component.html',
+  styleUrls: ['./doctor-appointments.component.scss']
 })
-export class PreviousAppointmentsComponent implements OnInit {
+export class DoctorAppointmentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  previousAppointments: PreviousAppointment[];
+  appointments: Appointment[];
   statuses: AppointmentStatus[] = [];
-  prevAppointCount: number;
-  filter: PreviousAppointmentFilter;
+  appointmentCount: number;
+  filter: DoctorAppointmentFilter;
   isStatusesResult = true;
   isAppointmentsResult = true;
   pageSize = 5;
 
-  constructor(private docService: DoctorsService) {
-    this.filter = new PreviousAppointmentFilter();
+  constructor(private appService: DoctorplansService) {
+    this.filter = new DoctorAppointmentFilter();
   }
 
   ngOnInit() {
     this.paginator.pageSize = this.pageSize;
 
-    this.docService.getAppointmentStatuses().subscribe(
+    this.appService.getAppointmentStatuses().subscribe(
       statuses => {
         this.initializeAppoitmentStatus(statuses);
         this.isStatusesResult = false;
@@ -43,11 +44,11 @@ export class PreviousAppointmentsComponent implements OnInit {
           this.isAppointmentsResult = true;
           this.filter.pageIndex = this.paginator.pageIndex;
           this.filter.pageSize = this.paginator.pageSize;
-          return this.docService.getPreviousAppointment(this.filter);
+          return this.appService.getAllDoctorAppointments(this.filter);
         })
       ).subscribe(result => {
-        this.previousAppointments = result.appointments;
-        this.prevAppointCount = result.quantity;
+        this.appointments = result.appointments;
+        this.appointmentCount = result.quantity;
         this.isAppointmentsResult = false;
       });
 
@@ -61,7 +62,7 @@ export class PreviousAppointmentsComponent implements OnInit {
     });
   }
 
-  onSearch($event: PreviousAppointmentFilter) {
+  onSearch($event: DoctorAppointmentFilter) {
     this.paginator.pageIndex = 0;
     this.filter = $event;
     this.paginator.page.emit();

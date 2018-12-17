@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreviousSearchItemComponent } from './previous-search-item.component';
+import { PatientInfoProfileComponent } from './patient-info-profile.component';
 
-describe('PreviousSearchItemComponent', () => {
-  let component: PreviousSearchItemComponent;
-  let fixture: ComponentFixture<PreviousSearchItemComponent>;
+describe('PatientInfoProfileComponent', () => {
+  let component: PatientInfoProfileComponent;
+  let fixture: ComponentFixture<PatientInfoProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreviousSearchItemComponent ]
+      declarations: [ PatientInfoProfileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreviousSearchItemComponent);
+    fixture = TestBed.createComponent(PatientInfoProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

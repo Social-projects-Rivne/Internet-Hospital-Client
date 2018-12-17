@@ -1,3 +1,5 @@
+import { IllnessHistory } from 'src/app/Models/IllnessHistory';
+
 export class Appointment {
     id: number;
     userId: number;
@@ -8,4 +10,5 @@ export class Appointment {
     startTime: Date;
     endTime: Date;
     isAllowPatientInfo: boolean;
+    illnessHistory: IllnessHistory;
 }

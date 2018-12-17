@@ -61,11 +61,12 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
-import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
+import { DoctorAppointmentsComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments.component';
 // tslint:disable-next-line:max-line-length
-import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
+import { DoctorAppointmentItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointment-item/doctor-appointment-item.component';
 // tslint:disable-next-line:max-line-length
-import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { DoctorAppointmentsSearchItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments-search-item/doctor-appointments-search-item.component';
+import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
 
 @NgModule({
   declarations: [
@@ -99,9 +100,10 @@ import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/pre
     MatConfirmDialogComponent,
     LoadingComponent,
     DoctorProfileComponent,
-    PreviousAppointmentsComponent,
-    PreviousSearchItemComponent,
-    PreviousAppointmentItemComponent
+    DoctorAppointmentsComponent,
+    DoctorAppointmentItemComponent,
+    DoctorAppointmentsSearchItemComponent,
+    PatientInfoProfileComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [

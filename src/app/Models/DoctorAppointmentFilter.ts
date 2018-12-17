@@ -1,4 +1,4 @@
-export class PreviousAppointmentFilter {
+export class DoctorAppointmentFilter {
     from: Date;
     till: Date;
     searchKey: string;

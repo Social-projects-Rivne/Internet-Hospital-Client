@@ -1,24 +1,24 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PreviousAppointmentFilter } from 'src/app/Models/PreviousAppointmentFilter';
+import { DoctorAppointmentFilter } from 'src/app/Models/DoctorAppointmentFilter';
 import { AppointmentStatus } from 'src/app/Models/AppointmentStatus';
 import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
-  selector: 'app-previous-search-item',
-  templateUrl: './previous-search-item.component.html',
-  styleUrls: ['./previous-search-item.component.scss']
+  selector: 'app-doctor-appointments-search-item',
+  templateUrl: './doctor-appointments-search-item.component.html',
+  styleUrls: ['./doctor-appointments-search-item.component.scss']
 })
-export class PreviousSearchItemComponent implements OnInit {
+export class DoctorAppointmentsSearchItemComponent implements OnInit {
 
   @Input()
   statuses: AppointmentStatus[];
   @Output()
-  search = new EventEmitter<PreviousAppointmentFilter>();
+  search = new EventEmitter<DoctorAppointmentFilter>();
 
-  filter: PreviousAppointmentFilter;
+  filter: DoctorAppointmentFilter;
 
   constructor(private notification: NotificationService) {
-     this.filter = new PreviousAppointmentFilter();
+     this.filter = new DoctorAppointmentFilter();
    }
 
   ngOnInit() {
@@ -39,11 +39,11 @@ export class PreviousSearchItemComponent implements OnInit {
     }
   }
 
-  beginDate($event) {
+  beginDate($event: any) {
     this.filter.from = $event.target.value;
   }
 
-  finishDate($event) {
+  finishDate($event: any) {
     this.filter.till = $event.target.value;
   }
 

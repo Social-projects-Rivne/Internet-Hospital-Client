@@ -50,7 +50,7 @@
               <mat-expansion-panel-header>
                 <div fxLayout="row">
                   <mat-list-item>
-                    <div>{{IllnessHistory.finishAppointmentTime}}</div>
+                    <div>{{IllnessHistory.finishAppointmentTime | date:"dd/MM/yyyy 'at' h:mma"}}</div>
                   </mat-list-item>
                   <mat-list-item>
                     <div>{{IllnessHistory.diagnose}}</div>

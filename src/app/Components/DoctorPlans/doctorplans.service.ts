@@ -3,6 +3,7 @@ import { HOST_URL } from 'src/app/config';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Appointment } from './Appointment';
 import { DatePipe } from '@angular/common';
+import { DoctorAppointmentFilter } from 'src/app/Models/DoctorAppointmentFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,28 @@ export class DoctorplansService {
     return this.http.get(specUrl, httpOptions);
   }
 
+  getAllDoctorAppointments(filter: DoctorAppointmentFilter) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: new HttpParams()
+    };
+    let url = HOST_URL + '/api/Appointments/allappointments';
+
+    if (filter) {
+      url += filter.getUrl();
+    }
+
+    return this.http.get<any>(url, httpOptions);
+  }
+
+  getAppointmentStatuses() {
+    const specUrl = HOST_URL + '/api/Appointments/appointmentstatuses';
+    return this.http.get<string[]>(specUrl);
+  }
+
+
   subscribePatientToAppointment(appointmentId: number, isAllow: boolean) {
     const scecUrl = HOST_URL + '/api/Appointments/subscribe';
     return this.http.post(scecUrl, { Id: appointmentId, IsAllowPatientInfo: isAllow });
@@ -59,9 +82,6 @@ export class DoctorplansService {
 
   changePersonalInfoAccessibility(appointmentId: number, isAllow: boolean) {
     const scecUrl = HOST_URL + '/api/Appointments/changeAccess';
-    console.log('dasd');
-    return this.http.patch(scecUrl, { Id: appointmentId, IsAllowPatientInfo: isAllow });
-    console.log('dasd2');
-
+    return this.http.patch(scecUrl, { AppointmentId: appointmentId, IsAllowPatientInfo: isAllow });
   }
 }

@@ -1,3 +1,4 @@
+<app-loading *ngIf="isChangingAccess"></app-loading>
 <mat-card class="patientAppointmentsCard">
     <mat-card-header fxLayout="row">
         <mat-card-title fxLayoutAlign="center center">Appointment to {{patAppointment.doctorFirstName}}
@@ -13,12 +14,7 @@
     </mat-card-content>
     <mat-card-content>
         <mat-checkbox color="primary" [(ngModel)]="patAppointment.isAllowPatientInfo" (click)="changeAccessibility()">
-            <i class="far fa-question-circle" matTooltip="Allow doctor to see your illness history"></i>
-            <!-- <mat-icon [matTooltipPosition]="above" matTooltip="Allow doctor to see your illness history" 
-            aria-label="Example icon-button with a heart icon">
-                favorite
-            </mat-icon> -->
-            Allow info?
+            <i class="far fa-question-circle" matTooltip="Allow doctor to see your illness history">Allow info?</i>
         </mat-checkbox>
     </mat-card-content>
     <mat-card-actions fxLayout="row">
