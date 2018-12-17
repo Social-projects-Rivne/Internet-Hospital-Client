@@ -2,10 +2,12 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Patua One', cursive;
   margin-top: 10px;
   margin-bottom: 10px;
-  text-shadow: 1px 1px black;
+  color: #4056a1;
+  text-shadow: 1px 1px 1px #4056a1bb;
+
 
   .wrapper {
     position: relative;
@@ -16,6 +18,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    background-size: cover;
+    background-position: center;
     top: 0;
     transition: opacity 2s ease;
   }
@@ -23,7 +27,7 @@
   .greeting-text {
     display: inline-block;
     position: absolute;
-    color: red;
+    line-height: 1;
     font-size: 2.5vw;
   }
 
@@ -31,7 +35,6 @@
     display: inline-block;
     position: absolute;
     line-height: 1;
-    color: red;
     font-size: 2vw;
   }
 
@@ -39,16 +42,15 @@
     display: inline-block;
     position: absolute;
     line-height: 1;
-    color: red;
     font-size: 2vw;
   }
 
   a {
     display: inline-block;
     position: absolute;
-    width: 7vw;
-    height: 4.8vw;
-    padding-top: 1.6vw;
+    width: 7.6vw;
+    height: 6vw;
+    padding-top: 1vw;
     text-align: center;
     font-size: 1.6vw;
     text-decoration: none;
@@ -56,6 +58,7 @@
     background-size: cover;
     background-position: center;
     color: white;
+    text-shadow: none;
     z-index: 2;
   }
 

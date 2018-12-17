@@ -19,7 +19,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
         style({transform: 'scale3d(0.97, 0.97, 0.97)', offset: 0.8}),
         style({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1})
       ]))),
-      transition('showText => hideText', animate('750ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
+      transition('showText => hideText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
         style({transform: 'scale3d(0.9, 0.9, 0.9)', offset: 0.2}),
         style({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.5}),
         style({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.55}),
@@ -36,7 +36,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
         style({transform: 'translate3d(5px, 0, 0)', offset: 0.9}),
         style({transform: 'translate3d(0, 0, 0)', offset: 1}),
       ]))),
-      transition('showText => hideText', animate('750ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
+      transition('showText => hideText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
         style({transform: 'translate3d(20px, 0, 0)', offset: 0.2}),
         style({opacity: 0, transform: 'translate3d(-2000px, 0, 0)', offset: 1}),
       ])))
@@ -51,7 +51,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
         style({transform: 'translate3d(-5px, 0, 0)', offset: 0.9}),
         style({transform: 'translate3d(0, 0, 0)', offset: 1})
       ]))),
-      transition('showText => hideText', animate('750ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
+      transition('showText => hideText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
         style({transform: 'translate3d(-20px, 0, 0)', offset: 0.2}),
         style({opacity: 0, transform: 'translate3d(2000px, 0, 0)', offset: 1}),
       ])))

@@ -1,6 +1,8 @@
 <div class="greeting-slider">
   <div class="wrapper"></div>
-  <div *ngFor="let greeting of greetings; index as i" class="container" [style.opacity]="currentContainer == i ? 1 : 0">
+  <div *ngFor="let greeting of greetings; index as i" class="container"
+    [style.opacity]="currentContainer == i ? 1 : 0"
+    [style.background-image]="'url(' + greeting.imageUrl +')'">
     <span class="greeting-text"
       [style.top.%]="greeting.greeting.top"
       [style.right.%]="greeting.greeting.right"
@@ -36,10 +38,10 @@
       <img [src]="greeting.imageUrl">
     </div>
   </div>
-  <!-- <button mat-button class="left" (click)="nextContainer()">
+  <button mat-button class="left" (click)="nextContainer()">
     <mat-icon>navigate_before</mat-icon>
   </button>
   <button mat-button class="right" (click)="previousContainer()">
     <mat-icon>navigate_next</mat-icon>
-  </button> -->
+  </button>
 </div>
