@@ -49,13 +49,13 @@
         <div class="patient-history-search-filter" fxFlex="35%">
           <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
         </div>
-        <div class="patient-history" fxLayoutGap="0.5%" fxLayout="column" fxLayoutAlign="space-between stretch">
+        <div class="patient-history" fxLayoutGap="0.5%" fxLayout="column" >
           <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <div class="histories-top" fxLayout="row" fxFlex>
                   <div fxFlex>
-                    {{IllnessHistory.finishAppointmentTime }}
+                    <div>{{IllnessHistory.finishAppointmentTime | date:"MM/dd/yyyy 'at' h:mma"}}</div>
                   </div>
                   <div fxFlex>
                     Doctor: {{IllnessHistory.doctorName}}
