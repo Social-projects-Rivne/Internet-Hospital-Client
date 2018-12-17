@@ -1,20 +1,14 @@
-<div>
-  <mat-expansion-panel>
+<div class="whole_item">
+  <mat-expansion-panel fxFlex>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ prevApp.userFullName }}
-      </mat-panel-title>
-      <mat-list-item>
-        <div>{{prevApp.status}}</div>
-      </mat-list-item>
-      <mat-list-item>
-        <div>{{prevApp.startTime | date:'dd.MM HH:mm'}}</div>
-      </mat-list-item>
-      <mat-list-item>
-        <div>{{prevApp.endTime | date:'dd.MM HH:mm'}}</div>
-      </mat-list-item>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex style="margin-right: 5px">
+          <div fxFlex="25%">{{ prevApp.userFullName }}</div>
+          <div fxFlex="25%">{{prevApp.status}}</div>
+          <div fxFlex="25%">{{prevApp.startTime | date:'dd.MM HH:mm'}}</div>
+          <div fxFlex="25%">{{prevApp.endTime | date:'dd.MM HH:mm'}}</div>
+      </div>
     </mat-expansion-panel-header>
-    <div>
+    <div fxLayout="column" fxLayoutGap="5px">
       <div *ngIf="prevApp.illnessHistory?.complaints">
         Complaints: {{prevApp.illnessHistory.complaints}}
       </div>
