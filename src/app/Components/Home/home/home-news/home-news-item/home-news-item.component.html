@@ -1,26 +1,30 @@
 <mat-card class="mat-elevation-z10 content-item">
   <mat-card-header>
-    <div class="title-with-date">
-      <div class="content-title">
-        <div class="date-with-author">
-          <div class="content-date">{{content.dateOfCreation | date}}</div>
-          <div class="content-author" color="primary">{{content.author}}</div>
-        </div>
+    <div class="title">
       {{content.title}}
-      </div>
     </div>
-    <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
+    <p><span class="content-date">{{content.dateOfCreation | date}}</span>
+      <strong class="types">{{content.types.join(', ')}} </strong>
+    </p>
   </mat-card-header>
-  <div id="slideshow-container">
-    <slideshow [imageUrls]="imageUrls" [height]="height + 'px'" 
-      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
+
+  <div class="images-container">
+    <div class="image-wrap"></div>
+    <div class="image-container">
+      <img *ngFor="let img of imageUrls" src="{{img}}" 
+        [@imageDisplay]="img === imageUrls[slideIndex] ? 'displayed' : 'hidden'">
+    </div>
+    <button class="left-button" mat-button (click)="prevImg()"><mat-icon>navigate_before</mat-icon></button>
+    <button class="right-button" mat-button (click)="nextImg()"><mat-icon>navigate_next</mat-icon></button>
   </div>
+
   <mat-card-content>
     <p>
       {{content.shortDescription}}
     </p>
   </mat-card-content>
   <div class="button-container">
+    <div class="content-author-container">Author: <span class="content-author">{{content.author}}</span></div>
     <button mat-raised-button color="primary">READ FULL</button>
   </div>
 </mat-card>

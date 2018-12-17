@@ -64,8 +64,6 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
 
 
 import { SlideshowModule } from 'ng-simple-slideshow';
-import { HomeNewsItemVer2Component } from './Components/Home/home/home-news/home-news-item-ver2/home-news-item-ver2.component';
-import { HomeNewsItemVer3Component } from './Components/Home/home/home-news/home-news-item-ver3/home-news-item-ver3.component';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -103,20 +101,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatConfirmDialogComponent,
     LoadingComponent,
     DoctorProfileComponent,
-
-    HomeNewsItemVer2Component,
-
-    HomeNewsItemVer3Component,
-
-    GreetingItemComponent,
-
+    GreetingItemComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
-
-    SlideshowModule,
     InfiniteScrollModule,
-
     BrowserModule,
     MaterialModule,
     FormsModule,
