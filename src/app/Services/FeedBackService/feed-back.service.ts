@@ -14,6 +14,7 @@ const SEARCH_STATUS = 'SearchByType';
 @Injectable({
   providedIn: 'root'
 })
+
 export class FeedBackService {
 
   url = HOST_URL + '/api/feedBack/';
@@ -73,6 +74,11 @@ export class FeedBackService {
       }
     }
     return this.http.get(typeUrl);
+  }
+
+  sendSignal(feedbackModel: FeedbackViewModel) {
+    const Sendurl = HOST_URL + '/api/notification/send';
+    return this.http.post(Sendurl, {Recepient: feedbackModel.userId, Message: feedbackModel.reply}).subscribe();
   }
 
 }

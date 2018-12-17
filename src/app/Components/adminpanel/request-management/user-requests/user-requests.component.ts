@@ -127,6 +127,7 @@ export class UserRequestsComponent implements OnInit {
       this.selectedReplyModel = result;
       if (result !== undefined ) {
         this._feedbackService.updateFeedback(this.selectedReplyModel);
+        this._feedbackService.sendSignal(this.selectedReplyModel);
       }
     });
   }
