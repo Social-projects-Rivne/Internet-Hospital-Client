@@ -45,4 +45,5 @@ export const HUB_CONNECTION = '/notifications';
 export const NOTIFICATIONS_GET = '/api/notification';
 export const NOTIFICATIONS_CHANGE = '/api/notification/change';
 export const NOTIFICATION_NOTIFY = 'Notify';
+export const NOTIFICATION_ONLOAD = 'OnLoad';
 

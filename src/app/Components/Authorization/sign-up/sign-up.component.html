@@ -44,8 +44,10 @@
           </div>
         </div>
       </div>
-      <div id="PictureDiv" fxLayout="column" fxLayoutAlign="end center">
-        <img [src]="imageHandling.imageUrl" name="Caption" class="image-view">
+      <div fxLayout="column" fxLayoutAlign="end center">
+        <div id="PictureDiv">
+          <img [src]="imageHandling.imageUrl" name="Caption" class="image-view">
+        </div>
       </div>
     </form>
   </mat-card>
