@@ -13,6 +13,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 import { ContentTypeService } from '../Services/content-type.service';
 import { of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { DialogService } from 'src/app/Services/dialog.service';
 
 const DEF_PAGE_SIZE = 12;
 
@@ -34,19 +35,20 @@ export class ContentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private handlingService: ContentHandlingService,
-              private contentService: ContentService,
-              private typeService: ContentTypeService,
-              private notificationService: NotificationService,
-              private router: Router) {
+    private contentService: ContentService,
+    private typeService: ContentTypeService,
+    private notificationService: NotificationService,
+    private dialogService: DialogService,
+    private router: Router) {
   }
 
   loadTypes() {
     this.typeService.getContentType().subscribe(((res: any) => {
-        this.types = res;
-      }),
+      this.types = res;
+    }),
       error => {
         this.notificationService.error('Couldn\'t load types!!!');
-    });
+      });
   }
 
   ngOnInit() {
@@ -55,27 +57,27 @@ export class ContentsComponent implements OnInit {
     this.filters.page = 0;
     this.loadTypes();
     this.paginator.page.pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          this.filters.page = this.paginator.pageIndex;
-          this.filters.pageSize = this.paginator.pageSize;
-          return this.contentService.getShortModeratorContent(this.filters);
-        }),
-        map((data: any) => {
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.content.amountOfAll = data.amount;
-          return data.results;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          this.isRateLimitReached = true;
-          return observableOf([]);
-        })
-      ).subscribe(data => {
-        this.content.data = data;
-      });
+      startWith({}),
+      switchMap(() => {
+        this.isLoadingResults = true;
+        this.filters.page = this.paginator.pageIndex;
+        this.filters.pageSize = this.paginator.pageSize;
+        return this.contentService.getShortModeratorContent(this.filters);
+      }),
+      map((data: any) => {
+        this.isLoadingResults = false;
+        this.isRateLimitReached = false;
+        this.content.amountOfAll = data.amount;
+        return data.results;
+      }),
+      catchError(() => {
+        this.isLoadingResults = false;
+        this.isRateLimitReached = true;
+        return observableOf([]);
+      })
+    ).subscribe(data => {
+      this.content.data = data;
+    });
   }
 
   onChange(content: ShortContentWithEditors) {
@@ -91,11 +93,17 @@ export class ContentsComponent implements OnInit {
   }
 
   onDelete(content: ShortContentWithEditors) {
-    this.contentService.deleteContent(content.id).subscribe( _ => {
-      this.notificationService.success(`"${content.title}" was successfully deleted!`);
-      this.paginator.page.emit();
-    }, error => {
-      this.notificationService.error(`"${content.title}" wasn't deleted!`);
+    this.dialogService.openConfirmDialog(`Do you really want to delete "${content.title}"?`,
+      '10%', 'calc(50% - 195px)')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.contentService.deleteContent(content.id).subscribe(_ => {
+            this.notificationService.success(`"${content.title}" was successfully deleted!`);
+            this.paginator.page.emit();
+          }, error => {
+            this.notificationService.error(`"${content.title}" wasn't deleted!`);
+          });
+        }
     });
   }
 
