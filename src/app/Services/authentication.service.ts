@@ -7,6 +7,8 @@ import { ICurrentUser } from '../Models/CurrentUser';
 import { HOST_URL } from '../../app/config';
 import { SIGN_IN } from '../../app/config';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from './token.service';
+import { MessageService } from './message.service';
 
 const PATIENT = 'Patient';
 const DOCTOR = 'Doctor';
@@ -18,7 +20,10 @@ const DEFAULT_AVATAR = '../../assets/img/default-avatar.png';
 @Injectable()
 export class  AuthenticationService  {
 
-    constructor(private http: HttpClient, private router: Router) {   }
+    constructor(private http: HttpClient,
+                private router: Router,
+                private tokenService: TokenService,
+                private messageService: MessageService) { }
 
     url = HOST_URL;
     jwtHelper = new JwtHelperService();
@@ -51,6 +56,8 @@ export class  AuthenticationService  {
                     localStorage.setItem(TOKEN, JSON.stringify(user));
                     // set flag that a user is logged in
                     this.isLoginSubject.next(true);
+                    // connect to SignalR websocket
+                    this.messageService.startConnection();
                     // set user role depending on the token claims
                     this.setUserRole();
                     this.AvatarURL.next(this.checkAvatarUrl());
@@ -167,9 +174,7 @@ export class  AuthenticationService  {
 
     // refresh access token
     refreshToken(): Observable<ICurrentUser> {
-        const currentUser = JSON.parse(localStorage.getItem(TOKEN));
-        const token = currentUser.refresh_token;
-        return this.http.post<ICurrentUser>(this.url + '/api/Signin/refresh', { RefreshToken: token } )
+        return this.tokenService.refresh()
           .pipe(
             map(user => {
                 if (user && user.access_token) {
@@ -181,17 +186,15 @@ export class  AuthenticationService  {
 
     // get a token of logged user
     getAuthToken(): string {
-        const currentUser = JSON.parse(localStorage.getItem(TOKEN));
-        if (currentUser != null) {
-            return currentUser.access_token;
-        }
-        return '';
+        return this.tokenService.getAuthToken();
     }
 
     // log out user
     logout() {
         // clear localStorage
         localStorage.removeItem(TOKEN);
+        // disconnect SignalR socket
+        this.messageService.stopConnection();
         // set all flags about user status to false
         this.removeAllAuthorizeFlags();
         // redirect to sign in page

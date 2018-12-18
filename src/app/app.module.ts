@@ -61,6 +61,15 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
+// tslint:disable-next-line:max-line-length
+import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
+import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
+import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
 
 
 import { SlideshowModule } from 'ng-simple-slideshow';
@@ -102,6 +111,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     LoadingComponent,
     DoctorProfileComponent,
     GreetingItemComponent
+    PreviousAppointmentsComponent,
+    PreviousSearchItemComponent,
+    PreviousAppointmentItemComponent,
+    MyPatientsComponent,
+    BlackListComponent,
+    ActivePatientsComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
@@ -131,7 +146,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
           useClass: CustomEventTitleFormatter
         }
       },
-    )
+    ),
+    InfiniteScrollModule
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,

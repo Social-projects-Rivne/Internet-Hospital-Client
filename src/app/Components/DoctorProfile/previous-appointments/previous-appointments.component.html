@@ -1,0 +1,15 @@
+<div class="container" fxLayout="column">
+  <div fxLayout="row" fxLayout.lt-lg="column"  fxLayoutGap="5%" fxLayoutAlign="center" >
+    <div fxFlex="35%">
+      <app-previous-search-item [statuses]="statuses" (search)="onSearch($event)"></app-previous-search-item>
+    </div>
+    <div fxFlex="65%">
+      <app-loading *ngIf="isAppointmentsResult && isStatusesResult"></app-loading>
+      <div class="itemmmm">
+        <app-previous-appointment-item *ngFor="let prevApp of previousAppointments" [prevApp]="prevApp"></app-previous-appointment-item>
+      </div>
+    </div>
+  </div>
+  <mat-paginator fxLayoutAlign="end start" [length]="prevAppointCount" [hidePageSize]="true" showFirstLastButtons>
+  </mat-paginator>
+</div>

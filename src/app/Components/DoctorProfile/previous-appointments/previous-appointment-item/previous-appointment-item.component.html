@@ -1,0 +1,35 @@
+<div>
+  <mat-expansion-panel fxFlex>
+    <mat-expansion-panel-header>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+          <div fxFlex="25%">{{ prevApp.userFullName }}</div>
+          <div fxFlex="25%">{{prevApp.status}}</div>
+          <div fxFlex="25%">{{prevApp.startTime | date:'dd.MM HH:mm'}}</div>
+          <div fxFlex="25%">{{prevApp.endTime | date:'dd.MM HH:mm'}}</div>
+      </div>
+    </mat-expansion-panel-header>
+    <div fxLayout="column" fxLayoutGap="5px">
+      <div *ngIf="prevApp.illnessHistory?.complaints">
+        Complaints: {{prevApp.illnessHistory.complaints}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.diseaseAnamnesis">
+        Disease Anamnesis: {{prevApp.illnessHistory.diseaseAnamnesis}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.lifeAnamnesis">
+        Life Anamnesis: {{prevApp.illnessHistory.lifeAnamnesis}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.objectiveStatus">
+        Objective status: {{prevApp.illnessHistory.objectiveStatus}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.localStatus">
+        Local status: {{prevApp.illnessHistory.localStatus}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.surveyPlan">
+        Survey plan: {{prevApp.illnessHistory.surveyPlan}}
+      </div>
+      <div *ngIf="prevApp.illnessHistory?.treatmentPlan">
+        Treatment plan: {{prevApp.illnessHistory.treatmentPlan}}
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>
