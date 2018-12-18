@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
 import { DoctorAppointmentFilter } from '../Models/DoctorAppointmentFilter';
+import { AllowedPatientInfo } from '../Models/AllowedPatientInfo';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -68,6 +69,11 @@ export class DoctorsService {
   getSpecializations() {
     const specUrl = this.url + '/specializations';
     return this.http.get<Specialization[]>(specUrl);
+  }
+
+  getPatientInfo(userId: number) {
+    const specUrl = this.url + `/getpatientinfo/?userId=${userId}`;
+    return this.http.get<AllowedPatientInfo>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {
