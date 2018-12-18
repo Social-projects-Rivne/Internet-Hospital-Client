@@ -8,6 +8,7 @@ import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
 import { DoctorAppointmentFilter } from '../Models/DoctorAppointmentFilter';
 import { AllowedPatientInfo } from '../Models/AllowedPatientInfo';
+import { IllnessHistoryFilter } from '../Models/IllnessHistoryFilter';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -74,6 +75,15 @@ export class DoctorsService {
   getPatientInfo(userId: number) {
     const specUrl = this.url + `/getpatientinfo/?userId=${userId}`;
     return this.http.get<AllowedPatientInfo>(specUrl);
+  }
+
+  getPatientIllnessHistory(userId: number, filter: IllnessHistoryFilter) {
+    let specUrl = this.url + `/getpatientillnesshistory`;
+    if (filter) {
+      specUrl += filter.getUrl();
+    }
+    specUrl += `&userId=${userId}`;
+    return this.http.get<IllnessHistory[]>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {

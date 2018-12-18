@@ -12,10 +12,10 @@ export class IllnessHistoryFilter {
   public getUrl(): string {
     let url = `/?page=${this.pageIndex + 1}&pageCount=${this.pageSize}`;
     if (this.fromDate) {
-      url += `&from=${this.fromDate}`;
+      url += `&SearchFromDate=${this.fromDate.toDateString()}`;
     }
     if (this.toDate) {
-      url += `&till=${this.toDate}`;
+      url += `&SearchToDate=${this.toDate.toDateString()}`;
     }
     return url;
   }

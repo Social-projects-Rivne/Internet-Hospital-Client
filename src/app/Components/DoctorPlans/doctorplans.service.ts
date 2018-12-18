@@ -51,7 +51,6 @@ export class DoctorplansService {
       params: new HttpParams()
     };
     let url = HOST_URL + '/api/Appointments/allappointments';
-
     if (filter) {
       url += filter.getUrl();
     }

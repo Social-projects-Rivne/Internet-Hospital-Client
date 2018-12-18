@@ -12,10 +12,10 @@ export class DoctorAppointmentFilter {
             url += `&searchbyname=${this.searchKey}`;
         }
         if (this.from) {
-            url += `&from=${this.from}`;
+            url += `&from=${this.from.toDateString()}`;
         }
         if (this.till) {
-            url += `&till=${this.till}`;
+            url += `&till=${this.till.toDateString()}`;
         }
         if (this.statuses && this.statuses.length > 0) {
             url += `&statuses=${this.statuses.join(`&statuses=`)}`;

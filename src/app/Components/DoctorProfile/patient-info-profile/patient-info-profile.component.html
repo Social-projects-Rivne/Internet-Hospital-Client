@@ -1,10 +1,9 @@
 <div class="profile" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="40px">
+  <app-loading *ngIf="isProfileLoading && isIllnessHistoryLoading"></app-loading>
   <mat-card class="profile-top mat-elevation-z8">
       <div class="top-info" fxLayout="row" fxFlex>
         <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
-          <form enctype="multipart/form-data">
             <img [src]="patient.avatarUrl" alt="Avatar" (error)="img.src = defaultImage"/>
-          </form>
         </div>
         <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
           <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutGap="6%">
@@ -28,7 +27,7 @@
       </div>
       <div class="patient-history" fxFlex>
         <mat-list>
-          <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories" fxLayoutGap="0.5%"
+          <div class="history-items" *ngFor="let IllnessHistory of illnessHistories" fxLayoutGap="0.5%"
             fxLayout="row">
             <mat-expansion-panel fxFlex>
               <mat-expansion-panel-header>
@@ -69,6 +68,6 @@
         </mat-list>
       </div>
     </div>
-    <mat-paginator [length]="illnessHistory.length" [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+    <mat-paginator [length]="illnessHistoriesCount" [hidePageSize]="true" showFirstLastButtons></mat-paginator>
   </mat-card>
 </div>

@@ -15,34 +15,41 @@ import { IllnessHistoryFilter } from 'src/app/Models/IllnessHistoryFilter';
 export class PatientInfoProfileComponent implements OnInit {
   userId: number;
   patient: AllowedPatientInfo;
-  illnessHistory: IllnessHistory;
+  illnessHistories: IllnessHistory[] = [];
   filter: IllnessHistoryFilter;
   pageSize = 5;
+  illnessHistoriesCount: number;
   isProfileLoading = true;
+  isIllnessHistoryLoading = true;
+  defaultImage = '../../assets/img/default.png';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private activateRoute: ActivatedRoute,
-    private docService: DoctorsService) { }
+    private docService: DoctorsService) {
+      this.filter = new IllnessHistoryFilter();
+      this.patient = new AllowedPatientInfo();
+     }
 
   ngOnInit() {
     this.userId = this.activateRoute.snapshot.params['id'];
-    this.docService.getPatientInfo(this.userId).subscribe((patient) => this.patient = patient);
+    this.docService.getPatientInfo(this.userId).subscribe((patient) => {
+       this.patient = patient; this.isProfileLoading = false; console.log(this.patient); });
 
     this.paginator.pageSize = this.pageSize;
-    // this.paginator.page
-    //   .pipe(
-    //     switchMap(() => {
-    //       this.isProfileLoading = true;
-    //       this.filter.pageIndex = this.paginator.pageIndex;
-    //       this.filter.pageSize = this.paginator.pageSize;
-    //       return this.appService.getAllDoctorAppointments(this.filter);
-    //     })
-    //   ).subscribe(result => {
-    //     this.appointments = result.appointments;
-    //     this.appointmentCount = result.quantity;
-    //     this.isProfileLoading = false;
-    //   });
-  }
 
+    this.paginator.page
+      .pipe(
+        switchMap(() => {
+          this.isIllnessHistoryLoading = true;
+          this.filter.pageIndex = this.paginator.pageIndex;
+          this.filter.pageSize = this.paginator.pageSize;
+          return this.docService.getPatientIllnessHistory(this.userId, this.filter);
+        })
+      ).subscribe(result => {
+        this.illnessHistories = result;
+        this.isIllnessHistoryLoading = false;
+      });
+      this.paginator.page.emit();
+  }
 }
