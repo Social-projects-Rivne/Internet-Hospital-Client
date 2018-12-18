@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeNewsComponent implements OnInit {
   contents: HomePageContent[] = [];
-  amountForLoading = 1;
+  amountForLoading = 12;
   lastId = null;
   isLast = false;
   isLoading = false;
@@ -28,7 +28,7 @@ export class HomeNewsComponent implements OnInit {
   }
 
   loadContent() {
-    if (!this.isLast) {
+    if (!this.isLast && !this.isLoading) {
       this.isLoading = true;
       this.contentService.getShortModeratorContent(this.amountForLoading, this.lastId)
         .subscribe((data: any) => {

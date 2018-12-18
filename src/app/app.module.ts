@@ -75,9 +75,6 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
 
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +107,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatConfirmDialogComponent,
     LoadingComponent,
     DoctorProfileComponent,
-    GreetingItemComponent
+    GreetingItemComponent,
     PreviousAppointmentsComponent,
     PreviousSearchItemComponent,
     PreviousAppointmentItemComponent,

@@ -3,8 +3,6 @@
   overflow: hidden;
   position: relative;
   font-family: 'Patua One', cursive;
-  margin-top: 10px;
-  margin-bottom: 10px;
   color: #4056a1;
   text-shadow: 1px 1px 1px #4056a1bb;
 
@@ -28,7 +26,7 @@
     display: inline-block;
     position: absolute;
     line-height: 1;
-    font-size: 2.5vw;
+    font-size: 4vw;
   }
 
   .information-about-site {
@@ -48,11 +46,12 @@
   a {
     display: inline-block;
     position: absolute;
-    width: 7.6vw;
-    height: 6vw;
-    padding-top: 1vw;
+    width: 7.7vw;
+    line-height: 1;
+    height: 5.7vw;
+    padding-top: 1.4vw;
     text-align: center;
-    font-size: 1.6vw;
+    font-size: 1.5vw;
     text-decoration: none;
     background-image: url('../../../../../../assets/img/heart.png');
     background-size: cover;

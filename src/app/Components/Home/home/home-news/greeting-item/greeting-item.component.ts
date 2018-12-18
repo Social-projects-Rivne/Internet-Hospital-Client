@@ -127,17 +127,18 @@ export class GreetingItemComponent implements OnInit {
     this.setPlay();
 
     let greeting = new Greeting();
-    greeting.greeting = new TextWithPosition('HELLO GUEST', 10, 5, null, null);
-    greeting.aboutSite = new TextWithPosition('You visited site for finding doctor?', 30, 5, null, null);
-    greeting.aboutUsers = new TextWithPosition('There are more than 1000 verified doctors!', 50, 5, null, null);
+    greeting.greeting = new TextWithPosition('Hello!', 10, 12, null, null);
+    greeting.aboutSite = new TextWithPosition('You visited our platform to find a doctor, didn\'t you?', 35, 12, null, null);
+    greeting.aboutUsers = new TextWithPosition('There are more than 1000 verified doctors on our platform!', 55, 12, null, null);
     greeting.imageUrl = '../../../../../../assets/img/greeting-image-1.jpg';
     greeting.registerButton = new ButtonPosition(70, 20, null, null);
     this.greetings.push(greeting);
 
     greeting = new Greeting();
-    greeting.greeting = new TextWithPosition('HELLO GUEST', 10, null, null, 5);
-    greeting.aboutSite = new TextWithPosition('You are doctor and want to increase number of clients?', 30, null, null, 5);
-    greeting.aboutUsers =  new TextWithPosition('There are more than 10000 verified users!', 50, null, null, 5);
+    greeting.greeting = new TextWithPosition('Hello!', 10, null, null, 5);
+    greeting.aboutSite =
+      new TextWithPosition('You are doctor and you want to increase number of your clients, aren\'t you?', 30, null, null, 5);
+    greeting.aboutUsers =  new TextWithPosition('There are more than 10000 verified users on our platform!', 50, null, null, 5);
     greeting.imageUrl = '../../../../../../assets/img/greeting-image-2.jpg';
     greeting.registerButton = new ButtonPosition(null, null, 10, 20);
     this.greetings.push(greeting);

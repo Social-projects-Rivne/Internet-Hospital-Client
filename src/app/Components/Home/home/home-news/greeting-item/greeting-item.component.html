@@ -15,7 +15,7 @@
       [style.right.%]="greeting.aboutSite.right"
       [style.bottom.%]="greeting.aboutSite.bottom"
       [style.left.%]="greeting.aboutSite.left" 
-      [@textFromRight]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
+      [@textAppearing]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
       {{greeting.aboutSite.text}}
     </span>
     <span class="information-about-users"
@@ -23,7 +23,7 @@
       [style.right.%]="greeting.aboutUsers.right"
       [style.bottom.%]="greeting.aboutUsers.bottom"
       [style.left.%]="greeting.aboutUsers.left" 
-      [@textFromLeft]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
+      [@textAppearing]="animationShowing.informationAboutSite && currentContainer == i ? 'showText' : 'hideText'">
       {{greeting.aboutUsers.text}}
     </span>
     <a class="pulse" [routerLink]="'sign-up'" 

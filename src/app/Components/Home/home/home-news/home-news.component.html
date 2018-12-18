@@ -1,11 +1,9 @@
-<div class="side-block"></div>
+<app-greeting-item class="greeting" *ngIf="!(isLoggedIn | async)"></app-greeting-item>
 <div class="main-block">
-    <app-greeting-item *ngIf="!(isLoggedIn | async)"></app-greeting-item>
     <div class="news-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadContent()">
         <app-home-news-item class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item>
     </div>
-    <div class="loading-spinner" *ngIf="isLoading">
-        <mat-spinner></mat-spinner>
-    </div>
 </div>
-<div class="side-block"></div>
+<div class="loading-spinner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
