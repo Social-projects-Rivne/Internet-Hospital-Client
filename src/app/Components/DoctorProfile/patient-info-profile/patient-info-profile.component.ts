@@ -29,6 +29,7 @@ export class PatientInfoProfileComponent implements OnInit {
     private docService: DoctorsService) {
       this.filter = new IllnessHistoryFilter();
       this.patient = new AllowedPatientInfo();
+      console.log(this.patient);
      }
 
   ngOnInit() {

@@ -5,12 +5,14 @@ import { NotificationService } from '../../../Services/notification.service';
 import { HOST_URL } from '../../../config';
 import { IllnessHistory } from 'src/app/Models/IllnessHistory';
 import { ICurrentUser } from '../../../Models/CurrentUser';
+import { PatientSettings } from '../../../Models/ProfileSettings/PatientSettings';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { Patient } from '../../../Models/Patient';
 import { IllnessHistoryFilter } from '../../../Models/IllnessHistoryFilter';
 import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
+import { DatePipe } from '@angular/common';
 
 const TOKEN = 'currentUser';
 
@@ -33,16 +35,19 @@ export class UsersProfileComponent implements OnInit {
   user: ICurrentUser;
   token = TOKEN;
   patient: Patient = null;
-
   tempHistory: IllnessHistory[] = null;
-
-  tempText = `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-   Dolorum nulla harum architecto velit saepe cumque amet voluptas rem repellat dignissimos dicta,
-   quasi a, recusandae, nesciunt dolores aperiam eius tempore ad.`;
 
   defaultImage = '../../assets/img/default.png';
   fileAvatar: File = null;
   imageToShow = this.defaultImage;
+
+  patientSettings = PatientSettings;
+
+  currentMenuItem = 1;
+
+  changeSettings(id: number) {
+    this.currentMenuItem = id;
+  }
 
   getImageFromService() {
     this.patientService.getImage().subscribe((data: any) => {
@@ -52,8 +57,12 @@ export class UsersProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    let stringDate: string;
     this.patientService.getProfile().subscribe((profile: any) => { this.patient = profile,
-       this.updateService.patient = profile, this.updateService.setCurrentProfile(); });
+       this.updateService.patient = profile,
+       stringDate = new DatePipe('en-US').transform(profile.birthDate, 'MMMM d, y');
+       this.patient.birthDate = stringDate;
+       this.updateService.setCurrentProfile(); });
     this.patientService.getHistories();
     this.getImageFromService();
     this.filter = new IllnessHistoryFilter();

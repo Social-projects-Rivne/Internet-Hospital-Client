@@ -62,11 +62,15 @@ import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confi
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 import { DoctorAppointmentsComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // tslint:disable-next-line:max-line-length
 import { DoctorAppointmentItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointment-item/doctor-appointment-item.component';
 // tslint:disable-next-line:max-line-length
 import { DoctorAppointmentsSearchItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments-search-item/doctor-appointments-search-item.component';
 import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
+import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
+import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
+import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +107,10 @@ import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-
     DoctorAppointmentsComponent,
     DoctorAppointmentItemComponent,
     DoctorAppointmentsSearchItemComponent,
-    PatientInfoProfileComponent
+    PatientInfoProfileComponent,
+    MyPatientsComponent,
+    BlackListComponent,
+    ActivePatientsComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
@@ -132,7 +139,8 @@ import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-
           useClass: CustomEventTitleFormatter
         }
       },
-    )
+    ),
+    InfiniteScrollModule
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,

@@ -32,6 +32,7 @@ import { ADMIN_PANEL,
           FILL_ILLNESS,
           DOCTOR_PROFILE,
           PATIENT_INFO,
+          MY_PATIENTS
 } from '../../config';
 
 import { HomeNewsComponent } from 'src/app/Components/Home/home/home-news/home-news.component';
@@ -42,6 +43,7 @@ import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doc
 import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illness-history.component';
 import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 import { PatientInfoProfileComponent } from 'src/app/Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
+import { MyPatientsComponent } from 'src/app/Components/MyPatients/my-patients.component';
 
 const ROUTES: Routes = [
   {
@@ -58,7 +60,8 @@ const ROUTES: Routes = [
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
       { path: FILL_ILLNESS + '/:id', component: IllnessHistoryComponent, canActivate: [FinishAppointmentGuard] },
-      { path: PATIENT_INFO + '/:id', component: PatientInfoProfileComponent}
+      { path: PATIENT_INFO + '/:id', component: PatientInfoProfileComponent},
+      { path: MY_PATIENTS, component: MyPatientsComponent, canActivate: [DoctorGuard] },
     ]
   },
   { path: PAGE_404, component: Page404Component },
@@ -86,5 +89,6 @@ export const ROUTING_COMPONENTS = [
   DoctorPlansComponent,
   FeedbacksComponent,
   IllnessHistoryComponent,
-  PatientInfoProfileComponent
+  PatientInfoProfileComponent,
+  MyPatientsComponent
 ];

@@ -20,6 +20,7 @@ export class DoctorAppointmentItemComponent implements OnInit {
   }
 
   onFinish() {
+    console.log(this.appointment.startTime);
     this.dateSharing.changeDate(this.appointment.startTime);
     this.router.navigate([FILL_ILLNESS + `/${this.appointment.id}`]);
   }

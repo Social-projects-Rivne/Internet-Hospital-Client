@@ -10,4 +10,5 @@ export class IllnessHistory {
     treatmentPlan: string;
     finishAppointmentTime: Date;
     finishAppointmentTimeStamp: number;
+    doctorName: string;
 }

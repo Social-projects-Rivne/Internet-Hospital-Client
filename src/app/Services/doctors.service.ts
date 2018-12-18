@@ -9,9 +9,16 @@ import { DatePipe } from '@angular/common';
 import { DoctorAppointmentFilter } from '../Models/DoctorAppointmentFilter';
 import { AllowedPatientInfo } from '../Models/AllowedPatientInfo';
 import { IllnessHistoryFilter } from '../Models/IllnessHistoryFilter';
+import { Observable } from 'rxjs';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
+const INCLUDE_ALL = 'includeAll';
+const PAGE = 'page';
+const PAGE_SIZE = 'pageSize';
+const SEARCH_BY_NAME = 'searchByName';
+const SORT = 'sort';
+const ORDER_BY = 'order';
 
 @Injectable({
   providedIn: 'root'
@@ -94,5 +101,64 @@ export class DoctorsService {
     illnessHistory.finishAppointmentTimeStamp = illnessHistory.finishAppointmentTime.valueOf();
     const url = HOST_URL + '/api/Doctors/illnesshistory';
     return this.http.post(url, illnessHistory);
+  }
+
+  getMyPatients(sort: string,
+    order: string,
+    searchByName: string,
+    page: number,
+    includeAll: boolean,
+    pageSize: number): Observable<any> {
+    let url = this.url + '/mypatients' + `?${PAGE}=${page + 1}&`
+      + `${PAGE_SIZE}=${pageSize}&`
+      + `${INCLUDE_ALL}=${includeAll}&`;
+    if (searchByName) {
+      url += `${SEARCH_BY_NAME}=${searchByName}&`;
+    }
+    if (order) {
+      url += `${ORDER_BY}=${order}&`;
+    }
+    if (sort) {
+      url += `${SORT}=${sort}`;
+    }
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
+  addToBlackListSelected(userId: number[], description?: string) {
+    const specUrl = HOST_URL + '/api/Doctors/addtoblacklist';
+
+    return this.http.post(specUrl, {
+      id: userId,
+      description: description,
+    }, this.httpOptions);
+  }
+
+  getMyBlackList(sort: string,
+                  order: string,
+                  searchByName: string,
+                  page: number,
+                  includeAll: boolean,
+                  pageSize: number): Observable<any> {
+    let url = this.url + '/myblacklist' + `?${PAGE}=${page + 1}&`
+      + `${PAGE_SIZE}=${pageSize}&`
+      + `${INCLUDE_ALL}=${includeAll}&`;
+    if (searchByName) {
+      url += `${SEARCH_BY_NAME}=${searchByName}&`;
+    }
+    if (order) {
+      url += `${ORDER_BY}=${order}&`;
+    }
+    if (sort) {
+      url += `${SORT}=${sort}`;
+    }
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
+  removeFromBlackListSelected(userId: number[]) {
+    const specUrl = HOST_URL + '/api/Doctors/removefromblacklist';
+
+    return this.http.post(specUrl, {
+      id: userId,
+    }, this.httpOptions);
   }
 }
