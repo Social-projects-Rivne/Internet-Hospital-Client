@@ -81,6 +81,11 @@
       opacity: 0;
       color: white;
       font-size: 2rem;
+      
+      &:hover {
+        opacity: 0.7;
+        background: rgba($color: #696868, $alpha: 0.4);
+      }
     }
 
     .right-button {
@@ -89,11 +94,6 @@
 
     .left-button {
       left: 0;
-    }
-
-    button:hover {
-      opacity: 0.7;
-      background: rgba($color: #696868, $alpha: 0.4);
     }
   }
 
