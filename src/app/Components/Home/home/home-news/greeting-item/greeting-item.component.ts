@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, keyframes, trigger } from '@angular/animations';
-import { Greeting, TextWithPositon, ButtonPosition } from 'src/app/Models/Greeting';
+import { Greeting, TextWithPosition, ButtonPosition } from 'src/app/Models/Greeting';
 const TIME_FOR_CHANGE_CONTAINER = 10000;
 
 @Component({
@@ -125,21 +125,21 @@ export class GreetingItemComponent implements OnInit {
 
   ngOnInit() {
     this.setPlay();
+
     let greeting = new Greeting();
-    greeting.greeting = new TextWithPositon('HELLO GUEST', 10, 5, null, null);
-    greeting.aboutSite = new TextWithPositon('You visited site for finding doctor?', 30, 5, null, null);
-    greeting.aboutUsers = new TextWithPositon('There are more than 1000 verified doctors!', 50, 5, null, null);
+    greeting.greeting = new TextWithPosition('HELLO GUEST', 10, 5, null, null);
+    greeting.aboutSite = new TextWithPosition('You visited site for finding doctor?', 30, 5, null, null);
+    greeting.aboutUsers = new TextWithPosition('There are more than 1000 verified doctors!', 50, 5, null, null);
     greeting.imageUrl = '../../../../../../assets/img/greeting-image-1.jpg';
     greeting.registerButton = new ButtonPosition(70, 20, null, null);
     this.greetings.push(greeting);
-    greeting = new Greeting();
 
-    greeting.greeting = new TextWithPositon('HELLO GUEST', 10, null, null, 5);
-    greeting.aboutSite = new TextWithPositon('You are doctor and want to increase number of clients?', 30, null, null, 5);
-    greeting.aboutUsers =  new TextWithPositon('There are more than 10000 verified users!', 50, null, null, 5);
+    greeting = new Greeting();
+    greeting.greeting = new TextWithPosition('HELLO GUEST', 10, null, null, 5);
+    greeting.aboutSite = new TextWithPosition('You are doctor and want to increase number of clients?', 30, null, null, 5);
+    greeting.aboutUsers =  new TextWithPosition('There are more than 10000 verified users!', 50, null, null, 5);
     greeting.imageUrl = '../../../../../../assets/img/greeting-image-2.jpg';
     greeting.registerButton = new ButtonPosition(null, null, 10, 20);
-
     this.greetings.push(greeting);
   }
 
@@ -171,11 +171,8 @@ export class GreetingItemComponent implements OnInit {
   previousContainer() {
     this.clearTimers();
     this.hideText();
-    if (this.currentContainer === 0) {
-      this.currentContainer = 1;
-    } else {
-      this.currentContainer--;
-    }
+
+    this.currentContainer = this.currentContainer !== 0 ? this.currentContainer - 1 : this.greetings.length - 1;
 
     this.setTimersForTextShowing();
 
@@ -194,11 +191,7 @@ export class GreetingItemComponent implements OnInit {
     this.clearTimers();
     this.hideText();
 
-    if (this.currentContainer === 1) {
-      this.currentContainer = 0;
-    } else {
-      this.currentContainer++;
-    }
+    this.currentContainer = this.currentContainer !== this.greetings.length - 1 ? this.currentContainer + 1 : 0;
 
     this.setTimersForTextShowing();
 

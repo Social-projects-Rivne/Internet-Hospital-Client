@@ -60,11 +60,11 @@
     color: white;
     text-shadow: none;
     z-index: 2;
-  }
 
-  a:hover {
-    animation: pulse 3s infinite linear;
-    animation-play-state: running;
+    &:hover {
+      animation: pulse 3s infinite linear;
+      animation-play-state: running;
+    }
   }
 
   .image-container {
@@ -87,6 +87,10 @@
     bottom: 0;
     width: 15%;
     opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .left {
@@ -95,10 +99,6 @@
 
   .right {
     right: 0;
-  }
-
-  button:hover {
-    opacity: 1;
   }
 }
 

@@ -1,12 +1,12 @@
 export class Greeting {
-    greeting: TextWithPositon;
-    aboutSite: TextWithPositon;
-    aboutUsers: TextWithPositon;
+    greeting: TextWithPosition;
+    aboutSite: TextWithPosition;
+    aboutUsers: TextWithPosition;
     registerButton: ButtonPosition;
     imageUrl: string;
 }
 
-export class TextWithPositon {
+export class TextWithPosition {
     text: string;
     top: number;
     left: number;
