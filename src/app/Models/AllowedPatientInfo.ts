@@ -5,5 +5,5 @@ export class AllowedPatientInfo {
     thirdName: string;
     birthDate: Date;
     phoneNumber: string;
-    avatarUrl: string;
+    avatarURL: string;
 }

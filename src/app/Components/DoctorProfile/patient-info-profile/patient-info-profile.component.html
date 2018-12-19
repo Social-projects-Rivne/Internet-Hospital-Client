@@ -3,7 +3,7 @@
   <mat-card class="profile-top mat-elevation-z8">
       <div class="top-info" fxLayout="row" fxFlex>
         <div class="patient-photo" fxLayoutAlign="center center" fxFlex>
-            <img [src]="patient.avatarUrl" alt="Avatar" (error)="img.src = defaultImage"/>
+            <img [src]="avatarToShow" alt="Avatar" (error)="img.src = defaultImage"/>
         </div>
         <div class="patient-general-info" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20%" fxFlex>
           <div class="patient-name" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutGap="6%">
@@ -18,7 +18,6 @@
         </div>
       </div>
   </mat-card>
-
   <mat-card class="profile-bottom mat-elevation-z8" fxLayout="column" fxFlex="50%" fxLayoutGap="0.5%">
     <h3 style="text-align:center">Illness History</h3>
     <div class="without_paginator" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1%">

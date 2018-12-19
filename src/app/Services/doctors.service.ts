@@ -90,7 +90,7 @@ export class DoctorsService {
       specUrl += filter.getUrl();
     }
     specUrl += `&userId=${userId}`;
-    return this.http.get<IllnessHistory[]>(specUrl);
+    return this.http.get<any>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {

@@ -51,10 +51,10 @@
         </mat-form-field>
       </mat-card-content>
     </mat-expansion-panel>
+    <section>
+      <button id="CancelButton" type="button" mat-raised-button color="warn" (click)="onCancel()" mat-raised-button>Cancel</button>
+      <button id="ConfirmButton" type="submit" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Confirm</button>
+    </section>
   </form>
-  <section>
-    <button id="CancelButton" type="button" mat-raised-button color="warn" (click)="onCancel()" mat-raised-button>Cancel</button>
-    <button id="ConfirmButton" type="submit" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Confirm</button>
-  </section>
   <app-loading *ngIf="load"></app-loading>
 </div>

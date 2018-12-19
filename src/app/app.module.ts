@@ -71,6 +71,7 @@ import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
+import { PreviousRouteService } from './Services/previous-route.service';
 
 @NgModule({
   declarations: [
@@ -143,7 +144,8 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
     InfiniteScrollModule
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
+  // tslint:disable-next-line:max-line-length
+  providers: [AuthenticationService, PreviousRouteService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

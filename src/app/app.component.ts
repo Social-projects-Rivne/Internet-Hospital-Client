@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MessageService } from './Services/message.service';
 import { AuthenticationService } from './Services/authentication.service';
+import { PreviousRouteService } from './Services/previous-route.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,9 @@ import { AuthenticationService } from './Services/authentication.service';
 export class AppComponent {
   title = 'InternetHospitalWebUI';
 
-  constructor(private messageService: MessageService, private authenticationService: AuthenticationService) {
+  constructor(private messageService: MessageService,
+    private authenticationService: AuthenticationService,
+    private previousRouteService: PreviousRouteService) {
     if (this.authenticationService.hasAccessToken()) {
       this.messageService.startConnection();
     }

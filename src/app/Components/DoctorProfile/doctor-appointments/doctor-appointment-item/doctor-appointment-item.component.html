@@ -11,7 +11,7 @@
     <div *ngIf="appointment.status == 'Reserved'">
       <button mat-button color="Primary" (click)="onFinish()">Finish Appointment</button>
     </div>
-    <div>
+    <div *ngIf="appointment.status == 'Reserved'">
       <button mat-button color="Primary" (click)="onWatchInfo()" [disabled]="!appointment.isAllowPatientInfo">Watch
         Patient Info</button>
     </div>

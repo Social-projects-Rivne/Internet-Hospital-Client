@@ -6,6 +6,8 @@ import { IllnessHistory } from 'src/app/Models/IllnessHistory';
 import { MatPaginator } from '@angular/material';
 import { switchMap } from 'rxjs/operators';
 import { IllnessHistoryFilter } from 'src/app/Models/IllnessHistoryFilter';
+import { HOST_URL } from 'src/app/config';
+import { isUndefined } from 'typescript-collections/dist/lib/util';
 
 @Component({
   selector: 'app-patient-info-profile',
@@ -17,25 +19,33 @@ export class PatientInfoProfileComponent implements OnInit {
   patient: AllowedPatientInfo;
   illnessHistories: IllnessHistory[] = [];
   filter: IllnessHistoryFilter;
-  pageSize = 5;
-  illnessHistoriesCount: number;
+  pageSize = 2;
+  illnessHistoriesCount = 0;
   isProfileLoading = true;
   isIllnessHistoryLoading = true;
   defaultImage = '../../assets/img/default.png';
+  avatarToShow: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private activateRoute: ActivatedRoute,
     private docService: DoctorsService) {
-      this.filter = new IllnessHistoryFilter();
-      this.patient = new AllowedPatientInfo();
-      console.log(this.patient);
-     }
+    this.filter = new IllnessHistoryFilter();
+    this.patient = new AllowedPatientInfo();
+    this.avatarToShow = this.defaultImage;
+  }
 
   ngOnInit() {
     this.userId = this.activateRoute.snapshot.params['id'];
     this.docService.getPatientInfo(this.userId).subscribe((patient) => {
-       this.patient = patient; this.isProfileLoading = false; console.log(this.patient); });
+      this.patient = patient;
+      this.isProfileLoading = false;
+      if (isUndefined(patient.avatarURL) || patient.avatarURL == null) {
+        this.avatarToShow = this.defaultImage;
+      } else {
+        this.avatarToShow = HOST_URL + patient.avatarURL;
+      }
+    });
 
     this.paginator.pageSize = this.pageSize;
 
@@ -48,9 +58,21 @@ export class PatientInfoProfileComponent implements OnInit {
           return this.docService.getPatientIllnessHistory(this.userId, this.filter);
         })
       ).subscribe(result => {
-        this.illnessHistories = result;
+        console.log(result);
+        this.illnessHistories = result.illnesses;
+        this.illnessHistoriesCount = result.amount;
+        for (const history of this.illnessHistories) {
+          history.finishAppointmentTime = new Date();
+          history.finishAppointmentTime.setTime(history.finishAppointmentTimeStamp);
+        }
         this.isIllnessHistoryLoading = false;
       });
-      this.paginator.page.emit();
+    this.paginator.page.emit();
+  }
+
+  onSearch($event) {
+    this.paginator.pageIndex = 0;
+    this.filter = $event;
+    this.paginator.page.emit();
   }
 }

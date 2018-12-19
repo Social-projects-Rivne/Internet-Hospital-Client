@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, RoutesRecognized, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { PreviousRouteService } from 'src/app/Services/previous-route.service';
-// import 'rxjs/add/operator/pairwise';
-// import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-illness-history',
@@ -21,8 +18,7 @@ export class IllnessHistoryComponent implements OnInit {
     private router: Router,
     private previousRouteService: PreviousRouteService,
     private notification: NotificationService,
-    private activateRoute: ActivatedRoute,
-    private location: Location) { }
+    private activateRoute: ActivatedRoute) { }
 
   load = false;
 
@@ -51,44 +47,26 @@ export class IllnessHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.router.events
-    // .filter(e => e instanceof RoutesRecognized)
-    // .pairwise()
-    // .subscribe((e) => {
-    //   console.log(e);
-    // });
-
-    // this.router.events.filter(e => e instanceof NavigationStart )
-    //   .bufferCount(1, 1).subscribe(e => console.log(e[0]['url']));
-
-
     this.appointmentId = this.activateRoute.snapshot.params['id'];
     this.initializeFormGroup();
   }
 
   onCancel() {
-    console.log(this.previousRouteService.getPreviousUrl());
-    console.log('dsadasdasdasdasd');
-    // this.location.back();
-    // this.router.navigate([MY_PLANS]);
+    this.router.navigate([this.previousRouteService.getPreviousUrl()]);
   }
 
   onSubmit() {
-    console.log(this.previousRouteService.getPreviousUrl());
-    console.log('111111111111111111111111111111111111111');
     this.load = true;
     this.service.fillIllness(this.form, this.appointmentId).subscribe(
       () => {
-        this.notification.success('All is fine!');
+        this.notification.success('Appointment successfully finished!');
         this.load = false;
-        this.location.back();
-        // this.router.navigate([MY_PLANS]);
+        this.router.navigate([this.previousRouteService.getPreviousUrl()]);
       },
       (error) => {
         this.notification.error(error);
         this.load = false;
-        this.location.back();
-        // this.router.navigate([MY_PLANS]);
+        this.router.navigate([this.previousRouteService.getPreviousUrl()]);
       });
   }
 }
