@@ -17,6 +17,7 @@ export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';
 export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
 export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
+export const PATIENT_UPDATE_TO_DOCTOR = '/api/Patient/updateToDoctor';
 export const API_DOCTORS = '/api/Doctors';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
@@ -27,6 +28,9 @@ export const API_DOCTOR_UPDATE = '/api/Doctors/update';
 export const DOCTOR_GET_PROFILE = '/api/Doctors/getProfile';
 export const DOCTOR_GET_AVATAR = '/api/Doctors/getAvatar';
 export const DOCTOR_UPDATE_AVATAR = '/api/Doctors/updateAvatar';
+
+export const GET_PATIENT_TO_DOCTOR_REQUESTS = '/api/Request/getPatientToDoctor';
+export const HANDLE_PATIENT_TO_DOCTOR_REQUEST = '/api/Request/handlePatientToDoctor';
 
 // notification config
 export const TIME_DURATION = 3000;

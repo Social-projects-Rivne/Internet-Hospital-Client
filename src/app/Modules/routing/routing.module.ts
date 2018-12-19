@@ -40,10 +40,14 @@ import { DoctorProfileComponent } from '../../Components/DoctorProfile/doctor-pr
 import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doctor/update-doctor.component';
 import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illness-history.component';
 import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
+import { UpdateToDoctorComponent } from '../../Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
 const ROUTES: Routes = [
   {
     path: '', component: HomeComponent, children: [
+      // TEMPORARY ROUTE:
+      {path: 'updateToDoctor', component: UpdateToDoctorComponent, canActivate: [PatientGuard]},
+      // ---------------
       { path: '', component: HomeNewsComponent },
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },

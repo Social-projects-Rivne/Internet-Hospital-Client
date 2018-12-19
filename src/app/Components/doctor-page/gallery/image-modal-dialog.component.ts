@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { GalleryModel } from '../../../Models/GalleryModel';
+import { HOST_URL } from 'src/app/config';
 
 @Component({
   selector: 'app-image-modal-dialog',
@@ -8,6 +9,9 @@ import { GalleryModel } from '../../../Models/GalleryModel';
   styleUrls: ['image-modal-dialog.component.scss']
 })
 export class ImageModalDialogComponent {
+
+  url = HOST_URL;
+
   constructor(public dialogRef: MatDialogRef<ImageModalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GalleryModel) {
   }

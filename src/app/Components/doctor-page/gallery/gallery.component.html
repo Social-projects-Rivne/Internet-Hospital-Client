@@ -1,15 +1,34 @@
 <div id="gallery-container">
-  <button class="left" mat-button (click)="previous()" [disabled]="startIndex === 0">
+  <button class="left" mat-button (click)="previous()" *ngIf="amountOfPicsOnScreen <= images.length"
+    [disabled]="startIndex === 0 || amountOfPicsOnScreen >= images.length">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
-  <div id="slider" [style.width]="amountOfPicsOnScreen * widthOf1Image + 'px'">
-    <!--<div id="img-line" [style.width]="images.length * widthOf1Image + 'px'" [style.left]="startIndex * widthOf1Image + 'px'">
+  <div id="slider" [style.width]="'calc(100% - 80px)'">
+    <div id="img-line" [style.width]="images.length * widthOf1Image + 'px'" [style.left]="-startIndex * widthOf1Image + 'px'">
       <div class="img-container" *ngFor="let img of images; index as i" (click)="openDialog(i)">
-        <img [src]="img">
+        <img [src]="url + img">
       </div>
-    </div>-->
+    </div>
   </div>
-  <!--<button class="right" mat-button (click)="next()" [disabled]="-startIndex === images.length - amountOfPicsOnScreen">
+  <button class="right" mat-button (click)="next()" *ngIf="amountOfPicsOnScreen <= images.length"
+    [disabled]="startIndex === images.length - amountOfPicsOnScreenv + 1 || amountOfPicsOnScreen >= images.length">
     <mat-icon>keyboard_arrow_right</mat-icon>
-  </button>-->
+  </button>
 </div>
+
+<!-- On dev: -->
+<!-- <div id="gallery-container">
+    <button class="left" mat-button (click)="previous()" [disabled]="startIndex === 0">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <div id="slider" [style.width]="amountOfPicsOnScreen * widthOf1Image + 'px'">
+      <!--<div id="img-line" [style.width]="images.length * widthOf1Image + 'px'" [style.left]="startIndex * widthOf1Image + 'px'">
+        <div class="img-container" *ngFor="let img of images; index as i" (click)="openDialog(i)">
+          <img [src]="img">
+        </div>
+      </div>-->
+    <!--</div>
+    <!--<button class="right" mat-button (click)="next()" [disabled]="-startIndex === images.length - amountOfPicsOnScreen">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>-->
+ <!-- </div> -->

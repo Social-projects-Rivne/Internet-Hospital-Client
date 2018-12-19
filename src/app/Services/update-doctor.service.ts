@@ -22,7 +22,7 @@ export class UpdateDoctorService {
     SecondName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     ThirdName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁёіІїЇґҐ\-\']{1,28}$/)]),
     BirthDate: new FormControl('', MaxDateValidator),
-    Address: new FormControl('', MaxDateValidator),
+    Address: new FormControl('', Validators.required),
     Specialization: new FormControl('', Validators.required),
     PassportURL: new FormControl(''),
     DiplomaURL: new FormControl(''),

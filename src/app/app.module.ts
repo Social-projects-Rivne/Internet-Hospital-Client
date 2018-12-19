@@ -35,7 +35,7 @@ import { UsersProfileComponent } from './Components/PatientProfile/patient-profi
 
 import { DoctorPageComponent } from './Components/doctor-page/doctor-page.component';
 import { FeedbackItemComponent } from './Components/doctor-page/feedbacks/feedback-item/feedback-item.component';
-import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
+// import { GalleryComponent } from './Components/doctor-page/gallery/gallery.component';
 import { ImageModalDialogComponent } from './Components/doctor-page/gallery/image-modal-dialog.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FeedbacksComponent } from './Components/doctor-page/feedbacks/feedbacks.component';
@@ -61,6 +61,7 @@ import { PatAppointItemComponent } from './Components/PatientProfile/patient-app
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
+import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     UsersProfileComponent,
     DoctorPageComponent,
     FeedbackItemComponent,
-    GalleryComponent,
+ //   GalleryComponent,
     ImageModalDialogComponent,
     FeedbacksComponent,
     UpdatePatientComponent,
@@ -93,7 +94,8 @@ import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profil
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     LoadingComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    UpdateToDoctorComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
