@@ -5,6 +5,9 @@
 
 #PictureDiv {
   margin-left: 25px;
+  padding: 15px;
+  width: 350px;
+  height: 350px;
 }
 
 #PicSize {
@@ -53,9 +56,8 @@ mat-radio-group mat-radio-button {
 }
 
 .image-view {
-  margin: 15px;
-  max-width: 350px;
-  max-height: 350px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .mat-card-title {

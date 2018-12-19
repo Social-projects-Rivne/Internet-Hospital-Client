@@ -22,13 +22,19 @@
         <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
         <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
         <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
+        <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-patients']">My patients</button>
         <button mat-menu-item *ngIf="(isLoggedIn | async)" [routerLink]="['/sign-in']">Sign out</button>
     </mat-menu>
     <!-- Desktop Menu -->
     <div id="DeskMenu" fxHide.xs>
         <a class="font-view" mat-button routerLink="/doctor-list">Doctor's List</a>
+        <button *ngIf="(isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="notificationMenu" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()">
+            <mat-icon [matBadge]="(unreadCount  | async)" matBadgeColor="warn" matBadgePosition="above after" matBadgeSize="medium" [matBadgeHidden]="!(ifUnread | async)">
+                notification_important
+            </mat-icon>
+        </button>
         <button *ngIf="(isLoggedIn | async)" mat-button [matMenuTriggerFor]="appMenu">
-            <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img/>
+            <img [src]="userAvatar" class="user-avatar" (error)="img.src = defaultImage" #img />
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <button class="font-view" *ngIf="!(isLoggedIn | async)" mat-button [routerLink]="['/sign-in']">Sign In</button>
@@ -39,7 +45,37 @@
     <button mat-menu-item *ngIf="(isPatient | async)" [routerLink]="['/users-profile']">My profile</button>
     <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/doctor-profile']">My profile</button>
     <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-plans']">My plans</button>
+    <button mat-menu-item *ngIf="(isDoctor | async)" [routerLink]="['/my-patients']">My patients</button>
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
+</mat-menu>
+<mat-menu #notificationMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="notification-menu">
+    <app-loading *ngIf="load"></app-loading>
+    <div class="scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false">
+        <div *ngFor="let item of notifications" class="message" (click)="$event.stopPropagation()" [ngStyle]="{ 'background': (item.isRead ? 'white' : 'azure') }">
+            <div fxLayout="row">
+                <div fxFlex="100%" class="notification-message">
+                    <a>{{item.message}}</a>
+                </div>
+            </div>           
+            <div fxLayout="row" class="notification-info">
+                <div fxFlex="50%">
+                    <div fxLayout="row">
+                        <div fxFlex="20%">
+                                <a class="notification-date">{{item.date | date:'HH:mm'}}</a>
+                        </div>
+                        <div fxFlex="20%">
+                                <a class="notification-date">{{item.date | date:'dd.MMM.yy'}}</a>
+                        </div>
+                    </div>
+                </div>               
+                <div fxFlex="50%">
+                    <button mat-icon-button class="notification_btn" (click)="changeStatus(item)" [matTooltip]="item.isRead ? 'mark as unread' : 'mark as read'">
+                        <mat-icon [ngStyle]="{ 'color': (item.isRead ? 'grey' : 'red') }">fiber_manual_record</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </mat-menu>

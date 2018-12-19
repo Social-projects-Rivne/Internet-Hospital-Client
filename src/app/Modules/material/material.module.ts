@@ -21,10 +21,14 @@ import {
           MatPaginatorModule,
           MatDividerModule,
           MatTableModule,
+          MatSortModule,
           MatMenuModule,
           MatButtonToggleModule,
           MatExpansionModule,
-          MatProgressSpinnerModule } from '@angular/material';
+          MatProgressSpinnerModule,
+          MatBadgeModule,
+          MatTabsModule } from '@angular/material';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MAT_MODULS = [
@@ -51,9 +55,12 @@ const MAT_MODULS = [
     MatMenuModule,
     MatListModule,
     MatTableModule,
+    MatSortModule,
     MatButtonToggleModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatBadgeModule,
+    MatTabsModule
   ];
 
 @NgModule({
