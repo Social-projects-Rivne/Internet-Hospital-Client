@@ -100,8 +100,16 @@
   mat-card-content p {
     padding: 16px;
     text-align: justify;
-    height: 200px;
+    height: 150px;
     overflow: hidden;
+
+    @media screen and (max-width: 1200px) {
+      width: 120px;
+    }
+  
+    @media screen and (max-width: 800px) {
+      width: 120px;
+    }
   }
 
   .content-author-container {

@@ -22,25 +22,15 @@
     transition: opacity 2s ease;
   }
 
+  .showing-text {
+    display: inline-block;
+    position: absolute;
+    line-height: 1;
+    font-size: 2vw;
+  }
+
   .greeting-text {
-    display: inline-block;
-    position: absolute;
-    line-height: 1;
     font-size: 4vw;
-  }
-
-  .information-about-site {
-    display: inline-block;
-    position: absolute;
-    line-height: 1;
-    font-size: 2vw;
-  }
-
-  .information-about-users {
-    display: inline-block;
-    position: absolute;
-    line-height: 1;
-    font-size: 2vw;
   }
 
   a {

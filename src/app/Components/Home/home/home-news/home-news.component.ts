@@ -18,6 +18,7 @@ export class HomeNewsComponent implements OnInit {
   isLast = false;
   isLoading = false;
   isLoggedIn: Observable<boolean>;
+  couldntLoad = false;
 
   constructor(private contentService: HomeContentService,
     private authenticationService: AuthenticationService) { }
@@ -38,6 +39,9 @@ export class HomeNewsComponent implements OnInit {
           this.lastId = data.lastArticleId;
           this.isLast = data.isLast;
           this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          this.couldntLoad = true;
         });
     }
   }

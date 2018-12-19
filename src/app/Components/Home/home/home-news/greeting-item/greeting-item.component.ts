@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, keyframes, trigger } from '@angular/animations';
 import { Greeting, TextWithPosition, ButtonPosition } from 'src/app/Models/Greeting';
-const TIME_FOR_CHANGE_CONTAINER = 10000;
+const TIME_FOR_CHANGE_CONTAINER = 12000;
 
 @Component({
   selector: 'app-greeting-item',
@@ -11,7 +11,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
     trigger('textAppearing', [
       state('showText', style({opacity: 1})),
       state('hideText', style({opacity: 0})),
-      transition('hideText => showText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
+      transition('hideText => showText', animate('1500ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
         style({opacity: 0, transform: 'scale3d(0.3, 0.3, 0.3)', offset: 0}),
         style({transform: 'scale3d(0.6, 0.6, 0.6)', offset: 0.2}),
         style({transform: 'scale3d(0.9, 0.9, 0.9)', offset: 0.4}),
@@ -19,7 +19,7 @@ const TIME_FOR_CHANGE_CONTAINER = 10000;
         style({transform: 'scale3d(0.97, 0.97, 0.97)', offset: 0.8}),
         style({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1})
       ]))),
-      transition('showText => hideText', animate('1000ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
+      transition('showText => hideText', animate('1500ms cubic-bezier(0.215, 0.61, 0.355, 1)', keyframes([
         style({transform: 'scale3d(0.9, 0.9, 0.9)', offset: 0.2}),
         style({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.5}),
         style({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.55}),
@@ -107,9 +107,9 @@ export class GreetingItemComponent implements OnInit {
 
   animationDelay = {
     greeting: 1000,
-    informationAboutSite: 1500,
-    informationAboutUsers: 2000,
-    registerButton: 2500
+    informationAboutSite: 1000,
+    informationAboutUsers: 1000,
+    registerButton: 1000
   };
 
   animationShowing = {
@@ -127,11 +127,11 @@ export class GreetingItemComponent implements OnInit {
     this.setPlay();
 
     let greeting = new Greeting();
-    greeting.greeting = new TextWithPosition('Hello!', 10, 12, null, null);
-    greeting.aboutSite = new TextWithPosition('You visited our platform to find a doctor, didn\'t you?', 35, 12, null, null);
-    greeting.aboutUsers = new TextWithPosition('There are more than 1000 verified doctors on our platform!', 55, 12, null, null);
+    greeting.greeting = new TextWithPosition('Hello!', 40, null, null, 45);
+    greeting.aboutSite = new TextWithPosition('You visited our platform to find a doctor, didn\'t you?', 55, 15, null, 45);
+    greeting.aboutUsers = new TextWithPosition('There are more than 1000 verified doctors on our platform!', 70, 15, null, 45);
     greeting.imageUrl = '../../../../../../assets/img/greeting-image-1.jpg';
-    greeting.registerButton = new ButtonPosition(70, 20, null, null);
+    greeting.registerButton = new ButtonPosition(79, 20, null, null);
     this.greetings.push(greeting);
 
     greeting = new Greeting();
