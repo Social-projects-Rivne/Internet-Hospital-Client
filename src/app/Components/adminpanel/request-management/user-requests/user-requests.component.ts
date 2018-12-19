@@ -26,12 +26,14 @@ import { forEach } from '@angular/router/src/utils/collection';
   ]
 })
 
+
 export class UserRequestsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   hostUrl = HOST_URL;
+  DEFAULT_IMAGE = '/assets/img/default-avatar.png';
 
   feedbacksmodels: FeedbackViewModel[] = [];
   columnsToDisplay = ['usersEmail', 'dateTime', 'feedbackTypeName'];
@@ -57,9 +59,6 @@ export class UserRequestsComponent implements OnInit {
     this._feedbackService.getFeedBackViewModels().subscribe( (type: any) => {
       this.feedbacksmodels = type.feedbacks;
       this.usersAmount = type.quantity;
-      console.log(this.feedbacksmodels);
-      console.log(this._paginationService.pageIndex);
-      console.log(this._paginationService.feedbackPageSize);
       this.isLoadingResult = false;
     },
       error => {
@@ -87,8 +86,6 @@ export class UserRequestsComponent implements OnInit {
     event.pageIndex = this._paginationService.pageIndex - 1;
     event.length = this.usersAmount;
 
-    console.log(this.search);
-    console.log(this.selectedType);
     this.pageSwitch(event);
   }
   onClear() {
@@ -104,7 +101,6 @@ export class UserRequestsComponent implements OnInit {
     this._feedbackService.getFeedBackViewModels(this.filter).subscribe( (type: any) => {
       this.feedbacksmodels = type.feedbacks;
       this.usersAmount = type.quantity;
-      console.log(this.feedbacksmodels);
       this.isLoadingResult = false;
     },
       error => {
@@ -116,8 +112,6 @@ export class UserRequestsComponent implements OnInit {
   openDialog(selectedId: number) {
 
     this.selectedReplyModel = this.feedbacksmodels.find(x => x.id === selectedId);
-    console.log(selectedId);
-    console.log(this.selectedReplyModel.id);
 
     const dialogRef = this.dialog.open(ReplyDialogComponent, {
       data: {selectedUser: this.selectedReplyModel }
@@ -136,6 +130,7 @@ export class UserRequestsComponent implements OnInit {
     this.selectedReplyModel = this.feedbacksmodels.find(x => x.id === selectedId);
     this.selectedReplyModel.isViewed = true;
     this._feedbackService.updateFeedback(this.selectedReplyModel);
+    this._feedbackService.defaultSignal(this.selectedReplyModel.userId, 'Moderator has committed your request');
   }
 
 }

@@ -50,7 +50,7 @@ export class FeedBackService {
   updateFeedback(feedbackModel: FeedbackViewModel) {
     const typeUrl = this.url + 'updatefeedback';
     return this.http.put(typeUrl, feedbackModel).subscribe( (result: any) => {
-      this._notificationService.success('Your reply successfully deployed');
+      this._notificationService.success('Success');
     },
     error => {
       this._notificationService.error(error);
@@ -76,9 +76,14 @@ export class FeedBackService {
     return this.http.get(typeUrl);
   }
 
-  sendSignal(feedbackModel: FeedbackViewModel) {
+  sendSignal(feedbackModel?: FeedbackViewModel) {
     const Sendurl = HOST_URL + '/api/notification/send';
     return this.http.post(Sendurl, {Recepient: feedbackModel.userId, Message: feedbackModel.reply}).subscribe();
   }
+  defaultSignal(userId: number, text: string) {
+    const Sendurl = HOST_URL + '/api/notification/send';
+    return this.http.post(Sendurl, {Recepient: userId, Message: text}).subscribe();
+  }
+
 
 }
