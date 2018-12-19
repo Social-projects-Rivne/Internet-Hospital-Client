@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   notifications = [];
   page = 1;
   load = false;
+  endofload = false;
 
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
@@ -46,7 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onScroll() {
-    this.page = this.page + 1;
+    this.page++;
     this.getItems();
   }
 
@@ -57,21 +58,23 @@ export class HeaderComponent implements OnInit {
   menuClosed() {
     this.page = 1;
     this.notifications = [];
+    this.endofload = false;
   }
 
   addItems(res) {
-    if (res !== undefined) {
-      res.forEach(item => {
+      res.entities.forEach(item => {
         this.notifications.push(item);
       });
-    }
+      if (res.entityAmount === LOAD_PAGES && this.page === 2) {
+        this.endofload = true;
+      }
   }
 
   getItems() {
     this.load = true;
     this.messageService.getNotifications(this.page, LOAD_PAGES)
       .subscribe((data: any) => {
-        this.addItems(data.entities);
+        this.addItems(data);
         this.load = false;
       },
       () => {
