@@ -16,6 +16,7 @@ const PAGE_SIZE = 'pageSize';
 const SEARCH_BY_NAME = 'searchByName';
 const SORT = 'sort';
 const ORDER_BY = 'order';
+const SELECTED_STATUS = 'selectedStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,8 @@ export class UserListService {
     searchByName: string,
     page: number,
     includeAll: boolean,
-    pageSize: number): Observable<any> {
+    pageSize: number,
+    selectedStatus: string): Observable<any> {
     let url = this.url + `?${PAGE}=${page + 1}&`
       + `${PAGE_SIZE}=${pageSize}&`
       + `${INCLUDE_ALL}=${includeAll}&`;
@@ -52,6 +54,9 @@ export class UserListService {
     }
     if (sort) {
       url += `${SORT}=${sort}`;
+    }
+    if (selectedStatus) {
+      url += `${SELECTED_STATUS}=${selectedStatus}`;
     }
     return this.http.get<any>(url, this.httpOptions);
   }

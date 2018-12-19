@@ -29,16 +29,16 @@ export class UserManagementComponent implements OnInit {
   amountOfUsers = 0;
   pageSizeOptions = [5, 10, 15, 20, 30, 50];
   search = '';
+  selectedStatus = '';
   selected = [];
   description = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   content: FilteredResults<UserListModel> = new FilteredResults<UserListModel>();
 
-  // statuses: UserStatus;
+  statuses: UserStatus;
   // filter: UserListFilter;
   // searchInput = '';
-  // selectedStatus = 0;
   // usersAmount: number;
 
 
@@ -62,7 +62,8 @@ export class UserManagementComponent implements OnInit {
             this.search,
             this.paginator.pageIndex,
             this.includeAll,
-            this.paginator.pageSize);
+            this.paginator.pageSize,
+            this.selectedStatus);
         }),
         map((data: any) => {
           this.isLoadingResults = false;
@@ -74,6 +75,13 @@ export class UserManagementComponent implements OnInit {
           return observableOf([]);
         })
       ).subscribe(data => this.dataSource = data);
+      this.service.getStatuses().subscribe((result: any) => {
+        this.statuses = result;
+        console.log(this.statuses);
+      },
+      error => {
+        this._notificationService.error(error);
+      });
   }
 
   // onSearch() {

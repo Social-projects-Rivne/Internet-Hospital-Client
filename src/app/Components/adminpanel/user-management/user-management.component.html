@@ -53,6 +53,14 @@
     <mat-form-field>
       <input matInput placeholder="Search" [(ngModel)]="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
     </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-select [(value)]="selectedStatus" placeholder="Status" [(value)]="selected">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of statuses" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
