@@ -14,6 +14,8 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
+import { DialogService } from 'src/app/Services/dialog.service';
+
 const DEFAULT_AMOUNT_OF_MODERS_ON_PAGE = 5;
 
 @Component({
@@ -44,7 +46,10 @@ export class ModeratorManagementComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service: ModeratorService, private notification: NotificationService) {
+  constructor(private service: ModeratorService,
+    private notification: NotificationService,
+    private dialogService: DialogService
+  ) {
   }
 
   ngOnInit() {
@@ -101,27 +106,39 @@ export class ModeratorManagementComponent implements OnInit {
     }
   }
 
-  delete(id) {
-    this.isLoadingResults = true;
-    this.service.deleteModerator(id)
-      .subscribe( _ => {
-        this.notification.success('Moderator was successfully deleted!');
-        this.paginator.page.emit();
-      }, error => {
-        this.isLoadingResults = false;
-        this.notification.error(error);
+  delete(moderator) {
+    this.dialogService.openConfirmDialog(`Do you really want to delete ${moderator.email}?`,
+      '10%', 'calc(50% - 195px)')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.isLoadingResults = true;
+          this.service.deleteModerator(moderator.id)
+            .subscribe(_ => {
+              this.notification.success('Moderator was successfully deleted!');
+              this.paginator.page.emit();
+            }, error => {
+              this.isLoadingResults = false;
+              this.notification.error(error);
+            });
+        }
       });
   }
 
   deleteSelected() {
-    this.isLoadingResults = true;
-    this.service.deleteModerators(this.selected).subscribe( _ => {
-      this.selected = [];
-      this.paginator.page.emit();
-      this.notification.success('Moderators were deleted!');
-    }, error => {
-      this.isLoadingResults = false;
-      this.notification.error(error);
-    });
+    this.dialogService.openConfirmDialog(`Do you really want to delete all selected moderators?`,
+      '10%', 'calc(50% - 195px)')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.isLoadingResults = true;
+          this.service.deleteModerators(this.selected).subscribe(_ => {
+            this.selected = [];
+            this.paginator.page.emit();
+            this.notification.success('Moderators were deleted!');
+          }, error => {
+            this.isLoadingResults = false;
+            this.notification.error(error);
+          });
+        }
+      });
   }
 }
