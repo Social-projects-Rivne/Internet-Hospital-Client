@@ -15,7 +15,7 @@ import { ContentsComponent } from '../adminpanel/contents/contents.component';
 import { ContentPreviewComponent } from '../adminpanel/contents/content-managing/content-preview/content-preview.component';
 import { ContentEditComponent } from '../adminpanel/contents/content-managing/content-edit/content-edit.component';
 import { ContentItemComponent } from '../adminpanel/contents/content-item/content-item.component';
-import { GalleryComponent } from 'src/app/Components/doctor-page/gallery/gallery.component';
+// import { GalleryComponent } from 'src/app/Components/doctor-page/gallery/gallery.component';
 
 
 import { MatFormFieldModule,
@@ -104,7 +104,7 @@ import { FeedbackClaimComponent } from '../../Components/adminpanel/request-mana
     DataApproveComponent,
     RegistrationConfirmComponent,
     FeedbackClaimComponent,
-    GalleryComponent
+    // GalleryComponent
   ],
   providers: []
 })

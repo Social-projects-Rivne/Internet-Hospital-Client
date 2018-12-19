@@ -26,7 +26,7 @@ export class GalleryComponent implements AfterContentChecked {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
                                               / WIDTH_OF_1_IMG);
-                                              console.log(this.amountOfPicsOnScreen);
+                                              // console.log(this.amountOfPicsOnScreen);
 
   }
 
@@ -36,7 +36,7 @@ export class GalleryComponent implements AfterContentChecked {
     const currWidth = document.getElementById('gallery-container').offsetWidth;
     this.amountOfPicsOnScreen = Math.trunc((currWidth - SUM_OF_WIDTH_OF_SWITCH_BUTTONS)
                                               / WIDTH_OF_1_IMG);
-                                              console.log(this.amountOfPicsOnScreen, currWidth);
+                                              // console.log(this.amountOfPicsOnScreen, currWidth);
   }
 
   next() {

@@ -85,7 +85,7 @@ export class DataApproveComponent implements OnInit {
       if (res) {
         this.service.handlePatientToDoctorRequest(id, isApproved)
         .subscribe(() => {
-          this.notification.success('Unsubscribed successfully');
+          this.notification.success('User have been successfully approved!');
         },
         error => {
           this.notification.error(error);
