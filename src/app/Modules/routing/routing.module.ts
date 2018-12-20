@@ -47,9 +47,6 @@ import { UpdateToDoctorComponent } from '../../Components/PatientProfile/update-
 const ROUTES: Routes = [
   {
     path: '', component: HomeComponent, children: [
-      // TEMPORARY ROUTE:
-      {path: 'updateToDoctor', component: UpdateToDoctorComponent, canActivate: [PatientGuard]},
-      // ---------------
       { path: '', component: HomeNewsComponent },
       { path: SIGN_UP, component: SignUpComponent },
       { path: SIGN_IN, component: SignInComponent },

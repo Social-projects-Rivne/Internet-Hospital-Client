@@ -39,10 +39,7 @@ export class DataApproveComponent implements OnInit {
               private notification: NotificationService) { }
 
   ngOnInit() {
-
-    // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = DEFAULT_AMOUNT_OF_PATIENT_ON_PAGE;
-    // merge(this.sort.sortChange, this.paginator.page)
       this.paginator.page
       .pipe(
         startWith({}),
@@ -73,7 +70,6 @@ export class DataApproveComponent implements OnInit {
         .subscribe(() => {
           this.notification.success('User\'s request nave been successfully handled!');
           this.isLoadingResults = false;
-          // this.deleteById(id);
         },
         error => {
           this.notification.error(error);
@@ -82,15 +78,4 @@ export class DataApproveComponent implements OnInit {
       }
     });
   }
-
-  // deleteById(id: number) {
-  //   for (let i = 0; i < this.patientToDoctorModels.length; i++) {
-  //     if (this.patientToDoctorModels[i].userId === id) {
-  //       this.patientToDoctorModels.splice(i, 1);
-  //       console.log(this.patientToDoctorModels);
-  //     }
-  //   }
-  // }
-
-
 }
