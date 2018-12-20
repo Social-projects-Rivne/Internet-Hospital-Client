@@ -10,7 +10,6 @@ import { Observable} from 'rxjs';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  isAdmin: Observable<boolean>;
   isModerator: Observable<boolean>;
 
   pushRightClass = 'push-right';
@@ -25,7 +24,6 @@ export class AdminHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isModerator = this.authenticationService.isModerator();
-    this.isAdmin = this.authenticationService.isAdmin();
   }
 
   isToggled(): boolean {

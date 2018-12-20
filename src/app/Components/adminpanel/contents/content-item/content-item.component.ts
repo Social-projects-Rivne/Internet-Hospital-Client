@@ -1,18 +1,29 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShortContentWithEditors } from '../../../../Models/Content/ShortContentWithEditors';
 import { HOST_URL } from 'src/app/config';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
+const SLIDE_TIME_IN_MSC = 10000;
 
 @Component({
   selector: 'app-content-item',
   templateUrl: './content-item.component.html',
-  styleUrls: ['./content-item.component.scss']
+  styleUrls: ['./content-item.component.scss'],
+  animations: [
+    trigger('imageDisplay', [
+      state('displayed', style({opacity: '1'})),
+      state('hidden', style({opacity: '0'})),
+      transition('displayed <=> hidden', animate('1000ms cubic-bezier(0.74, 0.97, 0.91, 1)')),
+    ]),
+  ],
 })
 
 export class ContentItemComponent implements OnInit {
 
   url = HOST_URL;
   imgs = [];
-
+  slideIndex = 0;
+  timer = 0;
   height = 0;
 
   @Input() content: ShortContentWithEditors;
@@ -20,24 +31,37 @@ export class ContentItemComponent implements OnInit {
   @Output() deleted = new EventEmitter();
   @Output() changed = new EventEmitter();
 
-  @HostListener('window:resize')
-  onResize() {
-    this.setSliderHeigth();
+  constructor() {
+    this.setPlay();
   }
 
-  constructor() {
+  setPlay() {
+    this.timer = window.setTimeout(() => {
+      this.nextImg();
+    }, SLIDE_TIME_IN_MSC);
+  }
+
+  nextImg() {
+    window.clearTimeout(this.timer);
+    if (this.slideIndex < this.content.previewImageUrls.length - 1) {
+      this.slideIndex++;
+    } else {
+      this.slideIndex = 0;
+    }
+    this.setPlay();
+  }
+
+  prevImg() {
+    window.clearTimeout(this.timer);
+    if (this.slideIndex !== 0) {
+      this.slideIndex--;
+    } else {
+      this.slideIndex = this.content.previewImageUrls.length - 1;
+    }
+    this.setPlay();
   }
 
   ngOnInit() {
-    this.content.previewImageUrls.forEach( img => {
-      this.imgs.push(HOST_URL + img);
-    });
-    this.setSliderHeigth();
-  }
-
-  setSliderHeigth() {
-    const currWidth = document.getElementById('slideshow-container').offsetWidth;
-    this.height = Math.trunc(currWidth / 16 * 9);
   }
 
   delete() {

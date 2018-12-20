@@ -1,42 +1,109 @@
-.content-preview {
-  display: block;
+.content-preview {  
   padding: 0;
-  margin: 10px 0;
+  margin: 10px;
 
-  mat-card-header,
-  .content-body {
+  mat-card-header {
     padding: 16px;
-  }
-}
-
-  .content-title {
-    font-size: 2em;
-    line-height: normal;
-    text-align: left;
+    padding-bottom: 0;
     display: block;
-    width: 100%;
+    @media (max-width: 599px) {
+      margin: 0;
+    }
+
+    .title {
+      display: block;
+      font-size: 2em;
+      line-height: normal;
+      text-align: left;
+    }
 
     .content-date {
-      float: right;
-      font-size: 0.5em;
+      float: left;
+      color: red;
+      margin-right: 5px;
+    }
+
+    .types {
+      color: grey;
+    }
+
+    p {
+      -webkit-margin-after: 0;
+              margin-block-end: 0;
       text-align: right;
-      margin-left: 5px;
-      color: rgb(20, 9, 180)
     }
   }
 
-.types {
-  color: grey;
-  font-size: 0.5em;
-}
+  .images-container {
+    position: relative;
+    width: 100%;
 
-mat-card-content p {
-  padding: 16px;
-  text-align: justify;
-}
+    .image-wrap {
+      padding-top: 56.25%;
+    }
 
-.button-wrapper {
-  text-align: right;
-  margin-right: 10px;
-  padding-bottom: 10px;
+    .image-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      img {
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 20%;
+      opacity: 0;
+      color: white;
+      font-size: 2rem;
+      
+      &:hover {
+        opacity: 0.7;
+        background: rgba($color: #696868, $alpha: 0.4);
+      }
+    }
+
+    .right-button {
+      right: 0;
+    }
+
+    .left-button {
+      left: 0;
+    }
+  }
+
+  mat-card-content p {
+    padding: 16px;
+    text-align: justify;
+    overflow: hidden;
+  }
+
+  .content-author-container {
+    text-align: left;
+    padding-left: 16px;
+    display: inline-block;
+    width: calc(100% - 176px);
+
+    .content-author {
+      color: mediumblue;
+      padding: 16px;
+    }
+  }
+
+  .button-container {
+    text-align: right;
+
+    button {
+      width: 150px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
 }

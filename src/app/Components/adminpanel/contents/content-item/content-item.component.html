@@ -14,29 +14,37 @@
           <div class="content-date">{{content.dateOfCreation | date}}</div>
           <div class="content-author" color="primary">{{content.author}}</div>
         </div>
-      {{content.title}}
+        {{content.title}}
       </div>
     </div>
     <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
-  <div id="slideshow-container">
-    <slideshow [imageUrls]="imgs" [height]="height + 'px'" 
-      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
+  <div class="images-container">
+    <div class="image-wrap"></div>
+    <div class="image-container">
+      <img *ngFor="let img of content.previewImageUrls; let i = index" src="{{url + img}}" [@imageDisplay]="i === slideIndex ? 'displayed' : 'hidden'">
+    </div>
+    <button class="left-button" mat-button (click)="prevImg()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button class="right-button" mat-button (click)="nextImg()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
   </div>
   <mat-card-content>
     <p>
       {{content.shortDescription}}
     </p>
     <mat-expansion-panel *ngIf="content.editions.length > 0">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            History of editions
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="edition-block" *ngFor="let edition of content.editions">
-          <div class="edition-author">{{edition.author}}</div>
-          <div class="edition-date">{{edition.dateOfEdit | date}}</div>
-        </div>
-      </mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          History of editions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="edition-block" *ngFor="let edition of content.editions">
+        <div class="edition-author">{{edition.author}}</div>
+        <div class="edition-date">{{edition.dateOfEdit | date}}</div>
+      </div>
+    </mat-expansion-panel>
   </mat-card-content>
 </mat-card>

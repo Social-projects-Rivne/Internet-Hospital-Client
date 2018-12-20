@@ -1,27 +1,31 @@
 <mat-card class="mat-elevation-z10 content-preview">
   <mat-card-header>
-      <div class="content-title">
-        <div class="content-date">{{date | date}}</div>
-        {{handlingService.form.controls.title.value}}
-        <br>
-        <span class="types" *ngFor="let type of handlingService.form.controls.types.value; index as i">
-          <strong>
-            {{type.name + (i <  handlingService.form.controls.types.value.length - 1 ? ', ' : '')}}
-          </strong>
-        </span>
-      </div>
+    <div class="title">
+      {{handlingService.form.controls.title.value}}
+    </div>
+    <p>
+      <span class="types" *ngFor="let type of handlingService.form.controls.types.value; index as i">
+        <strong>
+          {{type.name + (i <  handlingService.form.controls.types.value.length - 1 ? ', ' : '')}}
+        </strong>
+      </span>
+    </p>
   </mat-card-header>
-  <div id="slideshow-container" style="height: auto">
-    <slideshow *ngIf="previewImgsService.croppedImgs.length > 0"
-      [imageUrls]="previewImgsService.croppedImgs" [height]="height + 'px'" 
-      [autoPlay]="true" [stopAutoPlayOnSlide]="false" [autoPlayInterval]="2000"></slideshow>
+  <div class="images-container" *ngIf="previewImgsService.croppedImgs.length > 0">
+    <div class="image-wrap"></div>
+    <div class="image-container">
+      <img *ngFor="let img of previewImgsService.croppedImgs; let i = index" src="{{img}}" 
+        [@imageDisplay]="i === slideIndex ? 'displayed' : 'hidden'">
+    </div>
+    <button class="left-button" mat-button (click)="prevImg()"><mat-icon>navigate_before</mat-icon></button>
+    <button class="right-button" mat-button (click)="nextImg()"><mat-icon>navigate_next</mat-icon></button>
   </div>
   <mat-card-content>
     <p>
       {{handlingService.form.controls.shortDescription.value}}
     </p>
   </mat-card-content>
-  <div class="button-wrapper">
-    <button class="source-button" mat-raised-button color="primary">Read full</button>
+  <div class="button-container">
+    <button mat-raised-button color="primary">READ FULL</button>
   </div>
 </mat-card>
