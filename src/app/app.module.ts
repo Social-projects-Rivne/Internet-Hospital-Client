@@ -68,6 +68,7 @@ import { MyPatientsComponent } from './Components/MyPatients/my-patients.compone
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
 import { SharedModule } from './Modules/shared/shared.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import { SharedModule } from './Modules/shared/shared.module';
           useClass: CustomEventTitleFormatter
         }
       },
-    )
+    ),
+    InfiniteScrollModule,
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
