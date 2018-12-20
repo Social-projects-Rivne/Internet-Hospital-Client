@@ -114,3 +114,20 @@
 .loadbar {
   height: 10px;
 }
+
+#markAllNotification {
+  text-align: right;
+  margin-right: 5px;
+  a{
+    color: rgb(105, 117, 117);
+  }  
+}
+
+#markAllNotification :hover {
+  color: rgb(70, 77, 77);
+}
+
+#notificationLabel {
+  margin-left: 5px;
+  color: #444749;
+}
