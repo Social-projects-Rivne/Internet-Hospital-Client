@@ -32,6 +32,7 @@
 }
 #Father-box{
   background-color: #4d5256;
+  z-index: 1000;
 } 
 .material-icons {
   color: azure;
@@ -113,6 +114,12 @@
 
 .loadbar {
   height: 10px;
+}
+
+.admin-sidebar-show-button {
+  @media screen and (min-width: 961px) {
+    display: none;   
+  }   
 }
 
 #markAllNotification {

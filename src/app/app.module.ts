@@ -8,7 +8,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
@@ -59,9 +58,7 @@ import { IllnessHistoryComponent } from './Components/illness-history/illness-hi
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
-import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
 // tslint:disable-next-line:max-line-length
 import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
@@ -73,6 +70,7 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
 import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
 import { SharedModule } from './Modules/shared/shared.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
@@ -81,7 +79,6 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
   declarations: [
     AppComponent,
     ROUTING_COMPONENTS,
-    HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
     HomeNewsItemComponent,
@@ -107,7 +104,6 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     PatientAppointmentsComponent,
     PatAppointItemComponent,
     MatConfirmDialogComponent,
-    LoadingComponent,
     DoctorProfileComponent,
     GreetingItemComponent,
     PreviousAppointmentsComponent,
@@ -147,7 +143,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
         }
       },
     ),
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
