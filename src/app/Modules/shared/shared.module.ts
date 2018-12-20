@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SliderComponent } from '../../Components/Shared/slider/slider.component';
+import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SliderComponent } from '../../Components/Shared/slider/slider.component';
+import { HeaderComponent } from 'src/app/Components/Layout/header/header.component';
+import { LoadingComponent } from '../../Components/loading/loading.component';
 
-const COMPONENTS = [SliderComponent];
+const COMPONENTS = [SliderComponent, HeaderComponent, LoadingComponent];
 
 @NgModule({
   declarations: COMPONENTS,
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule,
+    InfiniteScrollModule
   ],
   exports: COMPONENTS
 })

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
 import { HOST_URL, LOAD_PAGES } from '../../../config';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { MessageService } from 'src/app/Services/message.service';
+
+const MIN_WINDOW_WIDTH_FOR_SHOWING_SIDEBAR = 960;
 
 @Component({
   selector: 'app-header',
@@ -14,13 +17,13 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private storage: LocalStorageService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private router: Router) { }
 
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
   isDoctor: Observable<boolean>;
   isModerator: Observable<boolean>;
-  isAdmin: Observable<boolean>;
   ifUnread: Observable<boolean>;
   unreadCount: Observable<number>;
   userAvatar: string;
@@ -30,12 +33,13 @@ export class HeaderComponent implements OnInit {
   load = false;
   endofload = false;
 
+  pushRightClass = 'push-right';
+  @Input() adminPage = false;
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
     this.isPatient = this.authenticationService.isPatient();
     this.isDoctor = this.authenticationService.isDoctor();
     this.isModerator = this.authenticationService.isModerator();
-    this.isAdmin = this.authenticationService.isAdmin();
     this.ifUnread = this.messageService.ifUnread();
     this.unreadCount = this.messageService.unreadCount();
     this.authenticationService.getAvatarURL()
@@ -44,6 +48,23 @@ export class HeaderComponent implements OnInit {
     this.storage.watchStorage().subscribe((data: any) => {
       this.userAvatar = HOST_URL + data;
     });
+
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd && window.innerWidth <= MIN_WINDOW_WIDTH_FOR_SHOWING_SIDEBAR
+          && this.isToggled()) {
+        this.toggleSidebar();
+      }
+    });
+  }
+
+  isToggled(): boolean {
+    const dom: Element = document.querySelector('body');
+    return dom.classList.contains(this.pushRightClass);
+  }
+
+  toggleSidebar() {
+    const dom: any = document.querySelector('body');
+    dom.classList.toggle(this.pushRightClass);
   }
 
   onScroll() {

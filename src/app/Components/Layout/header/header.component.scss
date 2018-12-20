@@ -114,3 +114,11 @@
 .loadbar {
   height: 10px;
 }
+
+.admin-sidebar-show-button {
+  @media screen and (min-width: 961px) {
+    display: none;   
+  }   
+}
+
+
