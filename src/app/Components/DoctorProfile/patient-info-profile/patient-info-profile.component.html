@@ -40,25 +40,25 @@
                 </div>
               </mat-expansion-panel-header>
               <div fxLayout="column" fxLayoutGap="5px">
-                <div>
+                <div *ngIf="illnessHistory?.complaints">
                   Complaints: {{IllnessHistory.complaints}}
                 </div>                
-                <div>
+                <div *ngIf="illnessHistory?.diseaseAnamnesis">
                   Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
                 </div>
-                <div>
+                <div *ngIf="illnessHistory?.lifeAnamnesis">
                   Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
                 </div>
-                <div>
+                <div *ngIf="illnessHistory?.objectiveStatus">
                   Objective status: {{IllnessHistory.objectiveStatus}}
                 </div>
-                <div>
+                <div *ngIf="illnessHistory?.localStatus">
                   Local status: {{IllnessHistory.localStatus}}
                 </div>
-                <div>
+                <div *ngIf="illnessHistory?.surveyPlan">
                   Survey plan: {{IllnessHistory.surveyPlan}}
                 </div>
-                <div>
+                <div *ngIf="illnessHistory?.treatmentPlan">
                   Treatment plan: {{IllnessHistory.treatmentPlan}}
                 </div>
             </div>

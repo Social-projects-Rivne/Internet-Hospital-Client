@@ -1,6 +1,6 @@
 <div class="container" fxLayout="column" fxLayoutGap="0.5%" fxLayoutWrap fxLayoutAlign="center">
   <mat-form-field fxFlex="20%" class="search-form-field" floatLabel="never">
-    <input matInput [(ngModel)]="filter.searchKey" placeholder="Search" autocomplete="off">
+    <input matInput [(ngModel)]="filter.searchKey" placeholder="Search by name" autocomplete="off">
     <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.searchKey" (click)="onSearchClear()">
       <mat-icon>close</mat-icon>
     </button>

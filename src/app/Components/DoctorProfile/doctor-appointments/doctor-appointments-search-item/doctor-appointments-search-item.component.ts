@@ -52,10 +52,10 @@ export class DoctorAppointmentsSearchItemComponent implements OnInit {
   }
 
   onFromClear() {
-    this.filter.from = null;
+    this.filter.from = undefined;
   }
 
   onTillClear() {
-    this.filter.till = null;
+    this.filter.till = undefined;
   }
 }
