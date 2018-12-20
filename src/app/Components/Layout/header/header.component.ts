@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   isPatient: Observable<boolean>;
   isDoctor: Observable<boolean>;
   isModerator: Observable<boolean>;
+  isAdmin: Observable<boolean>;
   ifUnread: Observable<boolean>;
   unreadCount: Observable<number>;
   userAvatar: string;
@@ -34,11 +35,13 @@ export class HeaderComponent implements OnInit {
   endofload = false;
 
   pushRightClass = 'push-right';
-  @Input() adminPage = false;
+  @Input() isAdminPage = false;
+
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
     this.isPatient = this.authenticationService.isPatient();
     this.isDoctor = this.authenticationService.isDoctor();
+    this.isAdmin = this.authenticationService.isAdmin();
     this.isModerator = this.authenticationService.isModerator();
     this.ifUnread = this.messageService.ifUnread();
     this.unreadCount = this.messageService.unreadCount();
