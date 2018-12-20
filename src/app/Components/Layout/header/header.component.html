@@ -1,4 +1,4 @@
-<mat-toolbar id="Father-box">
+<mat-toolbar id="Father-box" [style.position]="adminPage ? 'static' : 'fixed'">
     <!-- Header -->
     <button *ngIf="adminPage" type="button" mat-icon-button class="admin-sidebar-show-button" (click)="toggleSidebar()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
