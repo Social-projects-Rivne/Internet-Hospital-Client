@@ -3,14 +3,11 @@ import { UserListService } from 'src/app/Services/UserListService/user-list.serv
 import { NotificationService } from 'src/app/Services/notification.service';
 import { UserListModel } from 'src/app/Models/UserListModel';
 import { MatPaginator, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
-import { UserListFilter } from 'src/app/Models/UserListFilter';
-import { PaginationService } from 'src/app/Services/pagination.service';
-import { EventEmitter } from 'events';
-import { UserStatus } from 'src/app/Models/UserStatus';
 import { FilteredResults } from 'src/app/Models/FilteredResults';
 import { merge, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { DEFAULT_AMOUNT_OF_PATIENTS_ON_PAGE } from '../../MyPatients/active-patients/active-patients.component';
+import { UserStatus } from 'src/app/Models/UserStatus';
 
 @Component({
   selector: 'app-user-management',
@@ -35,17 +32,11 @@ export class UserManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   content: FilteredResults<UserListModel> = new FilteredResults<UserListModel>();
-
   statuses: UserStatus;
-  // filter: UserListFilter;
-  // searchInput = '';
-  // usersAmount: number;
-
 
 
   constructor(private service: UserListService,
-              private _notificationService: NotificationService,
-              private _paginationService: PaginationService) {
+              private _notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -77,49 +68,15 @@ export class UserManagementComponent implements OnInit {
       ).subscribe(data => this.dataSource = data);
       this.service.getStatuses().subscribe((result: any) => {
         this.statuses = result;
-        console.log(this.statuses);
       },
       error => {
         this._notificationService.error(error);
       });
   }
 
-  // onSearch() {
-  //   this.filter.searchKey = this.searchInput;
-  //   this.filter.selectedStatus = this.selectedStatus;
-
-  //   this.paginator.firstPage();
-  //   const event = new PageEvent();
-  //   event.pageSize = this._paginationService.userPageSize;
-  //   event.pageIndex = this._paginationService.pageIndex - 1;
-  //   event.length = this.usersAmount;
-
-  //   this.pageSwitch(event);
-  // }
-
-  // onClear() {
-  //   this.searchInput = '';
-  //   this.selectedStatus = 0;
-  //   this.ngOnInit();
-  // }
-
-  // pageSwitch(event: PageEvent) {
-  //   this._paginationService.change(event);
-  //   this.isLoadingResults = true;
-  //   this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
-  //     result.users.sort((x1, x2) => x1.id - x2.id);
-  //     this.dataSource = this._userListService.StatusConverter(result.users);
-  //     this.usersAmount = result.count;
-  //     this.isLoadingResults = false;
-  //     if (this.usersAmount === 0) {
-  //       this._notificationService.error('There is no users for this request');
-  //     }
-  //   },
-  //     error => {
-  //       this._notificationService.error(error);
-  //     });
-  //   window.scroll(0, 0);
-  // }
+  onSearch() {
+    this.ngOnInit();
+  }
 
   select(event, id) {
     const index = this.selected.indexOf(id);

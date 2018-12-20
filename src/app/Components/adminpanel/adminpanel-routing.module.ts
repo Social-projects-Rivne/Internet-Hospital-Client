@@ -14,21 +14,23 @@ import { AdminGuard } from '../../Services/Guards/admin.guard';
 import { CONTENTS, CONTENTS_MNG, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG, MODER_CREATE} from './routesConfig';
 
 import { ADMIN_PANEL } from '../../config';
+import { ModeratorGuard } from 'src/app/Services/Guards/moderator.guard';
 const routes: Routes = [
   {
     path: ADMIN_PANEL,
     component: AdminPanelComponent,
-    canActivate: [AdminGuard],
+    canActivate: [ModeratorGuard],
     children: [
       {
         path: '',
-        redirectTo: MODERATORS_MNG,
+        redirectTo: CONTENTS,
         pathMatch: 'full'
       },
       {
         path: MODERATORS_MNG,
         component: ModeratorManagementComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AdminGuard]
       },
       {
         path: USERS_MNG,

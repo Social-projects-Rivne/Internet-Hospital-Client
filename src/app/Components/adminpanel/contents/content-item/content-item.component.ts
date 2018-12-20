@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShortContentWithEditors } from '../../../../Models/Content/ShortContentWithEditors';
 import { HOST_URL } from 'src/app/config';
 
@@ -10,34 +10,17 @@ import { HOST_URL } from 'src/app/config';
 
 export class ContentItemComponent implements OnInit {
 
-  url = HOST_URL;
-  imgs = [];
-
-  height = 0;
-
   @Input() content: ShortContentWithEditors;
 
   @Output() deleted = new EventEmitter();
   @Output() changed = new EventEmitter();
 
-  @HostListener('window:resize')
-  onResize() {
-    this.setSliderHeigth();
-  }
-
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.content.previewImageUrls.forEach( img => {
-      this.imgs.push(HOST_URL + img);
-    });
-    this.setSliderHeigth();
-  }
-
-  setSliderHeigth() {
-    const currWidth = document.getElementById('slideshow-container').offsetWidth;
-    this.height = Math.trunc(currWidth / 16 * 9);
+    for (let i = 0; i < this.content.previewImageUrls.length; ++i) {
+      this.content.previewImageUrls[i] = HOST_URL + this.content.previewImageUrls[i];
+    }
   }
 
   delete() {

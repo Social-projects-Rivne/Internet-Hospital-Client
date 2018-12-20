@@ -74,6 +74,7 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
 import { PreviousRouteService } from './Services/previous-route.service';
 import { PatientIdSharingService } from './Services/patient-id-sharing.service';
 import { WatchPatientInfoGuard } from './Services/Guards/watch-patient-info.guard';
+import { SharedModule } from './Modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { WatchPatientInfoGuard } from './Services/Guards/watch-patient-info.guar
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
+    SharedModule,
     BrowserModule,
     MaterialModule,
     FormsModule,
