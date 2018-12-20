@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HOST_URL, RESTART_TIME, HUB_CONNECTION,
-         NOTIFICATIONS_GET, NOTIFICATIONS_CHANGE,
+         NOTIFICATIONS_GET, NOTIFICATIONS_CHANGE, NOTIFICATIONS_CHACK_ALL,
          NOTIFICATION_NOTIFY, NOTIFICATION_ONLOAD, AUDIO } from '../config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TokenService } from './token.service';
@@ -47,7 +47,7 @@ export class MessageService {
     }
 
     checkAllNotifications() {
-        return this.http.post(HOST_URL + '/api/notification/checkall', {});
+        return this.http.post(HOST_URL + NOTIFICATIONS_CHACK_ALL, {});
     }
 
     /* SignalR settings */
