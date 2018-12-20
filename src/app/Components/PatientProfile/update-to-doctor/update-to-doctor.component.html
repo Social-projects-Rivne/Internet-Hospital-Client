@@ -1,61 +1,59 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div>
-    <mat-card-header>
-      <mat-card-title>Update Your profile to Doctor</mat-card-title>
-    </mat-card-header>
+<div id="father-div" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card-header>
+    <mat-card-title>Update Your profile to Doctor</mat-card-title>
+  </mat-card-header>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form"
-       class="normal-form form-width" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-       <app-loading *ngIf="isLoadingResults"></app-loading>
-       <div fxLayout="row" class="inner-div" fxLayoutGap="20px">
-        <div fxLayout="column">
-          <div class="controles-row form-fieldStrech">
-            <mat-form-field class="mat-form-fieldStrech">
-              <input required formControlName="Address" matInput placeholder="Working address" maxlength="85">
-              <mat-error>Working address is required.</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="controles-row form-fieldStrech">
-            <mat-form-field class="mat-form-fieldStrech">
-              <mat-select required formControlName="Specialization" placeholder="Specialization">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let specialization of this.specializations" [value]="specialization.specialization">{{specialization.specialization}}</mat-option>
-              </mat-select>
-              <mat-error>Choose your specialization.</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="upload-files">
-            <input required id="DiplomaURL" formControlName="DiplomaURL" #DiplomaURL type="file" accept="image/*" (change)="imageHandling.handleDiplomaInput($event.target)"
-              class="inputfile" multiple name="DiplomaURL">
-            <label *ngIf="!imageHandling.isDiplomaUploaded" class="upload-photos mi-text-header" for="DiplomaURL">
-              <i class="fas fa-upload"></i>
-              <strong> Upload diploma photos</strong>
-            </label>
-            <label *ngIf="imageHandling.isDiplomaUploaded" class="upload-succeded mi-text-header" for="DiplomaURL">
-              <i class="fas fa-check"></i>
-              <strong> Upload succeded</strong>
-            </label>
-          </div>
-          <div class="upload-files">
-            <input required id="LicenseURL" formControlName="LicenseURL" #LicenseURL type="file" accept="image/*" (change)="imageHandling.handleLicenseInput($event.target)"
-              class="inputfile" multiple name="LicenseURL">
-            <label *ngIf="!imageHandling.isLicenseUploaded" class="upload-photos mi-text-header" for="LicenseURL">
-              <i class="fas fa-upload"></i>
-              <strong> Upload license photo </strong>
-            </label>
-            <label *ngIf="imageHandling.isLicenseUploaded" class="upload-succeded mi-text-header" for="LicenseURL">
-              <i class="fas fa-check"></i>
-              <strong> Upload succeded</strong>
-            </label>
-          </div>
-          <div fxLayout="row" class="controles-row" fxLayoutAlign="center">
-            <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
-            <button class="marginbtn" mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
-          </div>
+  <form fxFlexAlign="space-evenly center" [formGroup]="service.form"
+    class="normal-form form-width" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <app-loading *ngIf="isLoadingResults"></app-loading>
+    <div fxLayout="row" class="inner-div" fxLayoutGap="20px">
+      <div fxLayout="column">
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <input required formControlName="Address" matInput placeholder="Working address" maxlength="85">
+            <mat-error>Working address is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="controles-row form-fieldStrech">
+          <mat-form-field class="mat-form-fieldStrech">
+            <mat-select required formControlName="Specialization" placeholder="Specialization">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let specialization of this.specializations" [value]="specialization.specialization">{{specialization.specialization}}</mat-option>
+            </mat-select>
+            <mat-error>Choose your specialization.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="upload-files">
+          <input required id="DiplomaURL" formControlName="DiplomaURL" #DiplomaURL type="file" accept="image/*"
+            (change)="imageHandling.handleDiplomaInput($event.target)" class="inputfile" multiple name="DiplomaURL">
+          <label *ngIf="!imageHandling.isDiplomaUploaded" class="upload-photos mi-text-header" for="DiplomaURL">
+            <i class="fas fa-upload"></i>
+            <strong> Upload diploma photos</strong>
+          </label>
+          <label *ngIf="imageHandling.isDiplomaUploaded" class="upload-succeded mi-text-header" for="DiplomaURL">
+            <i class="fas fa-check"></i>
+            <strong> Upload succeded</strong>
+          </label>
+        </div>
+        <div class="upload-files">
+          <input required id="LicenseURL" formControlName="LicenseURL" #LicenseURL type="file" accept="image/*"
+            (change)="imageHandling.handleLicenseInput($event.target)" class="inputfile" multiple name="LicenseURL">
+          <label *ngIf="!imageHandling.isLicenseUploaded" class="upload-photos mi-text-header" for="LicenseURL">
+            <i class="fas fa-upload"></i>
+            <strong> Upload license photo </strong>
+          </label>
+          <label *ngIf="imageHandling.isLicenseUploaded" class="upload-succeded mi-text-header" for="LicenseURL">
+            <i class="fas fa-check"></i>
+            <strong> Upload succeded</strong>
+          </label>
+        </div>
+        <div fxLayout="row" class="controles-row" fxLayoutAlign="center">
+          <button class="marginbtn" mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button class="marginbtn" mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

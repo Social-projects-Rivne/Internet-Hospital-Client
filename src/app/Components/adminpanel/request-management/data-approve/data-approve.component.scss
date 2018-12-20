@@ -40,9 +40,12 @@
 #maintextbox{
     text-align: justify;
 }
+#expanded-box{
+  padding: 20px;
+}
 .doc-pic{
-  width: 230px;
-  height: 230px;
+  max-width: 230px;
+  max-height: 230px;
   border-radius: 5%;
   // background-image: url('https://localhost:44357/Images/Frank.Deckow83@hotmail.com/Diploma/18.12.2018 17-26-51/8ac7eebd-3afc-4786-a5af-3915e803a5ae_1.jpg');
   background-clip: padding-box;
@@ -53,7 +56,10 @@
   background-repeat: no-repeat;
   vertical-align: middle;
 }
-
+img:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
 .user-avatar {
   border: 1px solid rgba(0, 0, 0, 0.4);
   background-repeat: no-repeat;

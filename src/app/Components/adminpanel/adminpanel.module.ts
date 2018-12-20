@@ -53,6 +53,7 @@ import { DataApproveComponent } from '../../Components/adminpanel/request-manage
 import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
+import { ImageModalComponent } from '../../Components/adminpanel/request-management/data-approve/image-modal/image-modal.component';
 
 @NgModule({
   imports: [
@@ -103,6 +104,10 @@ import { FeedbackClaimComponent } from '../../Components/adminpanel/request-mana
     DataApproveComponent,
     RegistrationConfirmComponent,
     FeedbackClaimComponent,
+    ImageModalComponent,
+  ],
+  entryComponents: [
+    ImageModalComponent,
   ],
   providers: []
 })
