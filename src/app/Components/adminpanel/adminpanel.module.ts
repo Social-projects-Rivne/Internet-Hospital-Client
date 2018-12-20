@@ -53,6 +53,7 @@ import { DataApproveComponent } from '../../Components/adminpanel/request-manage
 import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
+import { SharedModule } from 'src/app/Modules/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -85,6 +86,7 @@ import { FeedbackClaimComponent } from '../../Components/adminpanel/request-mana
     FroalaViewModule,
     SlideshowModule,
     MatTabsModule,
+    SharedModule
   ],
   declarations: [
     AdminPanelComponent,

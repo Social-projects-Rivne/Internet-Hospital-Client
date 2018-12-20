@@ -11,15 +11,8 @@
       </span>
     </p>
   </mat-card-header>
-  <div class="images-container" *ngIf="previewImgsService.croppedImgs.length > 0">
-    <div class="image-wrap"></div>
-    <div class="image-container">
-      <img *ngFor="let img of previewImgsService.croppedImgs; let i = index" src="{{img}}" 
-        [@imageDisplay]="i === slideIndex ? 'displayed' : 'hidden'">
-    </div>
-    <button class="left-button" mat-button (click)="prevImg()"><mat-icon>navigate_before</mat-icon></button>
-    <button class="right-button" mat-button (click)="nextImg()"><mat-icon>navigate_next</mat-icon></button>
-  </div>
+  <app-slider *ngIf="previewImgsService.croppedImgs.length > 0"
+    [images]="previewImgsService.croppedImgs"></app-slider>
   <mat-card-content>
     <p>
       {{handlingService.form.controls.shortDescription.value}}
