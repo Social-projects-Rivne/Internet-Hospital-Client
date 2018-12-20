@@ -10,6 +10,7 @@ import { MODER_CREATE } from './../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
 
 import { MatPaginator, MatSort } from '@angular/material';
+import { DialogService } from 'src/app/Services/dialog.service';
 
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
@@ -47,10 +48,8 @@ export class ModeratorManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private service: ModeratorService,
-    private notification: NotificationService,
-    private dialogService: DialogService
-  ) {
-  }
+              private notification: NotificationService,
+              private dialogService: DialogService) {}
 
   ngOnInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
