@@ -11,6 +11,7 @@ const MAX_WIDTH = 3000;
 const PASSPORT = 'passport';
 const LICENSE = 'license';
 const DIPLOMA = 'diploma';
+const DEFAULT_IMAGE = '../../assets/img/default.png';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class ImageHandlingService {
     private notification: NotificationService,
     private authentification: AuthenticationService) { }
 
-    defaultImage = '../../assets/img/default.png';
+    defaultImage = DEFAULT_IMAGE;
     imageUrl: string = this.defaultImage;
     fileToUpload: File = null;
     passportToUpload: FileList = null;
@@ -33,6 +34,11 @@ export class ImageHandlingService {
     isDiplomaUploaded = false;
     isLicenseUploaded = false;
     succeededUploading = 0;
+
+    resetUploadAvatar() {
+      this.fileToUpload = null;
+      this.imageUrl = DEFAULT_IMAGE;
+    }
 
     handleFileInput(file: FileList) {
       this.imageUrl = this.defaultImage;

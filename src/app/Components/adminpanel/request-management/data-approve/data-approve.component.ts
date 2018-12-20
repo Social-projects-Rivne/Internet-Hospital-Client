@@ -27,7 +27,6 @@ const DEFAULT_AMOUNT_OF_PATIENT_ON_PAGE = 5;
 export class DataApproveComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatSort) sort: MatSort;
 
   hostUrl = HOST_URL;
   usersAmount = 0;
@@ -69,13 +68,16 @@ export class DataApproveComponent implements OnInit {
     this.dialogService.openConfirmDialog('Are you sure to commit this action?')
     .afterClosed().subscribe(res => {
       if (res) {
+        this.isLoadingResults = true;
         this.service.handlePatientToDoctorRequest(id, isApproved)
         .subscribe(() => {
           this.notification.success('User\'s request nave been successfully handled!');
-          // this.deleteById(id); //res['message']
+          this.isLoadingResults = false;
+          // this.deleteById(id);
         },
         error => {
           this.notification.error(error);
+          this.isLoadingResults = false;
         });
       }
     });

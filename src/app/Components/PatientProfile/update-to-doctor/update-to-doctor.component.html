@@ -1,4 +1,4 @@
-<div id="GlobalDiv" fxLayout="row" fxLayoutAlign="center center">
+<div fxLayout="row" fxLayoutAlign="center center">
   <div>
     <mat-card-header>
       <mat-card-title>Update Your profile to Doctor</mat-card-title>
@@ -8,7 +8,8 @@
 
     <form fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="space-evenly center" [formGroup]="service.form"
        class="normal-form form-width" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-      <div fxLayout="row" class="inner-div" fxLayoutGap="20px">
+       <app-loading *ngIf="isLoadingResults"></app-loading>
+       <div fxLayout="row" class="inner-div" fxLayoutGap="20px">
         <div fxLayout="column">
           <div class="controles-row form-fieldStrech">
             <mat-form-field class="mat-form-fieldStrech">

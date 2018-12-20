@@ -15,7 +15,7 @@ import { Specialization } from 'src/app/Models/Specialization';
 export class UpdateToDoctorComponent implements OnInit {
 
   specializations: Specialization[];
-
+  isLoadingResults = false;
   constructor(private service: PatientToDoctorService,
     private notification: NotificationService,
     private imageHandling: ImageHandlingService,
@@ -34,6 +34,7 @@ export class UpdateToDoctorComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoadingResults = true;
     return this.service.updateToDoctor(this.imageHandling.diplomaToUpload, this.imageHandling.licenceToUpload)
     .subscribe(
       data => {
@@ -43,9 +44,11 @@ export class UpdateToDoctorComponent implements OnInit {
           this.service.initializeFormGroup();
           this.imageHandling.isDiplomaUploaded = false;
           this.imageHandling.isLicenseUploaded = false;
+          this.isLoadingResults = false;
         },
         error => {
           this.notification.error(error);
+          this.isLoadingResults = false;
         });
   }
 }
