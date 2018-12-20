@@ -44,6 +44,7 @@ import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illn
 import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 import { PatientInfoProfileComponent } from 'src/app/Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
 import { MyPatientsComponent } from 'src/app/Components/MyPatients/my-patients.component';
+import { WatchPatientInfoGuard } from 'src/app/Services/Guards/watch-patient-info.guard';
 
 const ROUTES: Routes = [
   {
@@ -60,7 +61,7 @@ const ROUTES: Routes = [
       { path: MY_PLANS, component: DoctorPlansComponent, canActivate: [DoctorGuard] },
       { path: FEEDBACKS, component: FeedbacksComponent, canActivate: [AuthGuard] },
       { path: FILL_ILLNESS + '/:id', component: IllnessHistoryComponent, canActivate: [FinishAppointmentGuard] },
-      { path: PATIENT_INFO + '/:id', component: PatientInfoProfileComponent},
+      { path: PATIENT_INFO + '/:id', component: PatientInfoProfileComponent, canActivate: [WatchPatientInfoGuard] },
       { path: MY_PATIENTS, component: MyPatientsComponent, canActivate: [DoctorGuard] },
     ]
   },

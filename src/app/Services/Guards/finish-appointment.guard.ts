@@ -17,9 +17,9 @@ export class FinishAppointmentGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.dateSharing.transferDate.subscribe(date => this.appointmentStart = date);
-
         if (!this.appointmentStart) {
             this.router.navigate([MY_PLANS]);
+            return false;
         }
         const start = this.appointmentStart;
         const now = new Date();

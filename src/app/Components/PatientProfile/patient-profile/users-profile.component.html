@@ -49,7 +49,7 @@
         <div class="patient-history-search-filter" fxFlex="35%">
           <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
         </div>
-        <div class="patient-history" fxLayoutGap="0.5%" fxLayout="column" >
+        <div class="patient-history" fxLayoutGap="5px" fxLayout="column" >
           <div class="history-items" *ngFor="let IllnessHistory of patientService.illnessHistories">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
@@ -63,28 +63,28 @@
                 </div>
               </mat-expansion-panel-header>
               <div fxLayout="column" fxLayoutGap="5px">
-                <div>
+                <div *ngIf="IllnessHistory?.diagnose">
                   Diagnose: {{IllnessHistory.diagnose}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.complaints">
                   Complaints: {{IllnessHistory.complaints}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.diseaseAnamnesis">
                   Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.lifeAnamnesis">
                   Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.objectiveStatus">
                   Objective status: {{IllnessHistory.objectiveStatus}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.localStatus">
                   Local status: {{IllnessHistory.localStatus}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.surveyPlan">
                   Survey plan: {{IllnessHistory.surveyPlan}}
                 </div>
-                <div>
+                <div *ngIf="IllnessHistory?.treatmentPlan">
                   Treatment plan: {{IllnessHistory.treatmentPlan}}
                 </div>
               </div>

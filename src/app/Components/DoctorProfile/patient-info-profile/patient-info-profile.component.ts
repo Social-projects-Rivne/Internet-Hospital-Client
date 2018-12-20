@@ -19,7 +19,7 @@ export class PatientInfoProfileComponent implements OnInit {
   patient: AllowedPatientInfo;
   illnessHistories: IllnessHistory[] = [];
   filter: IllnessHistoryFilter;
-  pageSize = 2;
+  pageSize = 5;
   illnessHistoriesCount = 0;
   isProfileLoading = true;
   isIllnessHistoryLoading = true;
@@ -37,17 +37,10 @@ export class PatientInfoProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.activateRoute.snapshot.params['id'];
-    this.docService.getPatientInfo(this.userId).subscribe((patient) => {
-      this.patient = patient;
-      this.isProfileLoading = false;
-      if (isUndefined(patient.avatarURL) || patient.avatarURL == null) {
-        this.avatarToShow = this.defaultImage;
-      } else {
-        this.avatarToShow = HOST_URL + patient.avatarURL;
-      }
-    });
 
     this.paginator.pageSize = this.pageSize;
+
+    this.getPatientInfo();
 
     this.paginator.page
       .pipe(
@@ -58,7 +51,6 @@ export class PatientInfoProfileComponent implements OnInit {
           return this.docService.getPatientIllnessHistory(this.userId, this.filter);
         })
       ).subscribe(result => {
-        console.log(result);
         this.illnessHistories = result.illnesses;
         this.illnessHistoriesCount = result.amount;
         for (const history of this.illnessHistories) {
@@ -68,6 +60,18 @@ export class PatientInfoProfileComponent implements OnInit {
         this.isIllnessHistoryLoading = false;
       });
     this.paginator.page.emit();
+  }
+
+  getPatientInfo() {
+    this.docService.getPatientInfo(this.userId).subscribe((patient) => {
+      this.patient = patient;
+      this.isProfileLoading = false;
+      if (isUndefined(patient.avatarURL) || patient.avatarURL == null) {
+        this.avatarToShow = this.defaultImage;
+      } else {
+        this.avatarToShow = HOST_URL + patient.avatarURL;
+      }
+    });
   }
 
   onSearch($event) {

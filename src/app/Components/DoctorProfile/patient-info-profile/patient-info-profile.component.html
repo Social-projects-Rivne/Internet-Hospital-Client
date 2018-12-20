@@ -24,47 +24,45 @@
       <div class="patient-history-search-filter" fxFlex="30%">
         <app-illness-history-search-item (search)="onSearch($event)"></app-illness-history-search-item>
       </div>
-      <div class="patient-history" fxFlex>
-        <mat-list>
+      <div class="patient-history" fxLayoutGap="5px" fxLayout="column" >
           <div class="history-items" *ngFor="let IllnessHistory of illnessHistories" fxLayoutGap="0.5%"
             fxLayout="row">
             <mat-expansion-panel fxFlex>
               <mat-expansion-panel-header>
-                <div fxLayout="row">
-                  <mat-list-item>
-                    <div>{{IllnessHistory.finishAppointmentTime | date:"dd/MM/yyyy 'at' h:mma"}}</div>
+                <div fxLayout="row" fxFlex>
+                  <mat-list-item fxFlex>
+                    {{IllnessHistory.finishAppointmentTime | date:"dd/MM/yyyy 'at' h:mma"}}
                   </mat-list-item>
-                  <mat-list-item>
-                    <div>{{IllnessHistory.diagnose}}</div>
+                  <mat-list-item fxFlex>
+                    Diagnose: {{IllnessHistory.diagnose}}
                   </mat-list-item>
                 </div>
               </mat-expansion-panel-header>
               <div fxLayout="column" fxLayoutGap="5px">
-                <div *ngIf="illnessHistory?.complaints">
+                <div *ngIf="IllnessHistory?.complaints">
                   Complaints: {{IllnessHistory.complaints}}
                 </div>                
-                <div *ngIf="illnessHistory?.diseaseAnamnesis">
+                <div *ngIf="IllnessHistory?.diseaseAnamnesis">
                   Disease Anamnesis: {{IllnessHistory.diseaseAnamnesis}}
                 </div>
-                <div *ngIf="illnessHistory?.lifeAnamnesis">
+                <div *ngIf="IllnessHistory?.lifeAnamnesis">
                   Life Anamnesis: {{IllnessHistory.lifeAnamnesis}}
                 </div>
-                <div *ngIf="illnessHistory?.objectiveStatus">
+                <div *ngIf="IllnessHistory?.objectiveStatus">
                   Objective status: {{IllnessHistory.objectiveStatus}}
                 </div>
-                <div *ngIf="illnessHistory?.localStatus">
+                <div *ngIf="IllnessHistory?.localStatus">
                   Local status: {{IllnessHistory.localStatus}}
                 </div>
-                <div *ngIf="illnessHistory?.surveyPlan">
+                <div *ngIf="IllnessHistory?.surveyPlan">
                   Survey plan: {{IllnessHistory.surveyPlan}}
                 </div>
-                <div *ngIf="illnessHistory?.treatmentPlan">
+                <div *ngIf="IllnessHistory?.treatmentPlan">
                   Treatment plan: {{IllnessHistory.treatmentPlan}}
                 </div>
             </div>
             </mat-expansion-panel>
           </div>
-        </mat-list>
       </div>
     </div>
     <mat-paginator [length]="illnessHistoriesCount" [hidePageSize]="true" showFirstLastButtons></mat-paginator>

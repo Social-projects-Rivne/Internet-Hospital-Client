@@ -72,6 +72,8 @@ import { MyPatientsComponent } from './Components/MyPatients/my-patients.compone
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
 import { PreviousRouteService } from './Services/previous-route.service';
+import { PatientIdSharingService } from './Services/patient-id-sharing.service';
+import { WatchPatientInfoGuard } from './Services/Guards/watch-patient-info.guard';
 
 @NgModule({
   declarations: [
@@ -145,7 +147,7 @@ import { PreviousRouteService } from './Services/previous-route.service';
   ],
   exports: [MaterialModule],
   // tslint:disable-next-line:max-line-length
-  providers: [AuthenticationService, PreviousRouteService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
+  providers: [AuthenticationService, PatientIdSharingService, WatchPatientInfoGuard, PreviousRouteService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
