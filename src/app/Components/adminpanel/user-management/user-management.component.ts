@@ -7,6 +7,10 @@ import { UserListFilter } from 'src/app/Models/UserListFilter';
 import { PaginationService } from 'src/app/Services/pagination.service';
 import { EventEmitter } from 'events';
 import { UserStatus } from 'src/app/Models/UserStatus';
+import { FilteredResults } from 'src/app/Models/FilteredResults';
+import { merge, of as observableOf } from 'rxjs';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { DEFAULT_AMOUNT_OF_PATIENTS_ON_PAGE } from '../../MyPatients/active-patients/active-patients.component';
 
 @Component({
   selector: 'app-user-management',
@@ -16,85 +20,115 @@ import { UserStatus } from 'src/app/Models/UserStatus';
 
 export class UserManagementComponent implements OnInit {
 
+
+
+  displayedColumns = ['select', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
+  dataSource: UserListModel[] = [];
+  isLoadingResults = true;
+  includeAll = false;
+  amountOfUsers = 0;
+  pageSizeOptions = [5, 10, 15, 20, 30, 50];
+  search = '';
+  selectedStatus = '';
+  selected = [];
+  description = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  content: FilteredResults<UserListModel> = new FilteredResults<UserListModel>();
 
-  public dataSource: MatTableDataSource<UserListModel>;
-  public statuses: UserStatus;
-  private filter: UserListFilter;
-  public searchInput = '';
-  public selectedStatus = 0;
-  usersAmount: number;
+  statuses: UserStatus;
+  // filter: UserListFilter;
+  // searchInput = '';
+  // usersAmount: number;
 
-  isLoadingResults = true;
 
-  displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
 
-  constructor(
-    private _userListService: UserListService,
-    private _notificationService: NotificationService,
-    private _paginationService: PaginationService,
-  ) {
-    this.filter = new UserListFilter();
+  constructor(private service: UserListService,
+              private _notificationService: NotificationService,
+              private _paginationService: PaginationService) {
   }
 
   ngOnInit() {
-    this._userListService.getUserList().subscribe((result: any) => {
-      result.users.sort((x1, x2) => x1.id - x2.id);
-      this.dataSource = this._userListService.StatusConverter(result.users);
-      this.usersAmount = result.count;
-      this.isLoadingResults = false;
-      if (this.usersAmount === 0) {
-        this._notificationService.error('There is no users for this request');
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.paginator.pageSize = DEFAULT_AMOUNT_OF_PATIENTS_ON_PAGE;
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.service.getUserList(
+            this.sort.active,
+            this.sort.direction,
+            this.search,
+            this.paginator.pageIndex,
+            this.includeAll,
+            this.paginator.pageSize,
+            this.selectedStatus);
+        }),
+        map((data: any) => {
+          this.isLoadingResults = false;
+          this.amountOfUsers = data.amount;
+          return data.results;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      ).subscribe(data => this.dataSource = data);
+      this.service.getStatuses().subscribe((result: any) => {
+        this.statuses = result;
+        console.log(this.statuses);
+      },
+      error => {
+        this._notificationService.error(error);
+      });
+  }
+
+  // onSearch() {
+  //   this.filter.searchKey = this.searchInput;
+  //   this.filter.selectedStatus = this.selectedStatus;
+
+  //   this.paginator.firstPage();
+  //   const event = new PageEvent();
+  //   event.pageSize = this._paginationService.userPageSize;
+  //   event.pageIndex = this._paginationService.pageIndex - 1;
+  //   event.length = this.usersAmount;
+
+  //   this.pageSwitch(event);
+  // }
+
+  // onClear() {
+  //   this.searchInput = '';
+  //   this.selectedStatus = 0;
+  //   this.ngOnInit();
+  // }
+
+  // pageSwitch(event: PageEvent) {
+  //   this._paginationService.change(event);
+  //   this.isLoadingResults = true;
+  //   this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
+  //     result.users.sort((x1, x2) => x1.id - x2.id);
+  //     this.dataSource = this._userListService.StatusConverter(result.users);
+  //     this.usersAmount = result.count;
+  //     this.isLoadingResults = false;
+  //     if (this.usersAmount === 0) {
+  //       this._notificationService.error('There is no users for this request');
+  //     }
+  //   },
+  //     error => {
+  //       this._notificationService.error(error);
+  //     });
+  //   window.scroll(0, 0);
+  // }
+
+  select(event, id) {
+    const index = this.selected.indexOf(id);
+    if (event.checked) {
+      if (index === -1) {
+        this.selected.push(id);
       }
-    },
-      error => {
-        this._notificationService.error(error);
-      });
-
-    this._userListService.getStatuses().subscribe((result: any) => {
-      this.statuses = result;
-    },
-      error => {
-        this._notificationService.error(error);
-      });
+    } else if (index !== -1) {
+      this.selected.splice(index, 1);
+    }
   }
-
-  onSearch() {
-    this.filter.searchKey = this.searchInput;
-    this.filter.selectedStatus = this.selectedStatus;
-
-    this.paginator.firstPage();
-    const event = new PageEvent();
-    event.pageSize = this._paginationService.userPageSize;
-    event.pageIndex = this._paginationService.pageIndex - 1;
-    event.length = this.usersAmount;
-
-    this.pageSwitch(event);
-  }
-
-  onClear() {
-    this.searchInput = '';
-    this.selectedStatus = 0;
-    this.ngOnInit();
-  }
-
-  pageSwitch(event: PageEvent) {
-    this._paginationService.change(event);
-    this.isLoadingResults = true;
-    this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
-      result.users.sort((x1, x2) => x1.id - x2.id);
-      this.dataSource = this._userListService.StatusConverter(result.users);
-      this.usersAmount = result.count;
-      this.isLoadingResults = false;
-      if (this.usersAmount === 0) {
-        this._notificationService.error('There is no users for this request');
-      }
-    },
-      error => {
-        this._notificationService.error(error);
-      });
-    window.scroll(0, 0);
-  }
-
 }
