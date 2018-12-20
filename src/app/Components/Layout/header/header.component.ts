@@ -13,8 +13,8 @@ import { MessageService } from 'src/app/Services/message.service';
 export class HeaderComponent implements OnInit {
   @ViewChild('panel', { read: ElementRef }) public panel: ElementRef<any>;
   constructor(private authenticationService: AuthenticationService,
-    private storage: LocalStorageService,
-    private messageService: MessageService) { }
+              private storage: LocalStorageService,
+              private messageService: MessageService) { }
 
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
