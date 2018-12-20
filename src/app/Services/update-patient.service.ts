@@ -17,6 +17,7 @@ export class UpdatePatientService {
   avatarUpdateUrl = HOST_URL + PATIENT_UPDATE_AVATAR;
   getProfileUrl = HOST_URL + API_PATIENT;
   patient: Patient;
+  birthday = '';
 
   constructor(private http: HttpClient) { }
   form: FormGroup = new FormGroup({
@@ -40,13 +41,16 @@ export class UpdatePatientService {
   }
 
   setCurrentProfile() {
-    const correctDate = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
+    if (this.patient.birthDate != null) {
+      this.birthday = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
+    }
+
     this.form.setValue({
       PhoneNumber: this.patient.phoneNumber,
       FirstName: this.patient.firstName,
       SecondName: this.patient.secondName,
       ThirdName: this.patient.thirdName,
-      BirthDate: correctDate,
+      BirthDate: this.birthday,
       PassportURL: '',
     });
   }

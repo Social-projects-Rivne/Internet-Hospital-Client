@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { CreatingModerator } from '../../../Models/CreatingModerator';
-import { HOST_URL } from '../../../config';
+import { HOST_URL, GET_PATIENT_TO_DOCTOR_REQUESTS,
+                   HANDLE_PATIENT_TO_DOCTOR_REQUEST } from '../../../config';
 import { Observable } from 'rxjs';
 import { ModeratorsData } from '../../../Models/ModeratorsData';
+import { PatientToDoctorList } from '../../../Models/PatientToDoctorList';
 
 const PAGE = 'page';
 const PAGE_SIZE = 'pageSize';
+const PAGE_INDEX = 'pageIndex';
 const SEARCH_BY_NAME = 'searchByName';
 const INCLUDE_ALL = 'includeAll';
 const SORT = 'sort';
@@ -53,5 +56,16 @@ export class ModeratorService {
 
   deleteModerators(ids: number[]) {
     return this.http.delete(`${this.url}/?ids=${ids.join('&ids=')}`);
+  }
+
+  getPatientBecomeDoctorRequests(pageIndex: number, pageSize: number): Observable<PatientToDoctorList> {
+    const url = `${HOST_URL}/${GET_PATIENT_TO_DOCTOR_REQUESTS}`
+      + `?${PAGE_INDEX}=${pageIndex + 1}&${PAGE_SIZE}=${pageSize}`;
+    return this.http.get<PatientToDoctorList>(url, this.httpOptions);
+  }
+
+  handlePatientToDoctorRequest(idUser: number, isApprovedUser: boolean) {
+    const url = `${HOST_URL}/${HANDLE_PATIENT_TO_DOCTOR_REQUEST}`;
+    return this.http.post(url, { id: idUser, isApproved: isApprovedUser }, this.httpOptions);
   }
 }

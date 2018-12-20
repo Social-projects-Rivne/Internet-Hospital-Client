@@ -70,8 +70,9 @@ import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/pre
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
-import { SharedModule } from './Modules/shared/shared.module';
+import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
+import { SharedModule } from './Modules/shared/shared.module';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
@@ -115,6 +116,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     MyPatientsComponent,
     BlackListComponent,
     ActivePatientsComponent,
+    UpdateToDoctorComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
