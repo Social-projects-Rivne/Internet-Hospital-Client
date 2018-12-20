@@ -8,9 +8,15 @@ import { stringify } from '@angular/core/src/render3/util';
 import { filterQueryId } from '@angular/core/src/view/util';
 import { PaginationService } from '../pagination.service';
 import { PageEvent } from '@angular/material';
+import { Observable } from 'rxjs';
 
-const SEARCH_NAME = 'SearchByName';
-const SEARCH_STATUS = 'SearchByStatus';
+const INCLUDE_ALL = 'includeAll';
+const PAGE = 'page';
+const PAGE_SIZE = 'pageSize';
+const SEARCH_BY_NAME = 'searchByName';
+const SORT = 'sort';
+const ORDER_BY = 'order';
+const SELECTED_STATUS = 'selectedStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -30,21 +36,47 @@ export class UserListService {
 
   constructor(private http: HttpClient, private _paginationService: PaginationService) { }
 
-  getUserList(filter?: UserListFilter, event?: PageEvent) {
-    let typeUrl = this.url + 'getparams';
-    this.httpOptions.params =
-    this.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
-
-    if (filter != null) {
-        if (filter.searchKey !== undefined && filter.searchKey !== '') {
-          typeUrl += `?${SEARCH_NAME}=${filter.searchKey}&`;
-        }
-        if (filter.selectedStatus !== 0 && filter.selectedStatus !== undefined) {
-          typeUrl += `?${SEARCH_STATUS}=${filter.selectedStatus}`;
-        }
+  getUserList(sort: string,
+    order: string,
+    searchByName: string,
+    page: number,
+    includeAll: boolean,
+    pageSize: number,
+    selectedStatus: string): Observable<any> {
+    let url = this.url + `?${PAGE}=${page + 1}&`
+      + `${PAGE_SIZE}=${pageSize}&`
+      + `${INCLUDE_ALL}=${includeAll}&`;
+    if (searchByName) {
+      url += `${SEARCH_BY_NAME}=${searchByName}&`;
     }
-    return this.http.get(typeUrl, this.httpOptions);
+    if (order) {
+      url += `${ORDER_BY}=${order}&`;
+    }
+    if (sort) {
+      url += `${SORT}=${sort}`;
+    }
+    if (selectedStatus) {
+      url += `${SELECTED_STATUS}=${selectedStatus}`;
+    }
+    return this.http.get<any>(url, this.httpOptions);
   }
+
+  // getUserList(filter?: UserListFilter, event?: PageEvent) {
+  //   let typeUrl = this.url + 'getparams';
+  //   this.httpOptions.params =
+  //   this.httpOptions.params.set('page', this._paginationService.pageIndex.toString());
+
+  //   if (filter != null) {
+  //       if (filter.searchKey !== undefined && filter.searchKey !== '') {
+  //         typeUrl += `?${SEARCH_NAME}=${filter.searchKey}&`;
+  //       }
+  //       if (filter.selectedStatus !== 0 && filter.selectedStatus !== undefined) {
+  //         typeUrl += `?${SEARCH_STATUS}=${filter.selectedStatus}`;
+  //       }
+  //   }
+  //   return this.http.get(typeUrl, this.httpOptions);
+  // }
+
   getStatuses() {
     const typeUrl = this.url + 'getstatuses';
     return this.http.get(typeUrl, this.httpOptions);

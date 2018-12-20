@@ -7,6 +7,6 @@ export class UserListModel {
     avatarURL: string;
     birthDate: string;
     statusId: number;
-    statusName?: string;
+    status?: string;
     statusDescription?: string;
 }

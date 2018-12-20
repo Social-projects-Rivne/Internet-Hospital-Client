@@ -18,7 +18,7 @@ mat-card {
 .mat-card-content {
   margin-bottom: 0;
   padding-left: 5px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   word-wrap: break-word;
 }
 
@@ -38,4 +38,14 @@ mat-card {
   background-size: cover;
   background-position: center center;
   vertical-align: middle;
+  position: relative;
+}
+
+.mat-card-title{
+  font-size: 24px;
+}
+
+.mat-card-title, .mat-card-subtitle {
+  text-align: center;
+  line-height: normal;
 }
