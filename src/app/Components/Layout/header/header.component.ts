@@ -88,4 +88,18 @@ export class HeaderComponent implements OnInit {
       item.isRead = !item.isRead;
     });
   }
+
+  checkAll() {
+    this.load = true;
+    this.messageService.checkAllNotifications()
+    .subscribe(() => {
+      this.notifications.forEach(item => {
+        item.isRead = true;
+      });
+      this.load = false;
+    },
+    () => {
+      this.load = false;
+    });
+  }
 }

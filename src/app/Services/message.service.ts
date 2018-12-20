@@ -46,6 +46,10 @@ export class MessageService {
         return this.http.patch(HOST_URL + NOTIFICATIONS_CHANGE, id);
     }
 
+    checkAllNotifications() {
+        return this.http.post(HOST_URL + '/api/notification/checkall', {});
+    }
+
     /* SignalR settings */
     private createConnection() {
         this.hubConnection = new HubConnectionBuilder()
