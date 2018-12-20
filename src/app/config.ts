@@ -48,6 +48,7 @@ export const LOAD_PAGES = 5;
 export const HUB_CONNECTION = '/notifications';
 export const NOTIFICATIONS_GET = '/api/notification';
 export const NOTIFICATIONS_CHANGE = '/api/notification/change';
+export const NOTIFICATIONS_CHACK_ALL = '/api/notification/checkall';
 export const NOTIFICATION_NOTIFY = 'Notify';
 export const NOTIFICATION_ONLOAD = 'OnLoad';
 

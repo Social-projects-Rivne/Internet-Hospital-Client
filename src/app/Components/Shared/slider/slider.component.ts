@@ -1,14 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ShortContentWithEditors } from 'src/app/Models/Content/ShortContentWithEditors';
-import { HOST_URL } from 'src/app/config';
 
 const SLIDE_TIME_IN_MSC = 10000;
 
 @Component({
-  selector: 'app-home-news-item',
-  templateUrl: './home-news-item.component.html',
-  styleUrls: ['./home-news-item.component.scss'],
+  selector: 'app-slider',
+  templateUrl: './slider.component.html',
+  styleUrls: ['./slider.component.scss'],
   animations: [
     trigger('imageDisplay', [
       state('displayed', style({opacity: '1'})),
@@ -16,34 +14,24 @@ const SLIDE_TIME_IN_MSC = 10000;
       transition('displayed <=> hidden', animate('1000ms cubic-bezier(0.74, 0.97, 0.91, 1)')),
     ]),
   ],
-
 })
-
-export class HomeNewsItemComponent implements OnInit {
-
-  imageUrls = [];
+export class SliderComponent implements OnInit {
+  @Input() images: string[] = [];
+  @Input() slideDelayTime = SLIDE_TIME_IN_MSC;
   slideIndex = 0;
   timer = 0;
-  @Input() content: ShortContentWithEditors;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.content.previewImageUrls.forEach(item => {
-      this.imageUrls.push(HOST_URL + item);
-    });
-    this.setPlay();
-  }
+  constructor() {}
 
   setPlay() {
     this.timer = window.setTimeout(() => {
       this.nextImg();
-    }, SLIDE_TIME_IN_MSC);
+    }, this.slideDelayTime);
   }
 
   nextImg() {
     window.clearTimeout(this.timer);
-    if (this.slideIndex < this.imageUrls.length - 1) {
+    if (this.slideIndex < this.images.length - 1) {
       this.slideIndex++;
     } else {
       this.slideIndex = 0;
@@ -56,8 +44,12 @@ export class HomeNewsItemComponent implements OnInit {
     if (this.slideIndex !== 0) {
       this.slideIndex--;
     } else {
-      this.slideIndex = this.imageUrls.length - 1;
+      this.slideIndex = this.images.length - 1;
     }
+    this.setPlay();
+  }
+
+  ngOnInit() {
     this.setPlay();
   }
 }

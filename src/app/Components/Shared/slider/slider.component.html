@@ -1,0 +1,13 @@
+<div class="images-container">
+  <div class="image-wrap"></div>
+  <div class="image-container">
+    <img *ngFor="let img of images; let i = index" src="{{img}}" 
+      [@imageDisplay]="i === slideIndex ? 'displayed' : 'hidden'">
+  </div>
+  <button class="left-button" mat-button (click)="prevImg()">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button class="right-button" mat-button (click)="nextImg()">
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
