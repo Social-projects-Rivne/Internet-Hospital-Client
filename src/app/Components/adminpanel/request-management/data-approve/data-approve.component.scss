@@ -1,0 +1,130 @@
+.feedback-card{
+    width: 80%;
+    min-width: 300px;
+    margin: 10px;
+    flex-wrap:  wrap;
+    align-content: flex-start;
+}
+.padding-left {
+  padding-left: 8px;
+}
+.padding-t-b {
+  padding-top: 5px 0;
+}
+.username{
+    line-height: 10px;
+    font-size: 30px;
+}
+.else-info{
+    font-size: 15px;
+}
+.margin-ten{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.margin-ten-full{
+  margin: 5px;
+}
+.status-buttons{
+    margin-left: -25px;
+}
+.minwidth{
+     min-width: 150px;
+}
+#navigate-div{
+    margin-top: 10px;
+}
+#component-box{
+    width: 100%;
+}
+#maintextbox{
+    text-align: justify;
+}
+.doc-pic{
+  width: 230px;
+  height: 230px;
+  border-radius: 5%;
+  // background-image: url('https://localhost:44357/Images/Frank.Deckow83@hotmail.com/Diploma/18.12.2018 17-26-51/8ac7eebd-3afc-4786-a5af-3915e803a5ae_1.jpg');
+  background-clip: padding-box;
+  margin: 7px 0 0 5px;
+  float: left;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  // vertical-align: middle;
+}
+
+.user-avatar {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background-repeat: no-repeat;
+  width: 110px;
+  height: 110px;
+  background-clip: padding-box;
+  border-radius: 110px;
+  background-size: cover;
+  background-position: center center;
+  vertical-align: middle;
+}
+
+table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: #f5f5f5;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+    padding-top: 5px;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    padding: 16px;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
