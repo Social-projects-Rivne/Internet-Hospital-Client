@@ -70,6 +70,7 @@ import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/pre
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
+import { SharedModule } from './Modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
   imports: [
+    SharedModule,
     BrowserModule,
     MaterialModule,
     FormsModule,

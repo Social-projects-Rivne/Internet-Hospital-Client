@@ -37,15 +37,16 @@
     </div>
     <button color="primary" mat-raised-button (click)="paginator.pageIndex=0; paginator.page.emit()">FILTER</button>
   </mat-expansion-panel>
-  <div fxLayout='row wrap' fxLayout.xs='column wrap' fxLayoutGap="15px grid">
+  <div>
     <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
       <div class="rate-limit-reached" *ngIf="isRateLimitReached">
         InternetHospital's API rate limit has been reached. It will be reset in one minute.
       </div>
     </div>
-    <div fxFlex.xs="100" fxFlex="50" fxFlex.lg="33.3" fxFlex.xl="20" *ngFor="let cont of content.data;">
-      <app-content-item fxFlexFill fxLayoutAlign="center stretch" [content]="cont" (changed)="onChange(cont)" (deleted)="onDelete(cont)">
+    <div class="contents-container">
+      <app-content-item class="content-item" *ngFor="let cont of content.data;" 
+        [content]="cont" (changed)="onChange(cont)" (deleted)="onDelete(cont)">
       </app-content-item>
     </div>
   </div>
