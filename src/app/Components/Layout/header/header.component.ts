@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
 import { HOST_URL, LOAD_PAGES } from '../../../config';
@@ -11,10 +11,10 @@ import { MessageService } from 'src/app/Services/message.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @ViewChild('panel', { read: ElementRef }) public panel: ElementRef<any>;
   constructor(private authenticationService: AuthenticationService,
-              private storage: LocalStorageService,
-              private messageService: MessageService) { }
+    private storage: LocalStorageService,
+    private messageService: MessageService) { }
 
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
@@ -52,22 +52,25 @@ export class HeaderComponent implements OnInit {
   }
 
   menuOpened() {
+    this.page = 1;
+    this.notifications = [];
+    this.endofload = false;
     this.getItems();
   }
 
   menuClosed() {
-    this.page = 1;
-    this.notifications = [];
-    this.endofload = false;
+    if (this.page === 2) {
+      this.panel.nativeElement.scrollTop += 8000;
+    }
   }
 
   addItems(res) {
-      res.entities.forEach(item => {
-        this.notifications.push(item);
-      });
-      if (res.entityAmount === LOAD_PAGES && this.page === 2) {
-        this.endofload = true;
-      }
+    res.entities.forEach(item => {
+      this.notifications.push(item);
+    });
+    if (res.entityAmount === LOAD_PAGES && this.page === 2) {
+      this.endofload = true;
+    }
   }
 
   getItems() {
@@ -77,29 +80,29 @@ export class HeaderComponent implements OnInit {
         this.addItems(data);
         this.load = false;
       },
-      () => {
-        this.load = false;
-      });
+        () => {
+          this.load = false;
+        });
   }
 
   changeStatus(item: any) {
     this.messageService.changeStatus(item.id)
-    .subscribe(() => {
-      item.isRead = !item.isRead;
-    });
+      .subscribe(() => {
+        item.isRead = !item.isRead;
+      });
   }
 
   checkAll() {
     this.load = true;
     this.messageService.checkAllNotifications()
-    .subscribe(() => {
-      this.notifications.forEach(item => {
-        item.isRead = true;
-      });
-      this.load = false;
-    },
-    () => {
-      this.load = false;
-    });
+      .subscribe(() => {
+        this.notifications.forEach(item => {
+          item.isRead = true;
+        });
+        this.load = false;
+      },
+        () => {
+          this.load = false;
+        });
   }
 }
