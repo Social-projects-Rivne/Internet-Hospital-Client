@@ -14,29 +14,26 @@
           <div class="content-date">{{content.dateOfCreation | date}}</div>
           <div class="content-author" color="primary">{{content.author}}</div>
         </div>
-      {{content.title}}
+        {{content.title}}
       </div>
     </div>
     <p class="types"><strong>{{content.types.join(', ')}} </strong></p>
   </mat-card-header>
-  <div id="slideshow-container">
-    <slideshow [imageUrls]="imgs" [height]="height + 'px'" 
-      [stopAutoPlayOnSlide]="false" [autoPlay]="true" [autoPlayInterval]="2000"></slideshow>
-  </div>
+  <app-slider [images]="content.previewImageUrls"></app-slider>
   <mat-card-content>
     <p>
       {{content.shortDescription}}
     </p>
     <mat-expansion-panel *ngIf="content.editions.length > 0">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            History of editions
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="edition-block" *ngFor="let edition of content.editions">
-          <div class="edition-author">{{edition.author}}</div>
-          <div class="edition-date">{{edition.dateOfEdit | date}}</div>
-        </div>
-      </mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          History of editions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="edition-block" *ngFor="let edition of content.editions">
+        <div class="edition-author">{{edition.author}}</div>
+        <div class="edition-date">{{edition.dateOfEdit | date}}</div>
+      </div>
+    </mat-expansion-panel>
   </mat-card-content>
 </mat-card>
