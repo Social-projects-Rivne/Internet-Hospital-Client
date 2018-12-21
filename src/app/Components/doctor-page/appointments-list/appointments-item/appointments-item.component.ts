@@ -15,6 +15,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 export class AppointmentsItemComponent implements OnInit {
   @Input()
   appointment: Appointment;
+  isAllow = false;
   isPatient: Observable<boolean>;
 
   constructor(private service: DoctorplansService,
@@ -30,7 +31,7 @@ export class AppointmentsItemComponent implements OnInit {
 
   onSubscribeToAppointment() {
     this.load = true;
-    this.service.subscribePatientToAppointment(this.appointment.id)
+    this.service.subscribePatientToAppointment(this.appointment.id, this.isAllow)
     .subscribe(() => {
       this.load = false;
       this.router.navigate([USERS_PROFILE]);

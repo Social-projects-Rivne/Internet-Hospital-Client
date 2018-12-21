@@ -1,5 +1,5 @@
 <div id="FatherDiv" fxLayoutAlign="center">
-  <form id="FatherForm" [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="Column" fxLayoutAlign="center center">
+  <form id="FatherForm" [formGroup]="form" fxLayout="Column" fxLayoutAlign="center center">
     <mat-card-title>Please, fill all required info</mat-card-title>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -52,8 +52,8 @@
       </mat-card-content>
     </mat-expansion-panel>
     <section>
-      <button id="CancelButton" mat-raised-button color="warn" (click)="onCancel()" mat-raised-button>Cancel</button>
-      <button id="ConfirmButton" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Confirm</button>
+      <button id="CancelButton" type="button" mat-raised-button color="warn" (click)="onCancel()" mat-raised-button>Cancel</button>
+      <button id="ConfirmButton" type="submit" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Confirm</button>
     </section>
   </form>
   <app-loading *ngIf="load"></app-loading>

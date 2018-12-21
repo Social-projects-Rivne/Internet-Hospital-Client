@@ -1,0 +1,29 @@
+.profile {
+    min-height: 100%;
+    margin-left: 3%;
+    margin-right: 10%; 
+    font-size: 16;
+    .settings-expanded-item {
+        margin-top: 5%;
+    }
+    .profile-menu {
+        margin-top: 5%;
+    }
+    .profile-top {
+            .patient-photo {
+                img {
+                    height: 200px;
+                    width: 200px;
+                    border-radius: 50%;
+                }
+            }
+        
+        .patient-name {
+            font-size: 30px;
+            line-height: normal;
+        }
+    }
+}
+.patient-history{
+    width: 100%;
+}

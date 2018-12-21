@@ -1,0 +1,41 @@
+<div>
+  <mat-expansion-panel fxFlex>
+    <mat-expansion-panel-header>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+        <div fxFlex="25%">{{appointment.userFirstName}} {{appointment.userSecondName}}</div>
+        <div fxFlex="25%">{{appointment.status}}</div>
+        <div fxFlex="25%">{{appointment.startTime | date:'dd/MM HH:mm'}}</div>
+        <div fxFlex="25%">{{appointment.endTime | date:'dd/MM HH:mm'}}</div>
+      </div>
+    </mat-expansion-panel-header>
+    <div *ngIf="appointment.status == 'Reserved'" id="ButtonsHolder" fxFlex>
+      <button mat-button color="Primary" (click)="onWatchInfo()" [disabled]="!appointment.isAllowPatientInfo">
+        Watch Patient Info
+      </button>
+      <button mat-button color="Primary" (click)="onFinish()">Finish Appointment</button>
+    </div>
+    <div fxLayout="column" fxLayoutGap="5px">
+      <div *ngIf="appointment.illnessHistory?.complaints">
+        Complaints: {{appointment.illnessHistory.complaints}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.diseaseAnamnesis">
+        Disease Anamnesis: {{appointment.illnessHistory.diseaseAnamnesis}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.lifeAnamnesis">
+        Life Anamnesis: {{appointment.illnessHistory.lifeAnamnesis}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.objectiveStatus">
+        Objective status: {{appointment.illnessHistory.objectiveStatus}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.localStatus">
+        Local status: {{appointment.illnessHistory.localStatus}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.surveyPlan">
+        Survey plan: {{appointment.illnessHistory.surveyPlan}}
+      </div>
+      <div *ngIf="appointment.illnessHistory?.treatmentPlan">
+        Treatment plan: {{appointment.illnessHistory.treatmentPlan}}
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>

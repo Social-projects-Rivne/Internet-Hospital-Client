@@ -1,0 +1,18 @@
+mat-expansion-panel {
+    margin-bottom: 5px;
+}
+
+#ButtonsHolder {
+    :first-child {
+        float: left;
+    }
+
+    :last-child {
+        float: right;
+    }
+
+    &::after {
+        display: table;
+        clear: both;
+    }
+}

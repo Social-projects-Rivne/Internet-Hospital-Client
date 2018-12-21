@@ -3,11 +3,17 @@
   <input matInput [(ngModel)]="filter.fromDate" [matDatepickerFilter]="startDateFilter" [matDatepicker]="fromPicker" placeholder="From" (dateChange)="beginDate($event)">
   <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
   <mat-datepicker #fromPicker startView="month" [startAt]="startDate"></mat-datepicker>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.fromDate" (click)="onFromClear()">
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-form-field>
 <mat-form-field>
   <input matInput [(ngModel)]="filter.toDate" [matDatepickerFilter]="dateFilter" [matDatepicker]="toPicker" placeholder="To" (dateChange)="finishDate($event)">
   <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
   <mat-datepicker #toPicker startView="month" [startAt]="endDate"></mat-datepicker>
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filter.toDate" (click)="onTillClear()">
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-form-field>
 </div>
 <br>

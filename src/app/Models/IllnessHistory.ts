@@ -1,13 +1,13 @@
 export class IllnessHistory {
-    appointmentId: Number;
-    complaints: String;
-    diseaseAnamnesis: String;
-    lifeAnamnesis: String;
-    objectiveStatus: String;
-    localStatus: String;
-    diagnose: String;
-    surveyPlan: String;
-    treatmentPlan: String;
+    appointmentId: number;
+    complaints: string;
+    diseaseAnamnesis: string;
+    lifeAnamnesis: string;
+    objectiveStatus: string;
+    localStatus: string;
+    diagnose: string;
+    surveyPlan: string;
+    treatmentPlan: string;
     finishAppointmentTime: Date;
     finishAppointmentTimeStamp: number;
     doctorName: string;

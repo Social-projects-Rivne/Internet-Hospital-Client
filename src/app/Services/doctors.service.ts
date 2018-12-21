@@ -6,9 +6,10 @@ import { Specialization } from '../Models/Specialization';
 import { FormGroup } from '@angular/forms';
 import { IllnessHistory } from '../Models/IllnessHistory';
 import { DatePipe } from '@angular/common';
+import { DoctorAppointmentFilter } from '../Models/DoctorAppointmentFilter';
+import { AllowedPatientInfo } from '../Models/AllowedPatientInfo';
+import { IllnessHistoryFilter } from '../Models/IllnessHistoryFilter';
 import { Observable } from 'rxjs';
-import { PreviousAppointment } from '../Models/PreviousAppointment';
-import { PreviousAppointmentFilter } from '../Models/PreviousAppointmentFilter';
 
 const searchbyname = 'searchbyname';
 const searchbyspecialization = 'searchbyspecialization';
@@ -78,25 +79,18 @@ export class DoctorsService {
     return this.http.get<Specialization[]>(specUrl);
   }
 
-  getPreviousAppointment(filter: PreviousAppointmentFilter) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      params: new HttpParams()
-    };
-    let url = this.url + '/previousappointments';
-
-    if (filter) {
-      url += filter.getUrl();
-    }
-
-    return this.http.get<any>(url, httpOptions);
+  getPatientInfo(userId: number) {
+    const specUrl = this.url + `/getpatientinfo/?userId=${userId}`;
+    return this.http.get<AllowedPatientInfo>(specUrl);
   }
 
-  getAppointmentStatuses() {
-    const specUrl = this.url + '/appointmentstatuses';
-    return this.http.get<string[]>(specUrl);
+  getPatientIllnessHistory(userId: number, filter: IllnessHistoryFilter) {
+    let specUrl = this.url + `/getpatientillnesshistory`;
+    if (filter) {
+      specUrl += filter.getUrl();
+    }
+    specUrl += `&userId=${userId}`;
+    return this.http.get<any>(specUrl);
   }
 
   fillIllness(form: FormGroup, appointmentId: number) {
