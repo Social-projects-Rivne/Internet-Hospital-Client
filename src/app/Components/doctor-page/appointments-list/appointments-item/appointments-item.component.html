@@ -8,7 +8,7 @@
         </mat-card-content>
 
 
-        <mat-checkbox fxFlex="25%" color="primary" [(ngModel)]="isAllow">
+        <mat-checkbox fxFlex="25%" *ngIf="(isPatient | async)" color="primary" [(ngModel)]="isAllow">
             <i class="far fa-question-circle" matTooltip="Allow doctor to see your illness history">Allow info?</i>
         </mat-checkbox>
 
