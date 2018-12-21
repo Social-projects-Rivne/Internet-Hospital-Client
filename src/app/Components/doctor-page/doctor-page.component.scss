@@ -39,7 +39,6 @@
   .doctor-rating {
     vertical-align: bottom;
     text-align: center;
-    height: 100%;
 
     .marks {
       display: inline-block;
@@ -65,6 +64,7 @@
 .additional-info {
   vertical-align: top;
   margin-top: 10px;
+  margin-bottom: 10px;
 
   p {
     text-align: justify;
@@ -77,9 +77,3 @@
   display: block;
 }
 
-.feedback-item {
-  display: inline-block;
-  text-align: center;
-  vertical-align: top;
-  width: 100%;
-}
