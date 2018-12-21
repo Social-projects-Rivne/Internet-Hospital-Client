@@ -78,7 +78,7 @@ export class FeedBackService {
 
   sendSignal(feedbackModel?: FeedbackViewModel) {
     const Sendurl = HOST_URL + '/api/notification/send';
-    return this.http.post(Sendurl, {Recepient: feedbackModel.userId, Message: feedbackModel.reply}).subscribe();
+    return this.http.post(Sendurl, {Recepient: feedbackModel.userId, Message: 'Moderator: ' + feedbackModel.reply}).subscribe();
   }
   defaultSignal(userId: number, text: string) {
     const Sendurl = HOST_URL + '/api/notification/send';
