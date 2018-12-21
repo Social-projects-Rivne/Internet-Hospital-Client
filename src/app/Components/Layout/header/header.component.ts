@@ -90,6 +90,7 @@ export class HeaderComponent implements OnInit {
 
   addItems(res) {
     res.entities.forEach(item => {
+      item.date = new Date(item.date.toLocaleString() + 'Z');
       this.notifications.push(item);
     });
     if (res.entityAmount === LOAD_PAGES && this.page === 2) {
