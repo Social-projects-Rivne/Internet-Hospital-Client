@@ -2,15 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModeratorService } from '../../Services/moderator.service';
 import { PatientToDoctorModel } from '../../../../Models/PatientToDoctorModel';
 import { PatientToDoctorList } from '../../../../Models/PatientToDoctorList';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 import { DialogService } from 'src/app/Services/dialog.service';
 import { HOST_URL} from '../../../../config';
 import { NotificationService } from '../../../../Services/notification.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { ImageModalComponent } from './image-modal/image-modal.component';
 
 const DEFAULT_AMOUNT_OF_PATIENT_ON_PAGE = 5;
 
@@ -78,12 +76,6 @@ export class DataApproveComponent implements OnInit {
           this.isLoadingResults = false;
         });
       }
-    });
-  }
-
-  openImageDialog(imagePath: string): void {
-    const dialogRef = this.dialog.open(ImageModalComponent, {
-      data: { image: imagePath }
     });
   }
 }

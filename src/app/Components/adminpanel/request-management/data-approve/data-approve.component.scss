@@ -40,12 +40,9 @@
 #maintextbox{
     text-align: justify;
 }
-#expanded-box{
-  padding: 20px;
-}
 .doc-pic{
-  max-width: 230px;
-  max-height: 230px;
+  width: 230px;
+  height: 230px;
   border-radius: 5%;
   background-clip: padding-box;
   margin: 7px 0 0 5px;
@@ -55,10 +52,7 @@
   background-repeat: no-repeat;
   vertical-align: middle;
 }
-img:hover {
-  cursor: pointer;
-  opacity: 0.5;
-}
+
 .user-avatar {
   border: 1px solid rgba(0, 0, 0, 0.4);
   background-repeat: no-repeat;
