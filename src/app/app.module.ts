@@ -7,6 +7,7 @@ import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.mod
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ReplyDialogComponent } from './Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
@@ -114,7 +115,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     ActivePatientsComponent,
     UpdateToDoctorComponent,
   ],
-  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
     SharedModule,
     BrowserModule,

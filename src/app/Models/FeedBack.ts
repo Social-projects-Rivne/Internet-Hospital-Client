@@ -3,4 +3,5 @@ export class FeedBack {
     Text?: string;
     TypeId?: number;
     UserId?: number;
+    datetime?: string;
 }

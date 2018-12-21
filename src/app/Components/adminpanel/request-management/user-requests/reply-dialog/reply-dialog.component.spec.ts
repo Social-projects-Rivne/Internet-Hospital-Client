@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedbackClaimComponent } from './feedback-claim.component';
+import { ReplyDialogComponent } from './reply-dialog.component';
 
-describe('FeedbackClaimComponent', () => {
-  let component: FeedbackClaimComponent;
-  let fixture: ComponentFixture<FeedbackClaimComponent>;
+describe('ReplyDialogComponent', () => {
+  let component: ReplyDialogComponent;
+  let fixture: ComponentFixture<ReplyDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedbackClaimComponent ]
+      declarations: [ ReplyDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FeedbackClaimComponent);
+    fixture = TestBed.createComponent(ReplyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

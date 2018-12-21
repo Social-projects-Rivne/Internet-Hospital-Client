@@ -52,11 +52,14 @@ import { DataApproveComponent } from '../../Components/adminpanel/request-manage
 // tslint:disable-next-line:import-spacing
 import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
+import { MatDialogModule } from '@angular/material';
+import { ReplyDialogComponent } from '../../Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
 
 @NgModule({
   imports: [
+    MatDialogModule,
     MatProgressBarModule,
     MatTooltipModule,
     CommonModule,
@@ -104,7 +107,7 @@ import { SharedModule } from 'src/app/Modules/shared/shared.module';
     UserRequestsComponent,
     DataApproveComponent,
     RegistrationConfirmComponent,
-    FeedbackClaimComponent,
+    ReplyDialogComponent,
   ],
   providers: []
 })

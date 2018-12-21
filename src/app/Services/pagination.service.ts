@@ -20,6 +20,9 @@ export class PaginationService {
     get userPageSize(): number {
         return this.paginationModel.userPageSize;
     }
+    get feedbackPageSize(): number {
+        return this.paginationModel.feedbackPageSize;
+    }
 
     constructor() {
         this.paginationModel = new Pagination();
@@ -28,6 +31,7 @@ export class PaginationService {
     change(pageEvent: PageEvent) {
         this.paginationModel.pageIndex = pageEvent.pageIndex + 1;
         this.paginationModel.pageSize = pageEvent.pageSize;
+        this.paginationModel.feedbackPageSize = pageEvent.pageSize;
         this.paginationModel.allItemsLength = pageEvent.length;
     }
 }
