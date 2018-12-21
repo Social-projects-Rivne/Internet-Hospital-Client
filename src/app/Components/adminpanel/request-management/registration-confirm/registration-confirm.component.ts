@@ -42,13 +42,11 @@ export class RegistrationConfirmComponent implements OnInit {
   ngOnInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = DEFAULT_AMOUNT_OF_PATIENT_ON_PAGE;
-    // merge(this.sort.sortChange, this.paginator.page)
       this.paginator.page
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          // const s = this.patientToDoctorModels[0].license;
           return this.service.getEditProfileRequest(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map((data: UsersEditProfileList) => {
@@ -62,28 +60,13 @@ export class RegistrationConfirmComponent implements OnInit {
         })
       ).subscribe(data => {
           this.usersEditProfileModels = data;
-          console.log(data);
         });
-
-      // this.sort.sortChange.subscribe(() => {
-      //   this.paginator.pageIndex = 0;
-      //   this.isLoadingResults = true;
-      // });
-
-
-    // this.service.getPatientBecomeDoctorRequests()
-    // .subscribe((data: any) => {
-    //   console.log(data);
-    //   this.patientToDoctorModels = data;
-    // });
   }
 
   openDialog(id: number, isApproved: boolean) {
-    console.log('in dialog ' + id + '   ' + isApproved);
     this.dialogService.openConfirmDialog('Are you sure to commit this action?')
     .afterClosed().subscribe(res => {
       if (res) {
-        console.log(res);
         this.service.handleEditUserProfile(id, isApproved)
         .subscribe(() => {
           this.notification.success('User have been successfully approved!');
