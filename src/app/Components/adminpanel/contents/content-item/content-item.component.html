@@ -24,16 +24,5 @@
     <p>
       {{content.shortDescription}}
     </p>
-    <mat-expansion-panel *ngIf="content.editions.length > 0">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          History of editions
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="edition-block" *ngFor="let edition of content.editions">
-        <div class="edition-author">{{edition.author}}</div>
-        <div class="edition-date">{{edition.dateOfEdit | date}}</div>
-      </div>
-    </mat-expansion-panel>
   </mat-card-content>
 </mat-card>
