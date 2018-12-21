@@ -102,7 +102,7 @@
     <div *ngSwitchCase="patientSettings.Appointments" class="patient-additional-info">
       <app-patient-appointments></app-patient-appointments>
     </div>
-    <div fxLayoutAlign="center center" fxFlex *ngSwitchCase="patientSettings.BecomeADoctor" class="patient-additional-info">
+    <div *ngSwitchCase="patientSettings.BecomeADoctor" class="patient-additional-info">
       <app-update-to-doctor></app-update-to-doctor>
     </div>
   </div>
