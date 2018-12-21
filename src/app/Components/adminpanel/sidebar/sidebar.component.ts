@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CONTENTS, MODERATORS_MNG, REQUESTS_MNG, USERS_MNG } from '../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
+import { AuthenticationService } from '../../../Services/authentication.service';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +11,9 @@ import { ADMIN_PANEL } from '../../../config';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  isAdmin: Observable<boolean>;
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   users = '/'  + ADMIN_PANEL +  '/' + USERS_MNG;
   moders = '/'  + ADMIN_PANEL +  '/' + MODERATORS_MNG;
@@ -17,5 +21,6 @@ export class SidebarComponent implements OnInit {
   requests = '/' + ADMIN_PANEL + '/' + REQUESTS_MNG;
 
   ngOnInit() {
-   }
+    this.isAdmin = this.authenticationService.isAdmin();
+  }
 }

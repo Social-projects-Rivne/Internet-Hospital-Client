@@ -14,7 +14,7 @@
     </div>
     <div class="filtering-block">
       <mat-form-field>
-        <input matInput [(ngModel)]="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
+        <input placeholder="Search moderator" matInput [(ngModel)]="search" (change)="paginator.pageIndex=0; paginator.page.emit()">
       </mat-form-field>
     </div>
     <table mat-table [dataSource]="dataSource" matSort>

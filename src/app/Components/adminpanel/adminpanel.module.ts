@@ -54,6 +54,7 @@ import { RegistrationConfirmComponent }
         from '../../Components/adminpanel/request-management/registration-confirm/registration-confirm.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
 import { ImageModalComponent } from '../../Components/adminpanel/request-management/data-approve/image-modal/image-modal.component';
+import { SharedModule } from 'src/app/Modules/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -86,6 +87,7 @@ import { ImageModalComponent } from '../../Components/adminpanel/request-managem
     FroalaViewModule,
     SlideshowModule,
     MatTabsModule,
+    SharedModule
   ],
   declarations: [
     AdminPanelComponent,

@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HomeImages } from '../../../../Models/Temp/HomeImage';
-import { HomeService } from 'src/app/Services/home.service';
+import { Component, OnInit } from '@angular/core';
+
+import { HomePageContent } from 'src/app/Models/Content/HomePageContent';
+
+import { HomeContentService } from 'src/app/Services/home-content.service';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-news',
@@ -8,17 +12,37 @@ import { HomeService } from 'src/app/Services/home.service';
   styleUrls: ['./home-news.component.scss']
 })
 export class HomeNewsComponent implements OnInit {
-  @Input()
-  homeImages: HomeImages[];
+  contents: HomePageContent[] = [];
+  amountForLoading = 12;
+  lastId = null;
+  isLast = false;
+  isLoading = false;
+  isLoggedIn: Observable<boolean>;
+  couldntLoad = false;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private contentService: HomeContentService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.getHomeImages();
+    this.loadContent();
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
   }
 
-  getHomeImages(): void {
-    this.homeService.getHomeImages()
-        .subscribe(homeImages => this.homeImages = homeImages);
+  loadContent() {
+    if (!this.isLast && !this.isLoading) {
+      this.isLoading = true;
+      this.contentService.getShortModeratorContent(this.amountForLoading, this.lastId)
+        .subscribe((data: any) => {
+          data.articles.forEach(item => {
+            this.contents.push(item);
+          });
+          this.lastId = data.lastArticleId;
+          this.isLast = data.isLast;
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          this.couldntLoad = true;
+        });
+    }
   }
 }
