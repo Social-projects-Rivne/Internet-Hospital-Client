@@ -1,3 +1,4 @@
+<app-loading *ngIf="isChangingAccess"></app-loading>
 <mat-card class="patientAppointmentsCard">
     <mat-card-header fxLayout="row">
         <mat-card-title fxLayoutAlign="center center">Appointment to {{patAppointment.doctorFirstName}}
@@ -10,6 +11,11 @@
     <mat-card-content class="mat-display-1" fxLayout="row">
         <span fxLayout="row">Date: {{patAppointment.startTime | date:'dd.MM.y HH.mm'}} - {{patAppointment.endTime |
             date:'HH.mm'}}</span>
+    </mat-card-content>
+    <mat-card-content>
+        <mat-checkbox color="primary" [(ngModel)]="patAppointment.isAllowPatientInfo" (click)="changeAccessibility()">
+            <i class="far fa-question-circle" matTooltip="Allow doctor to see your illness history">Allow info?</i>
+        </mat-checkbox>
     </mat-card-content>
     <mat-card-actions fxLayout="row">
         <button id="btnUnsubscribe" (click)="onUnsubscribeToAppointment()" mat-raised-button color="primary">Unsubscribe</button>

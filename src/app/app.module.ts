@@ -60,18 +60,21 @@ import { PatientAppointmentsComponent } from './Components/PatientProfile/patien
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
-import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
+import { DoctorAppointmentsComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // tslint:disable-next-line:max-line-length
-import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
+import { DoctorAppointmentItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointment-item/doctor-appointment-item.component';
 // tslint:disable-next-line:max-line-length
-import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/previous-appointments/previous-appointment-item/previous-appointment-item.component';
+import { DoctorAppointmentsSearchItemComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments-search-item/doctor-appointments-search-item.component';
+import { PatientInfoProfileComponent } from './Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
+import { PreviousRouteService } from './Services/previous-route.service';
+import { PatientIdSharingService } from './Services/patient-id-sharing.service';
+import { WatchPatientInfoGuard } from './Services/Guards/watch-patient-info.guard';
 import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
-
 import { SharedModule } from './Modules/shared/shared.module';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
@@ -106,14 +109,18 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     PatAppointItemComponent,
     MatConfirmDialogComponent,
     DoctorProfileComponent,
-    GreetingItemComponent,
-    PreviousAppointmentsComponent,
-    PreviousSearchItemComponent,
-    PreviousAppointmentItemComponent,
+    DoctorAppointmentsComponent,
+    DoctorAppointmentItemComponent,
+    DoctorAppointmentsSearchItemComponent,
+    PatientInfoProfileComponent,
     MyPatientsComponent,
     BlackListComponent,
     ActivePatientsComponent,
-    UpdateToDoctorComponent,
+    GreetingItemComponent,
+    MyPatientsComponent,
+    BlackListComponent,
+    ActivePatientsComponent,
+    UpdateToDoctorComponent
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
@@ -128,6 +135,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     FlexLayoutModule,
     AdminpanelModule,
     OverlayModule,
+    SlideshowModule,
     NgxMaskModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
@@ -147,7 +155,8 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     InfiniteScrollModule,
   ],
   exports: [MaterialModule],
-  providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
+  // tslint:disable-next-line:max-line-length
+  providers: [AuthenticationService, PatientIdSharingService, WatchPatientInfoGuard, PreviousRouteService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })

@@ -28,8 +28,17 @@ export class IllnessHistorySearchItemComponent implements OnInit {
   beginDate(date: any) {
     this.startDate = date.target.value;
   }
+
   finishDate(date: any) {
     this.endDate = date.target.value;
+  }
+
+  onFromClear() {
+    this.filter.fromDate = null;
+  }
+
+  onTillClear() {
+    this.filter.toDate = null;
   }
 
   dateFilter = (endDate?: Date): boolean => {
@@ -39,6 +48,7 @@ export class IllnessHistorySearchItemComponent implements OnInit {
       return endDate <= new Date();
     }
   }
+
   startDateFilter = (startDate?: Date): boolean => {
     if (this.endDate !== null) {
       return startDate <= new Date() && startDate <= this.endDate;

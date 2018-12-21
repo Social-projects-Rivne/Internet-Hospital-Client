@@ -3,7 +3,7 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { MY_PLANS } from 'src/app/config';
+import { PreviousRouteService } from 'src/app/Services/previous-route.service';
 
 @Component({
   selector: 'app-illness-history',
@@ -14,7 +14,10 @@ export class IllnessHistoryComponent implements OnInit {
 
   private appointmentId: number;
 
-  constructor(private service: DoctorsService, private router: Router, private notification: NotificationService,
+  constructor(private service: DoctorsService,
+    private router: Router,
+    private previousRouteService: PreviousRouteService,
+    private notification: NotificationService,
     private activateRoute: ActivatedRoute) { }
 
   load = false;
@@ -49,21 +52,21 @@ export class IllnessHistoryComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate([MY_PLANS]);
+    this.router.navigate([this.previousRouteService.getPreviousUrl()]);
   }
 
   onSubmit() {
     this.load = true;
     this.service.fillIllness(this.form, this.appointmentId).subscribe(
       () => {
-        this.notification.success('All is fine!');
+        this.notification.success('Appointment successfully finished!');
         this.load = false;
-        this.router.navigate([MY_PLANS]);
+        this.router.navigate([this.previousRouteService.getPreviousUrl()]);
       },
       (error) => {
         this.notification.error(error);
         this.load = false;
-        this.router.navigate([MY_PLANS]);
+        this.router.navigate([this.previousRouteService.getPreviousUrl()]);
       });
   }
 }

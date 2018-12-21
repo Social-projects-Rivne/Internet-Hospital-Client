@@ -14,6 +14,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 export class PatAppointItemComponent implements OnInit {
   @Input()
   patAppointment: Appointment;
+  isChangingAccess = false;
 
   constructor(private service: DoctorplansService,
               private dialogService: DialogService,
@@ -38,5 +39,17 @@ export class PatAppointItemComponent implements OnInit {
           });
       }
     });
+  }
+
+  changeAccessibility() {
+    this.isChangingAccess = true;
+    this.service.changePersonalInfoAccessibility(this.patAppointment.id, !this.patAppointment.isAllowPatientInfo)
+    .subscribe(
+      () => this.isChangingAccess = false,
+      (err) => {
+        this.notification.error(err);
+        this.isChangingAccess = false;
+      }
+    );
   }
 }
