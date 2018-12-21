@@ -55,6 +55,7 @@ import { RegistrationConfirmComponent }
 import { MatDialogModule } from '@angular/material';
 import { ReplyDialogComponent } from '../../Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { FeedbackClaimComponent } from '../../Components/adminpanel/request-management/feedback-claim/feedback-claim.component';
+import { ImageModalComponent } from '../../Components/adminpanel/request-management/data-approve/image-modal/image-modal.component';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
 
 @NgModule({
@@ -107,6 +108,11 @@ import { SharedModule } from 'src/app/Modules/shared/shared.module';
     UserRequestsComponent,
     DataApproveComponent,
     RegistrationConfirmComponent,
+    FeedbackClaimComponent,
+    ImageModalComponent,
+  ],
+  entryComponents: [
+    ImageModalComponent,
     ReplyDialogComponent,
   ],
   providers: []
