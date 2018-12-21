@@ -1,3 +1,74 @@
-<p>
-  registration-confirm works!
-</p>
+<div id="father-div" fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      </div>
+  <table matSort mat-table [dataSource]="usersEditProfileModels" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="email">Users email</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.email}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="requestTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="date">date</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.requestTime | date:'dd.MM.y HH:mm'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let row">
+        Edit Profile
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div fxLayout="row" class="example-element-detail" fxLayoutAlign="start space-between" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="minwidth padding-left" fxFlex="30" fxLayout="column">
+            <div class="example-element-detail">
+              id: {{element.id}}
+              <br> Name: {{element.firstName}} {{element.secondName}} {{element.thirdName}}
+            </div>
+            <div fxLayout="row" fxFlexAlign="start">
+              <div class="example-element-detail">
+                <button class="margin-ten" (click)="openDialog(element.id, true)" mat-raised-button color="primary">Approve</button>
+                <button (click)="openDialog(element.id, false)" mat-raised-button color="warn">Reject</button>
+              </div>
+            </div>
+            <div>
+            </div>
+          </div>
+          <div fxFlex="70" fxLayout="column" class="example-element-detail" fxLayoutAlign="space-around start">
+              <div *ngIf="element?.phoneNumber">Phone number: {{element.phoneNumber}}</div>
+              <div *ngIf="element?.specialization">Specialization: {{element.specialization}}</div>
+              <div *ngIf="element?.address"> Working Address: {{element.address}}</div>
+              <div *ngIf="element?.license"> License photo:
+              <div>
+                  <img class="doc-pic" [src]="this.hostUrl + element.license" />
+              </div>
+              </div>
+              <div *ngIf="element?.diplomas.length != 0"> Diplomas photos:
+                <div>
+                  <img *ngFor="let diploma of element.diplomas" class="doc-pic" [src]="this.hostUrl + diploma" />
+                </div>
+              </div>
+              <div *ngIf="element?.passport.length != 0">Passport photos:
+                <div>
+                  <img *ngFor="let passportElement of element.passport" class="doc-pic" [src]="this.hostUrl + passportElement" />
+                </div>
+              </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+</div>
+<div>
+  <mat-paginator showFirstLastButtons [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" [length]="usersAmount">
+  </mat-paginator>
+</div>

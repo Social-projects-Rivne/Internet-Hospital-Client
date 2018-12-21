@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { CreatingModerator } from '../../../Models/CreatingModerator';
 import { HOST_URL, GET_PATIENT_TO_DOCTOR_REQUESTS,
-                   HANDLE_PATIENT_TO_DOCTOR_REQUEST } from '../../../config';
+                   HANDLE_PATIENT_TO_DOCTOR_REQUEST,
+                   GET_EDIT_PROFILE_REQUESTS,
+                   HANDLE_EDIT_USER_PROFILE, } from '../../../config';
 import { Observable } from 'rxjs';
 import { ModeratorsData } from '../../../Models/ModeratorsData';
 import { PatientToDoctorList } from '../../../Models/PatientToDoctorList';
+import { UsersEditProfileList } from '../../../Models/UsersEditProfileList';
 
 const PAGE = 'page';
 const PAGE_SIZE = 'pageSize';
@@ -64,8 +67,20 @@ export class ModeratorService {
     return this.http.get<PatientToDoctorList>(url, this.httpOptions);
   }
 
+  getEditProfileRequest(pageIndex: number, pageSize: number): Observable<UsersEditProfileList> {
+    const url = `${HOST_URL}/${GET_EDIT_PROFILE_REQUESTS}`
+      + `?${PAGE_INDEX}=${pageIndex + 1}&${PAGE_SIZE}=${pageSize}`;
+    console.log(url);
+    return this.http.get<UsersEditProfileList>(url, this.httpOptions);
+  }
+
   handlePatientToDoctorRequest(idUser: number, isApprovedUser: boolean) {
     const url = `${HOST_URL}/${HANDLE_PATIENT_TO_DOCTOR_REQUEST}`;
     return this.http.post(url, { id: idUser, isApproved: isApprovedUser }, this.httpOptions);
+  }
+
+  handleEditUserProfile(idUser: number, isApprovedUser: boolean) {
+    const url = `${HOST_URL}/${HANDLE_EDIT_USER_PROFILE}`;
+    return this.http.put(url, { id: idUser, isApproved: isApprovedUser });
   }
 }

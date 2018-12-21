@@ -25,6 +25,8 @@ export const PASSPORT_AGE = 14;
 
 export const GET_PATIENT_TO_DOCTOR_REQUESTS = '/api/Request/getPatientToDoctor';
 export const HANDLE_PATIENT_TO_DOCTOR_REQUEST = '/api/Request/handlePatientToDoctor';
+export const GET_EDIT_PROFILE_REQUESTS = '/api/Request/getEditProfile';
+export const HANDLE_EDIT_USER_PROFILE = '/api/Request/handleEditProfile';
 
 export const PATIENT_GET_HISTORIES = '/api/Patient/GetHistories';
 export const SETTINGS_DOCTOR = 'settings-doctor';
