@@ -53,8 +53,8 @@
 }
 
 .doc-pic{
-  width: 230px;
-  height: 230px;
+  max-width: 230px;
+  max-height: 230px;
   border-radius: 5%;
   background-clip: padding-box;
   margin: 7px 0 0 5px;
@@ -62,18 +62,6 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-}
-
-.user-avatar {
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  background-repeat: no-repeat;
-  width: 110px;
-  height: 110px;
-  background-clip: padding-box;
-  border-radius: 110px;
-  background-size: cover;
-  background-position: center center;
-  vertical-align: middle;
 }
 
 table {
