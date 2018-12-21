@@ -7,8 +7,8 @@ import { RoutingModule, ROUTING_COMPONENTS } from './Modules/routing/routing.mod
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ReplyDialogComponent } from './Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
@@ -59,7 +59,6 @@ import { IllnessHistoryComponent } from './Components/illness-history/illness-hi
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
-import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
 import { DoctorAppointmentsComponent } from './Components/DoctorProfile/doctor-appointments/doctor-appointments.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -74,13 +73,16 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
 import { PreviousRouteService } from './Services/previous-route.service';
 import { PatientIdSharingService } from './Services/patient-id-sharing.service';
 import { WatchPatientInfoGuard } from './Services/Guards/watch-patient-info.guard';
+import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 import { SharedModule } from './Modules/shared/shared.module';
+
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ROUTING_COMPONENTS,
-    HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
     HomeNewsItemComponent,
@@ -106,7 +108,6 @@ import { SharedModule } from './Modules/shared/shared.module';
     PatientAppointmentsComponent,
     PatAppointItemComponent,
     MatConfirmDialogComponent,
-    LoadingComponent,
     DoctorProfileComponent,
     DoctorAppointmentsComponent,
     DoctorAppointmentItemComponent,
@@ -114,9 +115,14 @@ import { SharedModule } from './Modules/shared/shared.module';
     PatientInfoProfileComponent,
     MyPatientsComponent,
     BlackListComponent,
-    ActivePatientsComponent
+    ActivePatientsComponent,
+    GreetingItemComponent,
+    MyPatientsComponent,
+    BlackListComponent,
+    ActivePatientsComponent,
+    UpdateToDoctorComponent
   ],
-  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent ],
+  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
     SharedModule,
     BrowserModule,
@@ -129,6 +135,7 @@ import { SharedModule } from './Modules/shared/shared.module';
     FlexLayoutModule,
     AdminpanelModule,
     OverlayModule,
+    SlideshowModule,
     NgxMaskModule.forRoot(),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
@@ -145,7 +152,7 @@ import { SharedModule } from './Modules/shared/shared.module';
         }
       },
     ),
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   exports: [MaterialModule],
   // tslint:disable-next-line:max-line-length

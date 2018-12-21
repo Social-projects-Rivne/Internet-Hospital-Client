@@ -45,6 +45,7 @@ import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointme
 import { PatientInfoProfileComponent } from 'src/app/Components/DoctorProfile/patient-info-profile/patient-info-profile.component';
 import { MyPatientsComponent } from 'src/app/Components/MyPatients/my-patients.component';
 import { WatchPatientInfoGuard } from 'src/app/Services/Guards/watch-patient-info.guard';
+import { UpdateToDoctorComponent } from '../../Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
 const ROUTES: Routes = [
   {

@@ -1,3 +1,66 @@
-<p>
-  data-approve works!
-</p>
+<div id="father-div" fxLayout="column" fxLayoutAlign="space-around center">
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="patientToDoctorModels" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Users email</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.email}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="requestTime">
+      <th mat-header-cell *matHeaderCellDef>date</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.requestTime | date:'dd.MM.y HH.mm'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let row">
+        Change Role
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div fxLayout="row" class="example-element-detail" fxLayoutAlign="start space-between" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="minwidth padding-left" fxFlex="30" fxLayout="column">
+            <div class="example-element-detail">
+              id: {{element.userId}}
+              <br> Name: {{element.firstName}} {{element.secondName}} {{element.thirdName}}
+            </div>
+            <div fxLayout="row" fxFlexAlign="start">
+              <div class="example-element-detail">
+                <button class="margin-ten" (click)="openDialog(element.userId, true)" mat-raised-button color="primary">Approve</button>
+                <button (click)="openDialog(element.userId, false)" mat-raised-button color="warn">Reject</button>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="70" fxLayout="column" class="example-element-detail" fxLayoutAlign="space-around start">
+              Specialization: {{element.specialization}}
+              <br> Working Address: {{element.address}}<br>
+              <br> License photo:
+              <div>
+                  <img class="doc-pic" [src]="this.hostUrl + element.license" />
+              </div>
+              <br> Diplomas photos:
+              <div>
+                  <img *ngFor="let diploma of element.diplomas" class="doc-pic" [src]="this.hostUrl + diploma" />
+              </div>
+          </div>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+</div>
+<div>
+  <mat-paginator showFirstLastButtons [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" [length]="usersAmount">
+  </mat-paginator>
+</div>

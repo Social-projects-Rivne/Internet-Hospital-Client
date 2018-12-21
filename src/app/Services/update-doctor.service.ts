@@ -14,6 +14,7 @@ import { MaxDateValidator } from '../Directives/date-validator.directive';
 export class UpdateDoctorService {
   url = HOST_URL + API_DOCTOR_UPDATE;
   getProfileUrl = HOST_URL + DOCTOR_GET_PROFILE;
+  birthday = '';
 
   constructor(private http: HttpClient) { }
   form: FormGroup = new FormGroup({
@@ -47,13 +48,16 @@ export class UpdateDoctorService {
    setCurrentProfile() {
     this.getProfile().subscribe((res: any) => {
       const doctor = res;
-      const correctDate = doctor.birthDate.substring(0, 10);
+
+      if (doctor.birthDate != null) {
+        this.birthday = doctor.birthDate.substring(0, 10).split('.').reverse().join('-');
+      }
       this.form.setValue({
         PhoneNumber: doctor.phoneNumber,
         FirstName: doctor.firstName,
         SecondName: doctor.secondName,
         ThirdName: doctor.thirdName,
-        BirthDate: correctDate,
+        BirthDate: this.birthday,
         Address: doctor.address,
         Specialization: doctor.specialization,
         PassportURL: '',

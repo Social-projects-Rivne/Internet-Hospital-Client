@@ -75,6 +75,11 @@ export class UserManagementComponent implements OnInit {
   }
 
   onSearch() {
+    this.paginator.firstPage();
+  }
+
+  onClear() {
+    this.selectedStatus = undefined;
     this.ngOnInit();
   }
 

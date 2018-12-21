@@ -13,6 +13,8 @@ import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from '../../../Services/authentication.service';
+import { Observable } from 'rxjs';
 
 const TOKEN = 'currentUser';
 
@@ -25,12 +27,14 @@ export class UsersProfileComponent implements OnInit {
 
   constructor(private patientService: UsersProfileService, private imageValidator: ImageValidationService,
     private notification: NotificationService, private storage: LocalStorageService,
-    private pagService: PaginationService, private updateService: UpdatePatientService) {
+    private pagService: PaginationService, private updateService: UpdatePatientService,
+    private authenticationService: AuthenticationService) {
   }
   private filter: IllnessHistoryFilter;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  isPatient: Observable<boolean>;
   showLikeRow = true;
   user: ICurrentUser;
   token = TOKEN;
@@ -57,6 +61,7 @@ export class UsersProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isPatient = this.authenticationService.isPatient();
     let stringDate: string;
     this.patientService.getProfile().subscribe((profile: any) => {
     this.patient = profile,

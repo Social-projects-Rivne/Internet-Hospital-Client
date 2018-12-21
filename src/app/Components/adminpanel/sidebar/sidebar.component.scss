@@ -1,13 +1,17 @@
 #sidebar {
   width: 250px;
   position: fixed;
-  top: 56px;
+  top: 64px;
   bottom: 0;
   background: #fff;
   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
   z-index: 999;
   -ms-overflow-y: auto;
   overflow-y: auto;
+
+  @media screen and (max-width: 601px) {
+    top: 56px;
+  }
 
   .mat-nav-list {
     width: 100%;

@@ -10,11 +10,10 @@ import { MODER_CREATE } from './../routesConfig';
 import { ADMIN_PANEL } from '../../../config';
 
 import { MatPaginator, MatSort } from '@angular/material';
+import { DialogService } from 'src/app/Services/dialog.service';
 
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-
-import { DialogService } from 'src/app/Services/dialog.service';
 
 const DEFAULT_AMOUNT_OF_MODERS_ON_PAGE = 5;
 
@@ -47,10 +46,8 @@ export class ModeratorManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private service: ModeratorService,
-    private notification: NotificationService,
-    private dialogService: DialogService
-  ) {
-  }
+              private notification: NotificationService,
+              private dialogService: DialogService) {}
 
   ngOnInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -108,7 +105,7 @@ export class ModeratorManagementComponent implements OnInit {
 
   delete(moderator) {
     this.dialogService.openConfirmDialog(`Do you really want to delete ${moderator.email}?`,
-      '10%', 'calc(50% - 195px)')
+      '25vh', 'calc(50% - 195px)')
       .afterClosed().subscribe(res => {
         if (res) {
           this.isLoadingResults = true;
@@ -126,7 +123,7 @@ export class ModeratorManagementComponent implements OnInit {
 
   deleteSelected() {
     this.dialogService.openConfirmDialog(`Do you really want to delete all selected moderators?`,
-      '10%', 'calc(50% - 195px)')
+      '25vh', 'calc(50% - 195px)')
       .afterClosed().subscribe(res => {
         if (res) {
           this.isLoadingResults = true;
