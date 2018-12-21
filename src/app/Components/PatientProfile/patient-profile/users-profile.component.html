@@ -1,4 +1,4 @@
-<div class="profile" fxLayout="row" fxLayoutGap="20%">
+<div class="profile" fxLayout="row" fxLayoutGap="10%">
   <div class="profile-menu" fxLayout="column" fxLayoutGap="8%" fxLayoutAlign="start">
     <button (click)="changeSettings(patientSettings.MyProfile)" [disabled]="currentMenuItem===patientSettings.MyProfile"
       mat-raised-button>
@@ -16,6 +16,10 @@
       mat-raised-button>
       My appointments
     </button>
+    <button *ngIf="(isPatient | async)" (click)="changeSettings(patientSettings.BecomeADoctor)" [disabled]="currentMenuItem===patientSettings.BecomeADoctor"
+    mat-raised-button>
+    Become a doctor
+  </button>
   </div>
   <div class="settings-expanded-item" fxLayout="row" fxFlex [ngSwitch]="currentMenuItem">
     <div *ngSwitchCase="patientSettings.MyProfile" class="profile-top" fxLayout="row" fxLayoutAlign="center center"
@@ -97,6 +101,9 @@
     </div>
     <div *ngSwitchCase="patientSettings.Appointments" class="patient-additional-info">
       <app-patient-appointments></app-patient-appointments>
+    </div>
+    <div *ngSwitchCase="patientSettings.BecomeADoctor" class="patient-additional-info">
+      <app-update-to-doctor></app-update-to-doctor>
     </div>
   </div>
 </div>

@@ -9,7 +9,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ReplyDialogComponent } from './Components/adminpanel/request-management/user-requests/reply-dialog/reply-dialog.component';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/Layout/header/header.component';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { HomeNewsComponent } from './Components/Home/home/home-news/home-news.component';
 import { HomeNewsItemComponent } from './Components/Home/home/home-news/home-news-item/home-news-item.component';
@@ -60,9 +59,7 @@ import { IllnessHistoryComponent } from './Components/illness-history/illness-hi
 import { PatientAppointmentsComponent } from './Components/PatientProfile/patient-appointments/patient-appointments.component';
 import { PatAppointItemComponent } from './Components/PatientProfile/patient-appointments/pat-appoint-item/pat-appoint-item.component';
 import { MatConfirmDialogComponent } from './Components/PatientProfile/mat-confirm-dialog/mat-confirm-dialog.component';
-import { LoadingComponent } from './Components/loading/loading.component';
 import { DoctorProfileComponent } from './Components/DoctorProfile/doctor-profile/doctor-profile.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PreviousAppointmentsComponent } from './Components/DoctorProfile/previous-appointments/previous-appointments.component';
 // tslint:disable-next-line:max-line-length
 import { PreviousSearchItemComponent } from './Components/DoctorProfile/previous-appointments/previous-search-item/previous-search-item.component';
@@ -71,12 +68,18 @@ import { PreviousAppointmentItemComponent } from './Components/DoctorProfile/pre
 import { MyPatientsComponent } from './Components/MyPatients/my-patients.component';
 import { BlackListComponent } from './Components/MyPatients/black-list/black-list.component';
 import { ActivePatientsComponent } from './Components/MyPatients/active-patients/active-patients.component';
+import { UpdateToDoctorComponent } from './Components/PatientProfile/update-to-doctor/update-to-doctor.component';
+
+import { SharedModule } from './Modules/shared/shared.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ROUTING_COMPONENTS,
-    HeaderComponent,
     FooterComponent,
     HomeNewsComponent,
     HomeNewsItemComponent,
@@ -102,17 +105,19 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
     PatientAppointmentsComponent,
     PatAppointItemComponent,
     MatConfirmDialogComponent,
-    LoadingComponent,
     DoctorProfileComponent,
+    GreetingItemComponent,
     PreviousAppointmentsComponent,
     PreviousSearchItemComponent,
     PreviousAppointmentItemComponent,
     MyPatientsComponent,
     BlackListComponent,
     ActivePatientsComponent,
+    UpdateToDoctorComponent,
   ],
   entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
+    SharedModule,
     BrowserModule,
     MaterialModule,
     FormsModule,
@@ -139,7 +144,7 @@ import { ActivePatientsComponent } from './Components/MyPatients/active-patients
         }
       },
     ),
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   exports: [MaterialModule],
   providers: [AuthenticationService, AuthGuard, PatientGuard, DoctorGuard, ModeratorGuard, AdminGuard, DatePipe, FinishAppointmentGuard,

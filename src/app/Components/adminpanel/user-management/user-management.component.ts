@@ -3,9 +3,10 @@ import { UserListService } from 'src/app/Services/UserListService/user-list.serv
 import { NotificationService } from 'src/app/Services/notification.service';
 import { UserListModel } from 'src/app/Models/UserListModel';
 import { MatPaginator, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
-import { UserListFilter } from 'src/app/Models/UserListFilter';
-import { PaginationService } from 'src/app/Services/pagination.service';
-import { EventEmitter } from 'events';
+import { FilteredResults } from 'src/app/Models/FilteredResults';
+import { merge, of as observableOf } from 'rxjs';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { DEFAULT_AMOUNT_OF_PATIENTS_ON_PAGE } from '../../MyPatients/active-patients/active-patients.component';
 import { UserStatus } from 'src/app/Models/UserStatus';
 
 @Component({
@@ -16,45 +17,58 @@ import { UserStatus } from 'src/app/Models/UserStatus';
 
 export class UserManagementComponent implements OnInit {
 
+
+
+  displayedColumns = ['select', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
+  dataSource: UserListModel[] = [];
+  isLoadingResults = true;
+  includeAll = false;
+  amountOfUsers = 0;
+  pageSizeOptions = [5, 10, 15, 20, 30, 50];
+  search = '';
+  selectedStatus = '';
+  selected = [];
+  description = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  content: FilteredResults<UserListModel> = new FilteredResults<UserListModel>();
+  statuses: UserStatus;
 
-  public dataSource: MatTableDataSource<UserListModel>;
-  public statuses: UserStatus;
-  private filter: UserListFilter;
-  public searchInput = '';
-  public selectedStatus = 0;
-  usersAmount: number;
 
-  isLoadingResults = true;
-
-  displayedColumns = ['id', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
-
-  constructor(
-    private _userListService: UserListService,
-    private _notificationService: NotificationService,
-    private _paginationService: PaginationService,
-  ) {
-    this.filter = new UserListFilter();
+  constructor(private service: UserListService,
+              private _notificationService: NotificationService) {
   }
 
   ngOnInit() {
-    this._userListService.getUserList().subscribe((result: any) => {
-      result.users.sort((x1, x2) => x1.id - x2.id);
-      this.dataSource = this._userListService.StatusConverter(result.users);
-      this.usersAmount = result.count;
-      this.isLoadingResults = false;
-      if (this.usersAmount === 0) {
-        this._notificationService.error('There is no users for this request');
-      }
-    },
-      error => {
-        this._notificationService.error(error);
-      });
-
-    this._userListService.getStatuses().subscribe((result: any) => {
-      this.statuses = result;
-    },
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.paginator.pageSize = DEFAULT_AMOUNT_OF_PATIENTS_ON_PAGE;
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.service.getUserList(
+            this.sort.active,
+            this.sort.direction,
+            this.search,
+            this.paginator.pageIndex,
+            this.includeAll,
+            this.paginator.pageSize,
+            this.selectedStatus);
+        }),
+        map((data: any) => {
+          this.isLoadingResults = false;
+          this.amountOfUsers = data.amount;
+          return data.results;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      ).subscribe(data => this.dataSource = data);
+      this.service.getStatuses().subscribe((result: any) => {
+        this.statuses = result;
+      },
       error => {
         this._notificationService.error(error);
       });
@@ -79,22 +93,14 @@ export class UserManagementComponent implements OnInit {
     this.ngOnInit();
   }
 
-  pageSwitch(event: PageEvent) {
-    this._paginationService.change(event);
-    this.isLoadingResults = true;
-    this._userListService.getUserList(this.filter, event).subscribe((result: any) => {
-      result.users.sort((x1, x2) => x1.id - x2.id);
-      this.dataSource = this._userListService.StatusConverter(result.users);
-      this.usersAmount = result.count;
-      this.isLoadingResults = false;
-      if (this.usersAmount === 0) {
-        this._notificationService.error('There is no users for this request');
+  select(event, id) {
+    const index = this.selected.indexOf(id);
+    if (event.checked) {
+      if (index === -1) {
+        this.selected.push(id);
       }
-    },
-      error => {
-        this._notificationService.error(error);
-      });
-    window.scroll(0, 0);
+    } else if (index !== -1) {
+      this.selected.splice(index, 1);
+    }
   }
-
 }

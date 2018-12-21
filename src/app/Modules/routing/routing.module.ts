@@ -42,6 +42,7 @@ import { UpdateDoctorComponent } from '../../Components/DoctorProfile/update-doc
 import { IllnessHistoryComponent } from 'src/app/Components/illness-history/illness-history.component';
 import { FinishAppointmentGuard } from 'src/app/Services/Guards/finish-appointment.guard';
 import { MyPatientsComponent } from 'src/app/Components/MyPatients/my-patients.component';
+import { UpdateToDoctorComponent } from '../../Components/PatientProfile/update-to-doctor/update-to-doctor.component';
 
 const ROUTES: Routes = [
   {

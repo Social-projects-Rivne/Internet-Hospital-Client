@@ -29,6 +29,7 @@ export class SignUpComponent implements OnInit {
 
   onClear() {
     this.service.form.reset();
+    this.imageHandling.resetUploadAvatar();
   }
 
   onSubmit() {
@@ -41,6 +42,7 @@ export class SignUpComponent implements OnInit {
               this.router.navigate([SIGN_IN]);
               this.notification.success(data['message']);
               this.service.form.reset();
+              this.imageHandling.resetUploadAvatar();
               this.service.initializeFormGroup();
             },
             error => {

@@ -31,7 +31,6 @@
   </div>
   <mat-menu #appMenu="matMenu" [overlapTrigger]="false" xPosition="before">
     <button mat-menu-item *ngIf="(isModerator | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
-    <button mat-menu-item *ngIf="(isAdmin | async)" [routerLink]="['/supersecurityadminpanel']">Admin panel</button>
     <button mat-menu-item>Settings</button>
     <button mat-menu-item [routerLink]="['/sign-in']">Sign out</button>
   </mat-menu>

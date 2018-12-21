@@ -1,1 +1,12 @@
-<app-home-news-item *ngFor="let image of homeImages" [image]="image"></app-home-news-item>
+<app-greeting-item class="greeting" *ngIf="!(isLoggedIn | async)"></app-greeting-item>
+<div class="main-block">
+    <div class="news-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadContent()">
+        <app-home-news-item class="news-item" *ngFor="let content of contents" [content]="content"></app-home-news-item>
+    </div>
+</div>
+<div class="loading-spinner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="server-error" *ngIf="couldntLoad">
+    <p>COULDN'T LOAD NEWS FROM SERVER, PLEASE TRY LATER!</p>
+</div>

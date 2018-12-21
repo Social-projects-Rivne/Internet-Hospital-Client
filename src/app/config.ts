@@ -18,9 +18,13 @@ export const SETTINGS_PATIENT = 'settings-patient';
 export const API_PATIENT_UPDATE = '/api/Patient/update';
 export const PATIENT_UPDATE_AVATAR = '/api/Patient/updateAvatar';
 export const PATIENT_GET_AVATAR = '/api/Patient/getAvatar';
+export const PATIENT_UPDATE_TO_DOCTOR = '/api/Patient/updateToDoctor';
 export const API_DOCTORS = '/api/Doctors';
 export const LOCALE_PHONE = '+380';
 export const PASSPORT_AGE = 14;
+
+export const GET_PATIENT_TO_DOCTOR_REQUESTS = '/api/Request/getPatientToDoctor';
+export const HANDLE_PATIENT_TO_DOCTOR_REQUEST = '/api/Request/handlePatientToDoctor';
 
 export const PATIENT_GET_HISTORIES = '/api/Patient/GetHistories';
 export const SETTINGS_DOCTOR = 'settings-doctor';
@@ -44,6 +48,7 @@ export const LOAD_PAGES = 5;
 export const HUB_CONNECTION = '/notifications';
 export const NOTIFICATIONS_GET = '/api/notification';
 export const NOTIFICATIONS_CHANGE = '/api/notification/change';
+export const NOTIFICATIONS_CHACK_ALL = '/api/notification/checkall';
 export const NOTIFICATION_NOTIFY = 'Notify';
 export const NOTIFICATION_ONLOAD = 'OnLoad';
 

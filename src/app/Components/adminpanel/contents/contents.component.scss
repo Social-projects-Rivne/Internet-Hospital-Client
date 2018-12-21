@@ -55,3 +55,27 @@
   max-width: 360px;
   text-align: center;
 }
+
+.contents-container {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.content-item {
+  display: flex;
+  width: 33.3%;
+  align-items: stretch;
+
+  @media screen and (max-width: 1300px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1900px) {
+    width: 25%;
+  }
+}
