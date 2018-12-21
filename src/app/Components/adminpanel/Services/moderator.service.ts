@@ -70,7 +70,6 @@ export class ModeratorService {
   getEditProfileRequest(pageIndex: number, pageSize: number): Observable<UsersEditProfileList> {
     const url = `${HOST_URL}/${GET_EDIT_PROFILE_REQUESTS}`
       + `?${PAGE_INDEX}=${pageIndex + 1}&${PAGE_SIZE}=${pageSize}`;
-    console.log(url);
     return this.http.get<UsersEditProfileList>(url, this.httpOptions);
   }
 
