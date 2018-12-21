@@ -9,6 +9,7 @@ import { merge, of as observableOf } from 'rxjs';
 import { DialogService } from 'src/app/Services/dialog.service';
 import { HOST_URL} from '../../../../config';
 import { NotificationService } from '../../../../Services/notification.service';
+import { ImageModalComponent } from '../data-approve/image-modal/image-modal.component';
 
 const DEFAULT_AMOUNT_OF_PATIENT_ON_PAGE = 5;
 
@@ -77,4 +78,11 @@ export class RegistrationConfirmComponent implements OnInit {
       }
     });
   }
+
+  openImageDialog(imagePath: string): void {
+    const dialogRef = this.dialog.open(ImageModalComponent, {
+      data: { image: imagePath }
+    });
+  }
+
 }
