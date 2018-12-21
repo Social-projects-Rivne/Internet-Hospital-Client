@@ -17,8 +17,6 @@ import { UserStatus } from 'src/app/Models/UserStatus';
 
 export class UserManagementComponent implements OnInit {
 
-
-
   displayedColumns = ['select', 'firstName', 'secondName', 'thirdName', 'birthDate', 'email', 'statusName'];
   dataSource: UserListModel[] = [];
   isLoadingResults = true;
@@ -75,11 +73,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   onSearch() {
-    this.paginator.firstPage();
-  }
-
-  onClear() {
-    this.selectedStatus = undefined;
     this.ngOnInit();
   }
 
