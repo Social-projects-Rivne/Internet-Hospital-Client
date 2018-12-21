@@ -38,7 +38,7 @@
           </div>
         </div>
         <div fxLayout="column" fxLayoutGap="5%">
-          <div>Born on: {{patient?.birthDate}}</div>
+          <div>Born on: {{patient?.birthDate | date: 'mediumDate'}}</div>
           <div>Phone number: {{patient?.phoneNumber}}</div>
         </div>
       </div>

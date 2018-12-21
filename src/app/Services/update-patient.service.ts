@@ -42,7 +42,7 @@ export class UpdatePatientService {
 
   setCurrentProfile() {
     if (this.patient.birthDate != null) {
-      this.birthday = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
+      // this.birthday = this.patient.birthDate.substring(0, 10).split('.').reverse().join('-');
     }
 
     this.form.setValue({

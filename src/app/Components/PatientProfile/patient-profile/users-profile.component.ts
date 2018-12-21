@@ -62,11 +62,11 @@ export class UsersProfileComponent implements OnInit {
 
   ngOnInit() {
     this.isPatient = this.authenticationService.isPatient();
-    let stringDate: string;
+    // let stringDate: string;
     this.patientService.getProfile().subscribe((profile: any) => { this.patient = profile,
        this.updateService.patient = profile,
-       stringDate = new DatePipe('en-US').transform(profile.birthDate, 'MMMM d, y');
-       this.patient.birthDate = stringDate;
+       // stringDate = new DatePipe('en-US').transform(profile.birthDate, 'MMMM d, y');
+       // this.patient.birthDate = stringDate;
        this.updateService.setCurrentProfile(); });
     this.patientService.getHistories();
     this.getImageFromService();

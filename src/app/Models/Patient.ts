@@ -5,7 +5,7 @@ export class Patient {
     firstName: string;
     secondName: string;
     thirdName: string;
-    birthDate: string;
+    birthDate: Date;
     phoneNumber: string;
     illnessHistory: IllnessHistory[];
 }
