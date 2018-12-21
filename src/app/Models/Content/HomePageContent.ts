@@ -3,6 +3,6 @@ export class HomePageContent {
     title: string;
     types: string[];
     shortDescription: string;
-    dateOfCreation: Date;
+    creationDate: Date;
     previewImageUrls: string[];
 }

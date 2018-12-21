@@ -3,21 +3,12 @@
     <div class="title">
       {{content.title}}
     </div>
-    <p><span class="content-date">{{content.dateOfCreation | date}}</span>
+    <p>
+      <span class="content-date">{{content.creationDate | date}}</span>
       <strong class="types">{{content.types.join(', ')}} </strong>
     </p>
   </mat-card-header>
-
-  <div class="images-container">
-    <div class="image-wrap"></div>
-    <div class="image-container">
-      <img *ngFor="let img of imageUrls" src="{{img}}" 
-        [@imageDisplay]="img === imageUrls[slideIndex] ? 'displayed' : 'hidden'">
-    </div>
-    <button class="left-button" mat-button (click)="prevImg()"><mat-icon>navigate_before</mat-icon></button>
-    <button class="right-button" mat-button (click)="nextImg()"><mat-icon>navigate_next</mat-icon></button>
-  </div>
-
+  <app-slider [images]="imageUrls"></app-slider>
   <mat-card-content>
     <p>
       {{content.shortDescription}}
