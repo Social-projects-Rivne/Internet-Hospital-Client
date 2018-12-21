@@ -15,6 +15,7 @@ import { UpdatePatientService } from '../../../Services/update-patient.service';
 import { DatePipe } from '@angular/common';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
+import { PatientProfile } from '../../../Models/PatientProfile';
 
 const TOKEN = 'currentUser';
 
@@ -38,7 +39,7 @@ export class UsersProfileComponent implements OnInit {
   showLikeRow = true;
   user: ICurrentUser;
   token = TOKEN;
-  patient: Patient = null;
+  patient: PatientProfile = null;
   tempHistory: IllnessHistory[] = null;
 
   defaultImage = '../../assets/img/default.png';

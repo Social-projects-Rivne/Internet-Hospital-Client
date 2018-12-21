@@ -1,11 +1,11 @@
 import { IllnessHistory } from '../Models/IllnessHistory';
 
-export class Patient {
+export class PatientProfile {
     id: number;
     firstName: string;
     secondName: string;
     thirdName: string;
-    birthDate: string;
+    birthDate: Date;
     phoneNumber: string;
     illnessHistory: IllnessHistory[];
 }
