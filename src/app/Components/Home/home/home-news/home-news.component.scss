@@ -40,8 +40,9 @@
 .server-error {
   position: absolute;
   width: 100%;
-  height: calc(100% - 114px);
-  background-color: #8d83834b;
+  top: 64px;
+  bottom: 50px;
+  background-color: #adadad;
   text-align: center;
 
   p {
