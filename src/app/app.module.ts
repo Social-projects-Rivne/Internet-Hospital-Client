@@ -78,6 +78,7 @@ import { SharedModule } from './Modules/shared/shared.module';
 
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { GreetingItemComponent } from './Components/Home/home/home-news/greeting-item/greeting-item.component';
+import { ImageModalComponent } from './Components/adminpanel/request-management/data-approve/image-modal/image-modal.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     DoctorPageComponent,
     FeedbackItemComponent,
     GalleryComponent,
-    ImageModalDialogComponent,
+    ImageModalComponent,
     FeedbacksComponent,
     UpdatePatientComponent,
     DateValidatorDirective,
@@ -122,7 +123,7 @@ import { GreetingItemComponent } from './Components/Home/home/home-news/greeting
     ActivePatientsComponent,
     UpdateToDoctorComponent
   ],
-  entryComponents: [ ImageModalDialogComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
+  entryComponents: [ ImageModalComponent, MatConfirmDialogComponent, ReplyDialogComponent ],
   imports: [
     SharedModule,
     BrowserModule,

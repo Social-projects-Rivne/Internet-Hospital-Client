@@ -44,17 +44,17 @@
             <div *ngIf="element?.address"> Working Address: {{element.address}}</div>
             <div *ngIf="element?.license"> License photo:
             <div>
-                <img class="doc-pic" [src]="this.hostUrl + element.license" />
+                <img (click)="openImageDialog(this.hostUrl + element.license)" class="doc-pic" [src]="this.hostUrl + element.license" />
             </div>
             </div>
             <div *ngIf="element?.diplomas.length != 0"> Diplomas photos:
               <div>
-                <img *ngFor="let diploma of element.diplomas" class="doc-pic" [src]="this.hostUrl + diploma" />
+                <img (click)="openImageDialog(this.hostUrl + diploma)" *ngFor="let diploma of element.diplomas" class="doc-pic" [src]="this.hostUrl + diploma" />
               </div>
             </div>
             <div *ngIf="element?.passport.length != 0">Passport photos:
               <div>
-                <img *ngFor="let passportElement of element.passport" class="doc-pic" [src]="this.hostUrl + passportElement" />
+                <img (click)="openImageDialog(this.hostUrl + passportElement)" *ngFor="let passportElement of element.passport" class="doc-pic" [src]="this.hostUrl + passportElement" />
               </div>
             </div>
         </div>
