@@ -34,7 +34,7 @@ export class AppointmentsItemComponent implements OnInit {
     this.service.subscribePatientToAppointment(this.appointment.id, this.isAllow)
     .subscribe(() => {
       this.load = false;
-      this.router.navigate([USERS_PROFILE]);
+      this.router.navigate([USERS_PROFILE, {appointments: true}]);
       this.notification.success('You have been successfully subscribed for appointment');
     },
       error => {

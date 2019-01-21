@@ -12,9 +12,9 @@ import { IllnessHistoryFilter } from '../../../Models/IllnessHistoryFilter';
 import { PaginationService } from '../../../Services/pagination.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { UpdatePatientService } from '../../../Services/update-patient.service';
-import { DatePipe } from '@angular/common';
 import { AuthenticationService } from '../../../Services/authentication.service';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 const TOKEN = 'currentUser';
 
@@ -28,13 +28,15 @@ export class UsersProfileComponent implements OnInit {
   constructor(private patientService: UsersProfileService, private imageValidator: ImageValidationService,
     private notification: NotificationService, private storage: LocalStorageService,
     private pagService: PaginationService, private updateService: UpdatePatientService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute) {
   }
   private filter: IllnessHistoryFilter;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isPatient: Observable<boolean>;
+  isApprovedPatient: Observable<boolean>;
   showLikeRow = true;
   user: ICurrentUser;
   token = TOKEN;
@@ -62,17 +64,18 @@ export class UsersProfileComponent implements OnInit {
 
   ngOnInit() {
     this.isPatient = this.authenticationService.isPatient();
-    let stringDate: string;
+    this.isApprovedPatient = this.authenticationService.isApprovedPatient();
     this.patientService.getProfile().subscribe((profile: any) => {
-    this.patient = profile,
+      this.patient = profile,
       this.updateService.patient = profile,
-      stringDate = new DatePipe('en-US').transform(profile.birthDate, 'MMMM d, y');
-      this.patient.birthDate = stringDate;
       this.updateService.setCurrentProfile();
     });
     this.patientService.getHistories();
     this.getImageFromService();
     this.filter = new IllnessHistoryFilter();
+    if (this.route.snapshot.paramMap.get('appointments') === 'true') {
+      this.changeSettings(this.patientSettings.Appointments);
+    }
   }
   onSearch($event) {
     this.filter = $event;

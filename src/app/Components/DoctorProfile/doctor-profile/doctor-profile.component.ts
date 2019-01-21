@@ -9,6 +9,8 @@ import { NotificationService } from '../../../Services/notification.service';
 import { ActivatedRoute } from '@angular/router';
 import { Specialization } from '../../../Models/Specialization';
 import { DoctorSettings } from 'src/app/Models/ProfileSettings/DoctorSettings';
+import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/Services/authentication.service';
 
 const TOKEN = 'currentUser';
 
@@ -24,7 +26,7 @@ export class DoctorProfileComponent implements OnInit {
   fileAvatar: File = null;
   imageToShow = this.defaultImage;
   specializations: Specialization[];
-
+  isApprovedDoctor: Observable<boolean>;
   user: ICurrentUser;
   token = TOKEN;
 
@@ -44,9 +46,11 @@ export class DoctorProfileComponent implements OnInit {
     });
   }
   constructor(private doctorService: DoctorsService, private imageValidator: ImageValidationService,
-    private storage: LocalStorageService, private notification: NotificationService, private activateRoute: ActivatedRoute) { }
+    private storage: LocalStorageService, private notification: NotificationService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.isApprovedDoctor = this.authenticationService.isApprovedDoctor();
     this.getImageFromService();
     this.doctorService.getDoctor().subscribe(
       (data: any) => {

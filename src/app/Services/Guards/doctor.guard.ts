@@ -7,6 +7,6 @@ export class DoctorGuard implements CanActivate {
     constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.authenticationService.hasDoctorRole() && this.authenticationService.isApprovedDoctor();
+        return this.authenticationService.hasDoctorRole() && this.authenticationService.hasApprovedDoctorStatus();
     }
 }
