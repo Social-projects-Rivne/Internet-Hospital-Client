@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: Observable<boolean>;
   isPatient: Observable<boolean>;
   isDoctor: Observable<boolean>;
+  isApprovedDoctor: Observable<boolean>;
   isModerator: Observable<boolean>;
   isAdmin: Observable<boolean>;
   ifUnread: Observable<boolean>;
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
     this.isPatient = this.authenticationService.isPatient();
     this.isDoctor = this.authenticationService.isDoctor();
+    this.isApprovedDoctor = this.authenticationService.isApprovedDoctor();
     this.isAdmin = this.authenticationService.isAdmin();
     this.isModerator = this.authenticationService.isModerator();
     this.ifUnread = this.messageService.ifUnread();

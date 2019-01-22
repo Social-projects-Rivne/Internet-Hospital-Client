@@ -8,6 +8,6 @@ export class PatientGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        return this.authenticationService.hasPatientRole() && this.authenticationService.isApprovedPatient();
+        return this.authenticationService.hasPatientRole() && this.authenticationService.hasApprovedPatientStatus();
     }
 }

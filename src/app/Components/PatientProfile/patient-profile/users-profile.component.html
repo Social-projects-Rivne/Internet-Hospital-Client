@@ -8,15 +8,15 @@
       mat-raised-button>
       Edit profile
     </button>
-    <button (click)="changeSettings(patientSettings.IllnessHistories)" [disabled]="currentMenuItem===patientSettings.IllnessHistories"
+    <button *ngIf="(isApprovedPatient | async)" (click)="changeSettings(patientSettings.IllnessHistories)" [disabled]="currentMenuItem===patientSettings.IllnessHistories"
       mat-raised-button>
       My illness histories
     </button>
-    <button (click)="changeSettings(patientSettings.Appointments)" [disabled]="currentMenuItem===patientSettings.Appointments"
+    <button *ngIf="(isApprovedPatient | async)" (click)="changeSettings(patientSettings.Appointments)" [disabled]="currentMenuItem===patientSettings.Appointments"
       mat-raised-button>
       My appointments
     </button>
-    <button *ngIf="(isPatient | async)" (click)="changeSettings(patientSettings.BecomeADoctor)" [disabled]="currentMenuItem===patientSettings.BecomeADoctor"
+    <button *ngIf="(isApprovedPatient | async)" (click)="changeSettings(patientSettings.BecomeADoctor)" [disabled]="currentMenuItem===patientSettings.BecomeADoctor"
     mat-raised-button>
     Become a doctor
   </button>

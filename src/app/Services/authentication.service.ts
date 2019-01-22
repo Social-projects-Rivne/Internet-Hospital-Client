@@ -37,8 +37,14 @@ export class  AuthenticationService  {
     // check if user is a patient
     private isPatientSubject = new BehaviorSubject<boolean>(this.hasPatientRole());
 
+    // check if patient is approved
+    private isPatientApprovedSubject = new BehaviorSubject<boolean>(this.hasApprovedPatientStatus());
+
     // check if user is a doctor
     private isDoctorSubject = new BehaviorSubject<boolean>(this.hasDoctorRole());
+
+    // check if doctor is approved
+    private isDoctorApprovedSubject = new BehaviorSubject<boolean>(this.hasApprovedDoctorStatus());
 
     // check if user is a moderator
     private isModeratorSubject = new BehaviorSubject<boolean>(this.hasModeratorRole());
@@ -81,8 +87,14 @@ export class  AuthenticationService  {
     private setUserRole() {
         if (this.hasPatientRole()) {
             this.isPatientSubject.next(true);
+            if (this.hasApprovedPatientStatus()) {
+                this.isPatientApprovedSubject.next(true);
+            }
         } else if (this.hasDoctorRole()) {
             this.isDoctorSubject.next(true);
+            if (this.hasApprovedDoctorStatus()) {
+                this.isDoctorApprovedSubject.next(true);
+            }
         } else if (this.hasModeratorRole()) {
             this.isModeratorSubject.next(true);
         } else if (this.hasAdminRole()) {
@@ -138,7 +150,10 @@ export class  AuthenticationService  {
     }
 
     // return if user is approved doctor
-    isApprovedPatient(): boolean {
+    isApprovedPatient(): Observable<boolean> {
+        return this.isPatientApprovedSubject.asObservable();
+    }
+    hasApprovedPatientStatus(): boolean {
         if (localStorage.getItem(TOKEN)) {
             const tokenPayload = this.getTokenPayload();
             if (tokenPayload['ApprovedPatient'] !== undefined) {
@@ -149,7 +164,10 @@ export class  AuthenticationService  {
     }
 
     // return if user is approved doctor
-    isApprovedDoctor(): boolean {
+    isApprovedDoctor(): Observable<boolean> {
+        return this.isDoctorApprovedSubject.asObservable();
+    }
+    hasApprovedDoctorStatus(): boolean {
         if (localStorage.getItem(TOKEN)) {
             const tokenPayload = this.getTokenPayload();
             if (tokenPayload['ApprovedDoctor'] !== undefined) {
@@ -203,7 +221,9 @@ export class  AuthenticationService  {
     private removeAllAuthorizeFlags() {
         this.isLoginSubject.next(false);
         this.isPatientSubject.next(false);
+        this.isPatientApprovedSubject.next(false);
         this.isDoctorSubject.next(false);
+        this.isDoctorApprovedSubject.next(false);
         this.isModeratorSubject.next(false);
         this.isAdminSubject.next(false);
     }

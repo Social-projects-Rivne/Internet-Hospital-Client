@@ -8,7 +8,7 @@
       mat-raised-button>
       Edit profile
     </button>
-    <button (click)="changeSettings(doctorSettings.PreviousAppointments)" [disabled]="currentMenuItem===doctorSettings.PreviousAppointments"
+    <button *ngIf="(isApprovedDoctor | async)" (click)="changeSettings(doctorSettings.PreviousAppointments)" [disabled]="currentMenuItem===doctorSettings.PreviousAppointments"
       mat-raised-button>
       Appointments
     </button>
